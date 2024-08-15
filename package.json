@@ -10,10 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/lab": "^5.0.0-alpha.173",
+    "@mui/material": "^5.16.7",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "chess.js": "^1.0.0-beta.8",
     "react": "^18.3.1",
     "react-chessboard": "^4.6.0",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.12"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

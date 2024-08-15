@@ -31,7 +31,7 @@ export default function ChessboardDisplay() {
       }
     };
 
-    const intervalId = setInterval(makeRandomMove, 1000); // Co 1 sekundę wykonuje losowy ruch
+    const intervalId = setInterval(makeRandomMove, 100000); // Co 1 sekundę wykonuje losowy ruch
 
     return () => clearInterval(intervalId);
   }, [chess]);
