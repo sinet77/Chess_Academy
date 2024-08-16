@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
+
 const drawerWidth = 240;
 
 export default function SideMenu() {
@@ -27,7 +28,6 @@ export default function SideMenu() {
         onClick={toggleDrawer}
         aria-label="menu"
         sx={{
-          position: "absolute",
           left: open ? `${drawerWidth}px` : "0px",
           transition: "left 0.3s",
         }}
@@ -41,7 +41,7 @@ export default function SideMenu() {
         anchor="left"
         open={open}
         sx={{
-          width: drawerWidth,
+          width: "30px",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
@@ -66,7 +66,7 @@ export default function SideMenu() {
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
+
           paddingLeft: open ? `${drawerWidth}px` : "0px",
           transition: "padding-left 0.3s",
         }}
