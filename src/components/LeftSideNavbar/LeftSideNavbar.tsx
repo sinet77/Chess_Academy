@@ -8,7 +8,7 @@ import {
   Box,
 } from "@mui/material";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-
+import TrainingChessBoard from "../TrainingChessboard/TrainingChessboard";
 
 const drawerWidth = 240;
 
@@ -50,8 +50,8 @@ export default function SideMenu() {
         }}
       >
         <List>
-          <ListItem button onClick={() => console.log("First item clicked")}>
-            <ListItemText primary="First Item" />
+          <ListItem component="a" href="/training">
+            <ListItemText primary="Training" />
           </ListItem>
           <ListItem button onClick={() => console.log("Second item clicked")}>
             <ListItemText primary="Second Item" />
@@ -66,7 +66,6 @@ export default function SideMenu() {
       <Box
         component="main"
         sx={{
-
           paddingLeft: open ? `${drawerWidth}px` : "0px",
           transition: "padding-left 0.3s",
         }}

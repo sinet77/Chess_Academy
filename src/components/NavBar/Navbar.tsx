@@ -5,13 +5,12 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import SatelliteAltIcon from '@mui/icons-material/SatelliteAlt';
+import SatelliteAltIcon from "@mui/icons-material/SatelliteAlt";
 import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -25,9 +24,6 @@ function Navbar() {
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -41,7 +37,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" >
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar
           sx={{
@@ -52,7 +48,13 @@ function Navbar() {
           }}
         >
           <SideMenu />
-          <IconButton size='large' edge='start' color='inherit' aria-label='logo' mr='-5'/>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="logo"
+            mr="-5"
+          />
           <SatelliteAltIcon sx={{ mr: 1 }} />
           <Typography
             variant="h6"
@@ -66,13 +68,11 @@ function Navbar() {
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
-
             }}
           >
             Chess
           </Typography>
 
-        
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -87,7 +87,7 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ mr:-5 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ mr: -5 }}>
                 <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>

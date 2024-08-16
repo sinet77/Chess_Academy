@@ -2,11 +2,21 @@ import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
 import { MovePair } from "./ChessBoardDisplay.types";
+import { Button } from "@mui/material";
 
 export default function ChessboardDisplay() {
   const [chess] = useState<Chess>(new Chess()); // Tworzymy instancję Chess
   const [fen, setFen] = useState<string>(chess.fen()); // Stan do przechowywania FEN (pozycja szachowa)
   const [history, setHistory] = useState<MovePair[]>([]); // Stan do przechowywania historii ruchów
+  const [changeBoardOrientation, setChangeBoardOrientation] = useState<
+    "white" | "black"
+  >("white");
+
+  function handleBoardOrientation() {
+    setChangeBoardOrientation((prevBoardOrientation) =>
+      prevBoardOrientation === "white" ? "black" : "white"
+    );
+  }
 
   useEffect(() => {
     const makeRandomMove = () => {
@@ -38,8 +48,14 @@ export default function ChessboardDisplay() {
 
   return (
     <div style={{ width: "400px" }}>
-      <Chessboard id="BasicChessboard" position={fen} />
+      <Chessboard
+        id="BasicChessboard"
+        position={fen}
+        arePiecesDraggable={false}
+        boardOrientation={changeBoardOrientation}
+      />
       <div>
+        <Button onClick={handleBoardOrientation}>Swap</Button>
         <h3>Historia ruchów:</h3>
         <table>
           <thead>
