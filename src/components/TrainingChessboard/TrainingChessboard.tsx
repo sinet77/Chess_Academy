@@ -1,9 +1,21 @@
+import React, { useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
-import { useState } from "react";
-import { Button } from "@mui/material";
-import { MovePair } from "../ChessBoardDisplay.types";
+import { Box, Button } from "@mui/material";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import * as style from "./TrainingChessBoard.style";
+
+interface MovePair {
+  white: string;
+  black: string;
+}
 
 export default function TrainingChessBoard() {
   const [chess] = useState<Chess>(new Chess());
@@ -19,25 +31,10 @@ export default function TrainingChessBoard() {
     );
   }
 
-  const onPieceDrop = (
-    sourceSquare: Square,
-    targetSquare: Square,
-    piece: Piece
-  ): boolean => {
-    const move = chess.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: "q", // domyślna promocja pionka na hetmana
-    });
-
-    if (move === null) return false; // Nieprawidłowy ruch
-
-    setFen(chess.fen());
-
+  function updateHistory() {
     const currentHistory = chess.history();
     const updatedHistory: MovePair[] = [];
 
-    // Grupowanie ruchów białych i czarnych
     for (let i = 0; i < currentHistory.length; i += 2) {
       updatedHistory.push({
         white: currentHistory[i],
@@ -46,40 +43,69 @@ export default function TrainingChessBoard() {
     }
 
     setHistory(updatedHistory);
+  }
+
+  function undoMove() {
+    chess.undo();
+    setFen(chess.fen());
+    updateHistory();
+  }
+
+  const onPieceDrop = (
+    sourceSquare: Square,
+    targetSquare: Square,
+    piece: Piece
+  ): boolean => {
+    const move = chess.move({
+      from: sourceSquare,
+      to: targetSquare,
+      promotion: "q",
+    });
+
+    if (move === null) return false;
+
+    setFen(chess.fen());
+    updateHistory();
     return true;
   };
 
   return (
-    <div style={{ width: "400px" }}>
+    <Box sx={style.TrainingPageLayout}>
       <Chessboard
         id="BasicChessboard"
         position={fen}
         boardOrientation={changeBoardOrientation}
-        onPieceDrop={onPieceDrop} // Zmienione na prawidłowy typ
+        onPieceDrop={onPieceDrop}
         arePiecesDraggable={true}
+        boardWidth={500}
       />
-      <div>
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
         <Button onClick={handleBoardOrientation}>Swap</Button>
+        <Button onClick={undoMove}>Undo</Button>
         <h3>Historia ruchów:</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Ruch</th>
-              <th>Białe</th>
-              <th>Czarne</th>
-            </tr>
-          </thead>
-          <tbody>
-            {history.map((move, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{move.white}</td>
-                <td>{move.black}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <TableContainer sx={style.Table} component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Move</TableCell>
+                <TableCell>White</TableCell>
+                <TableCell>Black</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {history.map((move, index) => (
+                <TableRow key={index}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{move.white}</TableCell>
+                  <TableCell>{move.black}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </Box>
   );
 }
