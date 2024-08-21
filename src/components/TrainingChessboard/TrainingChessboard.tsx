@@ -56,6 +56,8 @@ export default function TrainingChessBoard() {
     targetSquare: Square,
     piece: Piece
   ): boolean => {
+    console.log('test');
+    
     const move = chess.move({
       from: sourceSquare,
       to: targetSquare,
