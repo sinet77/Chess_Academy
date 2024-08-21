@@ -10,5 +10,4 @@ export const TrainingPageLayout: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   height: "100vh",
-  flexGrow: 1,
 };

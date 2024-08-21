@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Box, Button } from "@mui/material";
@@ -77,7 +77,6 @@ export default function TrainingChessBoard() {
         boardOrientation={changeBoardOrientation}
         onPieceDrop={onPieceDrop}
         arePiecesDraggable={true}
-        boardWidth={500}
       />
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
