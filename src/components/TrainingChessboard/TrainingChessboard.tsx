@@ -64,8 +64,6 @@ export default function TrainingChessBoard() {
 
     if (move === null) return false;
 
-    console.log('test2');
-
     setFen(chess.fen());
     updateHistory();
     return true;
