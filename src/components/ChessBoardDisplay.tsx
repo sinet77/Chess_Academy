@@ -7,10 +7,6 @@ export default function ChessboardDisplay() {
   const [chess] = useState<Chess>(new Chess()); // Tworzymy instancję Chess
   const [fen, setFen] = useState<string>(chess.fen()); // Stan do przechowywania FEN (pozycja szachowa)
 
-  const [changeBoardOrientation, setChangeBoardOrientation] = useState<
-    "white" | "black"
-  >("white");
-
   function handleBoardOrientation() {
     setChangeBoardOrientation((prevBoardOrientation) =>
       prevBoardOrientation === "white" ? "black" : "white"
@@ -38,11 +34,7 @@ export default function ChessboardDisplay() {
         id="BasicChessboard"
         position={fen}
         arePiecesDraggable={false}
-        boardOrientation={changeBoardOrientation}
       />
-      <div>
-        <Button onClick={handleBoardOrientation}>Swap</Button>
-      </div>
     </div>
   );
 }

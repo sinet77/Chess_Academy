@@ -77,6 +77,7 @@ export default function TrainingChessBoard() {
         boardOrientation={changeBoardOrientation}
         onPieceDrop={onPieceDrop}
         arePiecesDraggable={true}
+        boardWidth={500}
       />
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
