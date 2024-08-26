@@ -5,15 +5,14 @@ export const Main: SxProps = {
   boxShadow: "10px 10px 30px rgba(0, 0, 0, 0.5)",
   padding: "30px",
   borderRadius: "3px",
-  marginRight: "40%",
   maxWidth: "90%",
-  marginBottom: "10%",
+  marginTop: "7%",
   textAlign: "center",
 };
 export const Form: SxProps = {
   display: "flex",
   flexDirection: "column",
-  gap: 2,
+  gap: 3,
   width: "300px",
   margin: "0 auto",
 };
@@ -32,12 +31,6 @@ export const TextField: SxProps = {
     "& > fieldset": { borderColor: "#964B00" },
   },
   "& .MuiInputLabel-root.Mui-focused": { color: "#964B00" },
-};
-
-export const Checkbox: SxProps = {
-  "&.Mui-checked": {
-    color: "#964B00",
-  },
 };
 
 export const Button: SxProps = {

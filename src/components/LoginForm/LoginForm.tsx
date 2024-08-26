@@ -1,6 +1,7 @@
 import { LoginSchema } from "../../schemas/ValidationSchema";
+import { useNavigate } from "react-router-dom";
 import * as style from "./LoginForm.style";
-import { Formik, Field, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import {
   Box,
   TextField,
@@ -12,56 +13,55 @@ import {
   Link,
 } from "@mui/material";
 
-const onSubmit = async (values, actions) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
-
 export default function LoginForm() {
+  const navigate = useNavigate();
+
+  const onSubmit = () => {
+    navigate("/");
+  };
+
   return (
-    <Box sx={{ backgroundColor: "white", padding: "20px" }}>
+    <Box sx={style.Main}>
+      <Typography sx={style.Text}>Start your journey</Typography>
       <Formik
         initialValues={{ login: "", password: "", remember: false }}
         validationSchema={LoginSchema}
+        validateOnChange={true}
+        validateOnBlur={true}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, errors, touched, values }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                width: "300px",
-                margin: "0 auto",
-              }}
-            >
-              <TextField
+            <Box sx={style.Form}>
+              <Field
                 sx={style.TextField}
+                name="login"
+                as={TextField}
                 fullWidth
                 id="login"
-                name="login"
                 label="Login"
                 placeholder="Login"
                 error={touched.login && Boolean(errors.login)}
                 helperText={touched.login && errors.login}
               />
 
-              <TextField
+              <Field
                 sx={style.TextField}
+                name="password"
+                as={TextField}
                 fullWidth
                 id="password"
-                name="password"
                 label="Password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Password"
                 error={touched.password && Boolean(errors.password)}
                 helperText={touched.password && errors.password}
               />
 
               <FormControlLabel
                 control={
-                  <Checkbox
+                  <Field
+                    as={Checkbox}
                     name="remember"
                     color="primary"
                     sx={style.Checkbox}
@@ -69,20 +69,21 @@ export default function LoginForm() {
                 }
                 label="Remember"
               />
-
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                sx={style.Button}
-              >
-                {isSubmitting ? "Loading..." : "Login"}
-              </Button>
-              <Divider>OR</Divider>
-              <Link href="/register" underline="hover">
-                Register
-              </Link>
+              <Box sx={style.Centered}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  sx={style.Button}
+                >
+                  {isSubmitting ? "Loading..." : "Login"}
+                </Button>
+                <Divider sx={style.Divider}>OR</Divider>
+                <Link href="/register" underline="hover">
+                  Register
+                </Link>
+              </Box>
             </Box>
           </Form>
         )}

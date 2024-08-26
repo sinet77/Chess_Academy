@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@fontsource/edu-vic-wa-nt-beginner": "^5.0.13",
     "@mui/icons-material": "^5.16.7",
     "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "^5.16.7",
@@ -24,10 +25,12 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.3.1",
+    "react-password-strength-bar": "^0.4.1",
     "react-router-dom": "^6.26.1",
     "react-virtuoso": "^4.10.1",
     "styled-components": "^6.1.12",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
