@@ -6,6 +6,8 @@ import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboa
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout/Layout.tsx";
 
+import Error404 from "./components/Error404/Error404.tsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
     ],
   },
 
-  { path: "*", element: <>There is no such page </> },
+  { path: "*", element: <Error404 /> },
 ]);
 
 const rootElement = document.getElementById("root");
