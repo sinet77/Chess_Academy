@@ -5,8 +5,7 @@ import "./index.css";
 import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboard.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout/Layout.tsx";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+
 import Error404 from "./components/Error404/Error404.tsx";
 
 const router = createBrowserRouter([
@@ -33,9 +32,7 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <DndProvider backend={HTML5Backend}>
-        <RouterProvider router={router} />
-      </DndProvider>
+      <RouterProvider router={router} />
     </React.StrictMode>
   );
 }

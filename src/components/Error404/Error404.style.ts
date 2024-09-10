@@ -6,10 +6,7 @@ export const Background: SxProps = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundImage: 'url("/src/assets/chess_pieces.png")',
-  backgroundSize: "100%", // Szerokość i wysokość tła
-  backgroundRepeat: "no-repeat", // Opcjonalnie, aby zapobiec powtarzaniu się tła
-  backgroundPosition: "center",
+  background: 'url("/src/assets/chess_pieces.png") center / 100% no-repeat',
 };
 
 export const MainContent: SxProps = {
