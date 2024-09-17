@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout/Layout.tsx";
 
 import Error404 from "./components/Error404/Error404.tsx";
+import FairPlay from "./components/Footer/FairPlay/FairPlayStartingPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/training",
         element: <TrainingChessBoard />,
+      },
+      {
+        path: "/fair-play",
+        element: <FairPlay />,
       },
     ],
   },
