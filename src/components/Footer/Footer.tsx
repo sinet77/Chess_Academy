@@ -27,11 +27,11 @@ export default function Footer() {
         <Typography
           sx={styles.Typography}
           component="a"
-          href="/job-offers"
+          href="/faq"
           variant="caption"
           gutterBottom
         >
-          Job offers
+          FAQ
         </Typography>
         <Typography
           sx={styles.Typography}
