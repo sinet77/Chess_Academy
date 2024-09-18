@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import * as style from "./FairPlay.styles";
 import FairPlayMainContent from "./FairPlayMainContent";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
 export default function FairPlay() {
   const [showNewComponent, setShowNewComponent] = useState(false);
@@ -12,7 +13,7 @@ export default function FairPlay() {
   };
 
   return (
-    <Box>
+    <Box sx={style.Background}>
       {!showNewComponent && (
         <motion.div
           initial={{ opacity: 0, scale: 0.3 }}
@@ -26,7 +27,12 @@ export default function FairPlay() {
               component="img"
               src="/src/assets/fair_play_image.jpg"
             ></Box>
-            <Button onClick={handleButtonClick}>Na dół</Button>
+            <Button onClick={handleButtonClick}>
+              <KeyboardDoubleArrowDownIcon
+                sx={style.BouncingIcon}
+                fontSize="large"
+              />
+            </Button>
           </Box>
         </motion.div>
       )}

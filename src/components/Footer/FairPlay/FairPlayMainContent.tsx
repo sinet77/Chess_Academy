@@ -27,7 +27,7 @@ const guidelines = [
 export default function FairPlayGuidelines() {
   return (
     <Box sx={style.MainContent}>
-      <Typography variant="h4" gutterBottom>
+      <Typography sx={style.guidelineTitle} variant="h4" gutterBottom>
         Fair Play Guidelines
       </Typography>
       <List>
@@ -43,12 +43,15 @@ export default function FairPlayGuidelines() {
           </Box>
         ))}
       </List>
-      <Typography>
-        IMPORTANT: As per our User Agreement, if we discover or have reason to
-        believe that you have breached any of these Fair Play Guidelines, your
-        account may be terminated, and it may be publicly marked as closed due
-        to Fair Play violations.",
-      </Typography>
+      <Box sx={style.ImportantBox}>
+        <Typography sx={style.Important}>IMPORTANT</Typography>
+        <Typography>
+          As per our User Agreement, if we discover or have reason to believe
+          that you have breached any of these Fair Play Guidelines, your account
+          may be terminated, and it may be publicly marked as closed due to Fair
+          Play violations.
+        </Typography>
+      </Box>
     </Box>
   );
 }
