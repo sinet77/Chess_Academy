@@ -9,6 +9,7 @@ import Layout from "./Layout/Layout.tsx";
 import Error404 from "./components/Error404/Error404.tsx";
 import FairPlay from "./components/Footer/FairPlay/FairPlayStartingPage.tsx";
 import FAQ from "./components/Footer/FAQ/FAQ.tsx";
+import AboutUs from "./components/Footer/AboutUs/AboutUs.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/faq",
         element: <FAQ />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
       },
     ],
   },

@@ -18,11 +18,11 @@ export default function Footer() {
         <Typography
           sx={styles.Typography}
           component="a"
-          href="/languages"
+          href="/about-us"
           variant="caption"
           gutterBottom
         >
-          Languages
+          About us
         </Typography>
         <Typography
           sx={styles.Typography}
