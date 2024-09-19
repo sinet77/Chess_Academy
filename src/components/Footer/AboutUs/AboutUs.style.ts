@@ -19,7 +19,7 @@ export const Background: SxProps = {
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
-  padding: "40px",
+  padding: "20px",
 };
 
 export const Title: SxProps = {
@@ -34,7 +34,7 @@ export const SubTitle: SxProps = {
 };
 
 export const Description: SxProps = {
-  color: "#555",
+  color: "black",
   fontSize: "16px",
   lineHeight: "1.6",
   marginBottom: "15px",
@@ -63,5 +63,42 @@ export const ActionButton: SxProps = {
 export const FooterText: SxProps = {
   fontWeight: "bold",
   color: "#888",
-  marginTop: "2rem",
+  marginTop: "20px",
+};
+
+export const StartingPage: SxProps = {
+  minHeight: "100vh",
+  backgroundImage: "url(/src/assets/dark_chess_background.jpg)",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "left",
+  padding: "15px",
+};
+
+export const StartingSection: SxProps = {
+  textAlign: "left",
+  marginBottom: "15px",
+  backgroundColor: "#d3a27f",
+  padding: "15px",
+  borderRadius: "8px",
+  border: "1px solid black",
+};
+export const AboutUsText: SxProps = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  mb: "20px",
+  mt: "-74px",
+  fontSize: "40px",
+  color: "white",
+};
+export const DownButton: SxProps = {
+  backgroundColor: "#ff008c",
+  color: "white",
+  padding: "10px 20px",
+  borderRadius: "5px",
 };
