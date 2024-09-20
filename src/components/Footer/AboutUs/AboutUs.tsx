@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import * as style from "./AboutUs.style";
 import AboutUsStartingPage from "./AboutUsStartingPage";
 import { useState } from "react";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 export default function AboutUs() {
   const [showNewComponent, setShowNewComponent] = useState(false);
