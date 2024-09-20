@@ -71,12 +71,11 @@ export default function AboutUs() {
           >
             <Box sx={style.Background}>
               <Box sx={style.Container}>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Button onClick={handleGoBackClick}>Do góry</Button>
-                </motion.button>
+                <Button sx={style.AboutUsButton} onClick={handleGoBackClick}>
+                  About us
+                  <ArrowUpwardIcon />
+                </Button>
+
                 <Typography sx={style.Title} variant="h4" gutterBottom>
                   Help Improve Chess Academy
                 </Typography>

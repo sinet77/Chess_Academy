@@ -1,3 +1,5 @@
+import { SxProps } from "@mui/material";
+import { position } from "./../../../../node_modules/@types/stylis/index.d";
 import { SxProps } from "@mui/material/styles";
 
 export const Container: SxProps = {
@@ -12,6 +14,7 @@ export const Container: SxProps = {
   backgroundColor: "#cefad0",
   borderRadius: "8px",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  position: "relative",
 };
 
 export const Background: SxProps = {
@@ -20,6 +23,7 @@ export const Background: SxProps = {
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   padding: "20px",
+  height: "100vh",
 };
 
 export const Title: SxProps = {
@@ -67,7 +71,7 @@ export const FooterText: SxProps = {
 };
 
 export const StartingPage: SxProps = {
-  minHeight: "100vh",
+  height: "100vh",
   backgroundImage: "url(/src/assets/dark_chess_background.jpg)",
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -77,6 +81,15 @@ export const StartingPage: SxProps = {
   justifyContent: "center",
   alignItems: "left",
   padding: "15px",
+  "@media (max-width: 1000px)": {
+    padding: "100px",
+    width: "auto",
+    height: "auto",
+  },
+};
+
+export const TextAboutMe: SxProps = {
+  background,
 };
 
 export const StartingSection: SxProps = {
@@ -86,19 +99,50 @@ export const StartingSection: SxProps = {
   padding: "15px",
   borderRadius: "8px",
   border: "1px solid black",
+  "@media (max-width: 1000px)": {
+    width: "auto",
+    height: "auto",
+  },
 };
 export const AboutUsText: SxProps = {
+  background:
+    "linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0) 100%)",
+  padding: "20px",
+  borderRadius: "10px",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  gap: "20px",
   mb: "20px",
   mt: "-74px",
   fontSize: "40px",
-  color: "white",
+  color: "black",
 };
 export const DownButton: SxProps = {
-  backgroundColor: "#ff008c",
+  backgroundColor: "#0096FF",
   color: "white",
   padding: "10px 20px",
   borderRadius: "5px",
+  "@media (max-width: 1000px)": {
+    width: "auto",
+    height: "auto",
+  },
+  "&:hover": {
+    backgroundColor: "#89CFF0",
+  },
+};
+
+export const AboutUsButton: SxProps = {
+  position: "absolute",
+  right: "10px",
+  top: "10px",
+  backgroundColor: "#b87333",
+  color: "#fff",
+  "&:hover": {
+    backgroundColor: "#654321",
+  },
+
+  padding: "0.75rem 1.5rem",
+  fontWeight: "bold",
 };

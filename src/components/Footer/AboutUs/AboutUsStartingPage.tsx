@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import * as style from "./AboutUs.style";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 export default function AboutUsStartingPage({
   buttonClick,
@@ -37,7 +38,23 @@ export default function AboutUsStartingPage({
 
   return (
     <Box sx={style.StartingPage}>
-      <Box sx={style.AboutUsText}>About us</Box>
+      <Box sx={style.AboutUsText}>
+        About us
+        <GroupsIcon fontSize="large" />
+      </Box>
+      <Box sx={style.TextAboutMe}>
+        For now, I am the only developer who is working at improving Chess
+        Academy website. In some time I will also be looking for other people
+        who will help me maintain and develop my idea of playing and learning
+        chess. I came up with this idea, when I was teaching chess online,
+        because I am active player and certified instructor. My goal was to do
+        my own website, where I can control the content which is apearing and
+        put my learning materials in one place for the students. Chess academy
+        is for everyone, on various level or age. Whether you want to play chess
+        games or solve puzzles, there are always different levels of difficulty,
+        so everyone can choose what they want. Chess Academy welcomes you!
+        Enjoy!
+      </Box>
       {guidelines.map((item, index) => (
         <motion.div
           key={index}
@@ -55,7 +72,7 @@ export default function AboutUsStartingPage({
       ))}
 
       <Button sx={style.DownButton} onClick={buttonClick}>
-        Help us
+        Help us to improve
       </Button>
     </Box>
   );
