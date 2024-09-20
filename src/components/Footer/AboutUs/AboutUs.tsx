@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion"; // Import AnimatePresence
+import { motion, AnimatePresence } from "framer-motion";
 import * as style from "./AboutUs.style";
 import AboutUsStartingPage from "./AboutUsStartingPage";
 import { useState } from "react";
@@ -9,6 +9,10 @@ export default function AboutUs() {
 
   const handleButtonClick = () => {
     setShowNewComponent(true);
+  };
+
+  const handleGoBackClick = () => {
+    setShowNewComponent(false);
   };
 
   const guidelines = [
@@ -38,7 +42,10 @@ export default function AboutUs() {
       <AnimatePresence>
         {!showNewComponent && (
           <motion.div
-            initial={{ y: 0, opacity: 1 }}
+            initial={{
+              y: "-100%",
+              opacity: 1,
+            }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.7 }}
@@ -51,11 +58,15 @@ export default function AboutUs() {
 
         {showNewComponent && (
           <motion.div
-            initial={{ y: "100%", opacity: 0 }}
+            initial={{
+              y: "100%",
+              opacity: 0,
+            }}
             animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "100%", opacity: 0 }}
             transition={{ duration: 0.7 }}
             style={{ position: "absolute", width: "100%" }}
-            key="newComponent"
+            key="mainComponent"
           >
             <Box sx={style.Background}>
               <Box sx={style.Container}>
@@ -63,9 +74,7 @@ export default function AboutUs() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <Button onClick={() => setShowNewComponent(false)}>
-                    Do góry
-                  </Button>
+                  <Button onClick={handleGoBackClick}>Do góry</Button>
                 </motion.button>
                 <Typography sx={style.Title} variant="h4" gutterBottom>
                   Help Improve Chess Academy

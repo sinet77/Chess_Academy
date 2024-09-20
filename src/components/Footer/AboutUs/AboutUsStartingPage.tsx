@@ -34,6 +34,7 @@ export default function AboutUsStartingPage({
         "Engage with other players in our forums, share tips, and join discussions on various chess topics",
     },
   ];
+
   return (
     <Box sx={style.StartingPage}>
       <Box sx={style.AboutUsText}>About us</Box>
