@@ -39,7 +39,7 @@ export default function AboutUs() {
   ];
 
   return (
-    <Box sx={{ position: "relative", overflow: "hidden", height: "100vh" }}>
+    <Box sx={{ position: "relative", height: "100vh" }}>
       <AnimatePresence>
         {!showNewComponent && (
           <motion.div

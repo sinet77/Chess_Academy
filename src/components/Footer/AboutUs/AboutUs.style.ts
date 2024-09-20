@@ -1,5 +1,3 @@
-import { SxProps } from "@mui/material";
-import { position } from "./../../../../node_modules/@types/stylis/index.d";
 import { SxProps } from "@mui/material/styles";
 
 export const Container: SxProps = {
@@ -33,7 +31,7 @@ export const Title: SxProps = {
 
 export const SubTitle: SxProps = {
   fontWeight: "bold",
-  color: "#333",
+  color: "black",
   marginTop: "15px",
 };
 
@@ -71,7 +69,6 @@ export const FooterText: SxProps = {
 };
 
 export const StartingPage: SxProps = {
-  height: "100vh",
   backgroundImage: "url(/src/assets/dark_chess_background.jpg)",
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -81,6 +78,7 @@ export const StartingPage: SxProps = {
   justifyContent: "center",
   alignItems: "left",
   padding: "15px",
+  height: "100vh",
   "@media (max-width: 1000px)": {
     padding: "100px",
     width: "auto",
@@ -89,13 +87,31 @@ export const StartingPage: SxProps = {
 };
 
 export const TextAboutMe: SxProps = {
-  background,
+  fontFamily: "'Courier New', Courier, monospace",
+  border: "2px solid #0096FF",
+  backgroundColor: "#DEEFF5",
+  lineHeight: "1.5",
+  padding: "15px",
+  mb: "15px",
 };
 
 export const StartingSection: SxProps = {
-  textAlign: "left",
+  textAlign: "center",
   marginBottom: "15px",
-  backgroundColor: "#d3a27f",
+  background: "linear-gradient(-45deg, #ee7752, #ff9b42, #ff6700, #ffa833)",
+  backgroundSize: "400% 400%",
+  animation: "gradient 8s ease infinite",
+  "@keyframes gradient": {
+    "0%": {
+      backgroundPosition: "0% 50%",
+    },
+    "50%": {
+      backgroundPosition: "100% 50%",
+    },
+    "100%": {
+      backgroundPosition: "0% 50%",
+    },
+  },
   padding: "15px",
   borderRadius: "8px",
   border: "1px solid black",
@@ -104,6 +120,7 @@ export const StartingSection: SxProps = {
     height: "auto",
   },
 };
+
 export const AboutUsText: SxProps = {
   background:
     "linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0) 100%)",

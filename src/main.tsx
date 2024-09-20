@@ -10,6 +10,7 @@ import Error404 from "./components/Error404/Error404.tsx";
 import FairPlay from "./components/Footer/FairPlay/FairPlayStartingPage.tsx";
 import FAQ from "./components/Footer/FAQ/FAQ.tsx";
 import AboutUs from "./components/Footer/AboutUs/AboutUs.tsx";
+import Contact from "./components/Footer/Contact.tsx/Contact.tsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/contact-us",
+        element: <Contact />,
       },
     ],
   },
