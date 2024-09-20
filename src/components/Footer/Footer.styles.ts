@@ -17,7 +17,7 @@ export const Footer: SxProps = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  height: "100px",
+  minHeight: "100px",
   backgroundColor: "#242424",
   color: "white",
   alignItems: "center",
