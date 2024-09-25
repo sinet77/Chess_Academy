@@ -19,6 +19,7 @@ export const Title: SxProps = {
 export const Accordion: SxProps = {
   marginBottom: "20px",
   borderRadius: "8px",
+  width: "50%",
 };
 
 export const AccordionSummary: SxProps = {
