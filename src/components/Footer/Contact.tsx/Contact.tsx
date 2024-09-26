@@ -1,9 +1,18 @@
-import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  LinearProgress,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import * as style from "./Contact.style";
 import { ContactSchema } from "./ValidationSchema";
 import { Formik, Form, Field, FormikHelpers } from "formik";
 import emailjs from "@emailjs/browser";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface FormValues {
   email: string;
@@ -13,6 +22,9 @@ interface FormValues {
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const sendEmail = (
     values: FormValues,
@@ -36,7 +48,8 @@ export default function Contact() {
       .then(
         (result) => {
           console.log("SUCCESS!", result.text);
-          alert("Email sent successfully!");
+          setAlertOpen(true);
+          setLoading(true);
           resetForm();
         },
         (error) => {
@@ -47,8 +60,31 @@ export default function Contact() {
       .finally(() => setSubmitting(false));
   };
 
+  useEffect(() => {
+    if (alertOpen) {
+      const timer = setTimeout(() => {
+        setAlertOpen(false);
+        setLoading(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [alertOpen]);
+
   return (
     <Box sx={style.Main}>
+      {alertOpen && (
+        <Box sx={{ mb: 2 }}>
+          <Alert
+            sx={style.Alert}
+            severity="success"
+            onClose={() => setAlertOpen(false)}
+          >
+            Email has been sent!
+          </Alert>
+          {loading && <LinearProgress color="success" />}
+        </Box>
+      )}
       <Box sx={style.FormAndTitle}>
         <Formik
           initialValues={{ email: "", subject: "", message: "" }}
@@ -111,8 +147,8 @@ export default function Contact() {
                   id="description"
                   label="Description"
                   placeholder="Describe the issue"
-                  error={touched.description && Boolean(errors.description)}
-                  helperText={touched.description && errors.description}
+                  error={touched.message && Boolean(errors.message)}
+                  helperText={touched.message && errors.message}
                   onChange={handleChange}
                 />
                 <Box sx={{ mt: 2 }}>
@@ -123,7 +159,7 @@ export default function Contact() {
                     disabled={isSubmitting}
                     type="submit"
                   >
-                    {isSubmitting ? "Loading..." : "Send"}
+                    {isSubmitting ? <CircularProgress size="20px" /> : "Send"}
                   </Button>
                 </Box>
               </Box>

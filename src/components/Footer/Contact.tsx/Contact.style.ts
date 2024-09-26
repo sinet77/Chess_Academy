@@ -65,3 +65,9 @@ export const TextField: SxProps = {
   },
   "& .MuiInputLabel-root.Mui-focused": { color: "black" },
 };
+
+export const Alert: SxProps = {
+  color: "green",
+  fontWeight: "bold",
+  border: "1px solid black",
+};
