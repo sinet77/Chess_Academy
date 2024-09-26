@@ -14,7 +14,7 @@ export const ContactSchema = yup.object().shape({
       "General question",
     ])
     .required("Categorize your issue"),
-  description: yup
+  message: yup
     .string()
     .required("Describe the case why you want to contact us"),
 });

@@ -1,11 +1,50 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import * as style from "./Contact.style";
 import { ContactSchema } from "./ValidationSchema";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikHelpers } from "formik";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
+
+interface FormValues {
+  email: string;
+  subject: string;
+  description: string;
+}
 
 export default function Contact() {
-  const onSubmit = () => {
-    navigate("/");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (
+    values: FormValues,
+    { setSubmitting, resetForm }: FormikHelpers<FormValues>
+  ) => {
+    setSubmitting(true);
+
+    if (!formRef.current) {
+      console.log("Form reference is null.");
+      setSubmitting(false);
+      return;
+    }
+
+    emailjs
+      .sendForm(
+        "service_usxqwrb",
+        "template_y0ozzt7",
+        formRef.current,
+        "whK46bSEc2Ei1VLH4"
+      )
+      .then(
+        (result) => {
+          console.log("SUCCESS!", result.text);
+          alert("Email sent successfully!");
+          resetForm();
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+          alert("Failed to send email.");
+        }
+      )
+      .finally(() => setSubmitting(false));
   };
 
   return (
@@ -16,10 +55,10 @@ export default function Contact() {
           validationSchema={ContactSchema}
           validateOnChange={true}
           validateOnBlur={true}
-          onSubmit={onSubmit}
+          onSubmit={sendEmail}
         >
           {({ isSubmitting, errors, touched, values, handleChange }) => (
-            <Form>
+            <Form ref={formRef}>
               <Box sx={style.Form}>
                 <Box sx={style.Text}>
                   <Typography sx={style.Paragraph}>
@@ -64,7 +103,7 @@ export default function Contact() {
                 </Field>
                 <Field
                   sx={style.TextField}
-                  name="description"
+                  name="message"
                   as={TextField}
                   fullWidth
                   multiline
@@ -76,7 +115,6 @@ export default function Contact() {
                   helperText={touched.description && errors.description}
                   onChange={handleChange}
                 />
-
                 <Box sx={{ mt: 2 }}>
                   <Button
                     sx={style.Button}
