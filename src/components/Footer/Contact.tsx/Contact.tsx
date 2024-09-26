@@ -8,7 +8,7 @@ import { useRef } from "react";
 interface FormValues {
   email: string;
   subject: string;
-  description: string;
+  message: string;
 }
 
 export default function Contact() {
@@ -51,7 +51,7 @@ export default function Contact() {
     <Box sx={style.Main}>
       <Box sx={style.FormAndTitle}>
         <Formik
-          initialValues={{ email: "", subject: "", description: "" }}
+          initialValues={{ email: "", subject: "", message: "" }}
           validationSchema={ContactSchema}
           validateOnChange={true}
           validateOnBlur={true}
