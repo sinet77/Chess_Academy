@@ -1,6 +1,7 @@
 import { Box, Button, CircularProgress, Link } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import * as style from "./Articles.styles";
+import { motion } from "framer-motion";
 
 interface Article {
   title: string;
@@ -66,46 +67,52 @@ const Articles: React.FC = () => {
   }
 
   return (
-    <Box sx={style.ArticlesBox}>
-      {articles.length > 0 && (
-        <Box sx={style.ArticlesBox}>
-          <Box sx={style.Title}>{articles[currentIndex].title}</Box>
-          <Box sx={style.PubDate}>{articles[currentIndex].pubDate}</Box>
+    <motion.div
+      initial={{ x: "100%", opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.7 }}
+    >
+      <Box sx={style.ArticlesBox}>
+        {articles.length > 0 && (
+          <Box sx={style.ArticlesBox}>
+            <Box sx={style.Title}>{articles[currentIndex].title}</Box>
+            <Box sx={style.PubDate}>{articles[currentIndex].pubDate}</Box>
 
-          <Box
-            dangerouslySetInnerHTML={{
-              __html: articles[currentIndex].description,
-            }}
-          />
-          <Link
-            sx={style.ReadMore}
-            href={articles[currentIndex].link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read more
-          </Link>
-          <Box sx={style.ButtonContainer}>
-            <Button
-              variant="outlined"
-              sx={style.ButtonPrev}
-              onClick={previousArticle}
-              disabled={currentIndex === 0}
+            <Box
+              dangerouslySetInnerHTML={{
+                __html: articles[currentIndex].description,
+              }}
+            />
+            <Link
+              sx={style.ReadMore}
+              href={articles[currentIndex].link}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Previous
-            </Button>
-            <Button
-              variant="contained"
-              sx={style.ButtonNext}
-              onClick={nextArticle}
-              disabled={currentIndex === articles.length - 1}
-            >
-              Next
-            </Button>
+              Read more
+            </Link>
+            <Box sx={style.ButtonContainer}>
+              <Button
+                variant="outlined"
+                sx={style.ButtonPrev}
+                onClick={previousArticle}
+                disabled={currentIndex === 0}
+              >
+                Previous
+              </Button>
+              <Button
+                variant="contained"
+                sx={style.ButtonNext}
+                onClick={nextArticle}
+                disabled={currentIndex === articles.length - 1}
+              >
+                Next
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      )}
-    </Box>
+        )}
+      </Box>
+    </motion.div>
   );
 };
 
