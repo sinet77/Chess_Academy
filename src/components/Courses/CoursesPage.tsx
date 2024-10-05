@@ -1,21 +1,14 @@
 import { Box } from "@mui/material";
 import Courses from "./CoursesFirstPage/Courses";
 import OurClass from "./OurClass/OurClass";
+import OurPrices from "./OurPrices/OurPrices";
 
 export default function CoursesPage() {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Box>
-        <Courses />
-      </Box>
-      <Box>
-        <OurClass />
-      </Box>
+    <Box>
+      <Courses />
+      <OurClass />
+      <OurPrices />
     </Box>
   );
 }

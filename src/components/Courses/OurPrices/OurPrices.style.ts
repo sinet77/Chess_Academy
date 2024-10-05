@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const Main: SxProps = {
-  backgroundColor: "#000000",
+  backgroundColor: "white",
   padding: "80px",
 };
 
@@ -31,7 +31,7 @@ export const BigTitle: SxProps = {
   fontSize: "52px",
   fontWeight: "600",
   lineHeight: "70px",
-  color: "white",
+  color: "#000000",
   textAlign: "center",
 };
 
@@ -40,30 +40,26 @@ export const DescriptionHeader: SxProps = {
   fontSize: "16px",
   fontWeight: "300",
   lineHeight: "30px",
-  color: "#DADADA",
+  color: "#7E7E7E",
 };
 
-export const Image: SxProps = {
-  height: "120px",
-  width: "120px",
-  filter: "sepia(100%) saturate(0%) brightness(200%)",
-};
-
-export const OneTile: SxProps = {
+export const OneBox: SxProps = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
   gap: "10px",
+  border: "1px solid black",
+  padding: "80px 50px",
 };
 
-export const Header: SxProps = {
+export const Level: SxProps = {
   fontFamily: "Playfair Display",
   fontSize: "23px",
   fontWeight: "600",
   lineHeight: "34px",
-  color: "white",
+  color: "#000000",
   letterSpacing: "0.05em",
 };
 
@@ -71,13 +67,26 @@ export const Description: SxProps = {
   fontFamily: "Roboto",
   fontSize: "16px",
   fontWeight: "300",
-  lineHeight: "30px",
-  color: "#DADADA",
+  lineHeight: "23px",
+  color: "#000000",
 };
 
-export const Tiles: SxProps = {
+export const Boxes: SxProps = {
   display: "grid",
   gridTemplateColumns: "repeat(3,1fr)",
-  gridTemplateRows: "repeat(2,1fr)",
   columnGap: "30px",
+};
+
+export const Button: SxProps = {
+  color: "white",
+  backgroundColor: "#000000",
+  fontFamily: "Playfair Display",
+  fontSize: "16px",
+  fontWeight: "500",
+  lineHeight: "23px",
+  textTransform: "none",
+  padding: "10px 30px",
+  "&:hover": {
+    backgroundColor: "#B6740C",
+  },
 };
