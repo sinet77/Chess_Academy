@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import SatelliteAltIcon from "@mui/icons-material/SatelliteAlt";
 import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
+import Logout from "../Logout";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];

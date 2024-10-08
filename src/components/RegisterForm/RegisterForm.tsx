@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { doCreateUserWithEmailAndPassword } from "./../../firebase/auth";
 import PasswordStrengthBar from "react-password-strength-bar";
 import * as style from "./RegisterForm.style";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikHelpers } from "formik";
 import {
   Box,
   TextField,
@@ -16,21 +17,49 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { RegisterSchema } from "../../schemas/ValidationSchema";
+import { Navigate } from "react-router-dom";
+
+interface FormValues {
+  email: string;
+  login: string;
+  password: string;
+  confirmPassword: string;
+}
 
 export default function RegisterForm() {
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
 
-  const onSubmit = () => {
-    navigate("/");
+  const { userLoggedIn } = useAuth();
+
+  const onSubmit = async (
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>
+  ) => {
+    if (!isRegistering) {
+      setIsRegistering(true);
+      try {
+        await doCreateUserWithEmailAndPassword(values.email, values.password);
+      } catch (error) {
+        console.log(error);
+      }
+      setSubmitting(false);
+      setIsRegistering(false);
+    }
   };
 
   return (
     <Box sx={style.Main}>
+      {userLoggedIn && <Navigate to={"/"} replace={true} />}
       <Typography sx={style.Text}>Create your account</Typography>
       <Formik
-        initialValues={{ login: "", password: "", confirmPassword: "" }}
+        initialValues={{
+          login: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        }}
         validationSchema={RegisterSchema}
         validateOnChange={true}
         validateOnBlur={true}
@@ -49,6 +78,18 @@ export default function RegisterForm() {
                 placeholder="Login"
                 error={touched.login && Boolean(errors.login)}
                 helperText={touched.login && errors.login}
+              />
+              <Field
+                sx={style.TextField}
+                name="email"
+                as={TextField}
+                fullWidth
+                id="email"
+                label="Email"
+                placeholder="Email"
+                error={touched.email && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
+                onChange={handleChange}
               />
 
               <Field

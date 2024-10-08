@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout/Layout.tsx";
 import LoginPage from "./pages/LoginPage/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.tsx";
+import { AuthProvider } from "./context/authContext"; // Dodano import AuthProvider
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,9 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </React.StrictMode>
   );
 }

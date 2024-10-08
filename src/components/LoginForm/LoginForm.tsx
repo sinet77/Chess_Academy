@@ -1,5 +1,8 @@
 import { LoginSchema } from "../../schemas/ValidationSchema";
-import { useNavigate } from "react-router-dom";
+import {
+  doSignInWithEmailAndPassword,
+  doSignInWithGoogle,
+} from "./../../firebase/auth";
 import * as style from "./LoginForm.style";
 import { Formik, Form, Field } from "formik";
 import {
@@ -12,16 +15,41 @@ import {
   Divider,
   Link,
 } from "@mui/material";
+import { useAuth } from "../../context/authContext";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const navigate = useNavigate();
+  const { userLoggedIn } = useAuth();
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
-  const onSubmit = () => {
-    navigate("/");
+  const onSubmit = async (values, { setSubmitting }) => {
+    if (!isSigningIn) {
+      setIsSigningIn(true);
+      try {
+        await doSignInWithEmailAndPassword(values.login, values.password);
+      } catch (error) {
+        // obsłuż błąd logowania
+      }
+      setSubmitting(false);
+      setIsSigningIn(false);
+    }
+  };
+
+  const onGoogleSignIn = async () => {
+    if (!isSigningIn) {
+      setIsSigningIn(true);
+      try {
+        await doSignInWithGoogle();
+      } catch (error) {
+        setIsSigningIn(false);
+      }
+    }
   };
 
   return (
     <Box sx={style.Main}>
+      {userLoggedIn && <Navigate to={"/"} replace={true} />}
       <Typography sx={style.Text}>Start your journey</Typography>
       <Formik
         initialValues={{ login: "", password: "", remember: false }}
@@ -74,12 +102,20 @@ export default function LoginForm() {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  disabled={isSubmitting}
+                  disabled={isSigningIn}
                   sx={style.Button}
                 >
-                  {isSubmitting ? "Loading..." : "Login"}
+                  {isSigningIn ? "Loading..." : "Login"}
                 </Button>
                 <Divider sx={style.Divider}>OR</Divider>
+                <Button
+                  onClick={onGoogleSignIn}
+                  variant="contained"
+                  color="primary"
+                  sx={style.Button}
+                >
+                  Sign in with Google
+                </Button>
                 <Link href="/register" underline="hover">
                   Register
                 </Link>
