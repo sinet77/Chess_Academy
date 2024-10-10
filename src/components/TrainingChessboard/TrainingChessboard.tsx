@@ -3,6 +3,7 @@ import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Box, Button } from "@mui/material";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import SettingsIcon from "@mui/icons-material/Settings";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,6 +12,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import * as style from "./TrainingChessBoard.style";
+import Pgn from "./Pgn";
+import Options from "./Options";
+import Fen from "./Fen";
 
 interface MovePair {
   white: string;
@@ -18,16 +22,27 @@ interface MovePair {
 }
 
 export default function TrainingChessBoard() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const [chess] = useState<Chess>(new Chess());
   const [fen, setFen] = useState<string>(chess.fen());
   const [history, setHistory] = useState<MovePair[]>([]);
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
+  const [autoPromoteToQueen, setAutoPromoteToQueen] = useState<boolean>(false);
 
   function handleBoardOrientation() {
     setChangeBoardOrientation((prevBoardOrientation) =>
       prevBoardOrientation === "white" ? "black" : "white"
+    );
+  }
+
+  function handleAutoPromoteToQueen() {
+    setAutoPromoteToQueen((prevAutoPromoteToQueen) =>
+      prevAutoPromoteToQueen === true ? false : true
     );
   }
 
@@ -69,37 +84,80 @@ export default function TrainingChessBoard() {
     return true;
   };
 
+  const handleFenChange = (newFen: string) => {
+    setFen(newFen);
+    updateHistory();
+  };
+
+  const handleClearTheBoard = () => {
+    chess.clear();
+    setFen(chess.fen());
+  };
+
+  const handleResetTheBoard = () => {
+    chess.reset();
+    setFen(chess.fen());
+  };
+
   return (
     <Box sx={style.TrainingPageLayout}>
-      <Chessboard
-        id="BasicChessboard"
-        position={fen}
-        boardOrientation={changeBoardOrientation}
-        onPieceDrop={onPieceDrop}
-        arePiecesDraggable={true}
-        boardWidth={500}
-      />
-      <Box
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      >
-        <Button onClick={handleBoardOrientation}>Swap</Button>
-        <Button onClick={undoMove}>Undo</Button>
-        <h3>Historia ruchów:</h3>
+      <Box sx={style.firstColumn}>
+        <Box sx={style.Chessboard}>
+          <Chessboard
+            id="BasicChessboard"
+            position={fen}
+            boardOrientation={changeBoardOrientation}
+            onPieceDrop={onPieceDrop}
+            arePiecesDraggable={true}
+            autoPromoteToQueen={autoPromoteToQueen}
+            customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
+            customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+          />
+        </Box>
+        <Pgn chess={chess} onFenChange={handleFenChange} />
+        <Fen chess={chess} onFenChange={handleFenChange} />
+      </Box>
+
+      <Box sx={style.secondColumn}>
+        <Box>
+          <Button
+            variant="contained"
+            endIcon={<SettingsIcon />}
+            onClick={handleOpen}
+          >
+            Settings
+          </Button>
+          <Options
+            open={open}
+            handleClose={handleClose}
+            handleBoardOrientation={handleBoardOrientation}
+            undoMove={undoMove}
+            clearBoard={handleClearTheBoard}
+            resetBoard={handleResetTheBoard}
+            handleAutoPromoteToQueen={handleAutoPromoteToQueen}
+          />
+        </Box>
+
+        <h3>Moves history:</h3>
         <TableContainer sx={style.Table} component={Paper}>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell>Move</TableCell>
-                <TableCell>White</TableCell>
-                <TableCell>Black</TableCell>
+              <TableRow sx={style.MainRow}>
+                <TableCell sx={style.moveColumn}>Move</TableCell>
+                <TableCell sx={style.WhiteAndBlackColumn}>White</TableCell>
+                <TableCell sx={style.WhiteAndBlackColumn}>Black</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {history.map((move, index) => (
                 <TableRow key={index}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{move.white}</TableCell>
-                  <TableCell>{move.black}</TableCell>
+                  <TableCell sx={style.moveColumn}>{index + 1}</TableCell>
+                  <TableCell sx={style.WhiteAndBlackColumn}>
+                    {move.white}
+                  </TableCell>
+                  <TableCell sx={style.WhiteAndBlackColumn}>
+                    {move.black}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
