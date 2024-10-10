@@ -2,6 +2,12 @@ import { Box, Button, Link, Typography } from "@mui/material";
 import * as style from "./OurCouch.style";
 import { Facebook, GitHub, LinkedIn } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import {
+  ourCouch,
+  portret,
+  steps,
+  chess_set,
+} from "../../assets/OurCoachImages.js";
 
 export default function OurCoach() {
   const navigate = useNavigate();
@@ -23,20 +29,12 @@ export default function OurCoach() {
             individual curriculum for each student at different levels of
             advancement
           </Typography>
-          <Box
-            component="img"
-            sx={style.HeadImage}
-            src="/src/assets/ourCouch.jpg"
-          />
+          <Box component="img" sx={style.HeadImage} src={ourCouch} />
         </Box>
         <Box sx={style.ImgWithNameBox}>
-          <Box
-            component="img"
-            sx={style.Image}
-            src="/src/assets/ja_portret.jpg"
-          />
+          <Box component="img" sx={style.Image} src={portret} />
           <Box sx={style.FooterBox}>
-            <Box sx={style.NameAndRole}>
+            <Box>
               <Typography sx={style.Name}>Paweł Kozłowski</Typography>
               <Typography sx={style.Role}>Main Coach</Typography>
             </Box>
@@ -66,26 +64,11 @@ export default function OurCoach() {
           With cutting-edge tools and methodologies, we empower players to
           unlock their full potential.
         </Typography>
-        <Box
-          component="img"
-          sx={style.StepsImage}
-          src="/src/assets/123_steps.webp"
-        />
+        <Box component="img" sx={style.StepsImage} src={steps} />
       </Box>
       <Box sx={style.BlackTile}>
-        <Box
-          component="img"
-          sx={style.TransparentImage}
-          src="/src/assets/chess_set.png"
-        />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "flex-start",
-          }}
-        >
+        <Box component="img" sx={style.TransparentImage} src={chess_set} />
+        <Box sx={style.JoinContainer}>
           <Typography sx={{ ...style.BigTitle, color: "white" }}>
             Join And Become A Better Player!
           </Typography>

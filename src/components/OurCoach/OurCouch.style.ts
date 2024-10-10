@@ -148,3 +148,10 @@ export const StepsImage: SxProps = {
   height: "350px",
   borderRadius: "8px",
 };
+
+export const JoinContainer: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+  alignItems: "flex-start",
+};
