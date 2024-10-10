@@ -20,233 +20,83 @@ export default function OurPrices() {
         <Box sx={style.OneBox}>
           <Typography sx={style.Level}>Fresh</Typography>
           <Typography>
-            <span
-              style={{
-                fontFamily: "Playfair Display",
-                fontSize: "50px",
-                fontWeight: "700",
-              }}
-            >
-              300
-            </span>
-            <span
-              style={{
-                fontFamily: "Playfair Display",
-                fontSize: "23px",
-                fontWeight: "550",
-                marginLeft: "10px",
-              }}
-            >
-              zł Month
-            </span>
+            <span style={style.price}>300</span>
+            <span style={style.priceTitle}>zł Month</span>
           </Typography>
           <Typography sx={style.Description}>
-            <ul
-              style={{
-                padding: 0,
-                marginLeft: 0,
-                marginBottom: 20,
-                gap: 10,
-                listStylePosition: "inside",
-              }}
-            >
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
+            <Box component="ul" sx={style.List}>
+              <Box component="li" sx={style.Point}>
                 4 individual classes a month
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
+              </Box>
+              <Box component="li" sx={style.Point}>
                 duration of 60 mins per class
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                the teacher avaiable only during the classes
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
+              </Box>
+              <Box component="li" sx={style.Point}>
+                the teacher available only during the classes
+              </Box>
+              <Box component="li" sx={style.Point}>
                 you get notes from the classes
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
+              </Box>
+              <Box component="li" sx={style.Point}>
                 extra tasks to do on your own
-              </li>
-            </ul>
+              </Box>
+            </Box>
           </Typography>
           <Button sx={style.Button}>Join This Class</Button>
         </Box>
+
         <Box sx={style.OneBox}>
-          <Typography sx={{ ...style.Level, color: "#B6740C" }}>
-            Premium
-          </Typography>
+          <Typography sx={style.Level}>Intermediate</Typography>
           <Typography>
-            <span
-              style={{
-                fontFamily: "Playfair Display",
-                fontSize: "50px",
-                fontWeight: "700",
-              }}
-            >
-              550
-            </span>
-            <span
-              style={{
-                fontFamily: "Playfair Display",
-                fontSize: "23px",
-                fontWeight: "550",
-                marginLeft: "10px",
-              }}
-            >
-              zł Month
-            </span>
+            <span style={style.price}>500</span>
+            <span style={style.priceTitle}>zł Month</span>
           </Typography>
           <Typography sx={style.Description}>
-            <ul
-              style={{
-                padding: 0,
-                marginLeft: 0,
-                marginBottom: 20,
-                gap: 10,
-                listStylePosition: "inside",
-              }}
-            >
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                7 individual classes a month
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                duration of 80 mins per class
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                help of the teacher after the classes
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                you get notes from the classes
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                extra tasks to do on your own
-              </li>
-            </ul>
+            <Box component="ul" sx={style.List}>
+              <Box component="li" sx={style.Point}>
+                8 individual classes a month
+              </Box>
+              <Box component="li" sx={style.Point}>
+                duration of 60 mins per class
+              </Box>
+              <Box component="li" sx={style.Point}>
+                teacher available during classes and homework sessions
+              </Box>
+              <Box component="li" sx={style.Point}>
+                personalized homework assignments
+              </Box>
+              <Box component="li" sx={style.Point}>
+                feedback on extra tasks
+              </Box>
+            </Box>
           </Typography>
           <Button sx={style.Button}>Join This Class</Button>
         </Box>
+
         <Box sx={style.OneBox}>
-          <Typography sx={style.Level}>Medium</Typography>
+          <Typography sx={style.Level}>Advanced</Typography>
           <Typography>
-            <span
-              style={{
-                fontFamily: "Playfair Display",
-                fontSize: "50px",
-                fontWeight: "700",
-              }}
-            >
-              400
-            </span>
-            <span
-              style={{
-                fontFamily: "Playfair Display",
-                fontSize: "23px",
-                fontWeight: "550",
-                marginLeft: "10px",
-              }}
-            >
-              zł Month
-            </span>
+            <span style={style.price}>800</span>
+            <span style={style.priceTitle}>zł Month</span>
           </Typography>
           <Typography sx={style.Description}>
-            <ul
-              style={{
-                padding: 0,
-                marginLeft: 0,
-                marginBottom: 20,
-                gap: 10,
-                listStylePosition: "inside",
-              }}
-            >
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                4 individual classes a month
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                duration of 70 mins per class
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                the teacher avaiable only during the classes
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                you get notes from the classes
-              </li>
-              <li
-                style={{
-                  textAlign: "justify",
-                  marginBottom: "20px",
-                }}
-              >
-                extra tasks to do on your own
-              </li>
-            </ul>
+            <Box component="ul" sx={style.List}>
+              <Box component="li" sx={style.Point}>
+                12 individual classes a month
+              </Box>
+              <Box component="li" sx={style.Point}>
+                duration of 90 mins per class
+              </Box>
+              <Box component="li" sx={style.Point}>
+                teacher available for continuous support
+              </Box>
+              <Box component="li" sx={style.Point}>
+                personalized strategies and notes
+              </Box>
+              <Box component="li" sx={style.Point}>
+                feedback on advanced tasks
+              </Box>
+            </Box>
           </Typography>
           <Button sx={style.Button}>Join This Class</Button>
         </Box>

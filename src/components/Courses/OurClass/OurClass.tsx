@@ -1,5 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import * as style from "./OurClass.style";
+import {
+  pawn_classes,
+  strategy,
+  champion_strategy,
+  time,
+  knight,
+  classes,
+} from "../../../assets/CoursesImages.js";
 
 export default function OurClass() {
   return (
@@ -16,44 +24,28 @@ export default function OurClass() {
       </Box>
       <Box sx={style.Tiles}>
         <Box sx={style.OneTile}>
-          <Box
-            component="img"
-            sx={style.Image}
-            src="/src/assets/pawn_classes.png"
-          />
+          <Box component="img" sx={style.Image} src={pawn_classes} />
           <Typography sx={style.Header}>Chess For Beginner</Typography>
           <Typography sx={style.Description}>
             Start learning chess from the very beginning.
           </Typography>
         </Box>
         <Box sx={style.OneTile}>
-          <Box
-            component="img"
-            sx={style.Image}
-            src="/src/assets/classicStrategy_classes.png"
-          />
+          <Box component="img" sx={style.Image} src={strategy} />
           <Typography sx={style.Header}>Classic Strategies</Typography>
           <Typography sx={style.Description}>
             Solve tasks from the easiest level possible.
           </Typography>
         </Box>
         <Box sx={style.OneTile}>
-          <Box
-            component="img"
-            sx={style.Image}
-            src="/src/assets/championStrategy_classes.png"
-          />
+          <Box component="img" sx={style.Image} src={champion_strategy} />
           <Typography sx={style.Header}>Champion Strategies</Typography>
           <Typography sx={style.Description}>
             Master solving puzzles to become a champion of puzzles!
           </Typography>
         </Box>
         <Box sx={style.OneTile}>
-          <Box
-            component="img"
-            sx={style.Image}
-            src="/src/assets/time_classes.png"
-          />
+          <Box component="img" sx={style.Image} src={time} />
           <Typography sx={style.Header}>Notions Of Time</Typography>
           <Typography sx={style.Description}>
             Be patient, study consistently and you will quickly see the results
@@ -61,11 +53,7 @@ export default function OurClass() {
           </Typography>
         </Box>
         <Box sx={style.OneTile}>
-          <Box
-            component="img"
-            sx={style.Image}
-            src="/src/assets/knight_classes.png"
-          />
+          <Box component="img" sx={style.Image} src={knight} />
           <Typography sx={style.Header}>Opponent's Thoughts</Typography>
           <Typography sx={style.Description}>
             Theory is good but remember to always practice by playing chess
@@ -76,7 +64,7 @@ export default function OurClass() {
           <Box
             component="img"
             sx={{ height: "120px", width: "120px" }}
-            src="/src/assets/classes_courses.png"
+            src={classes}
           />
           <Typography sx={style.Header}>Online Classes</Typography>
           <Typography sx={style.Description}>

@@ -4,7 +4,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
@@ -12,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
+import { web_logo } from "../../assets/FooterNavbarImages.js";
 
 const pages = ["Home", "About", "Courses", "Pages", "Contact"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -33,43 +33,24 @@ function Navbar() {
   };
 
   return (
-    <AppBar
-      position="static"
-      sx={{ backgroundColor: "#000000", width: "100%" }}
-    >
+    <AppBar position="static" sx={style.AppBar}>
       <Toolbar sx={style.Navbar}>
         <SideMenu />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "0px",
-            width: "330px",
-            height: "65px",
-            marginLeft: "255px",
-          }}
-        >
+        <Box sx={style.BarContainer}>
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
-            sx={{ textAlign: "center" }}
+            sx={style.WebTitle}
           >
             Chess
           </Typography>
-          <img src="/src/assets/orange_logo.png" style={{ height: "50px" }} />
+
+          <Box component="img" sx={style.WebLogo} src={web_logo} />
         </Box>
 
-        <Box
-          sx={{
-            flexGrow: 1,
-            display: "flex",
-            justifyContent: "center",
-            gap: "20px",
-          }}
-        >
+        <Box sx={style.TabsNavbar}>
           {pages.map((page) => (
             <Button
               key={page}
@@ -81,9 +62,9 @@ function Navbar() {
           ))}
         </Box>
 
-        <Box sx={{ flexGrow: 0 }}>
+        <Box>
           <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ mr: -5 }}>
+            <IconButton onClick={handleOpenUserMenu} sx={style.IconButton}>
               <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
             </IconButton>
           </Tooltip>
@@ -105,7 +86,7 @@ function Navbar() {
           >
             {settings.map((setting) => (
               <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Button textAlign="center">{setting}</Button>
+                <Button>{setting}</Button>
               </MenuItem>
             ))}
           </Menu>

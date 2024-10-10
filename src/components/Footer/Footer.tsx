@@ -1,17 +1,15 @@
 import { Typography, Box, Link, Divider } from "@mui/material";
 import * as style from "./Footer.styles";
 import { Facebook, GitHub, Instagram, LinkedIn } from "@mui/icons-material";
+import { footer_knight } from "../../assets/FooterNavbarImages.js";
+import { routes } from "../../routes.js";
 
 export default function Footer() {
   return (
     <Box sx={style.Footer}>
       <Box sx={style.Container}>
         <Box sx={style.ImgAndQuote}>
-          <Box
-            component="img"
-            sx={style.Image}
-            src="/src/assets/footer_knight.png"
-          />
+          <Box component="img" sx={style.Image} src={footer_knight} />
           <Typography sx={{ ...style.CopyrightText, textAlign: "left" }}>
             „Chess is a fight against yourself first and foremost” - Garri
             Kasparow
@@ -45,7 +43,7 @@ export default function Footer() {
         <Typography
           sx={style.Typography}
           component="a"
-          href="/contact-us"
+          href={routes.contactUs}
           variant="caption"
           gutterBottom
         >
@@ -54,7 +52,7 @@ export default function Footer() {
         <Typography
           sx={style.Typography}
           component="a"
-          href="/about-us"
+          href={routes.aboutUs}
           variant="caption"
           gutterBottom
         >
@@ -63,7 +61,7 @@ export default function Footer() {
         <Typography
           sx={style.Typography}
           component="a"
-          href="/faq"
+          href={routes.faq}
           variant="caption"
           gutterBottom
         >
@@ -72,7 +70,7 @@ export default function Footer() {
         <Typography
           sx={style.Typography}
           component="a"
-          href="/fair-play"
+          href={routes.fairPlay}
           variant="caption"
           gutterBottom
         >

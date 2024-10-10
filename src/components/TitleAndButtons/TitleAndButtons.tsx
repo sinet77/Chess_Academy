@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import * as style from "./TitleAndButtons.style";
 import { motion } from "framer-motion";
+import { training, computer, puzzle } from "../../assets/MainPageImages.js";
 
 export default function TitleAndButtons() {
   return (
@@ -27,28 +28,20 @@ export default function TitleAndButtons() {
         <Box sx={style.TileContainer}>
           <Button sx={style.ImageButtonContainer}>
             <img
-              src="/src/assets/chess_puzzles.png"
-              alt="Chess Puzzle"
+              src={training}
+              alt="Chessboard with a man playing"
               style={style.ButtonImage}
             />
             <Typography sx={style.TitleUnderButtonImage}>Training</Typography>
           </Button>
           <Button sx={style.ImageButtonContainer}>
-            <img
-              src="/src/assets/robot.jpg"
-              alt="Chess Puzzle"
-              style={style.ButtonImage}
-            />
+            <img src={computer} alt="Chess Puzzle" style={style.ButtonImage} />
             <Typography sx={style.TitleUnderButtonImage}>
               Play vs computer
             </Typography>
           </Button>
           <Button sx={style.ImageButtonContainer}>
-            <img
-              src="/src/assets/puzzle.jpg"
-              alt="Chess Puzzle"
-              style={style.ButtonImage}
-            />
+            <img src={puzzle} alt="Chess Puzzle" style={style.ButtonImage} />
             <Typography sx={style.TitleUnderButtonImage}>Puzzles</Typography>
           </Button>
         </Box>

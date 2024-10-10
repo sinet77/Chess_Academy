@@ -22,3 +22,24 @@ export const Navbar: SxProps = {
   alignItems: "center",
   display: "flex",
 };
+
+export const BarContainer: SxProps = {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: "0px",
+  width: "330px",
+  height: "65px",
+  marginLeft: "255px",
+};
+export const WebTitle: SxProps = { textAlign: "center" };
+export const AppBar: SxProps = { backgroundColor: "#000000", width: "100%" };
+export const WebLogo: SxProps = { height: "50px" };
+export const IconButton: SxProps = { mr: -5 };
+
+export const TabsNavbar: SxProps = {
+  flexGrow: 1,
+  display: "flex",
+  justifyContent: "center",
+  gap: "20px",
+};
