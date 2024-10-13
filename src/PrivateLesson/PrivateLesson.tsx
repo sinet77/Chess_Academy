@@ -6,12 +6,18 @@ import {
   chess_private_lesson,
 } from "../assets/PrivateLessonImages.js";
 import CheckIcon from "@mui/icons-material/Check";
+import StarRateIcon from "@mui/icons-material/StarRate";
+import FormatQuoteOutlinedIcon from "@mui/icons-material/FormatQuoteOutlined";
 
 export default function PrivateLesson() {
   const navigate = useNavigate();
 
   function handleJoinButtonClick() {
     navigate("/courses");
+  }
+
+  function handleReadMeButtonClick() {
+    window.location.href = "https://www.e-korepetycje.net/pawel608/szachy";
   }
   return (
     <Box>
@@ -73,6 +79,62 @@ export default function PrivateLesson() {
           <Button onClick={handleJoinButtonClick} sx={style.Button}>
             Join
           </Button>
+        </Box>
+      </Box>
+      <Box sx={style.ReviewsTile}>
+        <Box sx={style.Titles}>
+          <Typography sx={style.SmallTitle}>Opinions</Typography>
+          <Typography sx={style.BigTitle}>
+            What They Said After Class
+          </Typography>
+          <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
+            Years of teaching experience have allowed us to develop an
+            individual curriculum for each student at different levels of
+            advancement
+          </Typography>
+          <Button onClick={handleReadMeButtonClick} sx={style.ReadButton}>
+            Read More
+          </Button>
+        </Box>
+        <Box sx={style.StarOpinion}>
+          {Array.from({ length: 5 }, (_, index) => (
+            <StarRateIcon key={index} sx={{ color: "#B6740C" }} />
+          ))}
+          <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
+            Professional classes, fantastic approach to the student. My son is
+            delighted. I recommend it wholeheartedly and thank you on behalf of
+            myself and my son.
+          </Typography>
+          <FormatQuoteOutlinedIcon
+            sx={{
+              color: "#C3C3C3",
+              fontSize: "70px",
+              position: "absolute",
+              top: "0",
+              right: "0",
+              zIndex: 0,
+            }}
+          />
+        </Box>
+        <Box sx={style.StarOpinion}>
+          {Array.from({ length: 5 }, (_, index) => (
+            <StarRateIcon key={index} sx={{ color: "#B6740C" }} />
+          ))}
+          <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
+            I highly recommend it, fantastic individual approach to the student,
+            thanks to which I increased my playing strength after just a few
+            lessons
+          </Typography>
+          <FormatQuoteOutlinedIcon
+            sx={{
+              color: "#C3C3C3",
+              fontSize: "70px",
+              position: "absolute",
+              top: "0",
+              right: "0",
+              zIndex: 0,
+            }}
+          />
         </Box>
       </Box>
     </Box>

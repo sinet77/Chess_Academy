@@ -111,7 +111,6 @@ export const BenefitsTile: SxProps = {
 export const BenefitsBigTitle: SxProps = {
   fontFamily: "Playfair Display",
   fontSize: "25px",
-
   fontWeight: "500",
   lineHeight: "34px",
   letterSpacing: "0.1em",
@@ -151,4 +150,34 @@ export const List: SxProps = {
   marginBottom: 20,
   gap: 10,
   listStylePosition: "inside",
+};
+
+export const ReadButton: SxProps = {
+  color: "white",
+  backgroundColor: "#000000",
+  fontFamily: "Playfair Display",
+  fontSize: "16px",
+  fontWeight: "500",
+  lineHeight: "23px",
+  textTransform: "none",
+  padding: "10px 30px",
+  "&:hover": {
+    backgroundColor: "#B6740C",
+  },
+};
+
+export const ReviewsTile: SxProps = {
+  padding: "80px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "100px",
+  backgroundColor: "#FFFFFF",
+};
+
+export const StarOpinion: SxProps = {
+  borderLeft: "3px solid #C3C3C3",
+  borderTop: "3px solid #C3C3C3",
+  padding: "30px",
+  position: "relative",
 };
