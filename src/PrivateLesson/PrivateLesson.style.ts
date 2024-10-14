@@ -55,6 +55,14 @@ export const DescriptionHeader: SxProps = {
   color: "#7E7E7E",
 };
 
+export const QuoteText: SxProps = {
+  fontFamily: "Playfair Display",
+  fontSize: "20px",
+  fontWeight: "500",
+  lineHeight: "40px",
+  color: "#7E7E7E",
+};
+
 export const JoinTile: SxProps = {
   padding: "40px 40px 60px 40px",
   display: "flex",
@@ -180,4 +188,49 @@ export const StarOpinion: SxProps = {
   borderTop: "3px solid #C3C3C3",
   padding: "30px",
   position: "relative",
+  gap: "20px",
+};
+
+export const Stars: SxProps = {
+  color: "#B6740C",
+  mr: "5px",
+  mb: "20px",
+  position: "relative",
+  zIndex: 1,
+};
+export const Face: SxProps = {
+  fontSize: "30px",
+};
+
+export const QuoteIcon: SxProps = {
+  color: "#C3C3C3",
+  fontSize: "70px",
+  position: "absolute",
+  top: "0",
+  right: "0",
+  zIndex: 0,
+  opacity: 0.8,
+};
+
+export const NameContainer: SxProps = {
+  display: "flex",
+  marginTop: "20px",
+  gap: "25px",
+  alignItems: "center",
+};
+
+export const Name: SxProps = {
+  fontFamily: "Playfair Display",
+  fontSize: "24px",
+  fontWeight: "500",
+  lineHeight: "30px",
+  color: "#000000",
+};
+
+export const Role: SxProps = {
+  fontFamily: "Roboto",
+  fontSize: "16px",
+  fontWeight: "300",
+  lineHeight: "30px",
+  color: "#000000",
 };

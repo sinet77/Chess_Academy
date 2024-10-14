@@ -8,6 +8,7 @@ import {
 import CheckIcon from "@mui/icons-material/Check";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import FormatQuoteOutlinedIcon from "@mui/icons-material/FormatQuoteOutlined";
+import { Face, Face3 } from "@mui/icons-material";
 
 export default function PrivateLesson() {
   const navigate = useNavigate();
@@ -34,12 +35,22 @@ export default function PrivateLesson() {
             individual curriculum for each student at different levels of
             advancement
           </Typography>
+          <Typography sx={style.QuoteText}>
+            “You may learn much more from a game you lose than from a game you
+            win.” — Jose Capablanca
+          </Typography>
         </Box>
         <Box sx={style.BenefitsTile}>
           <Typography sx={style.BenefitsBigTitle}>
             Benefits of online classes
           </Typography>
-          <Typography sx={style.BenefitsDescription}>Description</Typography>
+          <Typography sx={style.BenefitsDescription}>
+            Online chess lessons offer a flexible and effective way to improve
+            your skills without the need to travel. With personalized coaching
+            and interactive tools, you can progress at your own pace, from the
+            comfort of your home. Discover the many advantages that make online
+            learning a perfect fit for chess enthusiasts of all levels.
+          </Typography>
           <Box component="ul" sx={style.List}>
             <Box component="li" sx={style.Point}>
               <CheckIcon sx={style.CheckIcon} />
@@ -98,43 +109,39 @@ export default function PrivateLesson() {
         </Box>
         <Box sx={style.StarOpinion}>
           {Array.from({ length: 5 }, (_, index) => (
-            <StarRateIcon key={index} sx={{ color: "#B6740C" }} />
+            <StarRateIcon key={index} sx={style.Stars} />
           ))}
           <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
             Professional classes, fantastic approach to the student. My son is
             delighted. I recommend it wholeheartedly and thank you on behalf of
             myself and my son.
           </Typography>
-          <FormatQuoteOutlinedIcon
-            sx={{
-              color: "#C3C3C3",
-              fontSize: "70px",
-              position: "absolute",
-              top: "0",
-              right: "0",
-              zIndex: 0,
-            }}
-          />
+          <FormatQuoteOutlinedIcon sx={style.QuoteIcon} />
+          <Box sx={style.NameContainer}>
+            <Face3 sx={style.Face} />
+            <Box>
+              <Typography sx={style.Name}>Olga</Typography>
+              <Typography sx={style.Role}>Student's mom</Typography>
+            </Box>
+          </Box>
         </Box>
         <Box sx={style.StarOpinion}>
           {Array.from({ length: 5 }, (_, index) => (
-            <StarRateIcon key={index} sx={{ color: "#B6740C" }} />
+            <StarRateIcon key={index} sx={style.Stars} />
           ))}
           <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
             I highly recommend it, fantastic individual approach to the student,
             thanks to which I increased my playing strength after just a few
             lessons
           </Typography>
-          <FormatQuoteOutlinedIcon
-            sx={{
-              color: "#C3C3C3",
-              fontSize: "70px",
-              position: "absolute",
-              top: "0",
-              right: "0",
-              zIndex: 0,
-            }}
-          />
+          <FormatQuoteOutlinedIcon sx={style.QuoteIcon} />
+          <Box sx={style.NameContainer}>
+            <Face sx={style.Face} />
+            <Box>
+              <Typography sx={style.Name}>Michał</Typography>
+              <Typography sx={style.Role}>Student</Typography>
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>
