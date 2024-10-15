@@ -80,7 +80,6 @@ export const Boxes: SxProps = {
 export const Button: SxProps = {
   color: "white",
   backgroundColor: "#000000",
-  marginTop: "-100px",
   fontFamily: "Playfair Display",
   fontSize: "16px",
   fontWeight: "500",
@@ -92,13 +91,13 @@ export const Button: SxProps = {
   },
 };
 
-export const price = {
+export const Price = {
   fontFamily: "Playfair Display",
   fontSize: "50px",
   fontWeight: "700",
 };
 
-export const priceTitle = {
+export const PriceTitle = {
   fontFamily: "Playfair Display",
   fontSize: "23px",
   fontWeight: "550",
@@ -108,7 +107,6 @@ export const priceTitle = {
 export const List: SxProps = {
   padding: 0,
   marginLeft: 0,
-  marginBottom: 20,
   gap: 10,
   listStylePosition: "inside",
 };

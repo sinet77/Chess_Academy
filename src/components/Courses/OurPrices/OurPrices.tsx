@@ -20,8 +20,8 @@ export default function OurPrices() {
         <Box sx={style.OneBox}>
           <Typography sx={style.Level}>Fresh</Typography>
           <Typography>
-            <span style={style.price}>300</span>
-            <span style={style.priceTitle}>zł Month</span>
+            <span style={style.Price}>300</span>
+            <span style={style.PriceTitle}>zł Month</span>
           </Typography>
           <Typography sx={style.Description}>
             <Box component="ul" sx={style.List}>
@@ -48,8 +48,8 @@ export default function OurPrices() {
         <Box sx={style.OneBox}>
           <Typography sx={style.Level}>Intermediate</Typography>
           <Typography>
-            <span style={style.price}>500</span>
-            <span style={style.priceTitle}>zł Month</span>
+            <span style={style.Price}>500</span>
+            <span style={style.PriceTitle}>zł Month</span>
           </Typography>
           <Typography sx={style.Description}>
             <Box component="ul" sx={style.List}>
@@ -76,8 +76,8 @@ export default function OurPrices() {
         <Box sx={style.OneBox}>
           <Typography sx={style.Level}>Advanced</Typography>
           <Typography>
-            <span style={style.price}>800</span>
-            <span style={style.priceTitle}>zł Month</span>
+            <span style={style.Price}>800</span>
+            <span style={style.PriceTitle}>zł Month</span>
           </Typography>
           <Typography sx={style.Description}>
             <Box component="ul" sx={style.List}>
