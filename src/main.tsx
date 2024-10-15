@@ -11,6 +11,7 @@ import FairPlay from "./components/Footer/FairPlay/FairPlayStartingPage.tsx";
 import FAQ from "./components/Footer/FAQ/FAQ.tsx";
 import AboutUs from "./components/Footer/AboutUs/AboutUs.tsx";
 import Contact from "./components/Footer/Contact.tsx/Contact.tsx";
+import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <Contact />,
+      },
+      {
+        path: "/ourcoach",
+        element: <OurCoach />,
       },
     ],
   },
