@@ -4,7 +4,7 @@ import {
   doSignInWithGoogle,
 } from "./../../firebase/auth";
 import * as style from "./LoginForm.style";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikHelpers } from "formik";
 import {
   Box,
   TextField,
@@ -16,34 +16,31 @@ import {
   Link,
 } from "@mui/material";
 import { useAuth } from "../../context/authContext";
-import { useState } from "react";
+
 import { Navigate } from "react-router-dom";
 
 export default function LoginForm() {
   const { userLoggedIn } = useAuth();
-  const [isSigningIn, setIsSigningIn] = useState(false);
 
-  const onSubmit = async (values, { setSubmitting }) => {
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-      try {
-        await doSignInWithEmailAndPassword(values.login, values.password);
-      } catch (error) {
-        // obsłuż błąd logowania
-      }
-      setSubmitting(false);
-      setIsSigningIn(false);
+  const initialValues = { login: "", password: "", remember: false };
+
+  const onSubmit = async (
+    values: typeof initialValues,
+    { setSubmitting }: FormikHelpers<typeof initialValues>
+  ) => {
+    try {
+      await doSignInWithEmailAndPassword(values.login, values.password);
+    } catch (error) {
+      console.log(error);
     }
+    setSubmitting(false);
   };
 
   const onGoogleSignIn = async () => {
-    if (!isSigningIn) {
-      setIsSigningIn(true);
-      try {
-        await doSignInWithGoogle();
-      } catch (error) {
-        setIsSigningIn(false);
-      }
+    try {
+      await doSignInWithGoogle();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -52,10 +49,8 @@ export default function LoginForm() {
       {userLoggedIn && <Navigate to={"/"} replace={true} />}
       <Typography sx={style.Text}>Start your journey</Typography>
       <Formik
-        initialValues={{ login: "", password: "", remember: false }}
+        initialValues={initialValues}
         validationSchema={LoginSchema}
-        validateOnChange={true}
-        validateOnBlur={true}
         onSubmit={onSubmit}
       >
         {({ isSubmitting, errors, touched }) => (
@@ -102,10 +97,10 @@ export default function LoginForm() {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  disabled={isSigningIn}
+                  disabled={isSubmitting}
                   sx={style.Button}
                 >
-                  {isSigningIn ? "Loading..." : "Login"}
+                  {isSubmitting ? "Loading..." : "Login"}
                 </Button>
                 <Divider sx={style.Divider}>OR</Divider>
                 <Button
@@ -113,6 +108,7 @@ export default function LoginForm() {
                   variant="contained"
                   color="primary"
                   sx={style.Button}
+                  type="button"
                 >
                   Sign in with Google
                 </Button>
