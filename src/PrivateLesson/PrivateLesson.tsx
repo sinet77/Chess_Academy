@@ -1,25 +1,16 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, Link } from "@mui/material";
 import * as style from "./PrivateLesson.style";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import {
   chess_set,
   chess_private_lesson,
-} from "../assets/PrivateLessonImages.js";
+} from "../assets/PrivateLessonImages.ts";
 import CheckIcon from "@mui/icons-material/Check";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import FormatQuoteOutlinedIcon from "@mui/icons-material/FormatQuoteOutlined";
 import { Face, Face3 } from "@mui/icons-material";
 
 export default function PrivateLesson() {
-  const navigate = useNavigate();
-
-  function handleJoinButtonClick() {
-    navigate("/courses");
-  }
-
-  function handleReadMeButtonClick() {
-    window.location.href = "https://www.e-korepetycje.net/pawel608/szachy";
-  }
   return (
     <Box>
       <Box sx={style.BlackTile}>Private Lesson</Box>
@@ -87,9 +78,9 @@ export default function PrivateLesson() {
           <Typography sx={{ ...style.DescriptionHeader, color: "#FFFFFF" }}>
             Sign up for classes now and check your possibilities!
           </Typography>
-          <Button onClick={handleJoinButtonClick} sx={style.Button}>
-            Join
-          </Button>
+          <Link to={"/courses"} component={RouterLink}>
+            <Button sx={style.Button}>Join</Button>
+          </Link>
         </Box>
       </Box>
       <Box sx={style.ReviewsTile}>
@@ -103,9 +94,12 @@ export default function PrivateLesson() {
             individual curriculum for each student at different levels of
             advancement
           </Typography>
-          <Button onClick={handleReadMeButtonClick} sx={style.ReadButton}>
-            Read More
-          </Button>
+          <Link
+            to={"https://www.e-korepetycje.net/pawel608/szachy"}
+            component={RouterLink}
+          >
+            <Button sx={style.ReadButton}>Read More</Button>
+          </Link>
         </Box>
         <Box sx={style.StarOpinion}>
           {Array.from({ length: 5 }, (_, index) => (
