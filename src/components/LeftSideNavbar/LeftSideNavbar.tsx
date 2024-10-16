@@ -8,7 +8,6 @@ import {
   Box,
 } from "@mui/material";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import TrainingChessBoard from "../TrainingChessboard/TrainingChessboard";
 
 const drawerWidth = 240;
 
