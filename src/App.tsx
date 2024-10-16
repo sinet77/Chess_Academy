@@ -1,11 +1,14 @@
 import { Box } from "@mui/material";
-import "./App.css";
-import ChessboardDisplay from "./components/ChessBoardDisplay";
+
+import Articles from "./components/Articles/Articles";
+import * as style from "./App.styles";
+import TitleAndButtons from "./components/TitleAndButtons/TitleAndButtons";
 
 export default function App() {
   return (
-    <Box className="main">
-      <ChessboardDisplay />
+    <Box sx={style.main}>
+      <TitleAndButtons />
+      <Articles />
     </Box>
   );
 }
