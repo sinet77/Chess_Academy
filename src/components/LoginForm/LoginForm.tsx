@@ -1,8 +1,4 @@
 import { LoginSchema } from "../../schemas/ValidationSchema";
-import {
-  doSignInWithEmailAndPassword,
-  doSignInWithGoogle,
-} from "./../../firebase/auth";
 import * as style from "./LoginForm.style";
 import { Formik, Form, Field, FormikHelpers } from "formik";
 import {
@@ -20,7 +16,12 @@ import { useAuth } from "../../context/authContext";
 import { Navigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const { userLoggedIn } = useAuth();
+  const {
+    userLoggedIn,
+    doCreateUserWithEmailAndPassword,
+    doSignInWithEmailAndPassword,
+    doSignInWithGoogle,
+  } = useAuth();
 
   const initialValues = { login: "", password: "", remember: false };
 

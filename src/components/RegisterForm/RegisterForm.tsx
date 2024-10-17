@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
-import { doCreateUserWithEmailAndPassword } from "./../../firebase/auth";
 import PasswordStrengthBar from "react-password-strength-bar";
 import * as style from "./RegisterForm.style";
 import { Formik, Form, Field, FormikHelpers } from "formik";

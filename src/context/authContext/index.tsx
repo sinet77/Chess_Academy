@@ -12,6 +12,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  UserCredential,
 } from "firebase/auth";
 
 interface AuthContextType {
@@ -20,6 +21,15 @@ interface AuthContextType {
   isGoogleUser: boolean;
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+  doCreateUserWithEmailAndPassword: (
+    email: string,
+    password: string
+  ) => Promise<User>;
+  doSignInWithEmailAndPassword: (
+    email: string,
+    password: string
+  ) => Promise<UserCredential>;
+  doSignInWithGoogle: () => Promise<User>;
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
@@ -126,6 +136,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isGoogleUser,
     currentUser,
     setCurrentUser,
+    doCreateUserWithEmailAndPassword,
+    doSignInWithEmailAndPassword,
+    doSignInWithGoogle,
   };
 
   return (
