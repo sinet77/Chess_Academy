@@ -1,9 +1,5 @@
 import { SxProps } from "@mui/material";
 
-export const Background: SxProps = {
-  backgroundColor: 
-}
-
 export const TileContainer: SxProps = {
   display: "grid",
   gridTemplateColumns: "repeat(3, auto)",
