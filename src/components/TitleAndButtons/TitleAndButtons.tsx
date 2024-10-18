@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import * as style from "./TitleAndButtons.style";
 import { motion } from "framer-motion";
-import { training, computer, puzzle } from "../../assets/MainPageImages.js";
+import { training, computer, puzzle } from "../../assets/MainPageImages.ts";
 
 export default function TitleAndButtons() {
   return (

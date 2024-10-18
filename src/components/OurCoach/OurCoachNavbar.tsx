@@ -7,7 +7,7 @@ import {
   portret,
   steps,
   chess_set,
-} from "../../assets/OurCoachImages.js";
+} from "../../assets/OurCoachImages.ts";
 
 export default function OurCoach() {
   const navigate = useNavigate();
