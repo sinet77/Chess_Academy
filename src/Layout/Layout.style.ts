@@ -7,4 +7,5 @@ export const Main: SxProps = {
   boxSizing: "border-box",
   padding: 0,
   minHeight: "100vh",
+  width: "100%",
 };

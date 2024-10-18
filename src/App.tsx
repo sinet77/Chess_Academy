@@ -7,7 +7,7 @@ import OurClass from "./components/Courses/OurClass/OurClass";
 
 export default function App() {
   return (
-    <Box sx={style.main}>
+    <Box sx={style.Main}>
       <TitleAndButtons />
       <Articles />
       <OurClass />

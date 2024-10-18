@@ -5,7 +5,7 @@ import { training, computer, puzzle } from "../../assets/MainPageImages.js";
 
 export default function TitleAndButtons() {
   return (
-    <Box sx={style.Background}>
+    <Box>
       <motion.div
         initial={{ opacity: 0, scale: 0.3 }}
         animate={{ opacity: 1, scale: 1.1 }}

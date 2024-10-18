@@ -12,7 +12,7 @@ export const Typography: SxProps = {
 
 export const Navbar: SxProps = {
   borderBottom: "1px solid #DADADA",
-  width: "100%",
+
   height: "112px",
   gap: "0px",
   border: "1px 0px 0px 0px",
@@ -28,7 +28,6 @@ export const BarContainer: SxProps = {
   flexDirection: "row",
   alignItems: "center",
   gap: "0px",
-  width: "330px",
   height: "65px",
   marginLeft: "255px",
 };

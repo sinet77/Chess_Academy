@@ -1,6 +1,6 @@
 import { SxProps } from "@mui/material";
 
-export const main: SxProps = {
+export const Main: SxProps = {
   display: "flex",
   flexDirection: "column",
   backgroundImage: "url(/src/assets/chess_background.jpg)",
