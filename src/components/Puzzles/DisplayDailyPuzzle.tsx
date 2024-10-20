@@ -16,6 +16,7 @@ interface Puzzle {
 
 export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const [chess] = useState<Chess>(new Chess());
+  const [isMovable, setIsMovable] = useState(true);
   const [fen, setFen] = useState<string>("start");
   const [moves, setMoves] = useState<string[]>([]);
   const [currentMoveIndex, setCurrentMoveIndex] = useState<number>(0);
@@ -124,6 +125,12 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
           setCurrentMoveIndex(blackMoveIndex + 1);
         }
       }
+
+      //Czy koniec ruchów
+      if (blackMoveIndex + 1 === moves.length) {
+        setIsMovable(false);
+        console.log("Wszystkie ruchy wykonane. Ruchy zostały zablokowane.");
+      }
     } else {
       console.error("Zły ruch białych:", move.san);
       chess.undo();
@@ -142,7 +149,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
           id="BasicChessboard"
           position={fen}
           onPieceDrop={onPieceDrop}
-          arePiecesDraggable={true}
+          arePiecesDraggable={isMovable}
           customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
           customLightSquareStyle={{ backgroundColor: "#607d8b" }}
         />
