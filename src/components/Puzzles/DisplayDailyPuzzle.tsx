@@ -74,6 +74,15 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     targetSquare: Square,
     piece: Piece
   ): boolean => {
+    console.log(
+      "Piece dropped:",
+      piece,
+      "from:",
+      sourceSquare,
+      "to:",
+      targetSquare
+    );
+
     const previousFen = chess.fen();
 
     const move = chess.move({
@@ -83,19 +92,45 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     });
 
     if (move === null) {
+      console.error(`Invalid move: ${sourceSquare} to ${targetSquare}`);
       setFen(previousFen);
       return false;
     }
 
-    setFen(chess.fen());
+    console.log("Move performed:", move.san);
 
-    if (currentMoveIndex < moves.length) {
-      const blackMove = moves[currentMoveIndex];
+    const sanitizedMove = cleanMove(move.san);
 
-      chess.move(blackMove);
-      setFen(chess.fen());
-      setCurrentMoveIndex(currentMoveIndex + 1);
+    const moveIndex = currentMoveIndex;
+
+    console.log("Sanitized Move:", sanitizedMove);
+    console.log("Expected Move (White):", moves[moveIndex]);
+
+    if (sanitizedMove === moves[moveIndex]) {
+      console.log("Dobry ruch białych:", move.san);
+
+      setCurrentMoveIndex(moveIndex + 1);
+
+      const blackMoveIndex = moveIndex + 1;
+      if (blackMoveIndex < moves.length) {
+        const blackMove = moves[blackMoveIndex];
+        const moveBlack = chess.move(blackMove);
+
+        if (!moveBlack) {
+          console.error(`Invalid black move: ${blackMove}`);
+          chess.undo();
+        } else {
+          console.log("Czarny ruch wykonany:", moveBlack.san);
+          setCurrentMoveIndex(blackMoveIndex + 1);
+        }
+      }
+    } else {
+      console.error("Zły ruch białych:", move.san);
+      chess.undo();
+      setFen(previousFen);
     }
+
+    setFen(chess.fen());
 
     return true;
   };
