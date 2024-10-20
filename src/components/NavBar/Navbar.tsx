@@ -64,7 +64,7 @@ function Navbar() {
 
         <Box>
           <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={style.IconButton}>
+            <IconButton onClick={handleOpenUserMenu} >
               <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
             </IconButton>
           </Tooltip>
