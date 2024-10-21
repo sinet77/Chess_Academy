@@ -8,7 +8,7 @@ type BadgeProps = {
 export const Badge = ({ title, src }: BadgeProps) => {
   return (
     <Box sx={style.badgeContainer}>
-      <img src={src} alt={`${src}-icon`} style={{ width: '70px', height: '70px' }} />
+      <img src={src} alt={`${src}-icon`} style={style.imgStyle} />
       <Box>
         <Typography sx={style.title}>{title}</Typography>
       </Box>

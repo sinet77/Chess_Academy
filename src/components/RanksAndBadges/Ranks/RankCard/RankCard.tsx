@@ -17,7 +17,7 @@ export const RankCard = ({ rank }: RankCardProps) => {
   return (
     <Box sx={style.rankCardContainer}>
       <Box sx={style.iconWithTitle}>
-        <img src={rank.icon} alt={`${rank.rank}-icon`} style={{ filter: 'invert(56%) sepia(94%) saturate(1453%) hue-rotate(-9deg) brightness(102%) contrast(105%)', width: '100px', height: '100px', marginBottom: '10px' }} />
+        <img src={rank.icon} alt={`${rank.rank}-icon`} style={style.iconImg} />
         <Typography variant="h6" sx={style.rankTitle}>{rank.rank}</Typography>
       </Box>
 

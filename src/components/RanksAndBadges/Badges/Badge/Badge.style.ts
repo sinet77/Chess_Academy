@@ -18,3 +18,8 @@ export const title: SxProps = {
   mt: "10px"
 };
 
+export const imgStyle = {
+  width: '70px',
+  height: '70px'
+};
+

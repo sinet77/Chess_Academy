@@ -24,6 +24,14 @@ export const iconWithTitle: SxProps = {
   backgroundColor: "#282424",
   mb: "15px"
 }
+
+export const iconImg = {
+  filter: 'invert(56%) sepia(94%) saturate(1453%) hue-rotate(-9deg) brightness(102%) contrast(105%)',
+  width: '100px',
+  height: '100px',
+  marginBottom: '10px'
+}
+
 export const rankTitle: SxProps = {
   color: "orange"
 }
