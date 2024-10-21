@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const Main: SxProps = {
-  backgroundColor: "#03707d",
+  backgroundColor: "#FFFFFF",
   boxShadow: "10px 10px 30px rgba(0, 0, 0, 0.5)",
   padding: "50px",
   textAlign: "center",
@@ -70,4 +70,54 @@ export const Alert: SxProps = {
   color: "green",
   fontWeight: "bold",
   border: "1px solid black",
+};
+
+export const Map: SxProps = {
+  mt: "50px",
+  width: "100%",
+  height: { xs: "300px", md: "500px" },
+};
+
+export const GetInTouchContainer: SxProps = {
+  backgroundColor: "black",
+  width: "100%",
+  color: "white",
+  padding: "60px",
+  textAlign: "left",
+  position: "relative",
+};
+
+export const GetInTouch: SxProps = {
+  color: "#FFFFFF",
+  fontFamily: "Playfair Display",
+  fontSize: "50px",
+  fontWeight: "600",
+  lineHeight: "70px",
+  mb: "50px",
+};
+
+export const IconAndNameContainer: SxProps = {
+  display: "flex",
+  alignItems: "center",
+  gap: "15px",
+  mb: "30px",
+};
+
+export const Icon: SxProps = {
+  color: "#B6740C",
+  height: "25px",
+  width: "25px",
+};
+export const PointTitle: SxProps = {
+  fontFamily: "Playfair Display",
+  fontSize: "20px",
+  fontWeight: "500",
+  lineHeight: "23px",
+};
+
+export const FooterIcons: SxProps = {
+  display: "flex",
+  position: "absolute",
+  bottom: "50px",
+  gap: "20px",
 };
