@@ -14,6 +14,7 @@ import Contact from "./components/Footer/Contact.tsx/Contact.tsx";
 import CoursesPage from "./components/Courses/CoursesPage.tsx";
 import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
+import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,11 +22,11 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: routes.home,
         element: <App />,
       },
       {
-        path: "/training",
+        path: routes.training,
         element: <TrainingChessBoard />,
       },
       {
@@ -45,13 +46,17 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/ourcoach",
+        path: routes.ourcoach,
         element: <OurCoach />,
       },
       {
-        path: "/courses",
+        path: routes.courses,
         element: <CoursesPage />,
       },
+      {
+        path: routes.ranksAndBadges,
+        element: <RanksAndBadges />
+      }
     ],
   },
 
