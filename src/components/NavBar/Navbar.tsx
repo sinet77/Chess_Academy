@@ -12,8 +12,17 @@ import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.js";
+import { Link } from "react-router-dom";
+import { routes } from "../../routes.js";
 
-const pages = ["Home", "About", "Courses", "Pages", "Contact"];
+const pages = [
+  { name: "Home", path: routes.home },
+  { name: "About", path: routes.aboutUs },
+  { name: "Courses", path: routes.courses },
+  { name: "Pages", path: "/pages" },
+  { name: "Contact", path: routes.contactUs },
+  { name: "Ranks and Badges", path: routes.ranksAndBadges }
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
@@ -53,18 +62,20 @@ function Navbar() {
         <Box sx={style.TabsNavbar}>
           {pages.map((page) => (
             <Button
-              key={page}
-              onClick={handleCloseNavMenu}
+              key={page.name}
+              component={Link}
+              to={page.path}
               sx={style.Typography}
+              onClick={handleCloseNavMenu}
             >
-              {page}
+              {page.name}
             </Button>
           ))}
         </Box>
 
         <Box>
           <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} >
+            <IconButton onClick={handleOpenUserMenu}>
               <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
             </IconButton>
           </Tooltip>
@@ -95,4 +106,5 @@ function Navbar() {
     </AppBar>
   );
 }
+
 export default Navbar;

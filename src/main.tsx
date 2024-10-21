@@ -22,11 +22,11 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: routes.home,
         element: <App />,
       },
       {
-        path: "/training",
+        path: routes.training,
         element: <TrainingChessBoard />,
       },
       {
@@ -46,11 +46,11 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/ourcoach",
+        path: routes.ourcoach,
         element: <OurCoach />,
       },
       {
-        path: "/courses",
+        path: routes.courses,
         element: <CoursesPage />,
       },
       {
