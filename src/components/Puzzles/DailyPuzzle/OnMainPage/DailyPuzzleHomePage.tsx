@@ -12,27 +12,15 @@ export default function DailyPuzzleHomePage() {
     <Box sx={style.Chessboard}>
       <Link to={"/daily-chess-puzzle"} component={RouterLink} underline="none">
         <FetchDailyPuzzle setPuzzle={setPuzzle} />
-        <Box
-          sx={{
-            padding: "10px",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "black",
-            color: "white",
-            position: "relative",
-            display: "flex",
-          }}
-        >
+        <Box sx={style.TextAndIcon}>
           <Typography>Solve daily puzzle!</Typography>
-          <ArrowForwardIosIcon
-            sx={{ color: "white", position: "absolute", right: "10px" }}
-          />
+          <ArrowForwardIosIcon sx={style.Icon} />
         </Box>
         {puzzle && puzzle.image !== null && (
           <img
             src={puzzle.image}
             alt="Chess Puzzle"
-            style={{ maxWidth: "100%" }}
+            style={style.PuzzleImage}
           />
         )}
       </Link>
