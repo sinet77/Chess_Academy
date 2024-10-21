@@ -4,15 +4,7 @@ import { Chessboard } from "react-chessboard";
 import { Box } from "@mui/material";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
 import * as style from "./DisplayDailyPuzzle.style";
-
-interface Puzzle {
-  title: string;
-  comments: string;
-  url: string;
-  fen: string;
-  pgn: string;
-  image: string;
-}
+import { Puzzle } from "../PuzzleTypes";
 
 export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const [chess] = useState<Chess>(new Chess());
@@ -144,16 +136,14 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
 
   return (
     <Box>
-      <Box sx={style.Chessboard}>
-        <Chessboard
-          id="BasicChessboard"
-          position={fen}
-          onPieceDrop={onPieceDrop}
-          arePiecesDraggable={isMovable}
-          customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-          customLightSquareStyle={{ backgroundColor: "#607d8b" }}
-        />
-      </Box>
+      <Chessboard
+        id="BasicChessboard"
+        position={fen}
+        onPieceDrop={onPieceDrop}
+        arePiecesDraggable={isMovable}
+        customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
+        customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+      />
     </Box>
   );
 }

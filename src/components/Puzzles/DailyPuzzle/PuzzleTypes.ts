@@ -3,5 +3,6 @@ export interface Puzzle {
   comments: string;
   url: string;
   fen: string;
+  pgn: string;
   image: string;
 }

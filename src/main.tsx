@@ -14,6 +14,7 @@ import Contact from "./components/Footer/Contact.tsx/Contact.tsx";
 import CoursesPage from "./components/Courses/CoursesPage.tsx";
 import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
+import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/courses",
         element: <CoursesPage />,
+      },
+      {
+        path: "/daily-chess-puzzle",
+        element: <DailyPuzzle />,
       },
     ],
   },
