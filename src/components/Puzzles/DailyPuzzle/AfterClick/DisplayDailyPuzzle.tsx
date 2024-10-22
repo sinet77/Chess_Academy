@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
-import { Box, List, ListItem, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import { Box, Button, Link, List, ListItem, Typography } from "@mui/material";
 import ExtensionIcon from "@mui/icons-material/Extension";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
@@ -18,6 +20,15 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const [playedMoves, setPlayedMoves] = useState<
     { move: string; isValid: boolean }[]
   >([]);
+  const [changeBoardOrientation, setChangeBoardOrientation] = useState<
+    "white" | "black"
+  >("white");
+
+  function handleBoardOrientation() {
+    setChangeBoardOrientation((prevBoardOrientation) =>
+      prevBoardOrientation === "white" ? "black" : "white"
+    );
+  }
 
   const resetGame = () => {
     if (puzzle && puzzle.fen) {
@@ -162,52 +173,45 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
 
   return (
     <Box sx={style.Main}>
-      <Box sx={style.Chessboard}>
-        <Chessboard
-          id="BasicChessboard"
-          position={fen}
-          onPieceDrop={onPieceDrop}
-          arePiecesDraggable={isMovable}
-          customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-          customLightSquareStyle={{ backgroundColor: "#607d8b" }}
-        />
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
-        <button
-          onClick={resetGame}
-          style={{ padding: "10px 20px", fontSize: "16px" }}
-        >
-          Reset puzzle
-        </button>
+      <Box sx={style.BoardAndButtons}>
+        <Box sx={style.Chessboard}>
+          <Chessboard
+            id="BasicChessboard"
+            position={fen}
+            onPieceDrop={onPieceDrop}
+            arePiecesDraggable={isMovable}
+            boardOrientation={changeBoardOrientation}
+            customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
+            customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+          />
+        </Box>
+        <Box sx={style.ButtonsContainer}>
+          <Button onClick={resetGame} sx={style.Button}>
+            Reset puzzle
+          </Button>
+          <Button onClick={handleBoardOrientation} sx={style.Button}>
+            Swap orientation
+          </Button>
+        </Box>
       </Box>
       <Box sx={style.Moves}>
         <Box sx={style.Title}>
-          <Typography>Daily Puzzle</Typography>
-          <ExtensionIcon sx={{ color: "white" }} />
+          <Link to={"/"} component={RouterLink}>
+            <ArrowBackIcon sx={style.ArrowBackIcon} />
+          </Link>
+          <Box sx={style.TitleContainer}>
+            <Typography sx={style.TitleName}>Daily Puzzle</Typography>
+            <ExtensionIcon sx={style.PuzzleIcon} />
+          </Box>
         </Box>
         <List>
           {playedMoves.map((moveName, index) => (
             <ListItem key={index}>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#FFFFFF1A",
-                  padding: "15px",
-                  borderRadius: "10px",
-                  width: "100%",
-                }}
-              >
+              <Box sx={style.ListItem}>
                 {moveName.isValid ? (
-                  <CheckCircleIcon
-                    sx={{
-                      color: "#81B64C",
-                      marginRight: 1,
-                      backgroundColor: "",
-                    }}
-                  />
+                  <CheckCircleIcon sx={style.CheckIcon} />
                 ) : (
-                  <CancelIcon sx={{ color: "red", marginRight: 1 }} />
+                  <CancelIcon sx={style.CancelIcon} />
                 )}
                 <Typography
                   sx={
@@ -221,23 +225,11 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
                   {moveName.move}
                 </Typography>
                 {moveName.isValid ? (
-                  <Typography
-                    sx={{
-                      color: "#81B64C",
-                      marginLeft: 1,
-                      fontWeight: "bold",
-                    }}
-                  >
+                  <Typography sx={style.ValidationCorrectMoveName}>
                     is correct!
                   </Typography>
                 ) : (
-                  <Typography
-                    sx={{
-                      color: "#FA412D",
-                      marginLeft: 1,
-                      fontWeight: "bold",
-                    }}
-                  >
+                  <Typography sx={style.ValidationWrongMoveName}>
                     is not correct. Try again!
                   </Typography>
                 )}
@@ -249,7 +241,3 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     </Box>
   );
 }
-
-//DODAC PRZYCISK SPROBUJ PONOWNIE, ZEBY COFNELO DO POCZATKOWEJ POZYCJI I ZRESETOWALO HISTORIE RUCHOW
-// DODAC PRZYCISK POWROTU DO HOME
-// DODAC DZWIEKI JAK JEST DOBRZE I JAK JEST ZLE

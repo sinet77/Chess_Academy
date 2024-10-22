@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const Chessboard: SxProps = {
-  width: "40%",
+  width: "25%",
   height: "auto",
 };
 export const TextAndIcon: SxProps = {
@@ -21,6 +21,6 @@ export const Icon: SxProps = {
 };
 
 export const PuzzleImage: React.CSSProperties = {
-  maxWidth: "100%",
+  width: "100%",
   height: "auto",
 };
