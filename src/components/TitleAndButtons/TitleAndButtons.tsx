@@ -8,7 +8,7 @@ export default function TitleAndButtons() {
     <Box>
       <motion.div
         initial={{ opacity: 0, scale: 0.3 }}
-        animate={{ opacity: 1, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
         <Box sx={style.Title}>
