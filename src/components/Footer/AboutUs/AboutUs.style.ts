@@ -1,3 +1,4 @@
+import { DisplaySettings, WidthFull } from "@mui/icons-material";
 import { SxProps } from "@mui/material/styles";
 
 export const Container: SxProps = {
@@ -16,12 +17,7 @@ export const Container: SxProps = {
 };
 
 export const Background: SxProps = {
-  backgroundImage: "url(/src/assets/shattered_figures.jpg)",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  padding: "20px",
-  height: "100vh",
+  backgroundColor: "#fffcf3",
 };
 
 export const Title: SxProps = {
@@ -69,16 +65,12 @@ export const FooterText: SxProps = {
 };
 
 export const StartingPage: SxProps = {
-  backgroundImage: "url(/src/assets/dark_chess_background.jpg)",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  backgroundColor: "#fffcf3",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "left",
   padding: "15px",
-  height: "100vh",
   "@media (max-width: 1000px)": {
     padding: "100px",
     width: "auto",
@@ -121,21 +113,45 @@ export const StartingSection: SxProps = {
   },
 };
 
-export const AboutUsText: SxProps = {
-  background:
-    "linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0) 100%)",
-  padding: "20px",
-  borderRadius: "10px",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: "20px",
-  mb: "20px",
-  mt: "-74px",
-  fontSize: "40px",
-  color: "black",
+export const AboutUsFirstContainer: SxProps = {
+  fontSize: "100px",
+  paddingLeft: "100px",
 };
+
+export const AboutUsSecondContainer: SxProps = {
+  display: "flex",
+  gap: "30px",
+  paddingLeft: "100px",
+  paddingRight: "100px",
+};
+export const AboutUsSecondContainerTitle: SxProps = {
+  fontSize: "150px",
+  fontWeight: "500",
+  lineHeight: "120px",
+  paddingBottom: "50px"
+};
+
+export const AboutUsContainerFirstImage = {
+  width: "700px",
+  borderRadius: "30px"
+};
+
+export const AboutUsContainerSecondImage = {
+  width: "500px",
+  height: "auto",
+  borderRadius: "30px"
+};
+
+export const foundersContainer: SxProps = {
+  display: "flex",
+  backgroundColor: "#eae7e2",
+  borderRadius: "30px"
+};
+export const founderProfilePicture = {
+  width: "10%",
+  borderRadius: "50px"
+}
+
 export const DownButton: SxProps = {
   backgroundColor: "#0096FF",
   color: "white",

@@ -1,7 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import * as style from "./AboutUs.style";
-import GroupsIcon from "@mui/icons-material/Groups";
 
 export default function AboutUsStartingPage({
   buttonClick,
@@ -38,22 +37,32 @@ export default function AboutUsStartingPage({
 
   return (
     <Box sx={style.StartingPage}>
-      <Box sx={style.AboutUsText}>
-        About us
-        <GroupsIcon fontSize="large" />
+      <Box sx={style.AboutUsFirstContainer}>
+        <Typography sx={style.AboutUsSecondContainerTitle}>ABOUT</Typography>
       </Box>
-      <Box sx={style.TextAboutMe}>
-        For now, I am the only developer who is working at improving Chess
-        Academy website. In some time I will also be looking for other people
-        who will help me maintain and develop my idea of playing and learning
-        chess. I came up with this idea, when I was teaching chess online,
-        because I am active player and certified instructor. My goal was to do
-        my own website, where I can control the content which is apearing and
-        put my learning materials in one place for the students. Chess academy
-        is for everyone, on various level or age. Whether you want to play chess
-        games or solve puzzles, there are always different levels of difficulty,
-        so everyone can choose what they want. Chess Academy welcomes you!
-        Enjoy!
+      <Box sx={style.AboutUsSecondContainer}>
+        <Box sx={{ width: "50%" }}>
+          <Typography sx={style.AboutUsSecondContainerTitle}>US</Typography>
+          <Typography>
+            We are currently the sole developer working on improving the Chess Academy website. As an active player and certified instructor, I created this platform to offer a space where I can control the content and share my learning materials with students. In the future, I plan to bring on others to help maintain and grow this idea of combining playing and learning chess in one place.
+          </Typography>
+        </Box>
+
+        <Box>
+          <img src="src/assets/chess-board-aboutUs.jpeg" style={style.AboutUsContainerFirstImage} />
+        </Box>
+
+        <Box>
+          <img src="src/assets/chess-pieces-aboutUs.jpeg" style={style.AboutUsContainerSecondImage} />
+          <Typography>Our Phillosophy</Typography>
+          <Typography>
+            Chess Academy is designed for everyone, regardless of age or skill level. Whether you're looking to play games or solve puzzles, we provide various levels of difficulty to suit all preferences. Our mission is to create an accessible and enjoyable environment for learning and mastering chess. We welcome you to join and enjoy the experience!
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box sx={style.foundersContainer}>
+        <img src="src/assets/piotr-image.png" style={style.founderProfilePicture} />
       </Box>
       {guidelines.map((item, index) => (
         <motion.div
