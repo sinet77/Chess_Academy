@@ -19,6 +19,16 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     { move: string; isValid: boolean }[]
   >([]);
 
+  const resetGame = () => {
+    if (puzzle && puzzle.fen) {
+      chess.load(puzzle.fen);
+      setFen(puzzle.fen);
+    }
+    setPlayedMoves([]);
+    setCurrentMoveIndex(0);
+    setIsMovable(true);
+  };
+
   const cleanMove = (move: string): string | null => {
     // Usuwa numer ruchu, "x", "+", "!" i inne znaki, aby uzyskać czysty ruch
     const cleaned = move
@@ -162,6 +172,14 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
           customLightSquareStyle={{ backgroundColor: "#607d8b" }}
         />
       </Box>
+      <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+        <button
+          onClick={resetGame}
+          style={{ padding: "10px 20px", fontSize: "16px" }}
+        >
+          Reset puzzle
+        </button>
+      </Box>
       <Box sx={style.Moves}>
         <Box sx={style.Title}>
           <Typography>Daily Puzzle</Typography>
@@ -231,3 +249,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     </Box>
   );
 }
+
+//DODAC PRZYCISK SPROBUJ PONOWNIE, ZEBY COFNELO DO POCZATKOWEJ POZYCJI I ZRESETOWALO HISTORIE RUCHOW
+// DODAC PRZYCISK POWROTU DO HOME
+// DODAC DZWIEKI JAK JEST DOBRZE I JAK JEST ZLE
