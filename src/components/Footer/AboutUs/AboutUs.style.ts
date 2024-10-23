@@ -69,7 +69,7 @@ export const StartingPage: SxProps = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  alignItems: "left",
+  alignItems: "center",
   padding: "15px",
   "@media (max-width: 1000px)": {
     padding: "100px",
@@ -121,8 +121,7 @@ export const AboutUsFirstContainer: SxProps = {
 export const AboutUsSecondContainer: SxProps = {
   display: "flex",
   gap: "30px",
-  paddingLeft: "100px",
-  paddingRight: "100px",
+
 };
 export const AboutUsSecondContainerTitle: SxProps = {
   fontSize: "150px",
@@ -132,7 +131,7 @@ export const AboutUsSecondContainerTitle: SxProps = {
 };
 
 export const AboutUsContainerFirstImage = {
-  width: "700px",
+  width: "1000px",
   borderRadius: "30px"
 };
 
@@ -141,14 +140,22 @@ export const AboutUsContainerSecondImage = {
   height: "auto",
   borderRadius: "30px"
 };
+export const phillosophyTitle: SxProps = {
+  fontWeight: "500",
+  fontSize: "45px",
+  mt: "12px",
+  mb: "13px"
+}
 
 export const foundersContainer: SxProps = {
   display: "flex",
+  justifyContent: "center",
   backgroundColor: "#eae7e2",
-  borderRadius: "30px"
+  borderRadius: "30px",
+  width: "70%",
 };
 export const founderProfilePicture = {
-  width: "10%",
+  width: "30%",
   borderRadius: "50px"
 }
 

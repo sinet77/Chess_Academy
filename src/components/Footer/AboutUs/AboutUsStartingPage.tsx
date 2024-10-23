@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import * as style from "./AboutUs.style";
 
@@ -39,8 +39,8 @@ export default function AboutUsStartingPage({
     <Box sx={style.StartingPage}>
       <Box sx={style.AboutUsFirstContainer}>
         <Typography sx={style.AboutUsSecondContainerTitle}>ABOUT</Typography>
-      </Box>
-      <Box sx={style.AboutUsSecondContainer}>
+      </Box >
+      <Grid sx={style.AboutUsSecondContainer} >
         <Box sx={{ width: "50%" }}>
           <Typography sx={style.AboutUsSecondContainerTitle}>US</Typography>
           <Typography>
@@ -54,15 +54,30 @@ export default function AboutUsStartingPage({
 
         <Box>
           <img src="src/assets/chess-pieces-aboutUs.jpeg" style={style.AboutUsContainerSecondImage} />
-          <Typography>Our Phillosophy</Typography>
+          <Typography sx={style.phillosophyTitle}>Our Phillosophy</Typography>
           <Typography>
             Chess Academy is designed for everyone, regardless of age or skill level. Whether you're looking to play games or solve puzzles, we provide various levels of difficulty to suit all preferences. Our mission is to create an accessible and enjoyable environment for learning and mastering chess. We welcome you to join and enjoy the experience!
           </Typography>
         </Box>
-      </Box>
+      </Grid>
 
       <Box sx={style.foundersContainer}>
         <img src="src/assets/piotr-image.png" style={style.founderProfilePicture} />
+        <Box sx={{
+          backgroundColor: "white",
+          width: "50%",
+          height: "30%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+          <Typography variant="h2">MEET THE FOUNDERS</Typography>
+          <Typography>
+            Two clone brothers decided to create this awesome app to help you become a better version of yourself and improve your skills. Welcome to Chess Academy!
+          </Typography>
+        </Box>
+        <img src="src/assets/pawel-image.png" style={style.founderProfilePicture} />
       </Box>
       {guidelines.map((item, index) => (
         <motion.div
