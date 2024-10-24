@@ -30,7 +30,7 @@ export default function RegisterForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const { userLoggedIn } = useAuth();
+  const { userLoggedIn, handleCreateUserWithEmailAndPassword } = useAuth();
 
   const onSubmit = async (
     values: FormValues,
@@ -39,7 +39,7 @@ export default function RegisterForm() {
     if (!isRegistering) {
       setIsRegistering(true);
       try {
-        await doCreateUserWithEmailAndPassword(values.email, values.password);
+        await handleCreateUserWithEmailAndPassword(values);
       } catch (error) {
         console.log(error);
       }

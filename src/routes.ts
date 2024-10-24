@@ -10,5 +10,6 @@ export const routes = {
   courses: "courses",
   ourcouch: "/ourcouch",
   ourcoach: "/ourcoach",
-  ranksAndBadges: "ranks-and-badges",
+  privateLesson: "/private-lesson",
+  ranksAndBadges: "/ranks-and-badges",
 };

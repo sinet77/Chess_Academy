@@ -21,11 +21,15 @@ export const RegisterSchema = yup.object().shape({
 });
 
 export const LoginSchema = yup.object().shape({
-  login: yup.string().required("Required"),
-  email: yup
+  login: yup
     .string()
-    .email("Please enter a valid email")
-    .required("Email is required"),
-  password: yup.string().required("Required"),
-  remember: yup.boolean().optional(),
+    .required("Login or email is required")
+    .test("is-email-or-login", "Invalid email or login", function (value) {
+      if (value?.includes("@")) {
+        return yup.string().email().isValidSync(value);
+      } else {
+        return yup.string().min(3).isValidSync(value);
+      }
+    }),
+  password: yup.string().required("Password is required"),
 });

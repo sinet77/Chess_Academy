@@ -1,6 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth, db } from "../../firebase/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 
 import {
   onAuthStateChanged,
@@ -21,15 +29,12 @@ interface AuthContextType {
   isGoogleUser: boolean;
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
-  doCreateUserWithEmailAndPassword: (
-    email: string,
-    password: string
-  ) => Promise<User>;
-  doSignInWithEmailAndPassword: (
+  handleCreateUserWithEmailAndPassword: (userData: any) => Promise<User>;
+  handleSignInWithEmailAndPassword: (
     email: string,
     password: string
   ) => Promise<UserCredential>;
-  doSignInWithGoogle: () => Promise<User>;
+  handleSignInWithGoogle: () => Promise<User>;
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
@@ -42,58 +47,23 @@ export function useAuth() {
   return context;
 }
 
-const addUserToFirestore = async (user: User) => {
-  try {
-    const userRef = doc(db, "users", user.uid);
-    await setDoc(userRef, {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName || "",
-      providerId: user.providerData[0]?.providerId || "email",
-    });
-  } catch (error) {
-    console.error("Error adding user to Firestore:", error);
+const addUserToFirestore = async ({
+  id,
+  login = "",
+  email,
+}: {
+  id: string;
+  login: string;
+  email: string;
+}) => {
+  const userRef = doc(db, "Users", id);
+  const userSnapshot = await getDoc(userRef);
+
+  if (!userSnapshot.exists()) {
+    await setDoc(userRef, { id, login, email });
+  } else {
+    console.error("User already exists in Firestore");
   }
-};
-
-export const doSignOut = () => {
-  return auth.signOut();
-};
-
-export const doPasswordReset = (email: string) => {
-  return sendPasswordResetEmail(auth, email);
-};
-
-export const doPasswordChange = (password: string) => {
-  return updatePassword(auth.currentUser, password);
-};
-
-export const doSendEmailVerification = () => {
-  return sendEmailVerification(auth.currentUser, {
-    url: `${window.location.origin}/home`,
-  });
-};
-
-export const doCreateUserWithEmailAndPassword = async (
-  email: string,
-  password: string
-) => {
-  const { user } = await createUserWithEmailAndPassword(auth, email, password);
-  await addUserToFirestore(user);
-  return user;
-};
-
-export const doSignInWithEmailAndPassword = (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password);
-};
-
-export const doSignInWithGoogle = async () => {
-  const provider = new GoogleAuthProvider();
-  const result = await signInWithPopup(auth, provider);
-  const user = result.user;
-
-  await addUserToFirestore(user);
-  return user;
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -107,6 +77,77 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
     return () => unsubscribe();
   }, []);
+
+  const handleSignOut = () => {
+    return auth.signOut();
+  };
+
+  const handlePasswordReset = (email: string) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
+  const handlePasswordChange = (password: string) => {
+    return updatePassword(auth.currentUser, password);
+  };
+
+  const handleSendEmailVerification = () => {
+    return sendEmailVerification(auth.currentUser, {
+      url: `${window.location.origin}/home`,
+    });
+  };
+
+  const handleCreateUserWithEmailAndPassword = async ({
+    login,
+    email,
+    password,
+  }: {
+    login: string;
+    email: string;
+    password: string;
+  }) => {
+    const ref = query(collection(db, "Users"), where("login", "==", login));
+    const querySnapshot = await getDocs(ref);
+
+    if (!querySnapshot.empty) {
+      throw new Error("Login is already taken.");
+    }
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await addUserToFirestore({ id: user.uid, login, email });
+    return user;
+  };
+
+  const handleSignInWithEmailAndPassword = async (
+    id: string,
+    password: string
+  ) => {
+    const userData = { id, password };
+    if (!id.includes("@")) {
+      const ref = query(collection(db, "Users"), where("login", "==", id));
+      const querySnapshot = await getDocs(ref);
+      const dbUser = querySnapshot.docs[0]?.data();
+      userData.id = dbUser.email;
+    }
+    return signInWithEmailAndPassword(auth, userData.id, userData.password);
+  };
+
+  const handleSignInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    const userData = {
+      id: user.uid,
+      login: "",
+      email: user.email || "",
+    };
+
+    await addUserToFirestore(userData);
+    return user;
+  };
 
   async function initializeUser(user: User | null) {
     if (user) {
@@ -136,9 +177,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isGoogleUser,
     currentUser,
     setCurrentUser,
-    doCreateUserWithEmailAndPassword,
-    doSignInWithEmailAndPassword,
-    doSignInWithGoogle,
+    handleCreateUserWithEmailAndPassword,
+    handleSignInWithEmailAndPassword,
+    handleSignInWithGoogle,
   };
 
   return (

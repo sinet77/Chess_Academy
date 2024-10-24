@@ -1,17 +1,10 @@
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
-import { Button } from "@mui/material";
 
 export default function ChessboardDisplay() {
   const [chess] = useState<Chess>(new Chess()); // Tworzymy instancję Chess
   const [fen, setFen] = useState<string>(chess.fen()); // Stan do przechowywania FEN (pozycja szachowa)
-
-  function handleBoardOrientation() {
-    setChangeBoardOrientation((prevBoardOrientation) =>
-      prevBoardOrientation === "white" ? "black" : "white"
-    );
-  }
 
   useEffect(() => {
     const makeRandomMove = () => {

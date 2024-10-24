@@ -18,9 +18,8 @@ import { Navigate } from "react-router-dom";
 export default function LoginForm() {
   const {
     userLoggedIn,
-    doCreateUserWithEmailAndPassword,
-    doSignInWithEmailAndPassword,
-    doSignInWithGoogle,
+    handleSignInWithEmailAndPassword,
+    handleSignInWithGoogle,
   } = useAuth();
 
   const initialValues = { login: "", password: "", remember: false };
@@ -30,7 +29,7 @@ export default function LoginForm() {
     { setSubmitting }: FormikHelpers<typeof initialValues>
   ) => {
     try {
-      await doSignInWithEmailAndPassword(values.login, values.password);
+      await handleSignInWithEmailAndPassword(values.login, values.password);
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +38,7 @@ export default function LoginForm() {
 
   const onGoogleSignIn = async () => {
     try {
-      await doSignInWithGoogle();
+      await handleSignInWithGoogle();
     } catch (error) {
       console.log(error);
     }
