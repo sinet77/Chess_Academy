@@ -18,7 +18,6 @@ import { Navigate } from "react-router-dom";
 export default function LoginForm() {
   const {
     userLoggedIn,
-    doCreateUserWithEmailAndPassword,
     doSignInWithEmailAndPassword,
     doSignInWithGoogle,
   } = useAuth();

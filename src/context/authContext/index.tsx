@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth, db } from "../../firebase/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
 
 import {
   onAuthStateChanged,
@@ -21,10 +21,7 @@ interface AuthContextType {
   isGoogleUser: boolean;
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
-  doCreateUserWithEmailAndPassword: (
-    email: string,
-    password: string
-  ) => Promise<User>;
+  doCreateUserWithEmailAndPassword: (userData: any) => Promise<User>;
   doSignInWithEmailAndPassword: (
     email: string,
     password: string
@@ -42,15 +39,9 @@ export function useAuth() {
   return context;
 }
 
-const addUserToFirestore = async (user: User) => {
+const addUserToFirestore = async ({id, login='', email}: {id: string, login: string, email: string}) => {
   try {
-    const userRef = doc(db, "users", user.uid);
-    await setDoc(userRef, {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName || "",
-      providerId: user.providerData[0]?.providerId || "email",
-    });
+    await setDoc(doc(db, "Users", id), {id, login, email});
   } catch (error) {
     console.error("Error adding user to Firestore:", error);
   }
@@ -75,16 +66,23 @@ export const doSendEmailVerification = () => {
 };
 
 export const doCreateUserWithEmailAndPassword = async (
-  email: string,
-  password: string
+    {login, email, password}: { login: string, email: string; password: string }
 ) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
-  await addUserToFirestore(user);
-  return user;
+  await addUserToFirestore({id: user.uid, login, email});
 };
 
-export const doSignInWithEmailAndPassword = (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password);
+export const doSignInWithEmailAndPassword = async(id:string, password:string) => {
+  const userData = { id, password };
+
+  if (!id.includes('@')) {
+    const ref = query(collection(db, 'Users'), where('login', '==', id));
+    const querySnapshot = await getDocs(ref);
+    const dbUser = querySnapshot.docs[0]?.data();
+    userData.id = dbUser.email;
+  } 
+
+  return signInWithEmailAndPassword(auth, userData.id, userData.password);
 };
 
 export const doSignInWithGoogle = async () => {
@@ -92,7 +90,7 @@ export const doSignInWithGoogle = async () => {
   const result = await signInWithPopup(auth, provider);
   const user = result.user;
 
-  await addUserToFirestore(user);
+  // await addUserToFirestore(user);
   return user;
 };
 

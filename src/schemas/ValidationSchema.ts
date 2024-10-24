@@ -22,10 +22,7 @@ export const RegisterSchema = yup.object().shape({
 
 export const LoginSchema = yup.object().shape({
   login: yup.string().required("Required"),
-  email: yup
-    .string()
-    .email("Please enter a valid email")
-    .required("Email is required"),
+
   password: yup.string().required("Required"),
   remember: yup.boolean().optional(),
 });
