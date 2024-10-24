@@ -6,11 +6,11 @@ export const Container: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem",
+  padding: "3rem",
   maxWidth: "800px",
   margin: "auto",
   textAlign: "justify",
-  backgroundColor: "#cefad0",
+  backgroundColor: "#eae7e2",
   borderRadius: "8px",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   position: "relative",
@@ -18,6 +18,7 @@ export const Container: SxProps = {
 
 export const Background: SxProps = {
   backgroundColor: "#fffcf3",
+  padding: "50px"
 };
 
 export const Title: SxProps = {
@@ -41,10 +42,9 @@ export const Description: SxProps = {
 export const Section: SxProps = {
   textAlign: "left",
   marginBottom: "18px",
-  backgroundColor: "#9FE2BF",
+  backgroundColor: "#fffcf3",
   padding: "15px",
   borderRadius: "8px",
-  border: "1px solid black",
 };
 
 export const ActionButton: SxProps = {
@@ -90,7 +90,7 @@ export const TextAboutMe: SxProps = {
 export const StartingSection: SxProps = {
   textAlign: "center",
   marginBottom: "15px",
-  background: "linear-gradient(-45deg, #ee7752, #ff9b42, #ff6700, #ffa833)",
+  background: "linear-gradient(-45deg, #fffcf3, #eae7e2)",
   backgroundSize: "400% 400%",
   animation: "gradient 8s ease infinite",
   "@keyframes gradient": {
@@ -106,7 +106,7 @@ export const StartingSection: SxProps = {
   },
   padding: "15px",
   borderRadius: "8px",
-  border: "1px solid black",
+  border: "2px solid #eae7e2",
   "@media (max-width: 1000px)": {
     width: "auto",
     height: "auto",
@@ -115,7 +115,9 @@ export const StartingSection: SxProps = {
 
 export const AboutUsFirstContainer: SxProps = {
   fontSize: "100px",
-  paddingLeft: "100px",
+  textAlign: "left",
+  display: "flex",
+  justifyContent: "start"
 };
 
 export const AboutUsSecondContainer: SxProps = {
@@ -131,7 +133,7 @@ export const AboutUsSecondContainerTitle: SxProps = {
 };
 
 export const AboutUsContainerFirstImage = {
-  width: "1000px",
+  width: "900px",
   borderRadius: "30px"
 };
 
@@ -149,40 +151,50 @@ export const phillosophyTitle: SxProps = {
 
 export const foundersContainer: SxProps = {
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-between",
+  alignItems: "center",
   backgroundColor: "#eae7e2",
-  borderRadius: "30px",
-  width: "70%",
+  borderRadius: "50px",
+  width: "80%",
+  textAlign: "center",
+  mt: "100px",
+  mb: "100px"
 };
 export const founderProfilePicture = {
-  width: "30%",
+  display: "flex",
+  width: "20%",
   borderRadius: "50px"
 }
 
 export const DownButton: SxProps = {
-  backgroundColor: "#0096FF",
+  backgroundImage: "url(./src/assets/questions-background.png)",
+  backgroundPosition: "right center",
+  fontSize: "17px",
   color: "white",
   padding: "10px 20px",
+  border: "none",
   borderRadius: "5px",
+  mt: "50px",
+  mb: "50px",
+  transition: "transform 0.3s ease",
   "@media (max-width: 1000px)": {
     width: "auto",
     height: "auto",
   },
   "&:hover": {
-    backgroundColor: "#89CFF0",
+    transform: "scale(1.1)",
   },
 };
 
 export const AboutUsButton: SxProps = {
   position: "absolute",
-  right: "10px",
-  top: "10px",
+  right: "20px",
+  top: "20px",
   backgroundColor: "#b87333",
   color: "#fff",
   "&:hover": {
     backgroundColor: "#654321",
   },
-
-  padding: "0.75rem 1.5rem",
+  padding: "0.75rem 1rem",
   fontWeight: "bold",
 };

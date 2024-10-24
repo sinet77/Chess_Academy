@@ -72,8 +72,7 @@ export default function AboutUs() {
             <Box sx={style.Background}>
               <Box sx={style.Container}>
                 <Button sx={style.AboutUsButton} onClick={handleGoBackClick}>
-                  About us
-                  <ArrowUpwardIcon />
+                  Back to About us
                 </Button>
 
                 <Typography sx={style.Title} variant="h4" gutterBottom>
