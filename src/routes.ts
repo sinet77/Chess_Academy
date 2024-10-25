@@ -7,5 +7,7 @@ export const routes = {
   fairPlay: "/fair-play",
   ourcoach: "/ourcoach",
   courses: "/courses",
-  ranksAndBadges: "ranks-and-badges"
+  privateLesson: "/courses/private-lesson",
+  ranksAndBadges: "/ranks-and-badges",
+  puzzles: "/puzzles",
 };

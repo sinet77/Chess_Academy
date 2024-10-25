@@ -5,7 +5,6 @@ import "./index.css";
 import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboard.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout/Layout.tsx";
-
 import Error404 from "./components/Error404/Error404.tsx";
 import FairPlay from "./components/Footer/FairPlay/FairPlayStartingPage.tsx";
 import FAQ from "./components/Footer/FAQ/FAQ.tsx";
@@ -15,6 +14,8 @@ import CoursesPage from "./components/Courses/CoursesPage.tsx";
 import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
+import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
+import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
 
 const router = createBrowserRouter([
   {
@@ -55,11 +56,15 @@ const router = createBrowserRouter([
       },
       {
         path: routes.ranksAndBadges,
-        element: <RanksAndBadges />
-      }
+        element: <RanksAndBadges />,
+      },
       {
-        path: "/courses/private-lesson",
+        path: routes.privateLesson,
         element: <PrivateLesson />,
+      },
+      {
+        path: routes.puzzles,
+        element: <PuzzlesExercise />,
       },
     ],
   },
