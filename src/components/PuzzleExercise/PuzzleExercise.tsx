@@ -2,15 +2,23 @@ import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import { SquareStyles } from "./PuzzleExercise.types";
 
 export default function PuzzlesExercise() {
-  const [fen, setFen] = useState("start");
-  const [moves, setMoves] = useState([]);
-  const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
-  const [isPlayerTurn, setIsPlayerTurn] = useState(false);
+  const [fen, setFen] = useState<string>("start");
+  const [moves, setMoves] = useState<string[]>([]);
+  const [currentMoveIndex, setCurrentMoveIndex] = useState<number>(0);
+  const [isPlayerTurn, setIsPlayerTurn] = useState<boolean>(false);
   const [chess] = useState<Chess>(new Chess());
-  const [loading, setLoading] = useState(false);
-  const [startingColor, setStartingColor] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [startingColor, setStartingColor] = useState<string>("");
+  const [highlightedSquares, setHighlightedSquares] = useState<SquareStyles>(
+    {}
+  );
+  const [rightClickedSquares, setRightClickedSquares] = useState<SquareStyles>(
+    {}
+  );
+  const [optionSquares, setOptionSquares] = useState<SquareStyles>({});
 
   async function fetchPuzzle() {
     const url =
@@ -34,6 +42,7 @@ export default function PuzzlesExercise() {
       setMoves(puzzle.moves);
       chess.load(puzzle.fen);
       setIsPlayerTurn(false);
+      console.log("Ruchy", puzzle.moves);
 
       const color = getStartingColorForPlayer(puzzle.fen);
       setStartingColor(color === "White" ? "Black" : "White");
@@ -58,7 +67,7 @@ export default function PuzzlesExercise() {
     }
   };
 
-  function getStartingColorForPlayer(fen) {
+  function getStartingColorForPlayer(fen: string) {
     const spliitedPartsInFenToGetAColor = fen.split(" ");
     return spliitedPartsInFenToGetAColor[1] === "w" ? "White" : "Black";
   }
@@ -93,24 +102,45 @@ export default function PuzzlesExercise() {
     console.log("Move performed:", move.san);
 
     const moveIndex = currentMoveIndex;
+    const apiMove = moves[moveIndex];
 
-    const convertedMoveFromSANToAPIFormat = sourceSquare + targetSquare;
+    const isPromotionMove = apiMove.length === 5;
 
-    if (convertedMoveFromSANToAPIFormat === moves[moveIndex]) {
+    let isValidMove = false;
+
+    if (isPromotionMove) {
+      const possiblePromotions = ["q", "r", "b", "n"];
+      const convertedMoveFromSANToAPIFormat = sourceSquare + targetSquare;
+
+      isValidMove = possiblePromotions.some((promotion) => {
+        const apiMoveWithPromotion =
+          convertedMoveFromSANToAPIFormat + promotion;
+        return apiMove === apiMoveWithPromotion;
+      });
+    } else {
+      isValidMove = apiMove === sourceSquare + targetSquare;
+    }
+
+    if (isValidMove) {
       setCurrentMoveIndex(moveIndex + 1);
+
+      setHighlightedSquares({
+        [sourceSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+        [targetSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+      });
+
+      setIsPlayerTurn(false);
 
       const blackMoveIndex = moveIndex + 1;
       if (blackMoveIndex < moves.length) {
-        const blackMove = moves[blackMoveIndex];
-        const moveBlack = chess.move(blackMove);
-
-        if (!moveBlack) {
-          console.error(`Invalid black move: ${blackMove}`);
-          chess.undo();
-        } else {
-          console.log("Czarny ruch wykonany:", moveBlack.san);
+        setIsPlayerTurn(false);
+        setTimeout(() => {
+          const blackMove = moves[blackMoveIndex];
+          chess.move(blackMove);
           setCurrentMoveIndex(blackMoveIndex + 1);
-        }
+          setFen(chess.fen());
+          setIsPlayerTurn(true);
+        }, 500);
       }
 
       if (blackMoveIndex + 1 === moves.length) {
@@ -131,10 +161,60 @@ export default function PuzzlesExercise() {
     if (!isPlayerTurn && currentMoveIndex < moves.length) {
       const timer = setTimeout(() => {
         executeComputerMove();
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [isPlayerTurn, currentMoveIndex, moves]);
+
+  function onSquareRightClick(square: Square) {
+    const color = "rgba(254,46,46, 0.4)";
+    const isRightClicked =
+      rightClickedSquares[square]?.backgroundColor === color;
+
+    setRightClickedSquares((prevState) => ({
+      ...prevState,
+      [square]: isRightClicked
+        ? { backgroundColor: "transparent" }
+        : { backgroundColor: color },
+    }));
+  }
+
+  function getMoveOptions(square: Square) {
+    const moves = chess.moves({
+      square,
+      verbose: true,
+    });
+    if (moves.length === 0) {
+      return;
+    }
+
+    const newSquares: SquareStyles = {};
+    moves.map((move) => {
+      newSquares[move.to] = {
+        background:
+          chess.get(move.to) &&
+          chess.get(move.to).color !== chess.get(square).color
+            ? "radial-gradient(circle, rgba(0,0,0,.1) 85%, transparent 85%)"
+            : "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
+        borderRadius: "50%",
+      };
+      return move;
+    });
+    newSquares[square] = {
+      background: "rgba(255, 255, 0, 0.4)",
+    };
+    setOptionSquares(newSquares);
+  }
+
+  function onMouseOverSquare(square: Square) {
+    getMoveOptions(square);
+  }
+
+  function onMouseOutSquare() {
+    if (Object.keys(optionSquares).length !== 0) {
+      setOptionSquares({});
+    }
+  }
 
   return (
     <div>
@@ -149,6 +229,14 @@ export default function PuzzlesExercise() {
               position={fen}
               arePiecesDraggable={true}
               onPieceDrop={onPieceDrop}
+              customSquareStyles={{
+                ...highlightedSquares,
+                ...rightClickedSquares,
+                ...optionSquares,
+              }}
+              onMouseOverSquare={onMouseOverSquare}
+              onMouseOutSquare={onMouseOutSquare}
+              onSquareRightClick={onSquareRightClick}
             />
           </div>
           <button onClick={fetchPuzzle}>Next Puzzle</button>
