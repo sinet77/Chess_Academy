@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
 import { SquareStyles } from "./PuzzleExercise.types";
+import Stopwatch from "./Stopwatch/Stopwatch";
 
 export default function PuzzlesExercise() {
   const [fen, setFen] = useState<string>("start");
@@ -34,6 +35,7 @@ export default function PuzzlesExercise() {
     setMoves([]);
     setCurrentMoveIndex(0);
     setHighlightedSquares({});
+    setRightClickedSquares({});
 
     try {
       const response = await fetch(url, options);
@@ -219,12 +221,17 @@ export default function PuzzlesExercise() {
       ) : (
         <div>
           <p>{startingColor} on move</p>
+          <Stopwatch
+            startOnNewPuzzle={fetchPuzzle}
+            currentMoveIndex={currentMoveIndex}
+            moves={moves}
+          />
           <div style={{ width: "400px" }}>
             <Chessboard
               id="PuzzleChessboard"
               position={fen}
               arePiecesDraggable={true}
-              arePremovesAllowed={true}
+              arePremovesAllowed={false}
               onPieceDrop={onPieceDrop}
               customSquareStyles={{
                 ...highlightedSquares,
