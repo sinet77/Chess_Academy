@@ -221,11 +221,7 @@ export default function PuzzlesExercise() {
       ) : (
         <div>
           <p>{startingColor} on move</p>
-          <Stopwatch
-            startOnNewPuzzle={fetchPuzzle}
-            currentMoveIndex={currentMoveIndex}
-            moves={moves}
-          />
+          <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} />
           <div style={{ width: "400px" }}>
             <Chessboard
               id="PuzzleChessboard"

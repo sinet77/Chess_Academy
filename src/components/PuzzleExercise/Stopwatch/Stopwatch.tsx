@@ -1,28 +1,23 @@
 import { useState, useEffect } from "react";
 import { StopwatchProps } from "./Stopwatch.types";
 
-const Stopwatch = ({
-  startOnNewPuzzle,
-  moves,
-  currentMoveIndex,
-}: StopwatchProps) => {
+const Stopwatch = ({ moves, currentMoveIndex }: StopwatchProps) => {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
-    if (startOnNewPuzzle) {
-      let interval: NodeJS.Timeout | null = null;
+    let interval: NodeJS.Timeout | null = null;
 
-      if (isActive) {
-        interval = setInterval(() => {
-          setTotalSeconds((prev) => prev + 1);
-        }, 1000);
-      }
-
-      return () => {
-        if (interval) clearInterval(interval);
-      };
+    if (isActive) {
+      interval = setInterval(() => {
+        setTotalSeconds((prev) => prev + 1);
+      }, 1000);
     }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+
     [isActive];
   });
 
