@@ -33,6 +33,7 @@ export default function PuzzlesExercise() {
     setLoading(true);
     setMoves([]);
     setCurrentMoveIndex(0);
+    setHighlightedSquares({});
 
     try {
       const response = await fetch(url, options);
@@ -58,12 +59,23 @@ export default function PuzzlesExercise() {
   }, []);
 
   const executeComputerMove = () => {
-    if (currentMoveIndex < moves.length) {
+    if (!isPlayerTurn && currentMoveIndex < moves.length) {
       const nextMove = moves[currentMoveIndex];
-      chess.move(nextMove);
-      setFen(chess.fen());
-      setCurrentMoveIndex(currentMoveIndex + 1);
-      setIsPlayerTurn(true);
+
+      const move = chess.move(nextMove);
+      if (move) {
+        setFen(chess.fen());
+        setCurrentMoveIndex(currentMoveIndex + 1);
+        setIsPlayerTurn(true);
+
+        const sourceSquareComputer = move.from;
+        const targetSquareComputer = move.to;
+
+        setHighlightedSquares({
+          [sourceSquareComputer]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+          [targetSquareComputer]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+        });
+      }
     }
   };
 
@@ -130,30 +142,14 @@ export default function PuzzlesExercise() {
       });
 
       setIsPlayerTurn(false);
-
-      const blackMoveIndex = moveIndex + 1;
-      if (blackMoveIndex < moves.length) {
-        setIsPlayerTurn(false);
-        setTimeout(() => {
-          const blackMove = moves[blackMoveIndex];
-          chess.move(blackMove);
-          setCurrentMoveIndex(blackMoveIndex + 1);
-          setFen(chess.fen());
-          setIsPlayerTurn(true);
-        }, 500);
-      }
-
-      if (blackMoveIndex + 1 === moves.length) {
-        console.log("Wszystkie ruchy wykonane. Ruchy zostały zablokowane.");
-      }
+      executeComputerMove();
     } else {
-      console.error("Zły ruch białych:", move.san);
+      console.error("Invalid move:", move.san);
       chess.undo();
       setFen(previousFen);
     }
 
     setFen(chess.fen());
-
     return true;
   };
 
@@ -228,6 +224,7 @@ export default function PuzzlesExercise() {
               id="PuzzleChessboard"
               position={fen}
               arePiecesDraggable={true}
+              arePremovesAllowed={true}
               onPieceDrop={onPieceDrop}
               customSquareStyles={{
                 ...highlightedSquares,
