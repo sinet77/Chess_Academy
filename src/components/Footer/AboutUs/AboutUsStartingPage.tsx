@@ -2,6 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import * as style from "./AboutUs.style";
 import { guidelines } from "./AboutUs.constants";
+import { piotrImage, pawelImage, chessBoardAboutUs, chessPieciesAboutUs } from "../../../assets/AboutUsImages";
 
 export default function AboutUsStartingPage({
   buttonClick,
@@ -11,7 +12,7 @@ export default function AboutUsStartingPage({
 
   return (
     <Box sx={style.StartingPage}>
-      <Box sx={{ display: "flex", flexDirection: "column", padding: "50px" }}>
+      <Box sx={style.AboutUsMainContainer}>
         <Box sx={style.AboutUsFirstContainer}>
           <Typography sx={style.AboutUsSecondContainerTitle}>ABOUT</Typography>
         </Box >
@@ -24,11 +25,11 @@ export default function AboutUsStartingPage({
           </Box>
 
           <Box>
-            <img src="src/assets/chess-board-aboutUs.jpeg" style={style.AboutUsContainerFirstImage} />
+            <img src={chessBoardAboutUs} style={style.AboutUsContainerFirstImage} />
           </Box>
 
           <Box>
-            <img src="src/assets/chess-pieces-aboutUs.jpeg" style={style.AboutUsContainerSecondImage} />
+            <img src={chessPieciesAboutUs} style={style.AboutUsContainerSecondImage} />
             <Typography sx={style.phillosophyTitle}>Our Phillosophy</Typography>
             <Typography>
               Chess Academy is designed for everyone, regardless of age or skill level. Whether you're looking to play games or solve puzzles, we provide various levels of difficulty to suit all preferences. Our mission is to create an accessible and enjoyable environment for learning and mastering chess. We welcome you to join and enjoy the experience!
@@ -39,48 +40,22 @@ export default function AboutUsStartingPage({
 
 
       <Box sx={style.foundersContainer}>
-        <img src="src/assets/piotr-image.png" style={style.founderProfilePicture} />
-        <Box sx={{
-          backgroundColor: "#fffcf3",
-          width: "100%",
-          height: "30%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: "30px",
-          padding: "30px",
-          paddingLeft: "100px",
-          paddingRight: "100px"
-        }}>
+        <img src={piotrImage} style={style.founderProfilePicture} />
+        <Box sx={style.FoundersTextContainer}>
           <Typography variant="h2" sx={{ fontWeight: "500", mb: "30px" }}>MEET THE FOUNDERS</Typography>
           <Box sx={{ display: "flex" }}>
             <Box
-              sx={{
-                width: "260px",
-                height: "100px",
-                backgroundImage: 'url(src/assets/chess-world-map.jpg)',
-                backgroundSize: '520px 250px',
-                backgroundPosition: 'left',
-                borderRadius: '40px',
-              }}
+              sx={style.WorldMapImageLeft}
             />
             <Box
-              sx={{
-                width: "260px",
-                height: "100px",
-                backgroundImage: 'url(src/assets/chess-world-map.jpg)',
-                backgroundSize: '520px 250px',
-                backgroundPosition: 'right',
-                borderRadius: '40px',
-              }}
+              sx={style.WorldMapImageRight}
             />
           </Box>
           <Typography sx={{ mt: "50px" }}>
             Two brothers decided to create this awesome app to help you become a better version of yourself and improve your skills. Welcome to Chess Academy!
           </Typography>
         </Box>
-        <img src="src/assets/pawel-image.png" style={style.founderProfilePicture} />
+        <img src={pawelImage} style={style.founderProfilePicture} />
       </Box>
       <Box sx={{ width: "80%", margin: "0 auto" }}>
         <Grid container spacing={3}>
@@ -102,8 +77,6 @@ export default function AboutUsStartingPage({
           ))}
         </Grid>
       </Box>
-
-
 
       <Button sx={style.DownButton} onClick={buttonClick}>
         Help us to improve

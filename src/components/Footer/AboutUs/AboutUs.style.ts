@@ -1,4 +1,3 @@
-import { DisplaySettings, WidthFull } from "@mui/icons-material";
 import { SxProps } from "@mui/material/styles";
 
 export const Container: SxProps = {
@@ -78,15 +77,6 @@ export const StartingPage: SxProps = {
   },
 };
 
-export const TextAboutMe: SxProps = {
-  fontFamily: "'Courier New', Courier, monospace",
-  border: "2px solid #0096FF",
-  backgroundColor: "#DEEFF5",
-  lineHeight: "1.5",
-  padding: "15px",
-  mb: "15px",
-};
-
 export const StartingSection: SxProps = {
   textAlign: "center",
   marginBottom: "15px",
@@ -111,7 +101,13 @@ export const StartingSection: SxProps = {
     width: "auto",
     height: "auto",
   },
-};
+}
+
+export const AboutUsMainContainer: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  padding: "50px",
+}
 
 export const AboutUsFirstContainer: SxProps = {
   fontSize: "100px",
@@ -164,6 +160,36 @@ export const founderProfilePicture = {
   display: "flex",
   width: "20%",
   borderRadius: "50px"
+}
+export const FoundersTextContainer: SxProps = {
+  backgroundColor: "#fffcf3",
+  width: "100%",
+  height: "30%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: "30px",
+  padding: "30px",
+  paddingLeft: "100px",
+  paddingRight: "100px",
+}
+export const WorldMapImageLeft: SxProps = {
+  width: "260px",
+  height: "100px",
+  backgroundImage: 'url(src/assets/chess-world-map.jpg)',
+  backgroundSize: '520px 250px',
+  backgroundPosition: 'left',
+  borderRadius: '40px',
+}
+
+export const WorldMapImageRight: SxProps = {
+  width: "260px",
+  height: "100px",
+  backgroundImage: 'url(src/assets/chess-world-map.jpg)',
+  backgroundSize: '520px 250px',
+  backgroundPosition: 'right',
+  borderRadius: '40px',
 }
 
 export const DownButton: SxProps = {
