@@ -4,6 +4,15 @@ import { Chessboard } from "react-chessboard";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
 import { SquareStyles } from "./PuzzleExercise.types";
 import Stopwatch from "./Stopwatch/Stopwatch";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  FormControlLabel,
+  Grid,
+  Switch,
+  Typography,
+} from "@mui/material";
 
 export default function PuzzlesExercise() {
   const [fen, setFen] = useState<string>("start");
@@ -20,6 +29,12 @@ export default function PuzzlesExercise() {
     {}
   );
   const [optionSquares, setOptionSquares] = useState<SquareStyles>({});
+  const [changeBoardOrientation, setChangeBoardOrientation] = useState<
+    "white" | "black"
+  >("white");
+  const [isAutoNextEnabled, setIsAutoNextEnabled] = useState<boolean>(false);
+  const [isPuzzleSolved, setIsPuzzleSolved] = useState<boolean>(false);
+  const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
 
   async function fetchPuzzle() {
     const url =
@@ -31,6 +46,7 @@ export default function PuzzlesExercise() {
         "x-rapidapi-host": "chess-puzzles2.p.rapidapi.com",
       },
     };
+    setIsPuzzleSolved(false);
     setLoading(true);
     setMoves([]);
     setCurrentMoveIndex(0);
@@ -83,8 +99,29 @@ export default function PuzzlesExercise() {
 
   function getStartingColorForPlayer(fen: string) {
     const spliitedPartsInFenToGetAColor = fen.split(" ");
-    return spliitedPartsInFenToGetAColor[1] === "w" ? "White" : "Black";
+    if (spliitedPartsInFenToGetAColor[1] === "w") {
+      setChangeBoardOrientation("black");
+      return "White";
+    } else {
+      setChangeBoardOrientation("white");
+      return "Black";
+    }
   }
+
+  function automaticTransitionAfterSolvingPuzzle() {
+    if (isAutoNextEnabled && isPuzzleSolved) {
+      setTimeout(() => {
+        fetchPuzzle();
+      }, 1000);
+    }
+  }
+  const handleToggleAutoNext = () => {
+    setIsAutoNextEnabled((prev) => !prev);
+  };
+
+  useEffect(() => {
+    automaticTransitionAfterSolvingPuzzle();
+  }, [isPuzzleSolved, isAutoNextEnabled]);
 
   const onPieceDrop = (
     sourceSquare: Square,
@@ -136,11 +173,16 @@ export default function PuzzlesExercise() {
     }
 
     if (isValidMove) {
-      setCurrentMoveIndex(moveIndex + 1);
+      const newIndex = moveIndex + 1;
+      setCurrentMoveIndex(newIndex);
+
+      if (newIndex === moves.length) {
+        setIsPuzzleSolved(true);
+      }
 
       setHighlightedSquares({
-        [sourceSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
-        [targetSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+        [sourceSquare]: { backgroundColor: "#b2aa5e" },
+        [targetSquare]: { backgroundColor: "#ccd285" },
       });
 
       setIsPlayerTurn(false);
@@ -205,44 +247,95 @@ export default function PuzzlesExercise() {
   }
 
   function onMouseOverSquare(square: Square) {
-    getMoveOptions(square);
+    if (isShowMovesEnabled) {
+      getMoveOptions(square);
+    }
   }
-
   function onMouseOutSquare() {
     if (Object.keys(optionSquares).length !== 0) {
       setOptionSquares({});
     }
   }
 
+  const handleToggleShowEnableMoves = () => {
+    setIsShowMovesEnabled((prev) => !prev);
+  };
+
   return (
-    <div>
+    <Box sx={{ p: 2 }}>
       {loading ? (
-        <p>Loading...</p>
+        <CircularProgress />
       ) : (
-        <div>
-          <p>{startingColor} on move</p>
-          <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} />
-          <div style={{ width: "400px" }}>
-            <Chessboard
-              id="PuzzleChessboard"
-              position={fen}
-              arePiecesDraggable={true}
-              arePremovesAllowed={false}
-              onPieceDrop={onPieceDrop}
-              customSquareStyles={{
-                ...highlightedSquares,
-                ...rightClickedSquares,
-                ...optionSquares,
-              }}
-              onMouseOverSquare={onMouseOverSquare}
-              onMouseOutSquare={onMouseOutSquare}
-              onSquareRightClick={onSquareRightClick}
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography>{startingColor} on move</Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} />
+          </Grid>
+          <Grid item xs={12} md={6} container justifyContent="flex-end">
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={isShowMovesEnabled}
+                  onChange={handleToggleShowEnableMoves}
+                />
+              }
+              label="Enable Move Highlights"
             />
-          </div>
-          <button onClick={fetchPuzzle}>Next Puzzle</button>
-        </div>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={isAutoNextEnabled}
+                  onChange={handleToggleAutoNext}
+                />
+              }
+              label="Auto Next Puzzle on correct"
+            />
+          </Grid>
+          <Grid item xs={12} display="flex" justifyContent="center">
+            <Box
+              sx={{ width: { xs: "100%", md: "400px" }, aspectRatio: "1 / 1" }}
+            >
+              <Chessboard
+                id="PuzzleChessboard"
+                position={fen}
+                arePiecesDraggable={true}
+                arePremovesAllowed={false}
+                boardWidth={400}
+                onPieceDrop={onPieceDrop}
+                onSquareRightClick={onSquareRightClick}
+                onMouseOverSquare={onMouseOverSquare}
+                onMouseOutSquare={onMouseOutSquare}
+                customSquareStyles={{
+                  ...highlightedSquares,
+                  ...rightClickedSquares,
+                  ...optionSquares,
+                }}
+                boardOrientation={changeBoardOrientation}
+              />
+            </Box>
+            {isPuzzleSolved && (
+              <Box
+                sx={{
+                  mt: 2,
+                  textAlign: "center",
+                  color: "green",
+                  fontSize: "1.5rem",
+                }}
+              >
+                Correct!
+              </Box>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="contained" onClick={fetchPuzzle}>
+              Next Puzzle
+            </Button>
+          </Grid>
+        </Grid>
       )}
-    </div>
+    </Box>
   );
 }
 

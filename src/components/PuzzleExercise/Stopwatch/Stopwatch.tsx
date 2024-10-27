@@ -17,9 +17,7 @@ const Stopwatch = ({ moves, currentMoveIndex }: StopwatchProps) => {
     return () => {
       if (interval) clearInterval(interval);
     };
-
-    [isActive];
-  });
+  }, [isActive]);
 
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
