@@ -106,14 +106,19 @@ export const StartingSection: SxProps = {
 export const AboutUsMainContainer: SxProps = {
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
+  maxWidth: "1000px",
+  width: "100%",
   padding: "50px",
 }
 
 export const AboutUsFirstContainer: SxProps = {
   fontSize: "100px",
-  textAlign: "left",
   display: "flex",
-  justifyContent: "start"
+  justifyContent: "flex-start",
+  maxWidth: "1000px",
+  width: "100%",
+  ml: "-620px"
 };
 
 export const AboutUsSecondContainer: SxProps = {
