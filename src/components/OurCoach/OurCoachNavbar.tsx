@@ -1,4 +1,4 @@
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Button, Grid2 as Grid, Link, Typography } from "@mui/material";
 import * as style from "./OurCouch.style";
 import { Facebook, GitHub, LinkedIn } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -12,8 +12,8 @@ export default function OurCoach() {
   return (
     <Box>
       <Box sx={style.CouchTile}>Our Coach</Box>
-      <Box sx={style.WhiteTile}>
-        <Box sx={style.Titles}>
+      <Grid container spacing={2} justifyContent="center" padding="80px">
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography sx={style.SmallTitle}>Our Coach</Typography>
           <Typography sx={style.BigTitle}>
             We Have Inherited Technique
@@ -28,8 +28,11 @@ export default function OurCoach() {
             sx={style.HeadImage}
             src="/src/assets/ourCouch.jpg"
           />
-        </Box>
-        <Box sx={style.ImgWithNameBox}>
+        </Grid>
+        <Grid
+          size={{ xs: 12, md: 6 }}
+          // sx={style.ImgWithNameBox}
+        >
           <Box
             component="img"
             sx={style.Image}
@@ -55,8 +58,8 @@ export default function OurCoach() {
               </Link>
             </Box>
           </Box>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
       <Box sx={style.GreyTile}>
         <Typography sx={style.SmallTitle}>Why Choose Us?</Typography>
         <Typography sx={style.BigTitle}>We Have An Amazing Strategy</Typography>
@@ -72,20 +75,22 @@ export default function OurCoach() {
           src="/src/assets/123_steps.webp"
         />
       </Box>
-      <Box sx={style.BlackTile}>
-        <Box
-          component="img"
-          sx={style.TransparentImage}
-          src="/src/assets/chess_set.png"
-        />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "flex-start",
-          }}
-        >
+      <Grid
+        sx={style.BlackTile}
+        container
+        spacing={1}
+        justifyContent="center"
+        padding="80px"
+      >
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Box
+            component="img"
+            sx={style.TransparentImage}
+            src="/src/assets/chess_set.png"
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 6 }} direction="column">
           <Typography sx={{ ...style.BigTitle, color: "white" }}>
             Join And Become A Better Player!
           </Typography>
@@ -95,8 +100,8 @@ export default function OurCoach() {
           <Button onClick={handleJoinButtonClick} sx={style.Button}>
             Join
           </Button>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

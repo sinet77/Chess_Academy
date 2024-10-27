@@ -37,7 +37,6 @@ export const BigTitle: SxProps = {
   fontFamily: "Playfair Display",
   fontSize: "52px",
   fontWeight: "600",
-  lineHeight: "70px",
   color: "#000000",
 };
 
@@ -49,13 +48,6 @@ export const DescriptionHeader: SxProps = {
   color: "#7E7E7E",
 };
 
-export const WhiteTile: SxProps = {
-  padding: "80px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: "100px",
-};
 
 export const FooterBox: SxProps = {
   display: "flex",
@@ -117,10 +109,6 @@ export const GreyTile: SxProps = {
 
 export const BlackTile: SxProps = {
   padding: "40px 40px 60px 40px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: "100px",
   backgroundColor: "#000000",
 };
 
