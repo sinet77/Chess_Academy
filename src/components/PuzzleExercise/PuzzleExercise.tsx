@@ -13,6 +13,7 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
+import * as style from "./PuzzleExercise.style";
 
 export default function PuzzlesExercise() {
   const [fen, setFen] = useState<string>("start");
@@ -72,9 +73,9 @@ export default function PuzzlesExercise() {
     }
   }
 
-  useEffect(() => {
-    fetchPuzzle();
-  }, []);
+  //   useEffect(() => {
+  //     fetchPuzzle();
+  //   }, []);
 
   const executeComputerMove = () => {
     if (!isPlayerTurn && currentMoveIndex < moves.length) {
@@ -262,40 +263,52 @@ export default function PuzzlesExercise() {
   };
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 15 }}>
       {loading ? (
         <CircularProgress />
       ) : (
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography>{startingColor} on move</Typography>
+        <Grid container spacing={2} alignItems="center">
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography sx={style.ColorOnMove}>
+              {startingColor} on move
+            </Typography>
+            <Box
+              sx={{
+                ...style.ColorCircle,
+                backgroundColor: startingColor === "White" ? "white" : "black",
+              }}
+            />
           </Grid>
-          <Grid item xs={12} md={6}>
+
+          <Grid item xs={12} md={6} display="flex" justifyContent="center">
             <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} />
           </Grid>
+
           <Grid item xs={12} md={6} container justifyContent="flex-end">
             <FormControlLabel
               control={
                 <Switch
                   checked={isShowMovesEnabled}
                   onChange={handleToggleShowEnableMoves}
+                  sx={style.Switch}
                 />
               }
               label="Enable Move Highlights"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={isAutoNextEnabled}
-                  onChange={handleToggleAutoNext}
-                />
-              }
-              label="Auto Next Puzzle on correct"
+              sx={style.OptionSwitchLabel}
             />
           </Grid>
+
           <Grid item xs={12} display="flex" justifyContent="center">
             <Box
-              sx={{ width: { xs: "100%", md: "400px" }, aspectRatio: "1 / 1" }}
+              sx={{
+                width: { xs: "100%", md: "400px" },
+              }}
             >
               <Chessboard
                 id="PuzzleChessboard"
@@ -314,24 +327,44 @@ export default function PuzzlesExercise() {
                 }}
                 boardOrientation={changeBoardOrientation}
               />
+              {isPuzzleSolved && (
+                <Box
+                  sx={{
+                    mt: 2,
+                    textAlign: "center",
+                    color: "green",
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  Correct!
+                </Box>
+              )}
             </Box>
-            {isPuzzleSolved && (
-              <Box
-                sx={{
-                  mt: 2,
-                  textAlign: "center",
-                  color: "green",
-                  fontSize: "1.5rem",
-                }}
-              >
-                Correct!
-              </Box>
-            )}
           </Grid>
-          <Grid item xs={12}>
-            <Button variant="contained" onClick={fetchPuzzle}>
-              Next Puzzle
-            </Button>
+
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box sx={style.NextButtonAndSwitch}>
+              <Button sx={style.Button} onClick={fetchPuzzle}>
+                Next Puzzle
+              </Button>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isAutoNextEnabled}
+                    onChange={handleToggleAutoNext}
+                    sx={style.Switch}
+                  />
+                }
+                label="Auto Next Puzzle on correct"
+                sx={style.OptionSwitchLabel}
+              />
+            </Box>
           </Grid>
         </Grid>
       )}
