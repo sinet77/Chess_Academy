@@ -5,23 +5,19 @@ export const Container: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  padding: "2rem",
+  padding: "3rem",
   maxWidth: "800px",
   margin: "auto",
   textAlign: "justify",
-  backgroundColor: "#cefad0",
+  backgroundColor: "#eae7e2",
   borderRadius: "8px",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   position: "relative",
 };
 
 export const Background: SxProps = {
-  backgroundImage: "url(/src/assets/shattered_figures.jpg)",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  padding: "20px",
-  height: "100vh",
+  backgroundColor: "#fffcf3",
+  padding: "50px"
 };
 
 export const Title: SxProps = {
@@ -45,10 +41,9 @@ export const Description: SxProps = {
 export const Section: SxProps = {
   textAlign: "left",
   marginBottom: "18px",
-  backgroundColor: "#9FE2BF",
+  backgroundColor: "#fffcf3",
   padding: "15px",
   borderRadius: "8px",
-  border: "1px solid black",
 };
 
 export const ActionButton: SxProps = {
@@ -69,16 +64,12 @@ export const FooterText: SxProps = {
 };
 
 export const StartingPage: SxProps = {
-  backgroundImage: "url(/src/assets/dark_chess_background.jpg)",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  backgroundColor: "#fffcf3",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  alignItems: "left",
+  alignItems: "center",
   padding: "15px",
-  height: "100vh",
   "@media (max-width: 1000px)": {
     padding: "100px",
     width: "auto",
@@ -86,19 +77,10 @@ export const StartingPage: SxProps = {
   },
 };
 
-export const TextAboutMe: SxProps = {
-  fontFamily: "'Courier New', Courier, monospace",
-  border: "2px solid #0096FF",
-  backgroundColor: "#DEEFF5",
-  lineHeight: "1.5",
-  padding: "15px",
-  mb: "15px",
-};
-
 export const StartingSection: SxProps = {
   textAlign: "center",
   marginBottom: "15px",
-  background: "linear-gradient(-45deg, #ee7752, #ff9b42, #ff6700, #ffa833)",
+  background: "linear-gradient(-45deg, #fffcf3, #eae7e2)",
   backgroundSize: "400% 400%",
   animation: "gradient 8s ease infinite",
   "@keyframes gradient": {
@@ -114,52 +96,136 @@ export const StartingSection: SxProps = {
   },
   padding: "15px",
   borderRadius: "8px",
-  border: "1px solid black",
+  border: "2px solid #eae7e2",
   "@media (max-width: 1000px)": {
     width: "auto",
     height: "auto",
   },
+}
+
+export const AboutUsMainContainer: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  maxWidth: "1000px",
+  width: "100%",
+  padding: "50px",
+}
+
+export const AboutUsFirstContainer: SxProps = {
+  fontSize: "100px",
+  display: "flex",
+  justifyContent: "flex-start",
+  maxWidth: "1000px",
+  width: "100%",
+  ml: "-620px"
 };
 
-export const AboutUsText: SxProps = {
-  background:
-    "linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0) 100%)",
-  padding: "20px",
-  borderRadius: "10px",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+export const AboutUsSecondContainer: SxProps = {
   display: "flex",
+  gap: "30px",
+
+};
+export const AboutUsSecondContainerTitle: SxProps = {
+  fontSize: "150px",
+  fontWeight: "500",
+  lineHeight: "120px",
+  paddingBottom: "50px"
+};
+
+export const AboutUsContainerFirstImage = {
+  width: "900px",
+  borderRadius: "30px"
+};
+
+export const AboutUsContainerSecondImage = {
+  width: "500px",
+  height: "auto",
+  borderRadius: "30px"
+};
+export const phillosophyTitle: SxProps = {
+  fontWeight: "500",
+  fontSize: "45px",
+  mt: "12px",
+  mb: "13px"
+}
+
+export const foundersContainer: SxProps = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  backgroundColor: "#eae7e2",
+  borderRadius: "50px",
+  width: "80%",
+  textAlign: "center",
+  mt: "100px",
+  mb: "100px"
+};
+export const founderProfilePicture = {
+  display: "flex",
+  width: "20%",
+  borderRadius: "50px"
+}
+export const FoundersTextContainer: SxProps = {
+  backgroundColor: "#fffcf3",
+  width: "100%",
+  height: "30%",
+  display: "flex",
+  flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  gap: "20px",
-  mb: "20px",
-  mt: "-74px",
-  fontSize: "40px",
-  color: "black",
-};
+  borderRadius: "30px",
+  padding: "30px",
+  paddingLeft: "100px",
+  paddingRight: "100px",
+}
+export const WorldMapImageLeft: SxProps = {
+  width: "260px",
+  height: "100px",
+  backgroundImage: 'url(src/assets/chess-world-map.jpg)',
+  backgroundSize: '520px 250px',
+  backgroundPosition: 'left',
+  borderRadius: '40px',
+}
+
+export const WorldMapImageRight: SxProps = {
+  width: "260px",
+  height: "100px",
+  backgroundImage: 'url(src/assets/chess-world-map.jpg)',
+  backgroundSize: '520px 250px',
+  backgroundPosition: 'right',
+  borderRadius: '40px',
+}
+
 export const DownButton: SxProps = {
-  backgroundColor: "#0096FF",
+  backgroundImage: "url(./src/assets/questions-background.png)",
+  backgroundPosition: "right center",
+  fontSize: "17px",
   color: "white",
   padding: "10px 20px",
+  border: "none",
   borderRadius: "5px",
+  mt: "50px",
+  mb: "50px",
+  transition: "transform 0.3s ease",
   "@media (max-width: 1000px)": {
     width: "auto",
     height: "auto",
   },
   "&:hover": {
-    backgroundColor: "#89CFF0",
+    transform: "scale(1.1)",
   },
 };
 
 export const AboutUsButton: SxProps = {
   position: "absolute",
-  right: "10px",
-  top: "10px",
+  right: "20px",
+  top: "20px",
   backgroundColor: "#b87333",
   color: "#fff",
   "&:hover": {
     backgroundColor: "#654321",
   },
-
-  padding: "0.75rem 1.5rem",
+  padding: "0.75rem 1rem",
   fontWeight: "bold",
 };
