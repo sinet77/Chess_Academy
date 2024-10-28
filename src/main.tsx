@@ -16,6 +16,7 @@ import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
 import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
+import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: routes.puzzles,
-        element: <PuzzlesExercise />,
+        element: <ChoosingPuzzlePage />,
       },
     ],
   },
