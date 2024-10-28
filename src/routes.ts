@@ -9,5 +9,6 @@ export const routes = {
   courses: "/courses",
   privateLesson: "/courses/private-lesson",
   ranksAndBadges: "/ranks-and-badges",
-  puzzles: "/puzzles",
+  puzzles: "/puzzles/:level",
+  chooseDifficulty: "/choose-difficulty",
 };

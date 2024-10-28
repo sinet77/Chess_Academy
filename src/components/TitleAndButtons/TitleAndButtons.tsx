@@ -2,8 +2,16 @@ import { Box, Button, Typography } from "@mui/material";
 import * as style from "./TitleAndButtons.style";
 import { motion } from "framer-motion";
 import { training, computer, puzzle } from "../../assets/MainPageImages.js";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes.js";
 
 export default function TitleAndButtons() {
+  const navigate = useNavigate();
+
+  const handlePuzzlesClick = () => {
+    navigate(routes.chooseDifficulty);
+  };
+
   return (
     <Box>
       <motion.div
@@ -40,7 +48,9 @@ export default function TitleAndButtons() {
               Play vs computer
             </Typography>
           </Button>
-          <Button sx={style.ImageButtonContainer}>
+          <Button sx={style.ImageButtonContainer} onClick={handlePuzzlesClick}>
+            {" "}
+            {/* Dodaj onClick do przycisku Puzzles */}
             <img src={puzzle} alt="Chess Puzzle" style={style.ButtonImage} />
             <Typography sx={style.TitleUnderButtonImage}>Puzzles</Typography>
           </Button>

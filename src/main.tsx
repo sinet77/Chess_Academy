@@ -65,6 +65,10 @@ const router = createBrowserRouter([
       },
       {
         path: routes.puzzles,
+        element: <PuzzlesExercise />,
+      },
+      {
+        path: routes.chooseDifficulty,
         element: <ChoosingPuzzlePage />,
       },
     ],

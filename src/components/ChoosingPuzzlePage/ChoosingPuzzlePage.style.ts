@@ -19,3 +19,25 @@ export const HeadTitle: SxProps = {
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
 };
+
+export const Button: SxProps = {
+  width: "100vw",
+  backgroundSize: "100% 600%",
+  height: "128px",
+  color: "white",
+  textShadow: `
+    -2px -2px 0 black,  
+     2px -2px 0 black,  
+    -2px  2px 0 black,  
+     2px  2px 0 black   
+  `,
+  fontWeight: "bold",
+  fontSize: "2rem",
+  textTransform: "none",
+  fontFamily: "Playful Display",
+  boxShadow: 1,
+  overflow: "hidden",
+  "&:hover": {
+    opacity: 0.5,
+  },
+};

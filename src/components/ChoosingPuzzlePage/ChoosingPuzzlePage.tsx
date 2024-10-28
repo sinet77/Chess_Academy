@@ -2,6 +2,8 @@ import { Box, Typography, Grid, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import * as style from "./ChoosingPuzzlePage.style";
 import dragon from "../../assets/dust.jpg";
+import { DifficultyLevelProps } from "./ChoosingPuzzlePage.types";
+import { useNavigate } from "react-router-dom";
 
 const container = {
   hidden: { opacity: 0 },
@@ -24,13 +26,15 @@ const item = {
 };
 
 export default function ChoosingPuzzlePage() {
+  const navigate = useNavigate();
+
   const difficultyLevels = [
-    "Beginner",
-    "Easy",
-    "Intermediate",
-    "Challenging",
-    "Advanced",
-    "Expert",
+    { level: "Beginner", min: 100, max: 500 },
+    { level: "Easy", min: 501, max: 1000 },
+    { level: "Intermediate", min: 1001, max: 1500 },
+    { level: "Challenging", min: 1501, max: 2000 },
+    { level: "Advanced", min: 2001, max: 2500 },
+    { level: "Expert", min: 2501, max: 3000 },
   ];
 
   const backgroundPositions = [
@@ -42,6 +46,14 @@ export default function ChoosingPuzzlePage() {
     "0% -640px",
   ];
 
+  const handleDifficultySelect = ({
+    level,
+    min,
+    max,
+  }: DifficultyLevelProps) => {
+    navigate(`/puzzles/${level.toLowerCase()}`, { state: { min, max } });
+  };
+
   return (
     <Box sx={style.Main}>
       <Typography sx={style.HeadTitle} variant="h5">
@@ -49,34 +61,17 @@ export default function ChoosingPuzzlePage() {
       </Typography>
       <motion.div initial="hidden" animate="visible" variants={container}>
         <Grid container spacing={2}>
-          {difficultyLevels.map((level, index) => (
+          {difficultyLevels.map(({ level, min, max }, index) => (
             <Grid item xs={12} key={level}>
               <motion.div variants={item}>
                 <Button
                   variant="contained"
                   fullWidth
+                  onClick={() => handleDifficultySelect({ level, min, max })}
                   sx={{
-                    width: "100vw",
+                    ...style.Button,
                     backgroundImage: `url(${dragon})`,
-                    backgroundSize: "100% 600%",
                     backgroundPosition: backgroundPositions[index],
-                    height: "128px",
-                    color: "white",
-                    textShadow: `
-                    -2px -2px 0 black,  
-                     2px -2px 0 black,  
-                    -2px  2px 0 black,  
-                     2px  2px 0 black   
-                  `,
-                    fontWeight: "bold",
-                    fontSize: "2rem",
-                    textTransform: "none",
-                    fontFamily: "Playful Display",
-                    boxShadow: 1,
-                    overflow: "hidden",
-                    "&:hover": {
-                      opacity: 0.5,
-                    },
                   }}
                 >
                   {level}

@@ -15,8 +15,12 @@ import {
 } from "@mui/material";
 import * as style from "./PuzzleExercise.style";
 import { loading_gif } from "../../assets/PuzzleExerciseImages";
+import { useLocation } from "react-router-dom";
 
 export default function PuzzlesExercise() {
+  const location = useLocation();
+  const { min, max } = location.state;
+
   const [fen, setFen] = useState<string>("start");
   const [moves, setMoves] = useState<string[]>([]);
   const [currentMoveIndex, setCurrentMoveIndex] = useState<number>(0);
@@ -39,8 +43,7 @@ export default function PuzzlesExercise() {
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
 
   async function fetchPuzzle() {
-    const url =
-      "https://chess-puzzles2.p.rapidapi.com/range?min=100&max=1000&max_deviation=100&number_of_puzzles=1";
+    const url = `https://chess-puzzles2.p.rapidapi.com/range?min=${min}&max=${max}&max_deviation=100&number_of_puzzles=1`;
     const options = {
       method: "GET",
       headers: {
@@ -76,7 +79,7 @@ export default function PuzzlesExercise() {
 
   useEffect(() => {
     fetchPuzzle();
-  }, []);
+  }, [min, max]);
 
   const executeComputerMove = () => {
     if (!isPlayerTurn && currentMoveIndex < moves.length) {
@@ -292,11 +295,7 @@ export default function PuzzlesExercise() {
           </Grid>
 
           <Grid item xs={12} display="flex" justifyContent="center">
-            <Box
-              sx={{
-                width: { xs: "100%", md: "400px" },
-              }}
-            >
+            <Box>
               {isPuzzleSolved && (
                 <Box sx={style.CorrectText}>
                   Correct! XP gained <ScienceIcon />
@@ -306,8 +305,8 @@ export default function PuzzlesExercise() {
                 id="PuzzleChessboard"
                 position={fen}
                 arePiecesDraggable={true}
-                arePremovesAllowed={true}
-                boardWidth={400}
+                arePremovesAllowed={false}
+                boardWidth={500}
                 onPieceDrop={onPieceDrop}
                 onSquareRightClick={onSquareRightClick}
                 onMouseOverSquare={onMouseOverSquare}
