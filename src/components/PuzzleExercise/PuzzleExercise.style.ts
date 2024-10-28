@@ -1,5 +1,12 @@
 import { SxProps } from "@mui/material";
 
+export const Main: SxProps = {
+  p: 10,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
 export const Button: SxProps = {
   color: "white",
   mt: "30px",
@@ -33,6 +40,14 @@ export const ColorCircle = {
   border: "1px solid black",
 };
 
+export const CorrectText: SxProps = {
+  p: "20px 10px 30px 10px",
+  textAlign: "center",
+  color: "green",
+  fontSize: "1.5rem",
+  fontWeight: "bold",
+};
+
 export const OptionSwitchLabel: SxProps = {
   ".MuiFormControlLabel-label": {
     fontFamily: "Roboto",
@@ -61,5 +76,5 @@ export const Switch: SxProps = {
 export const NextButtonAndSwitch: SxProps = {
   display: "flex",
   flexDirection: "column",
-  gap: 2,
+  gap: 3,
 };

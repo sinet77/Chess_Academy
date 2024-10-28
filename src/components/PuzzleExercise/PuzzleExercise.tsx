@@ -3,17 +3,18 @@ import { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
 import { SquareStyles } from "./PuzzleExercise.types";
+import ScienceIcon from "@mui/icons-material/Science";
 import Stopwatch from "./Stopwatch/Stopwatch";
 import {
   Box,
   Button,
-  CircularProgress,
   FormControlLabel,
   Grid,
   Switch,
   Typography,
 } from "@mui/material";
 import * as style from "./PuzzleExercise.style";
+import { loading_gif } from "../../assets/PuzzleExerciseImages";
 
 export default function PuzzlesExercise() {
   const [fen, setFen] = useState<string>("start");
@@ -73,9 +74,9 @@ export default function PuzzlesExercise() {
     }
   }
 
-  //   useEffect(() => {
-  //     fetchPuzzle();
-  //   }, []);
+  useEffect(() => {
+    fetchPuzzle();
+  }, []);
 
   const executeComputerMove = () => {
     if (!isPlayerTurn && currentMoveIndex < moves.length) {
@@ -263,9 +264,9 @@ export default function PuzzlesExercise() {
   };
 
   return (
-    <Box sx={{ p: 15 }}>
+    <Box sx={style.Main}>
       {loading ? (
-        <CircularProgress />
+        <Box component="img" src={loading_gif}></Box>
       ) : (
         <Grid container spacing={2} alignItems="center">
           <Grid
@@ -286,22 +287,8 @@ export default function PuzzlesExercise() {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} display="flex" justifyContent="center">
+          <Grid item xs={12} display="flex" justifyContent="center">
             <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} />
-          </Grid>
-
-          <Grid item xs={12} md={6} container justifyContent="flex-end">
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={isShowMovesEnabled}
-                  onChange={handleToggleShowEnableMoves}
-                  sx={style.Switch}
-                />
-              }
-              label="Enable Move Highlights"
-              sx={style.OptionSwitchLabel}
-            />
           </Grid>
 
           <Grid item xs={12} display="flex" justifyContent="center">
@@ -310,11 +297,16 @@ export default function PuzzlesExercise() {
                 width: { xs: "100%", md: "400px" },
               }}
             >
+              {isPuzzleSolved && (
+                <Box sx={style.CorrectText}>
+                  Correct! XP gained <ScienceIcon />
+                </Box>
+              )}
               <Chessboard
                 id="PuzzleChessboard"
                 position={fen}
                 arePiecesDraggable={true}
-                arePremovesAllowed={false}
+                arePremovesAllowed={true}
                 boardWidth={400}
                 onPieceDrop={onPieceDrop}
                 onSquareRightClick={onSquareRightClick}
@@ -327,18 +319,6 @@ export default function PuzzlesExercise() {
                 }}
                 boardOrientation={changeBoardOrientation}
               />
-              {isPuzzleSolved && (
-                <Box
-                  sx={{
-                    mt: 2,
-                    textAlign: "center",
-                    color: "green",
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  Correct!
-                </Box>
-              )}
             </Box>
           </Grid>
 
@@ -362,6 +342,18 @@ export default function PuzzlesExercise() {
                   />
                 }
                 label="Auto Next Puzzle on correct"
+                sx={style.OptionSwitchLabel}
+              />
+
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isShowMovesEnabled}
+                    onChange={handleToggleShowEnableMoves}
+                    sx={style.Switch}
+                  />
+                }
+                label="Enable Move Highlights"
                 sx={style.OptionSwitchLabel}
               />
             </Box>

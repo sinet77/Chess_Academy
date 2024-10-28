@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StopwatchProps } from "./Stopwatch.types";
 import TimerIcon from "@mui/icons-material/Timer";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import * as style from "./Stopwatch.style";
 
 const Stopwatch = ({ moves, currentMoveIndex }: StopwatchProps) => {
@@ -33,16 +33,15 @@ const Stopwatch = ({ moves, currentMoveIndex }: StopwatchProps) => {
 
   return (
     <Box sx={style.Container}>
-      <TimerIcon />
-      <div>
+      <TimerIcon sx={style.TimerIconStyle} />
+      <Box sx={style.TimeNamesContainer}>
         {totalSeconds >= 60 && (
           <>
-            <span>{minutes} min</span>
-            <span> </span>
+            <Typography sx={style.TimeFont}>{minutes} min</Typography>
           </>
         )}
-        <span>{seconds} s</span>
-      </div>
+        <Typography sx={style.TimeFont}> {seconds} s</Typography>
+      </Box>
     </Box>
   );
 };
