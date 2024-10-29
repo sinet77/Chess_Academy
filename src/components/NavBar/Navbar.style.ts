@@ -29,7 +29,14 @@ export const BarContainer: SxProps = {
   height: "65px",
   marginLeft: "50px",
 };
-export const WebTitle: SxProps = { textAlign: "center" };
+export const WebTitle: SxProps = {
+  textAlign: "center",
+  textDecoration: "none",
+  color: "white",
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
+};
 export const AppBar: SxProps = {
   background: "transparent",
   position: "absolute",
@@ -40,7 +47,7 @@ export const WebLogo: SxProps = { height: "50px" };
 export const TabsNavbar: SxProps = {
   flexGrow: 1,
   display: "flex",
-  justifyContent: "flex-end", //jak chcesz zeby sie przesuwaly to usun to
+  justifyContent: "flex-end",
   gap: "20px",
   marginRight: "20px",
 };
