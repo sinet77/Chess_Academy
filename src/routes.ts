@@ -1,6 +1,15 @@
 export const routes = {
+  home: "/",
   contactUs: "/contact-us",
   aboutUs: "/about-us",
   faq: "/faq",
+  training: "/training",
   fairPlay: "/fair-play",
+  login: "/login",
+  register: "/register",
+  courses: "courses",
+  ourcouch: "/ourcouch",
+  ourcoach: "/ourcoach",
+  privateLesson: "/private-lesson",
+  ranksAndBadges: "/ranks-and-badges",
 };
