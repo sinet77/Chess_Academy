@@ -85,7 +85,6 @@ export const contactButton: SxProps = {
   border: "none",
   color: "white",
   backgroundImage: "url(./src/assets/questions-background.png)",
-
   backgroundPosition: "right center",
 }
 
