@@ -269,7 +269,9 @@ export default function PuzzlesExercise() {
   return (
     <Box sx={style.Main}>
       {loading ? (
-        <Box component="img" src={loading_gif}></Box>
+        <Box sx={style.ImgContainer}>
+          <Box component="img" src={loading_gif} />
+        </Box>
       ) : (
         <Grid container spacing={2} alignItems="center">
           <Grid

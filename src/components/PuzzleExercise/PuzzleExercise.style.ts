@@ -7,6 +7,14 @@ export const Main: SxProps = {
   alignItems: "center",
 };
 
+export const ImgContainer: SxProps = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: "100vh",
+  width: "100%",
+};
+
 export const Button: SxProps = {
   color: "white",
   mt: "30px",
