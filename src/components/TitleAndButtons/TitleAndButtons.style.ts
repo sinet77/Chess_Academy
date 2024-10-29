@@ -14,8 +14,15 @@ export const Title: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  padding: "30px",
-  marginBottom: "30px",
+  padding: "20px",
+};
+
+export const TitleText: SxProps = {
+  color: "#fff",
+  fontFamily: "Playfair Display",
+  fontSize: "62px",
+  fontWeight: "700",
+  lineHeight: "110px",
 };
 
 export const ImageButtonContainer: SxProps = {
@@ -28,6 +35,13 @@ export const ImageButtonContainer: SxProps = {
   backgroundColor: "#292929",
   borderRadius: "8px",
   border: "1px solid white",
+  mb: "20px",
+  transition: "transform 0.2s",
+  "&:hover": {
+    backgroundColor: "#5C5C5C",
+    transform: "scale(1.05)",
+    textDecoration: "none",
+  },
 };
 
 export const ButtonImage: React.CSSProperties = {
@@ -43,3 +57,5 @@ export const TitleUnderButtonImage: React.CSSProperties = {
   fontWeight: "bold",
   fontSize: "15px",
 };
+
+export const TextUnderlineTurnOff: SxProps = { textDecoration: "none" };

@@ -8,12 +8,27 @@ export default function TitleAndButtons() {
   return (
     <Box>
       <motion.div
+        initial={{ opacity: 0, scale: 0.3 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Box sx={style.Title}>
+          <Typography sx={style.TitleText}>
+            Welcome in Chess Academy!
+          </Typography>
+        </Box>
+      </motion.div>
+      <motion.div
         initial={{ y: "100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <Box sx={style.TileContainer}>
-          <Link to={"/training"} component={RouterLink}>
+          <Link
+            to={"/training"}
+            component={RouterLink}
+            sx={style.TextUnderlineTurnOff}
+          >
             <Button sx={style.ImageButtonContainer}>
               <img
                 src={training}
@@ -23,7 +38,11 @@ export default function TitleAndButtons() {
               <Typography sx={style.TitleUnderButtonImage}>Training</Typography>
             </Button>
           </Link>
-          <Link to={"/play/computer"} component={RouterLink}>
+          <Link
+            to={"/play/computer"}
+            component={RouterLink}
+            sx={style.TextUnderlineTurnOff}
+          >
             <Button sx={style.ImageButtonContainer}>
               <img
                 src={computer}
@@ -35,7 +54,11 @@ export default function TitleAndButtons() {
               </Typography>
             </Button>
           </Link>
-          <Link to={"/puzzles"} component={RouterLink}>
+          <Link
+            to={"/puzzles"}
+            component={RouterLink}
+            sx={style.TextUnderlineTurnOff}
+          >
             <Button sx={style.ImageButtonContainer}>
               <img src={puzzle} alt="Chess Puzzle" style={style.ButtonImage} />
               <Typography sx={style.TitleUnderButtonImage}>Puzzles</Typography>
