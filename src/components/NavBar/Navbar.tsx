@@ -33,7 +33,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={style.AppBar}>
+    <AppBar sx={style.AppBar}>
       <Toolbar sx={style.Navbar}>
         <SideMenu />
         <Box sx={style.BarContainer}>

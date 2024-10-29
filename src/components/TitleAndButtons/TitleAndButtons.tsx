@@ -8,20 +8,6 @@ export default function TitleAndButtons() {
   return (
     <Box>
       <motion.div
-        initial={{ opacity: 0, scale: 0.3 }}
-        animate={{ opacity: 1, scale: 1.1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Box sx={style.Title}>
-          <Typography sx={style.TitleText}>
-            Welcome in chess academy!
-          </Typography>
-          <Typography sx={style.SubtitleText}>
-            Choose starting options below
-          </Typography>
-        </Box>
-      </motion.div>
-      <motion.div
         initial={{ y: "100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}

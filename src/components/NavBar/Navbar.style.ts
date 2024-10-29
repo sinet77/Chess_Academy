@@ -12,12 +12,10 @@ export const Typography: SxProps = {
 
 export const Navbar: SxProps = {
   borderBottom: "1px solid #DADADA",
-
   height: "112px",
   gap: "0px",
   border: "1px 0px 0px 0px",
   opacity: "0px",
-  backgroundColor: "#000000",
   justifyContent: "center",
   alignItems: "center",
   display: "flex",
@@ -32,7 +30,11 @@ export const BarContainer: SxProps = {
   marginLeft: "255px",
 };
 export const WebTitle: SxProps = { textAlign: "center" };
-export const AppBar: SxProps = { backgroundColor: "#000000", width: "100%" };
+export const AppBar: SxProps = {
+  background: "transparent",
+  position: "absolute",
+  width: "100%",
+};
 export const WebLogo: SxProps = { height: "50px" };
 export const IconButton: SxProps = { mr: -5 };
 
