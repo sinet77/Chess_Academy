@@ -43,12 +43,15 @@ const router = createBrowserRouter(
           <Route path={routes.courses} element={<CoursesPage />} />
           <Route path={routes.ranksAndBadges} element={<RanksAndBadges />} />
           <Route path={routes.privateLesson} element={<PrivateLesson />} />
+          <Route path={routes.puzzles} element={<PuzzlesExercise />} />
+          <Route
+            path={routes.chooseDifficulty}
+            element={<ChoosingPuzzlePage />}
+          />
         </Route>
       </Route>
       <Route path={routes.login} element={<LoginPage />} />
       <Route path={routes.register} element={<RegisterPage />} />
-      <Route path={routes.puzzles} element={<PuzzlesExercise />} />
-      <Route path={routes.chooseDifficulty} element={<ChoosingPuzzlePage />} />
       <Route path="*" element={<Error404 />} />
     </Route>
   )
