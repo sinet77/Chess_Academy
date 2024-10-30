@@ -14,6 +14,7 @@ import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.js";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes.js";
+import { useAuth } from "../../context/authContext/index.js";
 
 const pages = [
   { name: "Home", path: routes.home },
@@ -21,13 +22,15 @@ const pages = [
   { name: "Courses", path: routes.courses },
   { name: "Pages", path: "/pages" },
   { name: "Contact", path: routes.contactUs },
-  { name: "Ranks and Badges", path: routes.ranksAndBadges }
+  { name: "Ranks and Badges", path: routes.ranksAndBadges },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const { handleSignOut } = useAuth();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -96,7 +99,15 @@ function Navbar() {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              <MenuItem
+                key={setting}
+                onClick={() => {
+                  handleCloseUserMenu();
+                  if (setting === "Logout") {
+                    handleSignOut();
+                  }
+                }}
+              >
                 <Button>{setting}</Button>
               </MenuItem>
             ))}
