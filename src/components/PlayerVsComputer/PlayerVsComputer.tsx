@@ -16,20 +16,36 @@ export default function PlayVsComputer() {
   const game = useMemo(() => new Chess(), []);
 
   const [gamePosition, setGamePosition] = useState(game.fen());
-  const [stockfishLevel, setStockfishLevel] = useState(2);
+  const [stockfishLevel, setStockfishLevel] = useState(1);
+  const [moveCounter, setMoveCounter] = useState(0);
 
   function findBestMove() {
     console.log(`Evaluating position at depth: ${stockfishLevel}`);
+
+    // Co drugi ruch będzie losowy
+    if (moveCounter % 2 === 1) {
+      const possibleMoves = game.moves();
+      const randomMove =
+        possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+
+      if (randomMove) {
+        console.log(`Random move chosen: ${randomMove}`);
+        game.move(randomMove);
+        setGamePosition(game.fen());
+        setMoveCounter(moveCounter + 1);
+      }
+      return;
+    }
+
+    // Ruch obliczony przez Stockfisha
     engine.evaluatePosition(game.fen(), stockfishLevel);
     engine.onMessage(({ bestMove }) => {
       console.log(`Best move received: ${bestMove}`);
-      if (bestMove) {
-        const move = game.move(bestMove);
-        if (move) {
-          setGamePosition(game.fen());
-        } else {
-          console.error(`Invalid move attempted: ${bestMove}`);
-        }
+      if (bestMove && game.move(bestMove)) {
+        setGamePosition(game.fen());
+        setMoveCounter(moveCounter + 1);
+      } else {
+        console.error(`Invalid move attempted: ${bestMove}`);
       }
     });
   }
@@ -41,11 +57,10 @@ export default function PlayVsComputer() {
       promotion: piece[1].toLowerCase() ?? "q",
     });
 
-    // illegal move
     if (move === null) return false;
 
     setGamePosition(game.fen());
-    findBestMove(); // Wywołaj funkcję, aby komputer wykonał ruch
+    findBestMove();
     return true;
   }
 
