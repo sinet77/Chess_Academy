@@ -5,10 +5,10 @@ export const ArticlesBox: SxProps = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "RGB(197, 239, 247)",
-  gap: "20px",
+  backgroundColor: "#C3C3C3",
   padding: "20px",
   height: "auto",
+  gap: "20px",
 };
 
 export const Title: SxProps = {
@@ -18,7 +18,7 @@ export const Title: SxProps = {
 
 export const PubDate: SxProps = {
   fontStyle: "italic",
-  color: "grey",
+  color: "black",
   fontWeight: "bold",
 };
 
@@ -29,20 +29,32 @@ export const Circular: SxProps = {
   height: "100%",
 };
 
-export const ButtonPrev: SxProps = {
-  backgroundColor: "white",
-  color: "RGB(34, 167, 240)",
-  border: "1px solid RGB(44, 62, 80)",
+export const ButtonNext: SxProps = {
+  color: "white",
+  backgroundColor: "#000000",
+  fontFamily: "Playfair Display",
+  fontSize: "20px",
   fontWeight: "500",
+  lineHeight: "23px",
+  padding: "15px 30px",
+  width: "50%",
   "&:hover": {
-    backgroundColor: "RGB(68, 108, 179)",
-    color: "white",
+    backgroundColor: "#B6740C",
   },
 };
-
-export const ButtonNext: SxProps = {
-  backgroundColor: "RGB(34, 167, 240);",
-  border: "1px solid RGB(44, 62, 80)",
+export const ButtonPrev: SxProps = {
+  color: "#000000",
+  backgroundColor: "white",
+  fontFamily: "Playfair Display",
+  fontSize: "20px",
+  fontWeight: "500",
+  lineHeight: "23px",
+  padding: "15px 30px",
+  width: "50%",
+  "&:hover": {
+    backgroundColor: "grey",
+    color: "white",
+  },
 };
 
 export const ButtonContainer: SxProps = {

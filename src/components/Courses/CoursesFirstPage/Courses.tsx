@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as style from "./Courses.style";
-import { pawn, courseware, classes } from "../../../assets/CoursesImages.js";
+import { pawn, courseware, classes } from "../../../assets/CoursesImages.ts";
 
 export default function Courses() {
   return (

@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
-import { web_logo } from "../../assets/FooterNavbarImages.js";
+import { web_logo } from "../../assets/FooterNavbarImages.ts";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes.js";
 import { useAuth } from "../../context/authContext/index.js";
@@ -45,7 +45,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={style.AppBar}>
+    <AppBar sx={style.AppBar}>
       <Toolbar sx={style.Navbar}>
         <SideMenu />
         <Box sx={style.BarContainer}>
@@ -56,10 +56,9 @@ function Navbar() {
             href="/"
             sx={style.WebTitle}
           >
-            Chess
+            Chess Academy
+            <Box component="img" sx={style.WebLogo} src={web_logo} />
           </Typography>
-
-          <Box component="img" sx={style.WebLogo} src={web_logo} />
         </Box>
 
         <Box sx={style.TabsNavbar}>
