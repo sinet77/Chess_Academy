@@ -35,6 +35,7 @@ interface AuthContextType {
     password: string
   ) => Promise<UserCredential>;
   handleSignInWithGoogle: () => Promise<User>;
+  handleSignOut: (userData: any) => Promise<User>;
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
@@ -180,6 +181,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     handleCreateUserWithEmailAndPassword,
     handleSignInWithEmailAndPassword,
     handleSignInWithGoogle,
+    handleSignOut,
   };
 
   return (

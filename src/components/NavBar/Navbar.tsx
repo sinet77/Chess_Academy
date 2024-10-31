@@ -14,6 +14,7 @@ import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.ts";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes.js";
+import { useAuth } from "../../context/authContext/index.js";
 
 const pages = [
   { name: "Home", path: routes.home },
@@ -28,6 +29,8 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const { handleSignOut } = useAuth();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -95,7 +98,15 @@ function Navbar() {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              <MenuItem
+                key={setting}
+                onClick={() => {
+                  handleCloseUserMenu();
+                  if (setting === "Logout") {
+                    handleSignOut();
+                  }
+                }}
+              >
                 <Button>{setting}</Button>
               </MenuItem>
             ))}
