@@ -3,6 +3,7 @@ import * as style from "./TitleAndButtons.style";
 import { motion } from "framer-motion";
 import { training, computer, puzzle } from "../../assets/MainPageImages.ts";
 import { Link as RouterLink } from "react-router-dom";
+import { routes } from "../../routes.ts";
 
 export default function TitleAndButtons() {
   return (
@@ -25,7 +26,7 @@ export default function TitleAndButtons() {
       >
         <Box sx={style.TileContainer}>
           <Link
-            to={"/training"}
+            to={routes.training}
             component={RouterLink}
             sx={style.TextUnderlineTurnOff}
           >
@@ -39,7 +40,7 @@ export default function TitleAndButtons() {
             </Button>
           </Link>
           <Link
-            to={"/play/computer"}
+            to={routes.playVsComputer}
             component={RouterLink}
             sx={style.TextUnderlineTurnOff}
           >
@@ -55,7 +56,7 @@ export default function TitleAndButtons() {
             </Button>
           </Link>
           <Link
-            to={"/puzzles"}
+            to={routes.puzzles}
             component={RouterLink}
             sx={style.TextUnderlineTurnOff}
           >

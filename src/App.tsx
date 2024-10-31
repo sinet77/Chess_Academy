@@ -7,13 +7,11 @@ import HeadBackground from "./components/HeadBackground/HeadBackground";
 
 export default function App() {
   return (
-    <>
-      <Box sx={style.Main}>
-        <HeadBackground />
-        <TitleAndButtons />
-        <Articles />
-        <OurClass />
-      </Box>
-    </>
+    <Box sx={style.Main}>
+      <HeadBackground />
+      <TitleAndButtons />
+      <Articles />
+      <OurClass />
+    </Box>
   );
 }
