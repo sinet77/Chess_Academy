@@ -4,8 +4,12 @@ import { useMemo, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import * as style from "./PlayerVsComputer.style";
 import Engine from "../../Engine/engine";
+import { useLocation } from "react-router-dom";
 
 export default function PlayVsComputer() {
+  const location = useLocation();
+  const { level } = location.state;
+
   const levels = {
     "Easy ": 1,
     "Medium ": 8,

@@ -10,51 +10,59 @@ import {
   cartoon_crazy,
 } from "../../../assets/ChooseComputerLevelImages";
 import * as style from "./ChooseComputerLevel.style";
-
-const characters = [
-  {
-    image: cartoon_sad,
-    level: "Novice",
-    description: "I'm not very aggressive, perfect for beginners. Let's play!",
-  },
-  {
-    image: cartoon_crazy,
-    level: "Learner",
-    description: "I make friendly, beginner-friendly moves.",
-  },
-  {
-    image: cartoon_happy,
-    level: "Apprentice",
-    description: "I love surprises and can catch you off guard!",
-  },
-  {
-    image: cartoon_curly,
-    level: "Challenger",
-    description: "I'm balanced - not too easy, but not too hard.",
-  },
-  {
-    image: cartoon_girl,
-    level: "Strategist",
-    description: "My moves can surprise even seasoned players!",
-  },
-  {
-    image: cartoon_girlBlueHair,
-    level: "Expert",
-    description: "I know complex strategies; prepare yourself!",
-  },
-  {
-    image: cartoon_girlV2,
-    level: "Master",
-    description: "I'm very challenging and lay traps for my opponents.",
-  },
-  {
-    image: cartoon_longHair,
-    level: "Grandmaster",
-    description: "I'm an expert player - only the best can beat me.",
-  },
-];
+import { useNavigate } from "react-router-dom";
 
 export default function ChooseComputerLevel() {
+  const navigate = useNavigate();
+
+  const characters = [
+    {
+      image: cartoon_sad,
+      level: "Novice",
+      description:
+        "I'm not very aggressive, perfect for beginners. Let's play!",
+    },
+    {
+      image: cartoon_crazy,
+      level: "Learner",
+      description: "I make friendly, beginner-friendly moves.",
+    },
+    {
+      image: cartoon_happy,
+      level: "Apprentice",
+      description: "I love surprises and can catch you off guard!",
+    },
+    {
+      image: cartoon_curly,
+      level: "Challenger",
+      description: "I'm balanced - not too easy, but not too hard.",
+    },
+    {
+      image: cartoon_girl,
+      level: "Strategist",
+      description: "My moves can surprise even seasoned players!",
+    },
+    {
+      image: cartoon_girlBlueHair,
+      level: "Expert",
+      description: "I know complex strategies; prepare yourself!",
+    },
+    {
+      image: cartoon_girlV2,
+      level: "Master",
+      description: "I'm very challenging and lay traps for my opponents.",
+    },
+    {
+      image: cartoon_longHair,
+      level: "Grandmaster",
+      description: "I'm an expert player - only the best can beat me.",
+    },
+  ];
+
+  const handleDifficultySelect = ({ level }: { level: string }) => {
+    navigate(`/play/computer/${level.toLowerCase()}`, { state: { level } });
+  };
+
   return (
     <Box
       sx={{
@@ -68,15 +76,15 @@ export default function ChooseComputerLevel() {
       }}
     >
       <Grid container spacing={2} justifyContent="center">
-        {characters.map((character, index) => (
+        {characters.map(({ image, level, description }, index) => (
           <Grid item xs={6} sm={4} md={3} key={index} sx={{ display: "flex" }}>
             <Button
               variant="outlined"
               sx={style.CharacterBox}
-              onClick={() => console.log(`Selected level: ${character.level}`)}
+              onClick={() => handleDifficultySelect({ level })}
             >
               <img
-                src={character.image}
+                src={image}
                 alt="cartoon button"
                 style={{
                   width: "100%",
@@ -85,10 +93,10 @@ export default function ChooseComputerLevel() {
                 }}
               />
               <Typography variant="h6" sx={style.LevelTitle}>
-                {character.level}
+                {level}
               </Typography>
               <Typography variant="subtitle1" sx={style.Description}>
-                {character.description}
+                {description}
               </Typography>
             </Button>
           </Grid>
