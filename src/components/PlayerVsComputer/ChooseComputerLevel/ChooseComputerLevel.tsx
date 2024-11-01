@@ -9,48 +9,48 @@ import {
   cartoon_longHair,
   cartoon_crazy,
 } from "../../../assets/ChooseComputerLevelImages";
+import * as style from "./ChooseComputerLevel.style";
 
 const characters = [
   {
     image: cartoon_sad,
-    level: "Easy",
+    level: "Novice",
     description: "I'm not very aggressive, perfect for beginners. Let's play!",
   },
   {
     image: cartoon_crazy,
-    level: "Easy",
-    description: "I am friendly and make beginner-friendly moves.",
+    level: "Learner",
+    description: "I make friendly, beginner-friendly moves.",
   },
   {
     image: cartoon_happy,
-    level: "Medium",
+    level: "Apprentice",
     description: "I love surprises and can catch you off guard!",
   },
   {
     image: cartoon_curly,
-    level: "Medium",
-    description: "I'm a balanced character, not too easy, but not too hard.",
+    level: "Challenger",
+    description: "I'm balanced - not too easy, but not too hard.",
   },
   {
     image: cartoon_girl,
-    level: "Medium",
-    description: "My strategies can surprise even the best players!",
+    level: "Strategist",
+    description: "My moves can surprise even seasoned players!",
   },
   {
     image: cartoon_girlBlueHair,
-    level: "Hard",
+    level: "Expert",
     description: "I know complex strategies; prepare yourself!",
   },
   {
     image: cartoon_girlV2,
-    level: "Hard",
-    description: "I am very challenging, and I prepare traps for beginners.",
+    level: "Master",
+    description: "I'm very challenging and lay traps for my opponents.",
   },
   {
     image: cartoon_longHair,
-    level: "Hard",
-    description:
-      "I'm an expert player; you'll need deep thinking to counter my moves.",
+    level: "Grandmaster",
+    description: "I'm an expert player - only the best can beat me.",
   },
 ];
 
@@ -61,8 +61,10 @@ export default function ChooseComputerLevel() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: "column",
         minHeight: "100vh",
         padding: 2,
+        backgroundColor: "#eeeeee",
       }}
     >
       <Grid container spacing={2} justifyContent="center">
@@ -70,23 +72,24 @@ export default function ChooseComputerLevel() {
           <Grid item xs={6} sm={4} md={3} key={index} sx={{ display: "flex" }}>
             <Button
               variant="outlined"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "100%",
-                textAlign: "center",
-                padding: 2,
-              }}
+              sx={style.CharacterBox}
               onClick={() => console.log(`Selected level: ${character.level}`)}
             >
               <img
                 src={character.image}
-                alt={`cartoon-${index}`}
-                style={{ width: "80%", height: "auto", marginBottom: "0.5rem" }}
+                alt="cartoon button"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  marginBottom: "0.5rem",
+                }}
               />
-              <Typography variant="h6">{character.level}</Typography>
-              <Typography variant="body2">{character.description}</Typography>
+              <Typography variant="h6" sx={style.LevelTitle}>
+                {character.level}
+              </Typography>
+              <Typography variant="subtitle1" sx={style.Description}>
+                {character.description}
+              </Typography>
             </Button>
           </Grid>
         ))}
