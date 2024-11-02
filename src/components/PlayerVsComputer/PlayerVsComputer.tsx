@@ -16,18 +16,29 @@ export default function PlayVsComputer() {
     "Hard ": 18,
   };
 
+  const frequencyMap: Record<string, number> = {
+    Novice: 1,
+    Learner: 1,
+    Apprentice: 2,
+    Challenger: 2,
+    Strategist: 3,
+    Expert: 4,
+    Master: 5,
+    Grandmaster: 6,
+  };
+
   const engine = useMemo(() => new Engine(), []);
   const game = useMemo(() => new Chess(), []);
 
   const [gamePosition, setGamePosition] = useState(game.fen());
   const [stockfishLevel, setStockfishLevel] = useState(1);
-  const [moveCounter, setMoveCounter] = useState(0);
+  const [moveCounter, setMoveCounter] = useState(1);
 
-  function findBestMove() {
-    console.log(`Evaluating position at depth: ${stockfishLevel}`);
+  function handleComputerMove() {
+    const frequency = frequencyMap[level];
+    console.log(`Current moveCounter: ${moveCounter}`);
 
-    // Co drugi ruch będzie losowy
-    if (moveCounter % 2 === 1) {
+    if (frequency === 1 || moveCounter % frequency === 1) {
       const possibleMoves = game.moves();
       const randomMove =
         possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
@@ -64,7 +75,7 @@ export default function PlayVsComputer() {
     if (move === null) return false;
 
     setGamePosition(game.fen());
-    findBestMove();
+    handleComputerMove();
     return true;
   }
 
