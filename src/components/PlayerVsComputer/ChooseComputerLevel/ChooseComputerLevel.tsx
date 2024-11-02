@@ -28,7 +28,7 @@ export default function ChooseComputerLevel() {
       description: "I make friendly, beginner-friendly moves.",
     },
     {
-      image: cartoon_happy,
+      image: cartoon_girl,
       level: "Apprentice",
       description: "I love surprises and can catch you off guard!",
     },
@@ -38,7 +38,7 @@ export default function ChooseComputerLevel() {
       description: "I'm balanced - not too easy, but not too hard.",
     },
     {
-      image: cartoon_girl,
+      image: cartoon_happy,
       level: "Strategist",
       description: "My moves can surprise even seasoned players!",
     },

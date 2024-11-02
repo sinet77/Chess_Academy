@@ -84,35 +84,3 @@ export const Button: SxProps<Theme> = {
     bgcolor: "#f5f5f5",
   },
 };
-
-export const Pgn: SxProps = {
-  display: "flex",
-  marginTop: "30px",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-export const Fen: SxProps = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-export const ButtonFen: SxProps = {
-  backgroundColor: "#53adcb",
-};
-
-export const ButtonPgn: SxProps = {
-  "&:hover": {
-    backgroundColor: "#53adcb",
-  },
-};
-
-export const PgnInput: SxProps = {
-  padding: "20px",
-  "& .MuiInputBase-input": {
-    fontSize: "15px",
-    padding: "10px",
-    height: "auto",
-  },
-};
