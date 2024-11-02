@@ -7,7 +7,7 @@ import {
   time,
   knight,
   classes,
-} from "../../../assets/CoursesImages.js";
+} from "../../../assets/CoursesImages.ts";
 
 export default function OurClass() {
   return (

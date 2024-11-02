@@ -101,7 +101,6 @@ const Articles: React.FC = () => {
                 Previous
               </Button>
               <Button
-                variant="contained"
                 sx={style.ButtonNext}
                 onClick={nextArticle}
                 disabled={currentIndex === articles.length - 1}

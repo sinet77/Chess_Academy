@@ -6,5 +6,6 @@ export const Main: SxProps = {
   margin: 0,
   boxSizing: "border-box",
   padding: 0,
-  height: "100vh",
+  minHeight: "100vh",
+  width: "100%",
 };
