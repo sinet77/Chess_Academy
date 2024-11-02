@@ -10,12 +10,6 @@ export default function PlayVsComputer() {
   const location = useLocation();
   const { level } = location.state;
 
-  const levels = {
-    "Easy ": 1,
-    "Medium ": 8,
-    "Hard ": 18,
-  };
-
   const frequencyMap: Record<string, number> = {
     Novice: 1,
     Learner: 1,
@@ -81,26 +75,6 @@ export default function PlayVsComputer() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "1rem",
-        }}
-      >
-        {Object.entries(levels).map(([level, depth]) => (
-          <button
-            key={depth}
-            style={{
-              backgroundColor: depth === stockfishLevel ? "#B58863" : "#f0d9b5",
-            }}
-            onClick={() => setStockfishLevel(depth)}
-          >
-            {level}
-          </button>
-        ))}
-      </div>
-
       <Box sx={style.Chessboard}>
         <Chessboard
           id="BasicChessboard"
