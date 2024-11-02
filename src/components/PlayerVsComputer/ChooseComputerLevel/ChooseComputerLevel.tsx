@@ -64,17 +64,7 @@ export default function ChooseComputerLevel() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        minHeight: "100vh",
-        padding: 2,
-        backgroundColor: "#eeeeee",
-      }}
-    >
+    <Box sx={style.Container}>
       <Grid container spacing={2} justifyContent="center">
         {characters.map(({ image, level, description }, index) => (
           <Grid item xs={6} sm={4} md={3} key={index} sx={{ display: "flex" }}>
@@ -83,15 +73,7 @@ export default function ChooseComputerLevel() {
               sx={style.CharacterBox}
               onClick={() => handleDifficultySelect({ level })}
             >
-              <img
-                src={image}
-                alt="cartoon button"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  marginBottom: "0.5rem",
-                }}
-              />
+              <img src={image} alt="cartoon button" style={style.Image} />
               <Typography variant="h6" sx={style.LevelTitle}>
                 {level}
               </Typography>

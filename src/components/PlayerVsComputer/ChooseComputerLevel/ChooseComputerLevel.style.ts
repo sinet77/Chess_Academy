@@ -1,5 +1,15 @@
 import { SxProps } from "@mui/material";
 
+export const Container: SxProps = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  minHeight: "100vh",
+  padding: 2,
+  backgroundColor: "#eeeeee",
+};
+
 export const HeadTitleContainer: SxProps = {
   backgroundColor: "#000000",
   fontFamily: "Playfair Display",
@@ -45,4 +55,10 @@ export const CharacterBox: SxProps = {
       color: "black",
     },
   },
+};
+
+export const Image = {
+  width: "100%",
+  height: "auto",
+  marginBottom: "0.5rem",
 };
