@@ -6,6 +6,9 @@ import cartoon_happy from "./cartoon_happy.png";
 import cartoon_sad from "./cartoon_sad.png";
 import cartoon_longHair from "./cartoon_longHair.png";
 import cartoon_crazy from "./cartoon_crazy.png";
+import whiteChoice from "./whiteChoice.png";
+import blackChoice from "./blackChoice.png";
+import randomChoice from "./randomChoice.png";
 
 export {
   cartoon_curly,
@@ -16,4 +19,7 @@ export {
   cartoon_sad,
   cartoon_longHair,
   cartoon_crazy,
+  whiteChoice,
+  blackChoice,
+  randomChoice,
 };

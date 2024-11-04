@@ -1,11 +1,41 @@
 import { SxProps } from "@mui/material";
 
+export const HeadImage: SxProps = {
+  height: "500px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  alignItems: "center",
+};
+
+export const Title: SxProps = {
+  fontFamily: "Playfair Display",
+  fontSize: "50px",
+  fontWeight: "700",
+  lineHeight: "100px",
+  color: "white",
+};
+
+export const ButtonImage: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  borderRadius: "8px",
+  border: "1px solid white",
+};
+
+export const ButtonForChoice: SxProps = {
+  width: "80px",
+  height: "80px",
+  padding: 0,
+};
+
 export const Container: SxProps = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  minHeight: "100vh",
   padding: 2,
   backgroundColor: "#eeeeee",
 };
@@ -39,17 +69,17 @@ export const CharacterBox: SxProps = {
   alignItems: "center",
   width: "100%",
   textAlign: "center",
-  padding: 2,
+  padding: 1.5,
   border: "2px solid orange",
   backgroundColor: "black",
-  borderRadius: "25px",
+  borderRadius: "20px",
   "&:hover": {
     backgroundColor: "#FFA53F",
     border: "2px solid black",
     color: "black",
     "& .MuiTypography-root": {
       color: "#002366",
-      fontWeight: "bold",
+      fontWeight: "500",
     },
     "& .MuiTypography-subtitle1": {
       color: "black",
