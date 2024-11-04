@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { Chess } from "chess.js";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import * as style from "./PlayerVsComputer.style";
 import Engine from "../../../../Engine/engine";
@@ -22,8 +22,11 @@ interface MovePair {
 
 export default function PlayVsComputer() {
   const location = useLocation();
-  const { level } = location.state;
+  const { level, color } = location.state;
   const stockfishLevel = 1;
+
+  const playerColor =
+    color === "random" ? (Math.random() < 0.5 ? "white" : "black") : color;
 
   const frequencyMap: Record<string, number> = {
     Novice: 1,
@@ -72,6 +75,13 @@ export default function PlayVsComputer() {
 
     setHistory(updatedHistory);
   }
+
+  useEffect(() => {
+    if (playerColor === "black") {
+      handleComputerMove();
+      setChangeBoardOrientation("black");
+    }
+  }, [playerColor]);
 
   function handleComputerMove() {
     const frequency = frequencyMap[level];

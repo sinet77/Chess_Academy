@@ -70,7 +70,9 @@ export default function ChooseComputerLevel() {
   ];
 
   const handleDifficultySelect = ({ level }: { level: string }) => {
-    navigate(`/play/computer/${level.toLowerCase()}`, { state: { level } });
+    navigate(`/play/computer/${level.toLowerCase()}`, {
+      state: { level, color: selectedColor },
+    });
   };
 
   return (
