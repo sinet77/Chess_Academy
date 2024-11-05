@@ -8,14 +8,15 @@ export const HeadImage: SxProps = {
   backgroundSize: "cover",
   backgroundPosition: "center",
   alignItems: "center",
+  textAlign: "center",
 };
 
 export const Title: SxProps = {
   fontFamily: "Playfair Display",
-  fontSize: "50px",
+  fontSize: { xs: "24px", sm: "36px", md: "50px" },
   fontWeight: "700",
-  lineHeight: "100px",
   color: "white",
+  mb: "30px",
 };
 
 export const ButtonImage: React.CSSProperties = {
@@ -38,18 +39,6 @@ export const Container: SxProps = {
   flexDirection: "column",
   padding: 2,
   backgroundColor: "#eeeeee",
-};
-
-export const HeadTitleContainer: SxProps = {
-  backgroundColor: "#000000",
-  fontFamily: "Playfair Display",
-  fontSize: "70px",
-  fontWeight: "700",
-  lineHeight: "108px",
-  alignItems: "center",
-  justifyContent: "center",
-  display: "flex",
-  color: "white",
 };
 
 export const Description: SxProps = {

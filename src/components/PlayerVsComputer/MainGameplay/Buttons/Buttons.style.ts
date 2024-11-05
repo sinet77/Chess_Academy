@@ -2,25 +2,26 @@ import { SxProps } from "@mui/material";
 
 export const Container: SxProps = {
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "bottom",
   alignItems: "center",
   gap: "30px",
 };
 
 export const Window: SxProps = {
-  bgcolor: "#fff",
-  border: "2px solid #000",
+  border: "2px solid orange",
   padding: "10px",
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  backgroundColor: "#bcdfeb",
-  mb: "25px",
+  color: "black",
+  backgroundColor: "#e0e0e0",
 };
 export const BackButton: SxProps = {
+  position: "absolute",
+  left: "30px",
+  top: "150px",
   color: "white",
   backgroundColor: "#000000",
   fontFamily: "Playfair Display",
+  border: "1px solid white",
   fontSize: "16px",
   fontWeight: "bold",
   height: "50px",
@@ -32,6 +33,23 @@ export const BackButton: SxProps = {
     fontWeight: "bold",
     border: "2px solid black",
   },
+};
+
+export const OptionsButton: SxProps = {
+  position: "absolute",
+  left: "0px",
+  top: "220px",
+  display: "flex",
+  alignContent: "center",
+  gap: "10px",
+  textTransform: "none",
+  backgroundColor: "#000000",
+  fontFamily: "Playfair Display",
+  color: "white",
+  fontSize: "22px",
+  fontWeight: "bold",
+  height: "50px",
+  padding: "20px",
 };
 
 export const Button: SxProps = {

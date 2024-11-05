@@ -232,13 +232,16 @@ export default function PlayVsComputer() {
 
   return (
     <Box sx={style.TrainingPageLayout}>
-      <Box sx={style.OptionsTile}>Options</Box>
+      <Box sx={style.OptionsTile}>
+        {" "}
+        <Buttons
+          handleBoardOrientation={handleBoardOrientation}
+          handleAutoPromoteToQueen={handleAutoPromoteToQueen}
+          handleToggleShowEnableMoves={handleToggleShowEnableMoves}
+        />
+      </Box>
       <Grid padding={"50px"} container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
-          <Buttons
-            handleBoardOrientation={handleBoardOrientation}
-            handleAutoPromoteToQueen={handleAutoPromoteToQueen}
-          />
           <Box sx={style.Chessboard}>
             <Chessboard
               id="BasicChessboard"
@@ -247,8 +250,8 @@ export default function PlayVsComputer() {
               onPieceDrop={onDrop}
               arePiecesDraggable={true}
               autoPromoteToQueen={autoPromoteToQueen}
-              customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-              customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+              customDarkSquareStyle={{ backgroundColor: "#607d8b" }}
+              customLightSquareStyle={{ backgroundColor: "#e0e0e0" }}
               onSquareRightClick={onSquareRightClick}
               onMouseOverSquare={onMouseOverSquare}
               onMouseOutSquare={onMouseOutSquare}

@@ -10,6 +10,7 @@ export const Table: SxProps = {
 export const TrainingPageLayout: SxProps = {
   display: "flex",
   flexDirection: "column",
+  height: "100vh",
   width: "1005",
   backgroundColor: "#e9f5f8",
 };
@@ -67,23 +68,6 @@ export const Chessboard: SxProps = {
   width: "70%",
   height: "auto",
   border: "1px solid black",
-};
-
-export const modalStyle: SxProps<Theme> = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "80%",
-  maxWidth: "600px",
-  bgcolor: "#fff",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  backgroundColor: "#bcdfeb",
 };
 
 export const Button: SxProps<Theme> = {

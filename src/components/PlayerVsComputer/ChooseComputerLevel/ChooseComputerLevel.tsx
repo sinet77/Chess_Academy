@@ -76,7 +76,7 @@ export default function ChooseComputerLevel() {
   };
 
   return (
-    <>
+    <Box>
       <Box
         sx={{ ...style.HeadImage, backgroundImage: `url(${playVsComputer})` }}
       >
@@ -149,6 +149,6 @@ export default function ChooseComputerLevel() {
           ))}
         </Grid>
       </Box>
-    </>
+    </Box>
   );
 }
