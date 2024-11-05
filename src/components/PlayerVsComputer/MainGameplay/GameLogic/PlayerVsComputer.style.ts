@@ -16,8 +16,8 @@ export const TrainingPageLayout: SxProps = {
 };
 
 export const OptionsTile: SxProps = {
-  height: "500px",
-  minHeight: "300px",
+  height: "350px",
+  minHeight: "200px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
