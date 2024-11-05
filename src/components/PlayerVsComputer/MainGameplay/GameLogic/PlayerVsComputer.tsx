@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Chess } from "chess.js";
 import { useEffect, useMemo, useState } from "react";
 import { Chessboard } from "react-chessboard";
@@ -26,13 +26,13 @@ export default function PlayVsComputer() {
 
   const frequencyMap: Record<string, number> = {
     Novice: 1,
-    Learner: 1,
-    Apprentice: 2,
-    Challenger: 3,
-    Strategist: 4,
-    Expert: 5,
-    Master: 7,
-    Grandmaster: 8,
+    Learner: 2,
+    Apprentice: 3,
+    Challenger: 4,
+    Strategist: 6,
+    Expert: 8,
+    Master: 10,
+    Grandmaster: 12,
   };
 
   const engine = useMemo(() => new Engine(), []);
@@ -66,6 +66,61 @@ export default function PlayVsComputer() {
     );
   }
 
+  function onSquareRightClick(square: Square) {
+    const color = "rgba(254,46,46, 0.4)";
+    const isRightClicked =
+      rightClickedSquares[square]?.backgroundColor === color;
+
+    setRightClickedSquares((prevState) => ({
+      ...prevState,
+      [square]: isRightClicked
+        ? { backgroundColor: "transparent" }
+        : { backgroundColor: color },
+    }));
+  }
+
+  function getMoveOptions(square: Square) {
+    const moves = game.moves({
+      square,
+      verbose: true,
+    });
+    if (moves.length === 0) {
+      return;
+    }
+
+    const newSquares: SquareStyles = {};
+    moves.map((move) => {
+      newSquares[move.to] = {
+        background:
+          game.get(move.to) &&
+          game.get(move.to).color !== game.get(square).color
+            ? "radial-gradient(circle, rgba(0,0,0,.1) 85%, transparent 85%)"
+            : "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
+        borderRadius: "50%",
+      };
+      return move;
+    });
+    newSquares[square] = {
+      background: "rgba(255, 255, 0, 0.4)",
+    };
+    setOptionSquares(newSquares);
+  }
+
+  function onMouseOverSquare(square: Square) {
+    if (isShowMovesEnabled) {
+      getMoveOptions(square);
+    }
+  }
+  function onMouseOutSquare() {
+    if (Object.keys(optionSquares).length !== 0) {
+      setOptionSquares({});
+    }
+  }
+
+  const handleToggleShowEnableMoves = () => {
+    setIsShowMovesEnabled((prev) => !prev);
+  };
+
   function updateHistory() {
     const currentHistory = game.history();
     const updatedHistory: MovePair[] = [];
@@ -96,13 +151,30 @@ export default function PlayVsComputer() {
       const randomMove =
         possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
 
-      if (randomMove) {
+      const move = game.move(randomMove);
+
+      if (move) {
         console.log(`Random move chosen: ${randomMove}`);
         setTimeout(() => {
-          game.move(randomMove);
           setGamePosition(game.fen());
           setMoveCounter((prevCounter) => prevCounter + 1);
           updateHistory();
+          const sourceSquareComputer = move.from;
+          const targetSquareComputer = move.to;
+
+          setHighlightedSquares({
+            [sourceSquareComputer]: {
+              backgroundColor: "rgba(255, 255, 0, 0.4)",
+            },
+            [targetSquareComputer]: {
+              backgroundColor: "rgba(255, 255, 0, 0.4)",
+            },
+          });
+          console.log(
+            "Highlighted squares updated:",
+            sourceSquareComputer,
+            targetSquareComputer
+          );
         }, 600);
       }
       return;
@@ -112,12 +184,25 @@ export default function PlayVsComputer() {
     engine.evaluatePosition(game.fen(), stockfishLevel);
     engine.onMessage(({ bestMove }) => {
       console.log(`Best move received: ${bestMove}`);
+
       if (bestMove) {
+        const move = game.move(bestMove);
         setTimeout(() => {
-          if (game.move(bestMove)) {
+          if (move) {
             setGamePosition(game.fen());
             setMoveCounter((prevCounter) => prevCounter + 1);
             updateHistory();
+            const sourceSquareComputer = move.from;
+            const targetSquareComputer = move.to;
+
+            setHighlightedSquares({
+              [sourceSquareComputer]: {
+                backgroundColor: "rgba(255, 255, 0, 0.4)",
+              },
+              [targetSquareComputer]: {
+                backgroundColor: "rgba(255, 255, 0, 0.4)",
+              },
+            });
           } else {
             console.error(`Invalid move attempted: ${bestMove}`);
           }
@@ -134,6 +219,11 @@ export default function PlayVsComputer() {
     });
 
     if (move === null) return false;
+    setHighlightedSquares({
+      [sourceSquare]: { backgroundColor: "#b2aa5e" },
+      [targetSquare]: { backgroundColor: "#ccd285" },
+    });
+
     updateHistory();
     setGamePosition(game.fen());
     handleComputerMove();
@@ -142,52 +232,63 @@ export default function PlayVsComputer() {
 
   return (
     <Box sx={style.TrainingPageLayout}>
-      <Box sx={style.firstColumn}>
-        <Buttons
-          handleBoardOrientation={handleBoardOrientation}
-          handleAutoPromoteToQueen={handleAutoPromoteToQueen}
-        />
-        <Box sx={style.Chessboard}>
-          <Chessboard
-            id="BasicChessboard"
-            position={gamePosition}
-            boardOrientation={changeBoardOrientation}
-            onPieceDrop={onDrop}
-            arePiecesDraggable={true}
-            autoPromoteToQueen={autoPromoteToQueen}
-            customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-            customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+      <Box sx={style.OptionsTile}>Options</Box>
+      <Grid padding={"50px"} container spacing={2}>
+        <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
+          <Buttons
+            handleBoardOrientation={handleBoardOrientation}
+            handleAutoPromoteToQueen={handleAutoPromoteToQueen}
           />
-        </Box>
-      </Box>
+          <Box sx={style.Chessboard}>
+            <Chessboard
+              id="BasicChessboard"
+              position={gamePosition}
+              boardOrientation={changeBoardOrientation}
+              onPieceDrop={onDrop}
+              arePiecesDraggable={true}
+              autoPromoteToQueen={autoPromoteToQueen}
+              customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
+              customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+              onSquareRightClick={onSquareRightClick}
+              onMouseOverSquare={onMouseOverSquare}
+              onMouseOutSquare={onMouseOutSquare}
+              customSquareStyles={{
+                ...highlightedSquares,
+                ...rightClickedSquares,
+                ...optionSquares,
+              }}
+            />
+          </Box>
+        </Grid>
 
-      <Box sx={style.secondColumn}>
-        <h3>Moves history:</h3>
-        <TableContainer sx={style.Table} component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow sx={style.MainRow}>
-                <TableCell sx={style.moveColumn}>Move</TableCell>
-                <TableCell sx={style.WhiteAndBlackColumn}>White</TableCell>
-                <TableCell sx={style.WhiteAndBlackColumn}>Black</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {history.map((move, index) => (
-                <TableRow key={index}>
-                  <TableCell sx={style.moveColumn}>{index + 1}</TableCell>
-                  <TableCell sx={style.WhiteAndBlackColumn}>
-                    {move.white}
-                  </TableCell>
-                  <TableCell sx={style.WhiteAndBlackColumn}>
-                    {move.black}
-                  </TableCell>
+        <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
+          <h3>Moves history:</h3>
+          <TableContainer sx={style.Table} component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow sx={style.MainRow}>
+                  <TableCell sx={style.moveColumn}>Move</TableCell>
+                  <TableCell sx={style.WhiteAndBlackColumn}>White</TableCell>
+                  <TableCell sx={style.WhiteAndBlackColumn}>Black</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
+              </TableHead>
+              <TableBody>
+                {history.map((move, index) => (
+                  <TableRow key={index}>
+                    <TableCell sx={style.moveColumn}>{index + 1}</TableCell>
+                    <TableCell sx={style.WhiteAndBlackColumn}>
+                      {move.white}
+                    </TableCell>
+                    <TableCell sx={style.WhiteAndBlackColumn}>
+                      {move.black}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

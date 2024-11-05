@@ -8,10 +8,20 @@ export const Table: SxProps = {
 };
 
 export const TrainingPageLayout: SxProps = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  width: "1005",
   backgroundColor: "#e9f5f8",
+};
+
+export const OptionsTile: SxProps = {
+  height: "500px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  backgroundColor: "black",
+  alignItems: "center",
+  color: "White",
 };
 
 export const firstColumn: SxProps = {
