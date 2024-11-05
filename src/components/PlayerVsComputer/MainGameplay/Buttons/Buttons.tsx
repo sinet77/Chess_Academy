@@ -29,7 +29,7 @@ export default function Buttons({
   };
 
   return (
-    <Box sx={style.Container}>
+    <Box>
       <Button sx={style.BackButton} onClick={handleBackButtonClick}>
         Back
       </Button>
@@ -65,7 +65,7 @@ export default function Buttons({
                 onChange={handleToggleShowEnableMoves}
               />
             }
-            label="Show possible moves"
+            label="Hide possible moves"
             sx={style.SwitchLabel}
           />
         </Box>

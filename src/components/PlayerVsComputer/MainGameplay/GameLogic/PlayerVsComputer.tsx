@@ -233,7 +233,6 @@ export default function PlayVsComputer() {
   return (
     <Box sx={style.TrainingPageLayout}>
       <Box sx={style.OptionsTile}>
-        {" "}
         <Buttons
           handleBoardOrientation={handleBoardOrientation}
           handleAutoPromoteToQueen={handleAutoPromoteToQueen}

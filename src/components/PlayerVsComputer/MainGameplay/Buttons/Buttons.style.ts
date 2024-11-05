@@ -1,12 +1,5 @@
 import { SxProps } from "@mui/material";
 
-export const Container: SxProps = {
-  display: "flex",
-  justifyContent: "bottom",
-  alignItems: "center",
-  gap: "30px",
-};
-
 export const Window: SxProps = {
   border: "2px solid orange",
   padding: "10px",
