@@ -14,11 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Buttons from "../Buttons/Buttons";
-
-interface MovePair {
-  white: string;
-  black: string;
-}
+import { MovePair, SquareStyles } from "./PlayerVsComputer.types";
 
 export default function PlayVsComputer() {
   const location = useLocation();
@@ -32,11 +28,11 @@ export default function PlayVsComputer() {
     Novice: 1,
     Learner: 1,
     Apprentice: 2,
-    Challenger: 2,
-    Strategist: 3,
-    Expert: 4,
-    Master: 5,
-    Grandmaster: 6,
+    Challenger: 3,
+    Strategist: 4,
+    Expert: 5,
+    Master: 7,
+    Grandmaster: 8,
   };
 
   const engine = useMemo(() => new Engine(), []);
@@ -49,6 +45,14 @@ export default function PlayVsComputer() {
     "white" | "black"
   >("white");
   const [autoPromoteToQueen, setAutoPromoteToQueen] = useState<boolean>(false);
+  const [highlightedSquares, setHighlightedSquares] = useState<SquareStyles>(
+    {}
+  );
+  const [rightClickedSquares, setRightClickedSquares] = useState<SquareStyles>(
+    {}
+  );
+  const [optionSquares, setOptionSquares] = useState<SquareStyles>({});
+  const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
 
   function handleBoardOrientation() {
     setChangeBoardOrientation((prevBoardOrientation) =>
