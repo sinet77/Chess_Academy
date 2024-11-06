@@ -12,6 +12,8 @@ export const TextAndIcon: SxProps = {
   color: "white",
   position: "relative",
   display: "flex",
+  border: "2px solid white",
+  borderBottom: "none",
 };
 
 export const Icon: SxProps = {

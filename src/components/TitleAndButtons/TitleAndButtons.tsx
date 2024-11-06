@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { training, computer, puzzle } from "../../assets/MainPageImages.ts";
 import { Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes.ts";
+import DailyPuzzleHomePage from "../Puzzles/DailyPuzzle/OnMainPage/DailyPuzzleHomePage.tsx";
 
 export default function TitleAndButtons() {
   return (
@@ -65,6 +66,7 @@ export default function TitleAndButtons() {
               <Typography sx={style.TitleUnderButtonImage}>Puzzles</Typography>
             </Button>
           </Link>
+          <DailyPuzzleHomePage />
         </Box>
       </motion.div>
     </Box>
