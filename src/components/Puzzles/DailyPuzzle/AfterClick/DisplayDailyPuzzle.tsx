@@ -11,6 +11,8 @@ import { Square } from "react-chessboard/dist/chessboard/types";
 import * as style from "./DisplayDailyPuzzle.style";
 import { Puzzle } from "../PuzzleTypes";
 import { SquareStyles } from "./DisplayDailyPuzzle.types";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const chess = useRef<Chess>(new Chess());
@@ -167,14 +169,24 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     return true;
   };
 
+  const notify = () =>
+    toast.success("Congratulations, you solved this!", {
+      position: "bottom-right",
+      autoClose: 6000,
+    });
+
+  useEffect(() => {
+    if (isCorrect) {
+      notify();
+    }
+  }, [isCorrect]);
+
   return (
     <Box>
       <Box sx={style.Navbar}></Box>
       <Box sx={style.Main}>
         <Box sx={style.BoardAndButtons}>
-          <Typography sx={{ color: "white" }}>
-            {isCorrect ? "correct" : ""}
-          </Typography>
+          <ToastContainer />
           <Box sx={style.Chessboard}>
             <Chessboard
               id="BasicChessboard"
