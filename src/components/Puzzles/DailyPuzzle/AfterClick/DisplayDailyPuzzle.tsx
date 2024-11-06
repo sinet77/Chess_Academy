@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
@@ -7,12 +7,13 @@ import ExtensionIcon from "@mui/icons-material/Extension";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import { Square } from "react-chessboard/dist/chessboard/types";
 import * as style from "./DisplayDailyPuzzle.style";
 import { Puzzle } from "../PuzzleTypes";
+import { SquareStyles } from "./DisplayDailyPuzzle.types";
 
 export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
-  const [chess] = useState<Chess>(new Chess());
+  const chess = useRef<Chess>(new Chess());
   const [isMovable, setIsMovable] = useState(true);
   const [fen, setFen] = useState<string>("start");
   const [moves, setMoves] = useState<string[]>([]);
@@ -23,18 +24,45 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
+  const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const [highlightedSquares, setHighlightedSquares] = useState<SquareStyles>(
+    {}
+  );
+  const [rightClickedSquares, setRightClickedSquares] = useState<SquareStyles>(
+    {}
+  );
 
-  function handleBoardOrientation() {
+  const handleBoardOrientation = () => {
     setChangeBoardOrientation((prevBoardOrientation) =>
       prevBoardOrientation === "white" ? "black" : "white"
     );
-  }
+  };
+
+  const onSquareRightClick = (square: Square) => {
+    const color = "rgba(254,46,46, 0.4)";
+    const isRightClicked =
+      rightClickedSquares[square]?.backgroundColor === color;
+
+    setRightClickedSquares((prevState) => ({
+      ...prevState,
+      [square]: isRightClicked
+        ? { backgroundColor: "transparent" }
+        : { backgroundColor: color },
+    }));
+  };
+
+  const showCorrectTitleWhenSolved = () => {
+    if (currentMoveIndex === moves.length - 1) {
+      setIsCorrect(true);
+    }
+  };
 
   const resetGame = () => {
-    if (puzzle && puzzle.fen) {
-      chess.load(puzzle.fen);
+    if (puzzle?.fen) {
+      chess.current.load(puzzle.fen);
       setFen(puzzle.fen);
     }
+    setHighlightedSquares({});
     setPlayedMoves([]);
     setCurrentMoveIndex(0);
     setIsMovable(true);
@@ -52,7 +80,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
 
   useEffect(() => {
     if (puzzle && puzzle.fen) {
-      chess.load(puzzle.fen);
+      chess.current.load(puzzle.fen);
       setFen(puzzle.fen);
     }
 
@@ -81,31 +109,15 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
         });
       });
 
-      console.log("All moves (raw):", moves);
-      console.log("Cleaned moves:", moves);
-
       setMoves(moves);
       setCurrentMoveIndex(0);
     }
   }, [puzzle]);
 
-  const onPieceDrop = (
-    sourceSquare: Square,
-    targetSquare: Square,
-    piece: Piece
-  ): boolean => {
-    console.log(
-      "Piece dropped:",
-      piece,
-      "from:",
-      sourceSquare,
-      "to:",
-      targetSquare
-    );
+  const onPieceDrop = (sourceSquare: Square, targetSquare: Square): boolean => {
+    const previousFen = chess.current.fen();
 
-    const previousFen = chess.fen();
-
-    const move = chess.move({
+    const move = chess.current.move({
       from: sourceSquare,
       to: targetSquare,
       promotion: "q",
@@ -120,13 +132,8 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
       return false;
     }
 
-    console.log("Move performed:", move.san);
-
     const sanitizedMove = cleanMove(move.san);
     const moveIndex = currentMoveIndex;
-
-    console.log("Sanitized Move:", sanitizedMove);
-    console.log("Expected Move (White):", moves[moveIndex]);
 
     if (sanitizedMove === moves[moveIndex]) {
       setPlayedMoves((prevMoves) => [
@@ -134,109 +141,123 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
         { move: move.san, isValid: true },
       ]);
 
-      console.log("Dobry ruch białych:", move.san);
       setCurrentMoveIndex(moveIndex + 1);
 
       const blackMoveIndex = moveIndex + 1;
+
       if (blackMoveIndex < moves.length) {
-        const blackMove = moves[blackMoveIndex];
-        const moveBlack = chess.move(blackMove);
+        setTimeout(() => {
+          const blackMove = moves[blackMoveIndex];
+          const PCmove = chess.current.move(blackMove);
+          const sourceSquareComputer = PCmove.from;
+          const targetSquareComputer = PCmove.to;
 
-        if (!moveBlack) {
-          console.error(`Invalid black move: ${blackMove}`);
-          chess.undo();
-        } else {
-          console.log("Czarny ruch wykonany:", moveBlack.san);
+          setHighlightedSquares({
+            [sourceSquareComputer]: {
+              backgroundColor: "rgba(255, 255, 0, 0.4)",
+            },
+            [targetSquareComputer]: {
+              backgroundColor: "rgba(255, 255, 0, 0.4)",
+            },
+          });
+          setFen(chess.current.fen());
           setCurrentMoveIndex(blackMoveIndex + 1);
-        }
-      }
 
-      if (blackMoveIndex + 1 === moves.length) {
-        setIsMovable(false);
-        console.log("Wszystkie ruchy wykonane. Ruchy zostały zablokowane.");
+          if (blackMoveIndex + 1 === moves.length) {
+            setIsMovable(false);
+            setIsCorrect(true);
+          }
+        }, 500);
       }
     } else {
-      console.error("Zły ruch białych:", move.san);
-      chess.undo();
+      chess.current.undo();
       setFen(previousFen);
-
       setPlayedMoves((prevMoves) => [
         ...prevMoves,
         { move: moveDescription, isValid: false },
       ]);
     }
 
-    setFen(chess.fen());
+    setFen(chess.current.fen());
+    showCorrectTitleWhenSolved();
 
     return true;
   };
 
   return (
-    <Box sx={style.Main}>
-      <Box sx={style.BoardAndButtons}>
-        <Box sx={style.Chessboard}>
-          <Chessboard
-            id="BasicChessboard"
-            position={fen}
-            onPieceDrop={onPieceDrop}
-            arePiecesDraggable={isMovable}
-            boardOrientation={changeBoardOrientation}
-            customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-            customLightSquareStyle={{ backgroundColor: "#607d8b" }}
-          />
-        </Box>
-        <Box sx={style.ButtonsContainer}>
-          <Button onClick={resetGame} sx={style.Button}>
-            Reset puzzle
-          </Button>
-          <Button onClick={handleBoardOrientation} sx={style.Button}>
-            Swap orientation
-          </Button>
-        </Box>
-      </Box>
-      <Box sx={style.Moves}>
-        <Box sx={style.Title}>
-          <Link to={"/"} component={RouterLink}>
-            <ArrowBackIcon sx={style.ArrowBackIcon} />
-          </Link>
-          <Box sx={style.TitleContainer}>
-            <Typography sx={style.TitleName}>Daily Puzzle</Typography>
-            <ExtensionIcon sx={style.PuzzleIcon} />
+    <Box>
+      <Box sx={style.Navbar}></Box>
+      <Box sx={style.Main}>
+        <Box sx={style.BoardAndButtons}>
+          <Typography sx={{ color: "white" }}>
+            {isCorrect ? "correct" : ""}
+          </Typography>
+          <Box sx={style.Chessboard}>
+            <Chessboard
+              id="BasicChessboard"
+              position={fen}
+              onPieceDrop={onPieceDrop}
+              arePiecesDraggable={isMovable}
+              boardOrientation={changeBoardOrientation}
+              onSquareRightClick={onSquareRightClick}
+              customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
+              customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+              customSquareStyles={{
+                ...highlightedSquares,
+                ...rightClickedSquares,
+              }}
+            />
+          </Box>
+          <Box sx={style.ButtonsContainer}>
+            <Button onClick={resetGame} sx={style.Button}>
+              Reset puzzle
+            </Button>
+            <Button onClick={handleBoardOrientation} sx={style.Button}>
+              Swap orientation
+            </Button>
           </Box>
         </Box>
-        <List>
-          {playedMoves.map((moveName, index) => (
-            <ListItem key={index}>
-              <Box sx={style.ListItem}>
-                {moveName.isValid ? (
-                  <CheckCircleIcon sx={style.CheckIcon} />
-                ) : (
-                  <CancelIcon sx={style.CancelIcon} />
-                )}
-                <Typography
-                  sx={
-                    moveName.isValid
-                      ? {
-                          color: "#81B64C",
-                        }
-                      : { color: "#FA412D" }
-                  }
-                >
-                  {moveName.move}
-                </Typography>
-                {moveName.isValid ? (
-                  <Typography sx={style.ValidationCorrectMoveName}>
-                    is correct!
+
+        <Box sx={style.Moves}>
+          <Box sx={style.Title}>
+            <Link to={"/"} component={RouterLink}>
+              <ArrowBackIcon sx={style.ArrowBackIcon} />
+            </Link>
+            <Box sx={style.TitleContainer}>
+              <Typography sx={style.TitleName}>Daily Puzzle</Typography>
+              <ExtensionIcon sx={style.PuzzleIcon} />
+            </Box>
+          </Box>
+          <List>
+            {playedMoves.map((moveName, index) => (
+              <ListItem key={index}>
+                <Box sx={style.ListItem}>
+                  {moveName.isValid ? (
+                    <CheckCircleIcon sx={style.CheckIcon} />
+                  ) : (
+                    <CancelIcon sx={style.CancelIcon} />
+                  )}
+                  <Typography
+                    sx={{
+                      color: `${moveName.isValid ? "#81B64C " : "#FA412D"}`,
+                    }}
+                  >
+                    {moveName.move}
                   </Typography>
-                ) : (
-                  <Typography sx={style.ValidationWrongMoveName}>
-                    is not correct. Try again!
-                  </Typography>
-                )}
-              </Box>
-            </ListItem>
-          ))}
-        </List>
+                  {moveName.isValid ? (
+                    <Typography sx={style.ValidationCorrectMoveName}>
+                      is correct!
+                    </Typography>
+                  ) : (
+                    <Typography sx={style.ValidationWrongMoveName}>
+                      is not correct. Try again!
+                    </Typography>
+                  )}
+                </Box>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Box>
     </Box>
   );

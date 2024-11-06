@@ -1,5 +1,11 @@
 import { SxProps } from "@mui/material";
 
+export const Navbar: SxProps = {
+  backgroundColor: "black",
+  height: "112px",
+  width: "100%",
+};
+
 export const Chessboard: SxProps = {
   width: "60%",
   height: "auto",
@@ -53,6 +59,9 @@ export const Moves: SxProps = {
   width: "40%",
   border: "1px solid #DADADA",
   borderTop: "none",
+  maxHeight: "100vh",
+  overflowY: "auto",
+  direction: "rtl",
 };
 
 export const Title: SxProps = {
@@ -89,6 +98,7 @@ export const ListItem: SxProps = {
   padding: "15px",
   borderRadius: "10px",
   width: "100%",
+  direction: "ltr",
 };
 
 export const ArrowBackIcon: SxProps = {
