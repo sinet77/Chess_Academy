@@ -5,7 +5,13 @@ export const routes = {
   faq: "/faq",
   training: "/training",
   fairPlay: "/fair-play",
+  login: "/login",
+  register: "/register",
+  courses: "courses",
+  ourcouch: "/ourcouch",
   ourcoach: "/ourcoach",
-  courses: "/courses",
-  ranksAndBadges: "ranks-and-badges"
+  privateLesson: "/private-lesson",
+  ranksAndBadges: "/ranks-and-badges",
+  playVsComputer: "/play/computer",
+  puzzles: "/puzzles",
 };
