@@ -70,10 +70,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
 
   const cleanMove = (move: string): string | null => {
     // Usuwa numer ruchu, "x", "+", "!" i inne znaki, aby uzyskać czysty ruch
-    const cleaned = move
-      .replace(/^\d+\.\s*/, "")
-      .replace(/[x+!?]/g, "")
-      .trim();
+    const cleaned = move.replace(/[x+!?]/g, "").trim();
 
     return cleaned || null;
   };
@@ -87,29 +84,15 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     if (puzzle && puzzle.pgn) {
       const pgn = puzzle.pgn;
 
-      const pgnLines = pgn
-        .split("\n")
-        .filter((line) => !line.startsWith("[") && line.trim() !== "");
+      const chess = new Chess();
 
-      const moves: string[] = [];
+      chess.loadPgn(pgn);
 
-      pgnLines.forEach((line) => {
-        const parts = line.split(" ");
+      const moves = chess.history({ verbose: true }).map((move) => move.san);
 
-        parts.forEach((part) => {
-          if (
-            (part.match(/^\d+\.\w+/) || !part.match(/^\d+\./)) &&
-            part !== "*"
-          ) {
-            const cleanedMove = cleanMove(part);
-            if (cleanedMove) {
-              moves.push(cleanedMove);
-            }
-          }
-        });
-      });
+      const cleanedMoves = moves.map(cleanMove).filter((move) => move !== null);
 
-      setMoves(moves);
+      setMoves(cleanedMoves);
       setCurrentMoveIndex(0);
     }
   }, [puzzle]);
