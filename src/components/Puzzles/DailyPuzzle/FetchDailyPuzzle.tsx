@@ -43,7 +43,7 @@ const FetchDailyPuzzle = ({ setPuzzle }: FetchDailyPuzzleProps) => {
 
         if (newPuzzle) {
           setPuzzle(newPuzzle);
-          await setDoc(docRef, { pgn: JSON.stringify(newPuzzle) });
+          await setDoc(docRef, { pgn: JSON.stringify(newPuzzle.pgn) });
           console.log("Saved new puzzle to Firestore");
         }
       }
