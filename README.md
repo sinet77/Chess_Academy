@@ -1,5 +1,8 @@
 <h1><b>Chess Academy</b></h1>
 
+![image](https://github.com/user-attachments/assets/970a4c3f-3e24-41a2-b372-6600ce481293)
+
+
 ![image](https://github.com/user-attachments/assets/dbecc2f7-7d0f-46b6-bfe5-e09d3143ffbc)
 
 
