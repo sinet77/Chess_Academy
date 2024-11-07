@@ -1,9 +1,12 @@
 <div align="center">
-<img src="https://github.com/user-attachments/assets/3d055398-3c89-417a-b73d-362527f6ae11" width="500" height="300" />
+  <h1>Chess Academy</h1>
 </div>
 
 ![image](https://github.com/user-attachments/assets/970a4c3f-3e24-41a2-b372-6600ce481293)
 
+<h1>General Info</h1>
+Chess Academy is a platform where you can learn and play chess. It has been created for my students to improve their chess skills
+<h1>Features</h1>
 
 ![image](https://github.com/user-attachments/assets/dbecc2f7-7d0f-46b6-bfe5-e09d3143ffbc)
 
