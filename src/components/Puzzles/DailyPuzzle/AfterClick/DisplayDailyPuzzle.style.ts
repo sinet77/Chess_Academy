@@ -7,7 +7,12 @@ export const Navbar: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: "60%",
+  width: {
+    xs: "80%",
+    sm: "70%",
+    md: "80%",
+    lg: "60%",
+  },
   height: "auto",
   border: "1px solid black",
 };

@@ -2,7 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
-import { Box, Button, Link, List, ListItem, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Link,
+  List,
+  ListItem,
+  Typography,
+} from "@mui/material";
 import ExtensionIcon from "@mui/icons-material/Extension";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -184,8 +192,8 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   return (
     <Box>
       <Box sx={style.Navbar}></Box>
-      <Box sx={style.Main}>
-        <Box sx={style.BoardAndButtons}>
+      <Grid container sx={style.Main}>
+        <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <ToastContainer />
           <Box sx={style.Chessboard}>
             <Chessboard
@@ -211,9 +219,9 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
               Swap orientation
             </Button>
           </Box>
-        </Box>
+        </Grid>
 
-        <Box sx={style.Moves}>
+        <Grid item xs={12} md={3} sx={style.Moves}>
           <Box sx={style.Title}>
             <Link to={"/"} component={RouterLink}>
               <ArrowBackIcon sx={style.ArrowBackIcon} />
@@ -252,8 +260,8 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
               </ListItem>
             ))}
           </List>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
