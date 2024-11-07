@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth, db } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase.ts";
 import {
   collection,
   doc,
@@ -14,7 +14,6 @@ import {
   onAuthStateChanged,
   User,
   sendPasswordResetEmail,
-  sendEmailVerification,
   updatePassword,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -29,13 +28,17 @@ interface AuthContextType {
   isGoogleUser: boolean;
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
-  handleCreateUserWithEmailAndPassword: (userData: any) => Promise<User>;
+  handleCreateUserWithEmailAndPassword: (userData: {
+    login: string;
+    email: string;
+    password: string;
+  }) => Promise<User>;
   handleSignInWithEmailAndPassword: (
     email: string,
     password: string
   ) => Promise<UserCredential>;
   handleSignInWithGoogle: () => Promise<User>;
-  handleSignOut: (userData: any) => Promise<User>;
+  handleSignOut: () => Promise<void>;
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
@@ -87,14 +90,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return sendPasswordResetEmail(auth, email);
   };
 
-  const handlePasswordChange = (password: string) => {
-    return updatePassword(auth.currentUser, password);
-  };
-
-  const handleSendEmailVerification = () => {
-    return sendEmailVerification(auth.currentUser, {
-      url: `${window.location.origin}/home`,
-    });
+  const handlePasswordChange = (password: string): Promise<void> => {
+    if (auth.currentUser) {
+      return updatePassword(auth.currentUser, password);
+    }
+    return Promise.reject("No current user");
   };
 
   const handleCreateUserWithEmailAndPassword = async ({

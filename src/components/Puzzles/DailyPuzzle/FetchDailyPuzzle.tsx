@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Puzzle } from "./PuzzleTypes";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebase.js";
+import { db } from "../../../firebase/firebase.ts";
 
 interface FetchDailyPuzzleProps {
   setPuzzle: (puzzle: Puzzle) => void;
