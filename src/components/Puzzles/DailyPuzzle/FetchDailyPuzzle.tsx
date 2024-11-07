@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Puzzle } from "./PuzzleTypes";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase.ts";
@@ -8,7 +8,6 @@ interface FetchDailyPuzzleProps {
 }
 
 const FetchDailyPuzzle = ({ setPuzzle }: FetchDailyPuzzleProps) => {
-  const ref = useRef(true);
   const fetchPuzzle = async () => {
     try {
       const response = await fetch("https://api.chess.com/pub/puzzle/random");
@@ -21,12 +20,6 @@ const FetchDailyPuzzle = ({ setPuzzle }: FetchDailyPuzzleProps) => {
   };
 
   useEffect(() => {
-    const initialRender = ref.current;
-
-    if (initialRender) {
-      ref.current = false;
-      return;
-    }
     const fetchOrSetNewPuzzle = async () => {
       const currentDate = new Date()
         .toLocaleDateString("en-GB")
@@ -50,7 +43,7 @@ const FetchDailyPuzzle = ({ setPuzzle }: FetchDailyPuzzleProps) => {
 
         if (newPuzzle) {
           setPuzzle(newPuzzle);
-          await setDoc(docRef, { pgn: JSON.stringify(newPuzzle.pgn) });
+          await setDoc(docRef, { pgn: JSON.stringify(newPuzzle) });
           console.log("Saved new puzzle to Firestore");
         }
       }

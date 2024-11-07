@@ -23,8 +23,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
-  const ref = useRef(true);
-
   const chess = useRef<Chess>(new Chess());
   const [isMovable, setIsMovable] = useState(true);
   const [fen, setFen] = useState<string>("start");
@@ -88,20 +86,21 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   };
 
   useEffect(() => {
-    if (puzzle?.fen) {
-      console.log("Setting FEN:", puzzle.fen);
-      chess.current.load(puzzle.fen);
-      setFen(puzzle.fen);
-    } else {
-      console.error("FEN not available in puzzle:", puzzle);
+    if (!puzzle) {
+      return;
     }
 
-    if (puzzle?.pgn) {
-      chess.current.loadPgn(puzzle.pgn);
+    if (puzzle.fen) {
+      chess.current.load(puzzle.fen);
+      setFen(puzzle.fen);
+    }
+
+    if (puzzle.pgn) {
+      const pgn = puzzle.pgn;
+      chess.current.loadPgn(pgn);
       const moves = chess.current
         .history({ verbose: true })
         .map((move) => move.san);
-
       const cleanedMoves = moves.map(cleanMove).filter((move) => move !== null);
       console.log(cleanedMoves);
 
