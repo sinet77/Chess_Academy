@@ -1,5 +1,8 @@
 <h1><b>Chess Academy</b></h1>
 
+![image](https://github.com/user-attachments/assets/dbecc2f7-7d0f-46b6-bfe5-e09d3143ffbc)
+
+
 * My website is a chess learning platform built using HTML, CSS, React, TypeScript, and libraries such as react-chessboard, chess.js, and framer-motion. It offers users the ability to solve various chess puzzles at different difficulty levels, allowing them to practice and improve their skills. Additionally, users can learn from a range of available lessons, which cater to players of all skill levels, from beginners to advanced.
 
 * The platform also provides the option to browse and purchase lesson packages tailored to individual interests. Users can select from a list of available chess instructors and book lessons based on their preferences. The website is designed with a focus on both learning and playing, giving users the opportunity to challenge themselves by playing chess against a computer opponent. The skill level of the AI can be adjusted to match the player's ability, providing a tailored experience for players of all levels.
