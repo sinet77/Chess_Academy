@@ -1,4 +1,6 @@
-<h1><b>Chess Academy</b></h1>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/3d055398-3c89-417a-b73d-362527f6ae11" width="500" height="300" />
+</div>
 
 ![image](https://github.com/user-attachments/assets/970a4c3f-3e24-41a2-b372-6600ce481293)
 
