@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Puzzle } from "./PuzzleTypes";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebase.js";
 
 interface FetchDailyPuzzleProps {
   setPuzzle: (puzzle: Puzzle) => void;
@@ -10,31 +12,46 @@ const FetchDailyPuzzle = ({ setPuzzle }: FetchDailyPuzzleProps) => {
     try {
       const response = await fetch("https://api.chess.com/pub/puzzle/random");
       const data = await response.json();
-      console.log("Fetched Puzzle Data:", data);
-      setPuzzle(data);
-      localStorage.setItem("lastPuzzle", JSON.stringify(data));
-      localStorage.setItem("lastFetchTime", Date.now().toString());
+      console.log("Fetched new puzzle:", data);
+      return data;
     } catch (error) {
       console.error("Error fetching puzzle:", error);
     }
   };
 
   useEffect(() => {
-    const lastFetchTime = localStorage.getItem("lastFetchTime");
-    const now = Date.now();
+    const fetchOrSetNewPuzzle = async () => {
+      const currentDate = new Date()
+        .toLocaleDateString("en-GB")
+        .split("/")
+        .join("-");
+      const docRef = doc(db, "Daily Puzzles", currentDate);
 
-    if (!lastFetchTime || now - parseInt(lastFetchTime) > 86400000) {
-      fetchPuzzle();
-    } else {
-      const savedPuzzle = localStorage.getItem("lastPuzzle");
-      if (savedPuzzle) {
-        setPuzzle(JSON.parse(savedPuzzle));
+      const snap = await getDoc(docRef);
+      console.log("Snapshot exists:", snap.exists());
+      console.log("Snapshot data:", snap.data());
+
+      if (snap.exists()) {
+        const data = snap.data();
+        if (data) {
+          const puzzleData = JSON.parse(data.pgn);
+          setPuzzle(puzzleData.pgn);
+          console.log("Loaded puzzle from Firestore:", puzzleData);
+        }
+      } else {
+        const newPuzzle = await fetchPuzzle();
+
+        if (newPuzzle) {
+          setPuzzle(newPuzzle);
+          await setDoc(docRef, { pgn: JSON.stringify(newPuzzle) });
+          console.log("Saved new puzzle to Firestore");
+        }
       }
-    }
+    };
 
-    const interval = setInterval(fetchPuzzle, 86400000);
-    return () => clearInterval(interval);
-  }, []);
+    fetchOrSetNewPuzzle();
+  }, [setPuzzle]);
+
   return null;
 };
 

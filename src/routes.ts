@@ -9,7 +9,6 @@ export const routes = {
   register: "/register",
   courses: "courses",
   ourcouch: "/ourcouch",
-  ourcoach: "/ourcoach",
   privateLesson: "/private-lesson",
   ranksAndBadges: "/ranks-and-badges",
   playVsComputer: "/play/computer",
