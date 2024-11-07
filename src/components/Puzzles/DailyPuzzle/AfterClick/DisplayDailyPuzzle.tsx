@@ -109,6 +109,12 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     }
   }, [puzzle]);
 
+  useEffect(() => {
+    if (puzzle) {
+      resetGame();
+    }
+  }, [puzzle]);
+
   const onPieceDrop = (sourceSquare: Square, targetSquare: Square): boolean => {
     const previousFen = chess.current.fen();
 
