@@ -1,5 +1,4 @@
 import { SxProps } from "@mui/material";
-import { CSSProperties } from "react";
 
 export const Navbar: SxProps = {
   backgroundColor: "black",
@@ -19,15 +18,13 @@ export const Chessboard: SxProps = {
   cursor: "pointer",
 };
 
-export const ColorOnMove: SxProps = {
-  display: "flex",
-  fontFamily: "Roboto",
-  fontSize: "25px",
-  fontStyle: "italic",
-  fontWeight: "500",
-  lineHeight: "34px",
-  padding: "5px",
+export const DrawnSquare: SxProps = {
   color: "white",
+  display: "flex",
+  justifyContent: "top",
+  alignItems: "top",
+  textAlign: "top",
+  mb: "50px",
 };
 
 export const BoardAndButtons: SxProps = {
@@ -79,7 +76,6 @@ export const Moves: SxProps = {
   borderTop: "none",
   maxHeight: "100vh",
   overflowY: "auto",
-  direction: "rtl",
 };
 
 export const Title: SxProps = {
@@ -108,20 +104,26 @@ export const TitleContainer: SxProps = {
   gap: "30px",
 };
 
-export const ImageTarget: CSSProperties = {
-  width: "150px",
+export const ImageTarget: SxProps = {
+  width: { xs: "30%", sm: "40%", md: "80%", lg: "70%" },
   height: "auto",
   borderRadius: "5px",
 };
 
-export const ListItem: SxProps = {
+export const List: SxProps = { display: "flex", flexWrap: "wrap", gap: "10px" };
+
+export const AttemptsContainer: SxProps = {
   display: "flex",
   alignItems: "center",
   backgroundColor: "#FFFFFF1A",
-  padding: "15px",
+  padding: 1,
   borderRadius: "10px",
-  width: "100%",
-  direction: "ltr",
+};
+
+export const ListItem: SxProps = {
+  padding: 0,
+  width: "auto",
+  minWidth: "fit-content",
 };
 
 export const ArrowBackIcon: SxProps = {
@@ -139,16 +141,4 @@ export const CheckIcon: SxProps = {
 export const CancelIcon: SxProps = {
   color: "#FA412D",
   marginRight: 1,
-};
-
-export const ValidationWrongMoveName: SxProps = {
-  color: "#FA412D",
-  marginLeft: 1,
-  fontWeight: "bold",
-};
-
-export const ValidationCorrectMoveName: SxProps = {
-  color: "#81B64C",
-  marginLeft: 1,
-  fontWeight: "bold",
 };

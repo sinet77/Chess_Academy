@@ -35,9 +35,11 @@ export default function Vision() {
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
-  const [randomSquare, setRandomSquare] = useState("");
-  const [isCorrect, setIsCorrect] = useState<boolean>(false);
-  const [checked, setChecked] = useState(true);
+  const [randomSquare, setRandomSquare] = useState<string>("");
+  const [attempts, setAttempts] = useState<
+    { isValid: boolean; targetSquare: string }[]
+  >([]);
+  const [checked, setChecked] = useState<boolean>(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -55,20 +57,24 @@ export default function Vision() {
   };
 
   const handleSquareClick = (square: string) => {
-    console.log(`Clicked on square: ${square}`);
-    if (square === randomSquare) {
-      setIsCorrect(true);
+    const isCorrect = square === randomSquare;
+    setAttempts((prevAttempts) => [
+      ...prevAttempts,
+      { isValid: isCorrect, targetSquare: randomSquare },
+    ]);
+
+    if (isCorrect) {
       toast.success("Correct! New square coming up!", {
         position: "bottom-right",
         autoClose: 2000,
       });
     } else {
-      setIsCorrect(false);
       toast.error("Try again!", {
         position: "bottom-right",
         autoClose: 2000,
       });
     }
+
     generateRandomSquare();
   };
 
@@ -83,6 +89,7 @@ export default function Vision() {
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
+          <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>
           <ToastContainer />
           <Box sx={style.Chessboard}>
             <Chessboard
@@ -124,41 +131,33 @@ export default function Vision() {
             </Link>
             <Box sx={style.TitleContainer}>
               <Typography sx={style.TitleName}>Vision Training</Typography>
-              <img
+              <Box
+                component="img"
                 src={target}
                 alt="Aim target with pawns"
-                style={style.ImageTarget}
+                sx={style.ImageTarget}
               />
             </Box>
           </Box>
-          <List>
-            {/* {playedMoves.map((moveName, index) => (
-              <ListItem key={index}>
-                <Box sx={style.ListItem}>
-                  {moveName.isValid ? (
+          <List sx={style.List}>
+            {attempts.map((attempt, index) => (
+              <ListItem key={index} sx={style.ListItem}>
+                <Box sx={style.AttemptsContainer}>
+                  {attempt.isValid ? (
                     <CheckCircleIcon sx={style.CheckIcon} />
                   ) : (
                     <CancelIcon sx={style.CancelIcon} />
                   )}
                   <Typography
                     sx={{
-                      color: `${moveName.isValid ? "#81B64C " : "#FA412D"}`,
+                      color: attempt.isValid ? "#81B64C" : "#FA412D",
                     }}
                   >
-                    {moveName.move}
+                    {attempt.targetSquare}
                   </Typography>
-                  {moveName.isValid ? (
-                    <Typography sx={style.ValidationCorrectMoveName}>
-                      is correct!
-                    </Typography>
-                  ) : (
-                    <Typography sx={style.ValidationWrongMoveName}>
-                      is not correct. Try again!
-                    </Typography>
-                  )}
                 </Box>
               </ListItem>
-            ))} */}
+            ))}
           </List>
         </Grid>
       </Grid>
