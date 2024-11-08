@@ -17,6 +17,17 @@ export const Chessboard: SxProps = {
   border: "1px solid black",
 };
 
+export const ColorOnMove: SxProps = {
+  display: "flex",
+  fontFamily: "Roboto",
+  fontSize: "25px",
+  fontStyle: "italic",
+  fontWeight: "500",
+  lineHeight: "34px",
+  padding: "5px",
+  color: "white",
+};
+
 export const BoardAndButtons: SxProps = {
   width: "100%",
   height: "auto",

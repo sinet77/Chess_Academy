@@ -34,6 +34,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
+  const [startingColor, setStartingColor] = useState<string>("");
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const [highlightedSquares, setHighlightedSquares] = useState<SquareStyles>(
     {}
@@ -67,6 +68,17 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     }
   };
 
+  const getStartingColorForPlayer = (fen: string) => {
+    const spliitedPartsInFenToGetAColor = fen.split(" ");
+    if (spliitedPartsInFenToGetAColor[1] === "w") {
+      setChangeBoardOrientation("white");
+      setStartingColor("White");
+    } else {
+      setChangeBoardOrientation("black");
+      setStartingColor("Black");
+    }
+  };
+
   const resetGame = () => {
     if (puzzle?.fen) {
       chess.current.load(puzzle.fen);
@@ -93,6 +105,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     if (puzzle.fen) {
       chess.current.load(puzzle.fen);
       setFen(puzzle.fen);
+      getStartingColorForPlayer(puzzle.fen);
     }
 
     if (puzzle.pgn) {
@@ -202,6 +215,9 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
+          <Typography sx={style.ColorOnMove}>
+            {startingColor} on move
+          </Typography>
           <ToastContainer />
           <Box sx={style.Chessboard}>
             <Chessboard
