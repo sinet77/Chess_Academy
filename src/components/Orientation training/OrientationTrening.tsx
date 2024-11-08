@@ -21,6 +21,7 @@ import * as style from "./OrientationTrening.style";
 import target from "../../assets/chess_aim_target.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Timer from "./Timer/Timer";
 
 const SQUARES = Array.from({ length: 8 }, (_, row) =>
   Array.from(
@@ -40,6 +41,7 @@ export default function Vision() {
     { isValid: boolean; targetSquare: string }[]
   >([]);
   const [checked, setChecked] = useState<boolean>(true);
+  const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -55,6 +57,7 @@ export default function Vision() {
   const handleStartClick = () => {
     setAttempts([]);
     generateRandomSquare();
+    setIsTimerActive(true);
   };
 
   const handleSquareClick = (square: string) => {
@@ -90,6 +93,7 @@ export default function Vision() {
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
+          <Timer isTurnedOn={isTimerActive} />
           <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>
           <ToastContainer />
           <Box sx={style.Chessboard}>
