@@ -53,6 +53,7 @@ export default function Vision() {
   };
 
   const handleStartClick = () => {
+    setAttempts([]);
     generateRandomSquare();
   };
 
