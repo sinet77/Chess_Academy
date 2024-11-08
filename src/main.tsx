@@ -25,6 +25,7 @@ import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
+import Vision from "./components/Orientation training/OrientationTrening.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
           <Route path={routes.courses} element={<CoursesPage />} />
           <Route path={routes.ranksAndBadges} element={<RanksAndBadges />} />
           <Route path={routes.privateLesson} element={<PrivateLesson />} />
+          <Route path={routes.vision} element={<Vision />} />
         </Route>
       </Route>
       <Route path={routes.login} element={<LoginPage />} />

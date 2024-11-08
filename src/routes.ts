@@ -14,4 +14,5 @@ export const routes = {
   ranksAndBadges: "/ranks-and-badges",
   playVsComputer: "/play/computer",
   puzzles: "/puzzles",
+  vision: "/vision",
 };
