@@ -12,13 +12,13 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
-import ExtensionIcon from "@mui/icons-material/Extension";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import * as style from "./OrientationTrening.style";
+import target from "../../assets/chess_aim_target.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -92,8 +92,8 @@ export default function Vision() {
               onSquareClick={handleSquareClick}
               showBoardNotation={checked}
               customNotationStyle={{ fontSize: "22px" }}
-              customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-              customLightSquareStyle={{ backgroundColor: "#607d8b" }}
+              customLightSquareStyle={{ backgroundColor: "#e0e0e0" }}
+              customDarkSquareStyle={{ backgroundColor: "#607d8b" }}
             />
           </Box>
           <Box sx={style.ButtonsContainer}>
@@ -124,7 +124,11 @@ export default function Vision() {
             </Link>
             <Box sx={style.TitleContainer}>
               <Typography sx={style.TitleName}>Vision Training</Typography>
-              <ExtensionIcon sx={style.PuzzleIcon} />
+              <img
+                src={target}
+                alt="Aim target with pawns"
+                style={style.ImageTarget}
+              />
             </Box>
           </Box>
           <List>

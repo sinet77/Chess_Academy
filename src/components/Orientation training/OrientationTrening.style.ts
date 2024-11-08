@@ -1,4 +1,5 @@
 import { SxProps } from "@mui/material";
+import { CSSProperties } from "react";
 
 export const Navbar: SxProps = {
   backgroundColor: "black",
@@ -98,14 +99,19 @@ export const TitleName: SxProps = {
   lineHeight: "23px",
 };
 
-export const PuzzleIcon: SxProps = { color: "#B6740C" };
-
 export const TitleContainer: SxProps = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  flexDirection: "column",
   flexGrow: 1,
-  gap: "10px",
+  gap: "30px",
+};
+
+export const ImageTarget: CSSProperties = {
+  width: "150px",
+  height: "auto",
+  borderRadius: "5px",
 };
 
 export const ListItem: SxProps = {
