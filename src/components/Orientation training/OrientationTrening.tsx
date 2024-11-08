@@ -42,6 +42,7 @@ export default function Vision() {
   >([]);
   const [checked, setChecked] = useState<boolean>(true);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
+  const [timerEnded, setTimerEnded] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,13 +53,14 @@ export default function Vision() {
     const randomIndex = Math.floor(Math.random() * SQUARES.length);
     const drawnSquare = SQUARES[randomIndex];
     setRandomSquare(drawnSquare);
-    console.log(drawnSquare);
   };
 
   const handleStartClick = () => {
+    setCounter(0);
     setAttempts([]);
     generateRandomSquare();
     setIsTimerActive(true);
+    setTimerEnded(false);
   };
 
   const handleSquareClick = (square: string) => {
@@ -90,13 +92,18 @@ export default function Vision() {
     );
   };
 
+  const handleTimerEnd = () => {
+    setIsTimerActive(false);
+    setTimerEnded(true);
+  };
+
   return (
     <Box>
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Typography sx={{ color: "white" }}>{counter}</Typography>
-          <Timer isTurnedOn={isTimerActive} />
+          <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
           <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>
           <ToastContainer />
           <Box sx={style.Chessboard}>
@@ -123,7 +130,7 @@ export default function Vision() {
                   },
                 }),
               }}
-              disabled={isTimerActive}
+              disabled={isTimerActive || timerEnded}
             >
               Start
             </Button>
