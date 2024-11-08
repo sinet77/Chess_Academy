@@ -25,6 +25,8 @@
 
 * <h3>Merge updated branches to main</h3>
 
+* <h3>Mobile responsiveness</h3>
+
 * <h3>Ranks and Badges customization</h3>
   
 * <h3>Analyse games with engine</h3>
