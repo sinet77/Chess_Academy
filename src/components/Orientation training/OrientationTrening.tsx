@@ -42,6 +42,7 @@ export default function Vision() {
   >([]);
   const [checked, setChecked] = useState<boolean>(true);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
+  const [counter, setCounter] = useState<number>(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -68,6 +69,7 @@ export default function Vision() {
     ]);
 
     if (isCorrect) {
+      setCounter(counter + 1);
       toast.success("Correct! New square coming up!", {
         position: "bottom-right",
         autoClose: 2000,
@@ -93,6 +95,7 @@ export default function Vision() {
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
+          <Typography sx={{ color: "white" }}>{counter}</Typography>
           <Timer isTurnedOn={isTimerActive} />
           <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>
           <ToastContainer />
@@ -109,19 +112,45 @@ export default function Vision() {
             />
           </Box>
           <Box sx={style.ButtonsContainer}>
-            <Button onClick={handleStartClick} sx={style.Button}>
+            <Button
+              onClick={handleStartClick}
+              sx={{
+                ...style.Button,
+                ...(isTimerActive && {
+                  "&.Mui-disabled": {
+                    backgroundColor: "grey",
+                    color: "black",
+                  },
+                }),
+              }}
+              disabled={isTimerActive}
+            >
               Start
             </Button>
-            <Button onClick={handleBoardOrientation} sx={style.Button}>
+            <Button
+              onClick={handleBoardOrientation}
+              sx={{
+                ...style.Button,
+                ...(isTimerActive && {
+                  "&.Mui-disabled": {
+                    backgroundColor: "grey",
+                    color: "black",
+                  },
+                }),
+              }}
+              disabled={isTimerActive}
+            >
               Swap orientation
             </Button>
             <FormControlLabel
+              sx={{ color: "white" }}
               control={
                 <Checkbox
                   checked={checked}
                   onChange={handleChange}
                   icon={<VisibilityOffIcon />}
                   checkedIcon={<VisibilityIcon />}
+                  disabled={isTimerActive}
                 />
               }
               label="Show cords"

@@ -1,4 +1,4 @@
-import { SxProps } from "@mui/material";
+import { SxProps } from "@mui/system";
 
 export const Navbar: SxProps = {
   backgroundColor: "black",
