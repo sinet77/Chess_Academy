@@ -18,13 +18,26 @@ export const Chessboard: SxProps = {
   cursor: "pointer",
 };
 
+export const TimerAndPoints: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "20px",
+  gap: "15px",
+};
+
+export const Points: SxProps = {
+  color: "white",
+  fontSize: "25px",
+  fontWeight: "bold",
+};
+
 export const DrawnSquare: SxProps = {
   color: "white",
-  display: "flex",
-  justifyContent: "top",
-  alignItems: "top",
-  textAlign: "top",
-  mb: "50px",
+  position: "absolute",
+  right: "40px",
+  top: "40px",
 };
 
 export const BoardAndButtons: SxProps = {
@@ -32,9 +45,11 @@ export const BoardAndButtons: SxProps = {
   height: "auto",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
+  justifyContent: "top",
   alignItems: "center",
-  gap: "20px",
+  position: "relative",
+  padding: "30px",
+  gap: "40px",
 };
 
 export const Button: SxProps = {
@@ -56,8 +71,9 @@ export const Button: SxProps = {
 export const ButtonsContainer: SxProps = {
   display: "flex",
   justifyContent: "center",
-  marginTop: 2,
+  gap: "20px",
 };
+
 export const Main: SxProps = {
   backgroundColor: "#312e2b",
   minHeight: "100vh",
@@ -110,7 +126,12 @@ export const ImageTarget: SxProps = {
   borderRadius: "5px",
 };
 
-export const List: SxProps = { display: "flex", flexWrap: "wrap", gap: "10px" };
+export const List: SxProps = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "10px",
+  justifyContent: "center",
+};
 
 export const AttemptsContainer: SxProps = {
   display: "flex",
@@ -118,11 +139,14 @@ export const AttemptsContainer: SxProps = {
   backgroundColor: "#FFFFFF1A",
   padding: 1,
   borderRadius: "10px",
+  wdith: "100%",
 };
 
 export const ListItem: SxProps = {
+  display: "flex",
+  justifyContent: "left",
   padding: 0,
-  width: "auto",
+  width: "50px",
   minWidth: "fit-content",
 };
 

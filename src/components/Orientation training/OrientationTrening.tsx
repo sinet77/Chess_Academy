@@ -42,7 +42,6 @@ export default function Vision() {
   >([]);
   const [checked, setChecked] = useState<boolean>(true);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
-  const [timerEnded, setTimerEnded] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,30 +59,31 @@ export default function Vision() {
     setAttempts([]);
     generateRandomSquare();
     setIsTimerActive(true);
-    setTimerEnded(false);
   };
 
   const handleSquareClick = (square: string) => {
-    const isCorrect = square === randomSquare;
-    setAttempts((prevAttempts) => [
-      ...prevAttempts,
-      { isValid: isCorrect, targetSquare: randomSquare },
-    ]);
+    if (isTimerActive) {
+      const isCorrect = square === randomSquare;
+      setAttempts((prevAttempts) => [
+        ...prevAttempts,
+        { isValid: isCorrect, targetSquare: randomSquare },
+      ]);
 
-    if (isCorrect) {
-      setCounter(counter + 1);
-      toast.success("Correct! New square coming up!", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
-    } else {
-      toast.error("Try again!", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
-    }
+      if (isCorrect) {
+        setCounter(counter + 1);
+        toast.success("Correct! New square coming up!", {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+      } else {
+        toast.error("Try again!", {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+      }
 
-    generateRandomSquare();
+      generateRandomSquare();
+    } else return;
   };
 
   const handleBoardOrientation = () => {
@@ -94,7 +94,7 @@ export default function Vision() {
 
   const handleTimerEnd = () => {
     setIsTimerActive(false);
-    setTimerEnded(true);
+    // setRandomSquare("");
   };
 
   return (
@@ -102,10 +102,12 @@ export default function Vision() {
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
-          <Typography sx={{ color: "white" }}>{counter}</Typography>
-          <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
+          <Box sx={style.TimerAndPoints}>
+            <Typography sx={style.Points}>Your points: {counter}</Typography>
+            <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
+            <ToastContainer />
+          </Box>
           <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>
-          <ToastContainer />
           <Box sx={style.Chessboard}>
             <Chessboard
               id="BasicChessboard"
@@ -113,7 +115,7 @@ export default function Vision() {
               boardOrientation={changeBoardOrientation}
               onSquareClick={handleSquareClick}
               showBoardNotation={checked}
-              customNotationStyle={{ fontSize: "22px" }}
+              customNotationStyle={{ fontSize: "18px" }}
               customLightSquareStyle={{ backgroundColor: "#e0e0e0" }}
               customDarkSquareStyle={{ backgroundColor: "#607d8b" }}
             />
@@ -130,7 +132,7 @@ export default function Vision() {
                   },
                 }),
               }}
-              disabled={isTimerActive || timerEnded}
+              disabled={isTimerActive}
             >
               Start
             </Button>

@@ -22,4 +22,4 @@ export const TimeText: SxProps = {
   fontSize: "1.2rem",
 };
 
-export const TimeFont: SxProps = { fontSize: "1.2rem", color: "white" };
+export const TimeFont: SxProps = { fontSize: "2.2rem", color: "white" };

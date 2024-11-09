@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import TimerIcon from "@mui/icons-material/Timer";
 import { Box, Typography } from "@mui/material";
 import * as style from "./Timer.style";
@@ -10,27 +10,38 @@ const Timer = ({
   isTurnedOn: boolean;
   onTimerEnd: () => void;
 }) => {
-  const [totalSeconds, setTotalSeconds] = useState(10);
+  const [totalSeconds, setTotalSeconds] = useState(30);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (!isTurnedOn || totalSeconds <= 0) return;
-
-    const interval = setInterval(() => {
-      setTotalSeconds((prev) => prev - 1);
-    }, 1000);
-
-    if (totalSeconds === 0) {
-      onTimerEnd();
+    if (isTurnedOn && !intervalRef.current) {
+      intervalRef.current = setInterval(() => {
+        setTotalSeconds((prev) => {
+          if (prev === 0) {
+            clearInterval(intervalRef.current!);
+            intervalRef.current = null;
+            onTimerEnd();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     }
 
-    return () => clearInterval(interval);
-  }, [isTurnedOn, totalSeconds, onTimerEnd]);
+    return () => {
+      if (!isTurnedOn && intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+        setTotalSeconds(30);
+      }
+    };
+  }, [isTurnedOn, onTimerEnd]);
 
   return (
     <Box sx={style.Container}>
       <TimerIcon sx={style.TimerIconStyle} />
       <Box sx={style.TimeNamesContainer}>
-        <Typography sx={style.TimeFont}> {totalSeconds} s</Typography>
+        <Typography sx={style.TimeFont}>{totalSeconds} s</Typography>
       </Box>
     </Box>
   );
