@@ -21,6 +21,13 @@
 <img src="https://github.com/user-attachments/assets/144bf1ba-df5f-481a-b126-69e82bb2dd81"/>
 <br></br>
 
+<h3>Guess correct squares and train your vision</h3>
+<img src="https://github.com/user-attachments/assets/ecd37b90-6155-498e-b74c-04cb93f984f5"/>
+<br></br>
+
+
+
+
 <h1>To Do</h1>
 
 * <h3>Merge updated branches to main</h3>
