@@ -124,21 +124,6 @@ export default function Vision() {
           </Box>
           <Box sx={style.ButtonsContainer}>
             <Button
-              onClick={handleStartClick}
-              sx={{
-                ...style.Button,
-                ...(isTimerActive && {
-                  "&.Mui-disabled": {
-                    backgroundColor: "grey",
-                    color: "black",
-                  },
-                }),
-              }}
-              disabled={isTimerActive}
-            >
-              Start
-            </Button>
-            <Button
               onClick={handleBoardOrientation}
               sx={{
                 ...style.Button,
@@ -152,6 +137,21 @@ export default function Vision() {
               disabled={isTimerActive}
             >
               Swap orientation
+            </Button>
+            <Button
+              onClick={handleStartClick}
+              sx={{
+                ...style.Button,
+                ...(isTimerActive && {
+                  "&.Mui-disabled": {
+                    backgroundColor: "grey",
+                    color: "black",
+                  },
+                }),
+              }}
+              disabled={isTimerActive}
+            >
+              Start
             </Button>
             <FormControlLabel
               sx={style.VisibilityContainer}
