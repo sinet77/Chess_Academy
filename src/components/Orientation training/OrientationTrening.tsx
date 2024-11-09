@@ -94,7 +94,7 @@ export default function Vision() {
 
   const handleTimerEnd = () => {
     setIsTimerActive(false);
-    // setRandomSquare("");
+    setRandomSquare("");
   };
 
   return (
@@ -103,11 +103,13 @@ export default function Vision() {
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Box sx={style.TimerAndPoints}>
-            <Typography sx={style.Points}>Your points: {counter}</Typography>
+            <Typography sx={style.Points}>Points scored: {counter}</Typography>
             <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
             <ToastContainer />
           </Box>
-          <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>
+          {isTimerActive && randomSquare && (
+            <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>
+          )}
           <Box sx={style.Chessboard}>
             <Chessboard
               id="BasicChessboard"
@@ -152,13 +154,13 @@ export default function Vision() {
               Swap orientation
             </Button>
             <FormControlLabel
-              sx={{ color: "white" }}
+              sx={style.VisibilityContainer}
               control={
                 <Checkbox
                   checked={checked}
                   onChange={handleChange}
-                  icon={<VisibilityOffIcon />}
-                  checkedIcon={<VisibilityIcon />}
+                  icon={<VisibilityOffIcon sx={style.InheritColor} />}
+                  checkedIcon={<VisibilityIcon sx={style.InheritColor} />}
                   disabled={isTimerActive}
                 />
               }

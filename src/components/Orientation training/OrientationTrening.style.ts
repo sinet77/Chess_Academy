@@ -6,6 +6,14 @@ export const Navbar: SxProps = {
   width: "100%",
 };
 
+export const Main: SxProps = {
+  backgroundColor: "#312e2b",
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "top",
+  alignItems: "top",
+};
+
 export const Chessboard: SxProps = {
   width: {
     xs: "80%",
@@ -31,6 +39,8 @@ export const Points: SxProps = {
   color: "white",
   fontSize: "25px",
   fontWeight: "bold",
+  letterSpacing: 2,
+  fontFamily: "Roboto",
 };
 
 export const DrawnSquare: SxProps = {
@@ -38,6 +48,13 @@ export const DrawnSquare: SxProps = {
   position: "absolute",
   right: "40px",
   top: "40px",
+  fontSize: "2.2rem",
+  fontWeight: "bold",
+  letterSpacing: 2,
+  padding: "14px 20px",
+  backgroundColor: "black",
+  border: "1px solid #c65102",
+  borderRadius: "5px",
 };
 
 export const BoardAndButtons: SxProps = {
@@ -56,7 +73,7 @@ export const Button: SxProps = {
   color: "white",
   backgroundColor: "#000000",
   fontFamily: "Playfair Display",
-  fontSize: "16px",
+  fontSize: "1rem",
   fontWeight: "500",
   lineHeight: "23px",
   textTransform: "none",
@@ -64,9 +81,11 @@ export const Button: SxProps = {
   mr: "10px",
   padding: "10px 30px",
   "&:hover": {
-    backgroundColor: "#B6740C",
+    backgroundColor: "#c65102",
   },
 };
+
+export const InheritColor: SxProps = { color: "inherit" };
 
 export const ButtonsContainer: SxProps = {
   display: "flex",
@@ -74,12 +93,26 @@ export const ButtonsContainer: SxProps = {
   gap: "20px",
 };
 
-export const Main: SxProps = {
-  backgroundColor: "#312e2b",
-  minHeight: "100vh",
+export const VisibilityContainer: SxProps = {
+  fontSize: "30px",
   display: "flex",
-  justifyContent: "top",
-  alignItems: "top",
+  width: "100%",
+  gap: "5px",
+  textWrap: "nowrap",
+  "& .MuiFormControlLabel-label": {
+    fontFamily: "Playfair Display",
+    color: "white",
+    fontSize: "1rem",
+  },
+  "&.Mui-disabled .MuiFormControlLabel-label": {
+    color: "grey",
+  },
+  "& .MuiCheckbox-root svg": {
+    color: "orange",
+  },
+  "&.Mui-disabled .MuiCheckbox-root svg": {
+    color: "lightgrey",
+  },
 };
 
 export const Moves: SxProps = {
