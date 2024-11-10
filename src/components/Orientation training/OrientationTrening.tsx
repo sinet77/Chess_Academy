@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase.ts";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -22,6 +24,7 @@ import target from "../../assets/chess_aim_target.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Timer from "./Timer/Timer";
+import { useAuth } from "../../context/authContext";
 
 const SQUARES = Array.from({ length: 8 }, (_, row) =>
   Array.from(
@@ -33,6 +36,7 @@ const SQUARES = Array.from({ length: 8 }, (_, row) =>
 const FEN = "";
 
 export default function Vision() {
+  const { currentUser } = useAuth();
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
@@ -43,6 +47,49 @@ export default function Vision() {
   const [checked, setChecked] = useState<boolean>(true);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
+  const [bestScore, setBestScore] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchBestScore = async () => {
+      if (currentUser) {
+        const bestScoreDocRef = doc(
+          db,
+          "Users",
+          currentUser.uid,
+          "vision",
+          "visionDocId"
+        );
+        const bestScoreDocSnapshot = await getDoc(bestScoreDocRef);
+
+        if (bestScoreDocSnapshot.exists()) {
+          setBestScore(bestScoreDocSnapshot.data().Best_Score);
+        } else {
+          await setDoc(bestScoreDocRef, { Best_Score: 0 });
+        }
+      }
+    };
+
+    fetchBestScore();
+  }, [currentUser]);
+
+  useEffect(() => {
+    const updateBestScore = async () => {
+      if (counter > bestScore && currentUser) {
+        const bestScoreDocRef = doc(
+          db,
+          "Users",
+          currentUser.uid,
+          "vision",
+          "visionDocId"
+        );
+
+        await setDoc(bestScoreDocRef, { Best_Score: counter });
+        setBestScore(counter);
+      }
+    };
+
+    updateBestScore();
+  }, [counter, bestScore, currentUser]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -70,7 +117,7 @@ export default function Vision() {
       ]);
 
       if (isCorrect) {
-        setCounter(counter + 1);
+        setCounter((prevCounter) => prevCounter + 1);
         toast.success("Correct! New square coming up!", {
           position: "bottom-right",
           autoClose: 2000,
@@ -104,6 +151,7 @@ export default function Vision() {
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Box sx={style.TimerAndPoints}>
             <Typography sx={style.Points}>Points scored: {counter}</Typography>
+            <Typography sx={style.Points}>Best: {bestScore}</Typography>
             <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
             <ToastContainer />
           </Box>
