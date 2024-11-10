@@ -118,15 +118,6 @@ export default function Vision() {
 
       if (isCorrect) {
         setCounter((prevCounter) => prevCounter + 1);
-        toast.success("Correct! New square coming up!", {
-          position: "bottom-right",
-          autoClose: 2000,
-        });
-      } else {
-        toast.error("Try again!", {
-          position: "bottom-right",
-          autoClose: 2000,
-        });
       }
 
       generateRandomSquare();
@@ -151,7 +142,6 @@ export default function Vision() {
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Box sx={style.TimerAndPoints}>
             <Typography sx={style.Points}>Points scored: {counter}</Typography>
-            <Typography sx={style.Points}>Best: {bestScore}</Typography>
             <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
             <ToastContainer />
           </Box>
@@ -230,6 +220,7 @@ export default function Vision() {
                 alt="Aim target with pawns"
                 sx={style.ImageTarget}
               />
+              <Typography sx={style.Points}>Best: {bestScore}</Typography>
             </Box>
           </Box>
           <List sx={style.List}>
