@@ -6,16 +6,18 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import * as style from "./PawnsGame.style.ts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Engine from "../../../../Engine/engine";
 import { Chess } from "chess.js";
 import { MovePair, SquareStyles } from "./PawnsGame.types.ts";
 import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import Engine from "../../Engine/engine.ts";
 
-const FEN = "8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 0 1";
+const FEN = "4k3/pppppppp/8/8/8/8/PPPPPPPP/4K3 w - - 0 1";
+
+const STOCKFISHLEVEL = 4;
 
 export default function Vision() {
-  //   const engine = useMemo(() => new Engine(), []);
-  const game = useMemo(() => new Chess(), []);
+  const engine = useMemo(() => new Engine(), []);
+  const game = useMemo(() => new Chess(FEN), []);
 
   const [gamePosition, setGamePosition] = useState(game.fen());
   const [history, setHistory] = useState<MovePair[]>([]);
@@ -92,7 +94,7 @@ export default function Vision() {
     setIsShowMovesEnabled((prev) => !prev);
   };
 
-  const getWinnerSquares = (number) => {
+  const getWinnerSquares = (number: number) => {
     const squares = ["a", "b", "c", "d", "e", "f", "g", "h"];
     return squares.map((letter) => `${letter}${number}`);
   };
@@ -100,11 +102,40 @@ export default function Vision() {
   const squaresForWhiteToWin = getWinnerSquares(8);
   const squaresForBlackToWin = getWinnerSquares(1);
 
+  function handleComputerMove() {
+    engine.evaluatePosition(game.fen(), STOCKFISHLEVEL);
+    engine.onMessage(({ bestMove }) => {
+      console.log(`Best move received: ${bestMove}`);
+
+      if (bestMove) {
+        const move = game.move(bestMove);
+        setTimeout(() => {
+          if (move) {
+            setGamePosition(game.fen());
+            const sourceSquareComputer = move.from;
+            const targetSquareComputer = move.to;
+
+            setHighlightedSquares({
+              [sourceSquareComputer]: {
+                backgroundColor: "rgba(255, 255, 0, 0.4)",
+              },
+              [targetSquareComputer]: {
+                backgroundColor: "rgba(255, 255, 0, 0.4)",
+              },
+            });
+          } else {
+            console.error(`Invalid move attempted: ${bestMove}`);
+          }
+        }, 600);
+      }
+    });
+  }
+
   function onDrop(sourceSquare: Square, targetSquare: Square, piece: Piece) {
     const move = game.move({
       from: sourceSquare,
       to: targetSquare,
-      promotion: piece[1].toLowerCase() ?? "q",
+      promotion: "q",
     });
 
     if (move === null) return false;
@@ -129,7 +160,7 @@ export default function Vision() {
           <Box sx={style.Chessboard}>
             <Chessboard
               id="BasicChessboard"
-              position={FEN}
+              position={gamePosition}
               onPieceDrop={onDrop}
               boardOrientation={changeBoardOrientation}
               customNotationStyle={{ fontSize: "18px" }}
@@ -173,7 +204,7 @@ export default function Vision() {
               <ArrowBackIcon sx={style.ArrowBackIcon} />
             </Link>
             <Box sx={style.TitleContainer}>
-              <Typography sx={style.TitleName}>Vision Training</Typography>
+              <Typography sx={style.TitleName}>Pawns Game</Typography>
             </Box>
           </Box>
         </Grid>
