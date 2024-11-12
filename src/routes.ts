@@ -12,7 +12,8 @@ export const routes = {
   ourcoach: "/ourcoach",
   privateLesson: "/private-lesson",
   ranksAndBadges: "/ranks-and-badges",
-  playVsComputer: "/play/computer",
+  playVsComputer: "/play/computer/:level",
+  chooseComputerLevel: "/play/choose-computer-level",
   puzzles: "/puzzles",
   pawnsGame: "/pawns-game",
 };

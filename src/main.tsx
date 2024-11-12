@@ -25,6 +25,8 @@ import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
+import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic/PlayerVsComputer.tsx";
+import ChooseComputerLevel from "./components/PlayerVsComputer/ChooseComputerLevel/ChooseComputerLevel.tsx";
 import PawnsGame from "./components/PawnsGame/PawnsGame.tsx";
 
 const router = createBrowserRouter(
@@ -42,6 +44,11 @@ const router = createBrowserRouter(
           <Route path={routes.courses} element={<CoursesPage />} />
           <Route path={routes.ranksAndBadges} element={<RanksAndBadges />} />
           <Route path={routes.privateLesson} element={<PrivateLesson />} />
+          <Route path={routes.playVsComputer} element={<PlayVsComputer />} />
+          <Route
+            path={routes.chooseComputerLevel}
+            element={<ChooseComputerLevel />}
+          />
           <Route path={routes.pawnsGame} element={<PawnsGame />} />
         </Route>
       </Route>
