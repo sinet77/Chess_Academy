@@ -86,17 +86,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return auth.signOut();
   };
 
-  const handlePasswordReset = (email: string) => {
-    return sendPasswordResetEmail(auth, email);
-  };
-
-  const handlePasswordChange = (password: string): Promise<void> => {
-    if (auth.currentUser) {
-      return updatePassword(auth.currentUser, password);
-    }
-    return Promise.reject("No current user");
-  };
-
   const handleCreateUserWithEmailAndPassword = async ({
     login,
     email,

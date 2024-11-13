@@ -12,7 +12,6 @@ const FetchDailyPuzzle = ({ setPuzzle }: FetchDailyPuzzleProps) => {
     try {
       const response = await fetch("https://api.chess.com/pub/puzzle/random");
       const data = await response.json();
-      console.log("Fetched new puzzle:", data);
       return data;
     } catch (error) {
       console.error("Error fetching puzzle:", error);
@@ -28,27 +27,19 @@ const FetchDailyPuzzle = ({ setPuzzle }: FetchDailyPuzzleProps) => {
       const docRef = doc(db, "Daily Puzzles", currentDate);
 
       const snap = await getDoc(docRef);
-      console.log("Snapshot exists:", snap.exists());
-      console.log("Snapshot data:", snap.data());
 
       if (snap.exists()) {
-        const data = snap.data();
-        if (data) {
-          const puzzleData = JSON.parse(data.pgn);
-          setPuzzle(puzzleData);
-          console.log("Loaded puzzle from Firestore:", puzzleData);
-        }
+        const puzzleData = JSON.parse(snap.data()?.pgn || null);
+        setPuzzle(puzzleData);
       } else {
         const newPuzzle = await fetchPuzzle();
 
         if (newPuzzle) {
           setPuzzle(newPuzzle);
           await setDoc(docRef, { pgn: JSON.stringify(newPuzzle) });
-          console.log("Saved new puzzle to Firestore");
         }
       }
     };
-
     fetchOrSetNewPuzzle();
   }, [setPuzzle]);
 
