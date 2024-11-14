@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -42,9 +42,14 @@ export default function Vision() {
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
 
   const handleBoardOrientation = () => {
-    setChangeBoardOrientation((prevBoardOrientation) =>
-      prevBoardOrientation === "white" ? "black" : "white"
-    );
+    setChangeBoardOrientation((prevBoardOrientation) => {
+      const newOrientation =
+        prevBoardOrientation === "white" ? "black" : "white";
+      if (newOrientation === "black") {
+        handleComputerMove();
+      }
+      return newOrientation;
+    });
   };
 
   const resetGame = () => {
@@ -119,8 +124,6 @@ export default function Vision() {
   const handleComputerMove = () => {
     engine.evaluatePosition(game.fen(), STOCKFISHLEVEL);
     engine.onMessage(({ bestMove }) => {
-      console.log(`Best move received: ${bestMove}`);
-
       if (bestMove) {
         const move = game.move(bestMove);
         setTimeout(() => {
