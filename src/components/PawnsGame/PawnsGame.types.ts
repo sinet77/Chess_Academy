@@ -5,8 +5,3 @@ export interface SquareStyles {
     borderRadius?: string;
   };
 }
-
-export interface MovePair {
-  white: string;
-  black: string;
-}

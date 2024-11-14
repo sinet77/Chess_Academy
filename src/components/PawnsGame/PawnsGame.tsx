@@ -1,14 +1,23 @@
 import { useMemo, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
-import { Box, Button, Grid, Link, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Grid,
+  Link,
+  Switch,
+  Typography,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 import * as style from "./PawnsGame.style.ts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Chess } from "chess.js";
-import { MovePair, SquareStyles } from "./PawnsGame.types.ts";
-import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import { SquareStyles } from "./PawnsGame.types.ts";
+import { Square } from "react-chessboard/dist/chessboard/types";
 import Engine from "../../Engine/engine.ts";
 
 const FEN = "4k3/pppppppp/8/8/8/8/PPPPPPPP/4K3 w - - 0 1";
@@ -20,7 +29,6 @@ export default function Vision() {
   const game = useMemo(() => new Chess(FEN), []);
 
   const [gamePosition, setGamePosition] = useState(game.fen());
-  const [history, setHistory] = useState<MovePair[]>([]);
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
@@ -37,6 +45,12 @@ export default function Vision() {
     setChangeBoardOrientation((prevBoardOrientation) =>
       prevBoardOrientation === "white" ? "black" : "white"
     );
+  };
+
+  const resetGame = () => {
+    setGamePosition(FEN);
+    setHighlightedSquares({});
+    setRightClickedSquares({});
   };
 
   const onSquareRightClick = (square: Square) => {
@@ -102,7 +116,7 @@ export default function Vision() {
   const squaresForWhiteToWin = getWinnerSquares(8);
   const squaresForBlackToWin = getWinnerSquares(1);
 
-  function handleComputerMove() {
+  const handleComputerMove = () => {
     engine.evaluatePosition(game.fen(), STOCKFISHLEVEL);
     engine.onMessage(({ bestMove }) => {
       console.log(`Best move received: ${bestMove}`);
@@ -129,9 +143,9 @@ export default function Vision() {
         }, 600);
       }
     });
-  }
+  };
 
-  function onDrop(sourceSquare: Square, targetSquare: Square, piece: Piece) {
+  const onDrop = (sourceSquare: Square, targetSquare: Square) => {
     const move = game.move({
       from: sourceSquare,
       to: targetSquare,
@@ -147,16 +161,29 @@ export default function Vision() {
     setGamePosition(game.fen());
     handleComputerMove();
     return true;
-  }
+  };
 
   return (
     <Box>
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
-        <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
-          <Box sx={style.TimerAndPoints}>
-            <ToastContainer />
+        <Grid container sx={style.Instruction}>
+          <Box sx={style.Title}>
+            <Link to={"/"} component={RouterLink}>
+              <ArrowBackIcon sx={style.ArrowBackIcon} />
+            </Link>
+            <Typography sx={style.TitleName}>Pawns Game</Typography>
           </Box>
+          <Box sx={style.DescriptionContainer}>
+            <Typography sx={style.Description}>
+              Your mission is to reach the eighth rank as white or the first
+              rank as black. The computer will try to beat you and fulfill the
+              same victory conditions
+            </Typography>
+          </Box>
+          <ToastContainer />
+        </Grid>
+        <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Box sx={style.Chessboard}>
             <Chessboard
               id="BasicChessboard"
@@ -178,34 +205,26 @@ export default function Vision() {
           </Box>
           <Box sx={style.ButtonsContainer}>
             <Button
+              sx={style.Button}
+              startIcon={<SwapVertIcon />}
               onClick={handleBoardOrientation}
-              sx={{
-                ...style.Button,
-              }}
             >
-              Swap orientation
+              Swap
             </Button>
-            <Button
-              sx={{
-                ...style.Button,
-              }}
-            >
-              Start
+            <Button sx={style.Button} onClick={resetGame}>
+              Reset
             </Button>
-            <Button onClick={handleToggleShowEnableMoves}>
-              Show enable moves
-            </Button>
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} md={3} sx={style.Moves}>
-          <Box sx={style.Title}>
-            <Link to={"/"} component={RouterLink}>
-              <ArrowBackIcon sx={style.ArrowBackIcon} />
-            </Link>
-            <Box sx={style.TitleContainer}>
-              <Typography sx={style.TitleName}>Pawns Game</Typography>
-            </Box>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="warning"
+                  size="small"
+                  onChange={handleToggleShowEnableMoves}
+                />
+              }
+              label="Hide possible moves"
+              sx={style.SwitchLabel}
+            />
           </Box>
         </Grid>
       </Grid>

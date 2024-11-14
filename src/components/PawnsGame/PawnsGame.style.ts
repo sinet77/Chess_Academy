@@ -10,8 +10,9 @@ export const Main: SxProps = {
   backgroundColor: "#312e2b",
   minHeight: "100vh",
   display: "flex",
-  justifyContent: "top",
-  alignItems: "top",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "relative",
 };
 
 export const Chessboard: SxProps = {
@@ -26,45 +27,12 @@ export const Chessboard: SxProps = {
   cursor: "pointer",
 };
 
-export const TimerAndPoints: SxProps = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "20px",
-  gap: "15px",
-};
-
-export const Points: SxProps = {
-  color: "white",
-  fontSize: "25px",
-  fontWeight: "bold",
-  letterSpacing: 2,
-  fontFamily: "Roboto",
-};
-
-export const DrawnSquare: SxProps = {
-  color: "white",
-  position: "absolute",
-  right: "40px",
-  top: "40px",
-  fontSize: "2.2rem",
-  fontWeight: "bold",
-  letterSpacing: 2,
-  padding: "14px 20px",
-  backgroundColor: "black",
-  border: "1px solid #c65102",
-  borderRadius: "5px",
-};
-
 export const BoardAndButtons: SxProps = {
   width: "100%",
   height: "auto",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "top",
   alignItems: "center",
-  position: "relative",
   padding: "30px",
   gap: "40px",
 };
@@ -79,57 +47,44 @@ export const Button: SxProps = {
   textTransform: "none",
   width: "100%",
   mr: "10px",
-  padding: "10px 30px",
+  padding: "15px 30px",
   "&:hover": {
     backgroundColor: "#c65102",
   },
 };
 
-export const InheritColor: SxProps = { color: "inherit" };
+export const SwitchLabel: SxProps = {
+  ml: "10px",
+  gap: "10px",
+  textWrap: "nowrap",
+  "& .MuiFormControlLabel-label": {
+    fontSize: "0.9rem",
+    color: "white",
+  },
+};
 
 export const ButtonsContainer: SxProps = {
   display: "flex",
   justifyContent: "center",
-  gap: "20px",
+  gap: "10px",
 };
 
-export const VisibilityContainer: SxProps = {
-  fontSize: "30px",
-  display: "flex",
-  width: "100%",
-  gap: "5px",
-  textWrap: "nowrap",
-  "& .MuiFormControlLabel-label": {
-    fontFamily: "Playfair Display",
-    color: "white",
-    fontSize: "1rem",
-  },
-  "&.Mui-disabled .MuiFormControlLabel-label": {
-    color: "grey",
-  },
-  "& .MuiCheckbox-root svg": {
-    color: "orange",
-  },
-  "&.Mui-disabled .MuiCheckbox-root svg": {
-    color: "lightgrey",
-  },
-};
-
-export const Moves: SxProps = {
+export const Instruction: SxProps = {
   backgroundColor: "#242424",
   color: "white",
-  height: "auto",
+  display: "flex",
+  width: "100%",
   padding: "20px",
-  width: "40%",
   border: "1px solid #DADADA",
   borderTop: "none",
-  maxHeight: "100vh",
-  overflowY: "auto",
+  position: "absolute",
+  top: 0,
+  left: 0,
 };
 
 export const Title: SxProps = {
   display: "flex",
-  justifyContent: "space-between",
+  width: "100%",
   alignItems: "center",
   gap: "10px",
   mb: "30px",
@@ -144,58 +99,24 @@ export const TitleName: SxProps = {
   lineHeight: "23px",
 };
 
-export const TitleContainer: SxProps = {
+export const DescriptionContainer: SxProps = {
   display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
-  flexGrow: 1,
-  gap: "30px",
-};
-
-export const ImageTarget: SxProps = {
-  width: { xs: "30%", sm: "40%", md: "80%", lg: "70%" },
-  height: "auto",
-  borderRadius: "5px",
-};
-
-export const List: SxProps = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "10px",
+  textAlign: "center",
   justifyContent: "center",
 };
 
-export const AttemptsContainer: SxProps = {
+export const Description: SxProps = {
+  fontFamily: "Roboto",
+  fontSize: "24px",
+  fontWeight: "500",
   display: "flex",
-  alignItems: "center",
-  backgroundColor: "#FFFFFF1A",
-  padding: 1,
-  borderRadius: "10px",
-  wdith: "100%",
-};
-
-export const ListItem: SxProps = {
-  display: "flex",
-  justifyContent: "left",
-  padding: 0,
-  width: "50px",
-  minWidth: "fit-content",
+  textAlign: "center",
+  justifyContent: "center",
 };
 
 export const ArrowBackIcon: SxProps = {
-  color: "white",
+  color: "orange",
   mr: "10px",
-  fontSize: "30px",
+  fontSize: "2rem",
   display: "flex",
-};
-
-export const CheckIcon: SxProps = {
-  color: "#81B64C",
-  marginRight: 1,
-};
-
-export const CancelIcon: SxProps = {
-  color: "#FA412D",
-  marginRight: 1,
 };
