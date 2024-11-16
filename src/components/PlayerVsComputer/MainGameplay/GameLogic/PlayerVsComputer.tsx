@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import { Chess } from "chess.js";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import * as style from "./PlayerVsComputer.style";
 import Engine from "../../../../Engine/engine";
@@ -16,6 +16,17 @@ import Paper from "@mui/material/Paper";
 import Buttons from "../Buttons/Buttons";
 import { MovePair, SquareStyles } from "./PlayerVsComputer.types";
 
+const FREQUENCY_MAP: Record<string, number> = {
+  Novice: 1,
+  Learner: 2,
+  Apprentice: 3,
+  Challenger: 4,
+  Strategist: 6,
+  Expert: 8,
+  Master: 10,
+  Grandmaster: 12,
+};
+
 export default function PlayVsComputer() {
   const location = useLocation();
   const { level, color } = location.state;
@@ -24,19 +35,11 @@ export default function PlayVsComputer() {
   const playerColor =
     color === "random" ? (Math.random() < 0.5 ? "white" : "black") : color;
 
-  const frequencyMap: Record<string, number> = {
-    Novice: 1,
-    Learner: 2,
-    Apprentice: 3,
-    Challenger: 4,
-    Strategist: 6,
-    Expert: 8,
-    Master: 10,
-    Grandmaster: 12,
-  };
+  const engineRef = useRef(new Engine());
+  const gameRef = useRef(new Chess());
 
-  const engine = useMemo(() => new Engine(), []);
-  const game = useMemo(() => new Chess(), []);
+  const engine = engineRef.current;
+  const game = gameRef.current;
 
   const [gamePosition, setGamePosition] = useState(game.fen());
   const [moveCounter, setMoveCounter] = useState(1);
@@ -143,7 +146,7 @@ export default function PlayVsComputer() {
   }, [playerColor]);
 
   const handleComputerMove = () => {
-    const frequency = frequencyMap[level];
+    const frequency = FREQUENCY_MAP[level];
 
     if (frequency === 1 || moveCounter % frequency === 1) {
       const possibleMoves = game.moves();
@@ -223,7 +226,7 @@ export default function PlayVsComputer() {
     <Box sx={style.TrainingPageLayout}>
       <Box sx={style.OptionsTile}>
         <Buttons
-          handleBoardOrientation={handleBoardOrientation}
+          handleBoardOrientationChange={handleBoardOrientation}
           handleAutoPromoteToQueen={handleAutoPromoteToQueen}
           handleToggleShowEnableMoves={handleToggleShowEnableMoves}
         />

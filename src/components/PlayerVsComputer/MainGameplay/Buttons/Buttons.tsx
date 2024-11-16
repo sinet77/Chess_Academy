@@ -1,28 +1,30 @@
-import { Box, Button, Switch, FormControlLabel, Collapse } from "@mui/material";
+import {
+  Box,
+  Button,
+  Switch,
+  FormControlLabel,
+  Collapse,
+  Link,
+} from "@mui/material";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import * as style from "./Buttons.style";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { routes } from "../../../../routes";
 import { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-interface ButtonsProps {
-  handleBoardOrientation: () => void;
+interface Props {
+  handleBoardOrientationChange: () => void;
   handleAutoPromoteToQueen: () => void;
   handleToggleShowEnableMoves: () => void;
 }
 
 export default function Buttons({
-  handleBoardOrientation,
+  handleBoardOrientationChange,
   handleAutoPromoteToQueen,
   handleToggleShowEnableMoves,
-}: ButtonsProps) {
+}: Props) {
   const [open, setOpen] = useState<boolean>(false);
-  const navigate = useNavigate();
-
-  const handleBackButtonClick = () => {
-    navigate(routes.chooseComputerLevel);
-  };
 
   const toggleOptions = () => {
     setOpen((prev) => !prev);
@@ -30,9 +32,10 @@ export default function Buttons({
 
   return (
     <Box>
-      <Button sx={style.BackButton} onClick={handleBackButtonClick}>
-        Back
-      </Button>
+      <Link to={routes.chooseComputerLevel} component={RouterLink}>
+        <Button sx={style.BackButton}>Back</Button>
+      </Link>
+
       <Button sx={style.OptionsButton} onClick={toggleOptions}>
         <SettingsIcon />
         Options
@@ -42,7 +45,7 @@ export default function Buttons({
           <Button
             sx={style.Button}
             startIcon={<SwapVertIcon />}
-            onClick={handleBoardOrientation}
+            onClick={handleBoardOrientationChange}
           >
             Swap
           </Button>
