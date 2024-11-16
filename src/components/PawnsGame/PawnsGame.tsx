@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   Box,
   Button,
@@ -19,14 +19,16 @@ import { Chess } from "chess.js";
 import { SquareStyles } from "./PawnsGame.types.ts";
 import { Square } from "react-chessboard/dist/chessboard/types";
 import Engine from "../../Engine/engine.ts";
-
-const FEN = "4k3/pppppppp/8/8/8/8/PPPPPPPP/4K3 w - - 0 1";
+import { routes } from "../../routes.ts";
 
 const STOCKFISHLEVEL = 4;
 
-export default function Vision() {
+export default function PawnsGame() {
+  const location = useLocation();
+  const { startingFen } = location.state;
+
   const engineRef = useRef(new Engine());
-  const gameRef = useRef(new Chess(FEN));
+  const gameRef = useRef(new Chess(startingFen));
 
   const engine = engineRef.current;
   const game = gameRef.current;
@@ -174,19 +176,12 @@ export default function Vision() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <Box>
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid container sx={style.Instruction}>
           <Box sx={style.Title}>
-            <Link to={"/"} component={RouterLink}>
+            <Link to={routes.chooseStartingPosition} component={RouterLink}>
               <ArrowBackIcon sx={style.ArrowBackIcon} />
             </Link>
             <Typography sx={style.TitleName}>Pawns Game</Typography>

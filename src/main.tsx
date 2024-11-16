@@ -28,6 +28,7 @@ import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
 import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic/PlayerVsComputer.tsx";
 import ChooseComputerLevel from "./components/PlayerVsComputer/ChooseComputerLevel/ChooseComputerLevel.tsx";
 import PawnsGame from "./components/PawnsGame/PawnsGame.tsx";
+import ChoosePosition from "./components/PawnsGame/ChoosePosition/ChoosePosition.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +49,10 @@ const router = createBrowserRouter(
           <Route
             path={routes.chooseComputerLevel}
             element={<ChooseComputerLevel />}
+          />
+          <Route
+            path={routes.chooseStartingPosition}
+            element={<ChoosePosition />}
           />
           <Route path={routes.pawnsGame} element={<PawnsGame />} />
         </Route>
