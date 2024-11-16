@@ -58,7 +58,7 @@ export default function PawnsGame() {
   };
 
   const resetGame = () => {
-    game.load(FEN);
+    game.load(startingFen);
     setGamePosition(game.fen());
     setHighlightedSquares({});
     setRightClickedSquares({});
