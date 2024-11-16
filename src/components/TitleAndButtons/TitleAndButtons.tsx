@@ -6,12 +6,6 @@ import { Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes.ts";
 
 export default function TitleAndButtons() {
-  const navigate = useNavigate();
-
-  const handlePuzzlesClick = () => {
-    navigate(routes.chooseDifficulty);
-  };
-
   return (
     <Box>
       <motion.div
@@ -62,7 +56,7 @@ export default function TitleAndButtons() {
             </Button>
           </Link>
           <Link
-            to={routes.puzzles}
+            to={routes.chooseDifficulty}
             component={RouterLink}
             sx={style.TextUnderlineTurnOff}
           >

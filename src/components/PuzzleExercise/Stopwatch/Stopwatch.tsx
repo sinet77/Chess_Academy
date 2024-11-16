@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
-import { StopwatchProps } from "./Stopwatch.types";
 import TimerIcon from "@mui/icons-material/Timer";
 import { Box, Typography } from "@mui/material";
 import * as style from "./Stopwatch.style";
 
-const Stopwatch = ({ moves, currentMoveIndex }: StopwatchProps) => {
+interface Props {
+  moves: string[];
+  currentMoveIndex: number;
+}
+
+const Stopwatch = ({ moves, currentMoveIndex }: Props) => {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+    let interval: ReturnType<typeof setInterval> | null = null;
 
     if (isActive) {
       interval = setInterval(() => {

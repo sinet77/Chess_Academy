@@ -12,6 +12,6 @@ export const routes = {
   privateLesson: "/private-lesson",
   ranksAndBadges: "/ranks-and-badges",
   puzzles: "/puzzles/:level",
-  chooseDifficulty: "/choose-difficulty",
+  chooseDifficulty: "/puzzles/choose-difficulty",
   playVsComputer: "/play/computer",
 };
