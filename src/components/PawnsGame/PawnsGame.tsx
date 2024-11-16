@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -25,8 +25,11 @@ const FEN = "4k3/pppppppp/8/8/8/8/PPPPPPPP/4K3 w - - 0 1";
 const STOCKFISHLEVEL = 4;
 
 export default function Vision() {
-  const engine = useMemo(() => new Engine(), []);
-  const game = useMemo(() => new Chess(FEN), []);
+  const engineRef = useRef(new Engine());
+  const gameRef = useRef(new Chess(FEN));
+
+  const engine = engineRef.current;
+  const game = gameRef.current;
 
   const [gamePosition, setGamePosition] = useState(game.fen());
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
@@ -53,9 +56,13 @@ export default function Vision() {
   };
 
   const resetGame = () => {
-    setGamePosition(FEN);
+    game.load(FEN);
+    setGamePosition(game.fen());
     setHighlightedSquares({});
     setRightClickedSquares({});
+    if (changeBoardOrientation === "black") {
+      handleComputerMove();
+    }
   };
 
   const onSquareRightClick = (square: Square) => {

@@ -12,7 +12,6 @@ export const Main: SxProps = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  position: "relative",
 };
 
 export const Chessboard: SxProps = {
@@ -77,9 +76,6 @@ export const Instruction: SxProps = {
   padding: "20px",
   border: "1px solid #DADADA",
   borderTop: "none",
-  position: "absolute",
-  top: 0,
-  left: 0,
 };
 
 export const Title: SxProps = {
