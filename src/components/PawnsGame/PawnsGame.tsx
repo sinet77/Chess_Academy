@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -174,7 +174,14 @@ export default function Vision() {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid container sx={style.Instruction}>

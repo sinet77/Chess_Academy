@@ -10,8 +10,9 @@ export const Main: SxProps = {
   backgroundColor: "#312e2b",
   minHeight: "100vh",
   display: "flex",
-  justifyContent: "center",
+  flexDirection: "column",
   alignItems: "center",
+  gap: "50px",
 };
 
 export const Chessboard: SxProps = {
