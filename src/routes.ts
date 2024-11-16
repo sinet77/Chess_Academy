@@ -10,7 +10,8 @@ export const routes = {
   courses: "courses",
   ourcouch: "/ourcouch",
   privateLesson: "/private-lesson",
-  ranksAndBadges: "//ranks-and-badges",
+  ranksAndBadges: "/ranks-and-badges",
   puzzles: "/puzzles/:level",
   chooseDifficulty: "/choose-difficulty",
+  playVsComputer: "/play/computer",
 };

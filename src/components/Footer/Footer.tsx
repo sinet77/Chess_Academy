@@ -1,7 +1,7 @@
 import { Typography, Box, Link, Divider } from "@mui/material";
 import * as style from "./Footer.styles";
 import { Facebook, GitHub, Instagram, LinkedIn } from "@mui/icons-material";
-import { footer_knight } from "../../assets/FooterNavbarImages.js";
+import { footer_knight } from "../../assets/FooterNavbarImages.ts";
 import { routes } from "../../routes.js";
 
 export default function Footer() {

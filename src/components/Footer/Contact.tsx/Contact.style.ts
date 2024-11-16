@@ -1,5 +1,11 @@
 import { SxProps } from "@mui/material";
 
+export const Navbar: SxProps = {
+  backgroundColor: "black",
+  height: "112px",
+  width: "100%",
+};
+
 export const Main: SxProps = {
   backgroundColor: "#FFFFFF",
   boxShadow: "10px 10px 30px rgba(0, 0, 0, 0.5)",
@@ -73,9 +79,9 @@ export const Alert: SxProps = {
 };
 
 export const Map: SxProps = {
-  mt: "50px",
+  mt: "30px",
   width: "100%",
-  height: { xs: "300px", md: "500px" },
+  height: { xs: "150px", md: "500px" },
 };
 
 export const GetInTouchContainer: SxProps = {
