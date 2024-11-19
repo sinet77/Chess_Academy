@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
@@ -45,12 +45,13 @@ export default function PawnsGame() {
   );
   const [optionSquares, setOptionSquares] = useState<SquareStyles>({});
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
+  const [gameOver, setGameOver] = useState(false);
 
   const handleBoardOrientation = () => {
     setChangeBoardOrientation((prevBoardOrientation) => {
       const newOrientation =
         prevBoardOrientation === "white" ? "black" : "white";
-      if (newOrientation === "black") {
+      if (newOrientation === "black" && !gameOver) {
         handleComputerMove();
       }
       return newOrientation;
@@ -62,7 +63,8 @@ export default function PawnsGame() {
     setGamePosition(game.fen());
     setHighlightedSquares({});
     setRightClickedSquares({});
-    if (changeBoardOrientation === "black") {
+    setGameOver(false);
+    if (changeBoardOrientation === "black" && !gameOver) {
       handleComputerMove();
     }
   };
@@ -122,15 +124,36 @@ export default function PawnsGame() {
     setIsShowMovesEnabled((prev) => !prev);
   };
 
-  const getWinnerSquares = (number: number) => {
+  const getWinnerSquares = (number: number): Square[] => {
     const squares = ["a", "b", "c", "d", "e", "f", "g", "h"];
-    return squares.map((letter) => `${letter}${number}`);
+    return squares.map((letter) => `${letter}${number}`) as Square[];
   };
 
-  const squaresForWhiteToWin = getWinnerSquares(8);
-  const squaresForBlackToWin = getWinnerSquares(1);
+  const checkWinner = (game: Chess) => {
+    const squaresForWhiteToWin: Square[] = getWinnerSquares(8);
+    const squaresForBlackToWin: Square[] = getWinnerSquares(1);
+
+    const whiteWins = squaresForWhiteToWin.some(
+      (square: Square) => game.get(square).color === "w"
+    );
+    if (whiteWins) {
+      setGameOver(true);
+      return "White wins!";
+    }
+
+    const blackWins = squaresForBlackToWin.some(
+      (square: Square) => game.get(square).color === "b"
+    );
+    if (blackWins) {
+      setGameOver(true);
+      return "Black wins!";
+    }
+    return null;
+  };
 
   const handleComputerMove = () => {
+    if (gameOver) return;
+
     engine.evaluatePosition(game.fen(), STOCKFISHLEVEL);
     engine.onMessage(({ bestMove }) => {
       if (bestMove) {
@@ -149,6 +172,7 @@ export default function PawnsGame() {
                 backgroundColor: "rgba(255, 255, 0, 0.4)",
               },
             });
+            checkWinner(game);
           } else {
             console.error(`Invalid move attempted: ${bestMove}`);
           }
@@ -158,6 +182,8 @@ export default function PawnsGame() {
   };
 
   const onDrop = (sourceSquare: Square, targetSquare: Square) => {
+    if (gameOver) return false;
+
     const move = game.move({
       from: sourceSquare,
       to: targetSquare,
@@ -171,9 +197,17 @@ export default function PawnsGame() {
     });
 
     setGamePosition(game.fen());
+    checkWinner(game);
     handleComputerMove();
     return true;
   };
+
+  useEffect(() => {
+    const winner = checkWinner(game);
+    if (winner) {
+      toast(winner);
+    }
+  }, [gamePosition]);
 
   return (
     <Box>
