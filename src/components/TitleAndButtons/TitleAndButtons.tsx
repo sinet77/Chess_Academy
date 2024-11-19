@@ -57,7 +57,7 @@ export default function TitleAndButtons() {
             </Button>
           </Link>
           <Link
-            to={routes.puzzles}
+            to={routes.chooseDifficulty}
             component={RouterLink}
             sx={style.TextUnderlineTurnOff}
           >

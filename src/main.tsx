@@ -26,6 +26,8 @@ import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
 import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
+import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
+import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +44,11 @@ const router = createBrowserRouter(
           <Route path={routes.courses} element={<CoursesPage />} />
           <Route path={routes.ranksAndBadges} element={<RanksAndBadges />} />
           <Route path={routes.privateLesson} element={<PrivateLesson />} />
+          <Route path={routes.puzzles} element={<PuzzlesExercise />} />
+          <Route
+            path={routes.chooseDifficulty}
+            element={<ChoosingPuzzlePage />}
+          />
           <Route path={routes.dailyPuzzle} element={<DailyPuzzle />} />
         </Route>
       </Route>

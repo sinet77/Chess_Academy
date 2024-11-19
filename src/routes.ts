@@ -11,7 +11,8 @@ export const routes = {
   ourcouch: "/ourcouch",
   privateLesson: "/private-lesson",
   ranksAndBadges: "/ranks-and-badges",
+  puzzles: "/puzzles/:level",
+  chooseDifficulty: "/puzzles/choose-difficulty",
   playVsComputer: "/play/computer",
-  puzzles: "/puzzles",
   dailyPuzzle: "daily-chess-puzzle",
 };
