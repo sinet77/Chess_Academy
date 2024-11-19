@@ -46,6 +46,7 @@ export default function PawnsGame() {
   const [optionSquares, setOptionSquares] = useState<SquareStyles>({});
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
   const [gameOver, setGameOver] = useState(false);
+  const [isGameStarted, setIsGameStarted] = useState(false)
 
   const handleBoardOrientation = () => {
     setChangeBoardOrientation((prevBoardOrientation) => {
@@ -60,13 +61,15 @@ export default function PawnsGame() {
 
   const resetGame = () => {
     game.load(startingFen);
-    setGamePosition(game.fen());
+    setGamePosition(startingFen);
+    setChangeBoardOrientation("white")
     setHighlightedSquares({});
     setRightClickedSquares({});
     setGameOver(false);
-    if (changeBoardOrientation === "black" && !gameOver) {
-      handleComputerMove();
-    }
+    setIsGameStarted(false)
+    if (changeBoardOrientation === "black") {
+      setChangeBoardOrientation("white");
+  }
   };
 
   const onSquareRightClick = (square: Square) => {
@@ -153,6 +156,7 @@ export default function PawnsGame() {
 
   const handleComputerMove = () => {
     if (gameOver) return;
+    setIsGameStarted(true)
 
     engine.evaluatePosition(game.fen(), STOCKFISHLEVEL);
     engine.onMessage(({ bestMove }) => {
@@ -183,6 +187,8 @@ export default function PawnsGame() {
 
   const onDrop = (sourceSquare: Square, targetSquare: Square) => {
     if (gameOver) return false;
+
+    setIsGameStarted(true)
 
     const move = game.move({
       from: sourceSquare,
@@ -251,9 +257,18 @@ export default function PawnsGame() {
           </Box>
           <Box sx={style.ButtonsContainer}>
             <Button
-              sx={style.Button}
+              sx={{
+                ...style.Button,
+                ...(isGameStarted && {
+                  "&.Mui-disabled": {
+                    backgroundColor: "grey",
+                    color: "black",
+                  },
+                }),
+              }}
               startIcon={<SwapVertIcon />}
               onClick={handleBoardOrientation}
+              disabled={isGameStarted}
             >
               Swap
             </Button>
