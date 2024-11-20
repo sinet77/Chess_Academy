@@ -5,14 +5,17 @@
 <h1>General Info</h1>
 <h3>Chess Academy is a platform where you can learn and play chess. It has been developed for my students in mind to improve their chess skills</h3>
 
+<h1>Demo</h1>
+
+
+| User  | Password |
+|-------|----------|
+| Demo  | Demo123  |
+
+
 <h1>Features</h1>
 
 <h3>Solve various chess puzzles at different difficulty levels</h3>
-
-<h1>Demo</h1>
-
-<h3>User: Demo</h3>
-<h3>Password: Demo123</h3>
 
 <img src="https://github.com/user-attachments/assets/dbecc2f7-7d0f-46b6-bfe5-e09d3143ffbc"  />
 
