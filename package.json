@@ -31,6 +31,7 @@
     "react-password-strength-bar": "^0.4.1",
     "react-router-dom": "^6.26.1",
     "react-virtuoso": "^4.10.1",
+    "stockfish": "^16.0.0",
     "rss-parser": "^3.13.0",
     "rss-to-json": "^2.1.1",
     "styled-components": "^6.1.12",
