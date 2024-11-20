@@ -26,6 +26,8 @@ import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
 import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
+import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic/PlayerVsComputer.tsx";
+import ChooseComputerLevel from "./components/PlayerVsComputer/ChooseComputerLevel/ChooseComputerLevel.tsx";
 import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
 import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
 
@@ -50,6 +52,11 @@ const router = createBrowserRouter(
             element={<ChoosingPuzzlePage />}
           />
           <Route path={routes.dailyPuzzle} element={<DailyPuzzle />} />
+          <Route path={routes.playVsComputer} element={<PlayVsComputer />} />
+          <Route
+            path={routes.chooseComputerLevel}
+            element={<ChooseComputerLevel />}
+          />
         </Route>
       </Route>
       <Route path={routes.login} element={<LoginPage />} />

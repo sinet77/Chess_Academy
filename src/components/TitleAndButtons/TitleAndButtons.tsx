@@ -41,7 +41,7 @@ export default function TitleAndButtons() {
             </Button>
           </Link>
           <Link
-            to={routes.playVsComputer}
+            to={routes.chooseComputerLevel}
             component={RouterLink}
             sx={style.TextUnderlineTurnOff}
           >

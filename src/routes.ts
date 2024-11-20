@@ -13,6 +13,7 @@ export const routes = {
   ranksAndBadges: "/ranks-and-badges",
   puzzles: "/puzzles/:level",
   chooseDifficulty: "/puzzles/choose-difficulty",
-  playVsComputer: "/play/computer",
+  playVsComputer: "/play/computer/:level",
+  chooseComputerLevel: "/play/choose-computer-level",
   dailyPuzzle: "daily-chess-puzzle",
 };
