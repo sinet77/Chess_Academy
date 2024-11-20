@@ -29,7 +29,7 @@ import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic
 import ChooseComputerLevel from "./components/PlayerVsComputer/ChooseComputerLevel/ChooseComputerLevel.tsx";
 import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
 import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
-import Vision from "./components/Orientation training/OrientationTrening.tsx";
+import VisionTraining from "./components/Orientation training/VisionTraining.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,7 +56,7 @@ const router = createBrowserRouter(
             path={routes.chooseComputerLevel}
             element={<ChooseComputerLevel />}
           />
-          <Route path={routes.vision} element={<Vision />} />
+          <Route path={routes.vision} element={<VisionTraining />} />
         </Route>
       </Route>
       <Route path={routes.login} element={<LoginPage />} />

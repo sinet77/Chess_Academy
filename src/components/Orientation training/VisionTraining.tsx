@@ -19,12 +19,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import * as style from "./OrientationTrening.style";
+import * as style from "./VisionTraining.style.ts";
 import target from "../../assets/chess_aim_target.jpg";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Timer from "./Timer/Timer";
-import { useAuth } from "../../context/authContext";
+import Timer from "./Timer/Timer.tsx";
+import { useAuth } from "../../context/authContext/index.tsx";
 
 const SQUARES = Array.from({ length: 8 }, (_, row) =>
   Array.from(
@@ -35,7 +34,7 @@ const SQUARES = Array.from({ length: 8 }, (_, row) =>
 
 const FEN = "";
 
-export default function Vision() {
+export default function VisionTraining() {
   const { currentUser } = useAuth();
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
@@ -51,7 +50,7 @@ export default function Vision() {
 
   useEffect(() => {
     const fetchBestScore = async () => {
-      if (currentUser) {
+      if (!currentUser) return
         const bestScoreDocRef = doc(
           db,
           "Users",
@@ -66,7 +65,7 @@ export default function Vision() {
         } else {
           await setDoc(bestScoreDocRef, { Best_Score: 0 });
         }
-      }
+      
     };
 
     fetchBestScore();
@@ -109,7 +108,7 @@ export default function Vision() {
   };
 
   const handleSquareClick = (square: string) => {
-    if (isTimerActive) {
+    if (!isTimerActive) return
       const isCorrect = square === randomSquare;
       setAttempts((prevAttempts) => [
         ...prevAttempts,
@@ -121,7 +120,7 @@ export default function Vision() {
       }
 
       generateRandomSquare();
-    } else return;
+    
   };
 
   const handleBoardOrientation = () => {
@@ -143,7 +142,6 @@ export default function Vision() {
           <Box sx={style.TimerAndPoints}>
             <Typography sx={style.Points}>Points scored: {counter}</Typography>
             <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
-            <ToastContainer />
           </Box>
           {isTimerActive && randomSquare && (
             <Typography sx={style.DrawnSquare}>{randomSquare}</Typography>

@@ -14,23 +14,25 @@ const Timer = ({
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (isTurnedOn) {
-      if (!intervalRef.current) {
+    if (!isTurnedOn) {
+      setTotalSeconds(30);
+      return
+    }
+      if (intervalRef.current) return
+
         intervalRef.current = setInterval(() => {
           setTotalSeconds((prev) => {
-            if (prev === 0) {
+            if (prev > 0) {
+              return prev-1
+            }
               clearInterval(intervalRef.current!);
               intervalRef.current = null;
               onTimerEnd();
-              return 0;
-            }
-            return prev - 1;
+              return 0;   
+            
           });
         }, 1000);
-      }
-    } else {
-      setTotalSeconds(30);
-    }
+      
 
     return () => {
       if (!isTurnedOn && intervalRef.current) {
