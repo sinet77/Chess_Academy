@@ -1,12 +1,12 @@
 import { SxProps } from "@mui/material";
 
 export const TileContainer: SxProps = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, auto)",
+  display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  gap: "50px",
-  padding: "30px",
+  gap: "70px",
+  padding: "10px",
+  mb: "20px",
 };
 
 export const Title: SxProps = {
@@ -20,7 +20,7 @@ export const Title: SxProps = {
 export const TitleText: SxProps = {
   color: "#fff",
   fontFamily: "Playfair Display",
-  fontSize: "62px",
+  fontSize: "50px",
   fontWeight: "700",
   lineHeight: "110px",
 };

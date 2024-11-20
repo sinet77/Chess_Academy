@@ -23,6 +23,7 @@ import Contact from "./components/Footer/Contact.tsx/Contact.tsx";
 import CoursesPage from "./components/Courses/CoursesPage.tsx";
 import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
+import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
 import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic/PlayerVsComputer.tsx";
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
             path={routes.chooseDifficulty}
             element={<ChoosingPuzzlePage />}
           />
+          <Route path={routes.dailyPuzzle} element={<DailyPuzzle />} />
           <Route path={routes.playVsComputer} element={<PlayVsComputer />} />
           <Route
             path={routes.chooseComputerLevel}
@@ -70,10 +72,8 @@ const rootElement = document.getElementById("root");
 
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
-    <React.StrictMode>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </React.StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
