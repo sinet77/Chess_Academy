@@ -20,7 +20,7 @@ const pages = [
   { name: "Home", path: routes.home },
   { name: "About", path: routes.aboutUs },
   { name: "Courses", path: routes.courses },
-  { name: "Pages", path: "/pages" },
+  { name: "Our Couch", path: routes.ourcouch },
   { name: "Contact", path: routes.contactUs },
   { name: "Ranks and Badges", path: routes.ranksAndBadges },
 ];

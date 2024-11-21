@@ -1,11 +1,11 @@
 import { Box, Grid } from "@mui/material";
 import { Chess } from "chess.js";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import * as style from "./PlayerVsComputer.style";
 import Engine from "../../../../Engine/engine";
 import { useLocation } from "react-router-dom";
-import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import { Square } from "react-chessboard/dist/chessboard/types";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -16,6 +16,17 @@ import Paper from "@mui/material/Paper";
 import Buttons from "../Buttons/Buttons";
 import { MovePair, SquareStyles } from "./PlayerVsComputer.types";
 
+const FREQUENCY_MAP: Record<string, number> = {
+  Novice: 1,
+  Learner: 2,
+  Apprentice: 3,
+  Challenger: 4,
+  Strategist: 6,
+  Expert: 8,
+  Master: 10,
+  Grandmaster: 12,
+};
+
 export default function PlayVsComputer() {
   const location = useLocation();
   const { level, color } = location.state;
@@ -24,19 +35,11 @@ export default function PlayVsComputer() {
   const playerColor =
     color === "random" ? (Math.random() < 0.5 ? "white" : "black") : color;
 
-  const frequencyMap: Record<string, number> = {
-    Novice: 1,
-    Learner: 2,
-    Apprentice: 3,
-    Challenger: 4,
-    Strategist: 6,
-    Expert: 8,
-    Master: 10,
-    Grandmaster: 12,
-  };
+  const engineRef = useRef(new Engine());
+  const gameRef = useRef(new Chess());
 
-  const engine = useMemo(() => new Engine(), []);
-  const game = useMemo(() => new Chess(), []);
+  const engine = engineRef.current;
+  const game = gameRef.current;
 
   const [gamePosition, setGamePosition] = useState(game.fen());
   const [moveCounter, setMoveCounter] = useState(1);
@@ -54,19 +57,19 @@ export default function PlayVsComputer() {
   const [optionSquares, setOptionSquares] = useState<SquareStyles>({});
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
 
-  function handleBoardOrientation() {
+  const handleBoardOrientation = () => {
     setChangeBoardOrientation((prevBoardOrientation) =>
       prevBoardOrientation === "white" ? "black" : "white"
     );
-  }
+  };
 
-  function handleAutoPromoteToQueen() {
+  const handleAutoPromoteToQueen = () => {
     setAutoPromoteToQueen((prevAutoPromoteToQueen) =>
       prevAutoPromoteToQueen === true ? false : true
     );
-  }
+  };
 
-  function onSquareRightClick(square: Square) {
+  const onSquareRightClick = (square: Square) => {
     const color = "rgba(254,46,46, 0.4)";
     const isRightClicked =
       rightClickedSquares[square]?.backgroundColor === color;
@@ -77,9 +80,9 @@ export default function PlayVsComputer() {
         ? { backgroundColor: "transparent" }
         : { backgroundColor: color },
     }));
-  }
+  };
 
-  function getMoveOptions(square: Square) {
+  const getMoveOptions = (square: Square) => {
     const moves = game.moves({
       square,
       verbose: true,
@@ -104,24 +107,24 @@ export default function PlayVsComputer() {
       background: "rgba(255, 255, 0, 0.4)",
     };
     setOptionSquares(newSquares);
-  }
+  };
 
-  function onMouseOverSquare(square: Square) {
+  const onMouseOverSquare = (square: Square) => {
     if (isShowMovesEnabled) {
       getMoveOptions(square);
     }
-  }
-  function onMouseOutSquare() {
+  };
+  const onMouseOutSquare = () => {
     if (Object.keys(optionSquares).length !== 0) {
       setOptionSquares({});
     }
-  }
+  };
 
   const handleToggleShowEnableMoves = () => {
     setIsShowMovesEnabled((prev) => !prev);
   };
 
-  function updateHistory() {
+  const updateHistory = () => {
     const currentHistory = game.history();
     const updatedHistory: MovePair[] = [];
 
@@ -133,7 +136,7 @@ export default function PlayVsComputer() {
     }
 
     setHistory(updatedHistory);
-  }
+  };
 
   useEffect(() => {
     if (playerColor === "black") {
@@ -142,9 +145,8 @@ export default function PlayVsComputer() {
     }
   }, [playerColor]);
 
-  function handleComputerMove() {
-    const frequency = frequencyMap[level];
-    console.log(`Current moveCounter: ${moveCounter}`);
+  const handleComputerMove = () => {
+    const frequency = FREQUENCY_MAP[level];
 
     if (frequency === 1 || moveCounter % frequency === 1) {
       const possibleMoves = game.moves();
@@ -154,7 +156,6 @@ export default function PlayVsComputer() {
       const move = game.move(randomMove);
 
       if (move) {
-        console.log(`Random move chosen: ${randomMove}`);
         setTimeout(() => {
           setGamePosition(game.fen());
           setMoveCounter((prevCounter) => prevCounter + 1);
@@ -170,11 +171,6 @@ export default function PlayVsComputer() {
               backgroundColor: "rgba(255, 255, 0, 0.4)",
             },
           });
-          console.log(
-            "Highlighted squares updated:",
-            sourceSquareComputer,
-            targetSquareComputer
-          );
         }, 600);
       }
       return;
@@ -183,8 +179,6 @@ export default function PlayVsComputer() {
     // Ruch obliczony przez Stockfisha z opóźnieniem
     engine.evaluatePosition(game.fen(), stockfishLevel);
     engine.onMessage(({ bestMove }) => {
-      console.log(`Best move received: ${bestMove}`);
-
       if (bestMove) {
         const move = game.move(bestMove);
         setTimeout(() => {
@@ -203,19 +197,17 @@ export default function PlayVsComputer() {
                 backgroundColor: "rgba(255, 255, 0, 0.4)",
               },
             });
-          } else {
-            console.error(`Invalid move attempted: ${bestMove}`);
           }
         }, 600);
       }
     });
-  }
+  };
 
-  function onDrop(sourceSquare: Square, targetSquare: Square, piece: Piece) {
+  const onDrop = (sourceSquare: Square, targetSquare: Square) => {
     const move = game.move({
       from: sourceSquare,
       to: targetSquare,
-      promotion: piece[1].toLowerCase() ?? "q",
+      promotion: "q",
     });
 
     if (move === null) return false;
@@ -228,13 +220,13 @@ export default function PlayVsComputer() {
     setGamePosition(game.fen());
     handleComputerMove();
     return true;
-  }
+  };
 
   return (
     <Box sx={style.TrainingPageLayout}>
       <Box sx={style.OptionsTile}>
         <Buttons
-          handleBoardOrientation={handleBoardOrientation}
+          handleBoardOrientationChange={handleBoardOrientation}
           handleAutoPromoteToQueen={handleAutoPromoteToQueen}
           handleToggleShowEnableMoves={handleToggleShowEnableMoves}
         />
