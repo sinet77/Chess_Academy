@@ -1,11 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
+export enum TimerDirection {
+  Forward = 1,
+  Backward = -1,
+}
 interface UseTimerOptions {
-  initialTime: number; 
-  format: "seconds" | "minutes" | "both"; 
-  direction: 1 | -1; 
-  isTurnedOn: boolean; 
-  onTimerEnd?: () => void; 
+  initialTime: number;
+  format: "seconds" | "minutes" | "both";
+  direction: TimerDirection;
+  isTurnedOn: boolean;
+  onTimerEnd?: () => void;
 }
 
 export const useTimer = ({
@@ -33,7 +37,7 @@ export const useTimer = ({
           const nextValue = prev + direction; 
   
 
-          if (direction === -1 && nextValue <= 0) {
+          if (direction === TimerDirection.Backward && nextValue <= 0) {
             clearInterval(intervalRef.current!);
             intervalRef.current = null;
             onTimerEnd?.();
@@ -55,12 +59,12 @@ export const useTimer = ({
 
 
 
-  const formattedTime = () => {
-    if (format === "seconds") return `${totalSeconds} s`;
-    if (format === "minutes") return `${Math.floor(totalSeconds / 60)} min`;
-    if (format === "both")
-      return `${Math.floor(totalSeconds / 60)} min ${totalSeconds % 60} s`;
-  };
+    const formattedTime = useMemo(() => {  
+      if (format === "seconds") return `${totalSeconds} s`;  
+      if (format === "minutes") return `${Math.floor(totalSeconds / 60)} min`;  
+      if (format === "both")  
+        return `${Math.floor(totalSeconds / 60)} min ${totalSeconds % 60} s`;  
+    }, [format, totalSeconds]); 
 
   return { totalSeconds, formattedTime };
 };

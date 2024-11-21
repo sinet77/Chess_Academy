@@ -1,6 +1,7 @@
 import TimerIcon from "@mui/icons-material/Timer";
 import { Box, Typography } from "@mui/material";
 import { useTimer } from "../../../hooks/useTimer"; 
+import {TimerDirection} from "../../../hooks/useTimer"
 import * as style from "./Timer.style";
 
 const Timer = ({
@@ -13,7 +14,7 @@ const Timer = ({
   const { formattedTime } = useTimer({
     initialTime: 30, 
     format: "seconds", 
-    direction: -1, 
+    direction: TimerDirection.Backward, 
     isTurnedOn: isTurnedOn, 
     onTimerEnd, 
   });
@@ -22,7 +23,7 @@ const Timer = ({
     <Box sx={style.Container}>
       <TimerIcon sx={style.TimerIconStyle} />
       <Box sx={style.TimeNamesContainer}>
-        <Typography sx={style.TimeFont}>{formattedTime()}</Typography>
+        <Typography sx={style.TimeFont}>{formattedTime}</Typography>
       </Box>
     </Box>
   );

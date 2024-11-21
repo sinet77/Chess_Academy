@@ -1,4 +1,5 @@
 import { SxProps } from "@mui/system";
+import { Theme } from "@mui/material/styles";
 
 export const Navbar: SxProps = {
   backgroundColor: "black",
@@ -21,6 +22,7 @@ export const Chessboard: SxProps = {
     md: "80%",
     lg: "60%",
   },
+  maxWidth: "800px",
   height: "auto",
   border: "1px solid black",
   cursor: "pointer",
@@ -69,7 +71,7 @@ export const BoardAndButtons: SxProps = {
   gap: "40px",
 };
 
-export const Button: SxProps = {
+export const Button = (theme: Theme) => ({
   color: "white",
   backgroundColor: "#000000",
   fontFamily: "Playfair Display",
@@ -78,12 +80,18 @@ export const Button: SxProps = {
   lineHeight: "23px",
   textTransform: "none",
   width: "100%",
-  mr: "10px",
   padding: "10px 30px",
+  mr: "10px",
   "&:hover": {
     backgroundColor: "#c65102",
   },
-};
+   
+  [theme.breakpoints.down("sm")]: {
+    padding: "5px",
+    fontSize: "10px" 
+  },
+});
+
 
 export const InheritColor: SxProps = { color: "inherit" };
 

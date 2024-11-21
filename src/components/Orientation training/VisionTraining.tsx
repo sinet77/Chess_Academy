@@ -12,7 +12,9 @@ import {
   Link,
   List,
   ListItem,
+  Theme,
   Typography,
+  useTheme,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -35,7 +37,10 @@ const SQUARES = Array.from({ length: 8 }, (_, row) =>
 const FEN = "";
 
 export default function VisionTraining() {
+  const theme = useTheme<Theme>();
+
   const { currentUser } = useAuth();
+
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
@@ -162,7 +167,7 @@ export default function VisionTraining() {
             <Button
               onClick={handleBoardOrientation}
               sx={{
-                ...style.Button,
+                ...style.Button(theme),
                 ...(isTimerActive && {
                   "&.Mui-disabled": {
                     backgroundColor: "grey",
@@ -177,7 +182,7 @@ export default function VisionTraining() {
             <Button
               onClick={handleStartClick}
               sx={{
-                ...style.Button,
+                ...style.Button(theme),
                 ...(isTimerActive && {
                   "&.Mui-disabled": {
                     backgroundColor: "grey",
