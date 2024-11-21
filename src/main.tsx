@@ -23,13 +23,14 @@ import Contact from "./components/Footer/Contact.tsx/Contact.tsx";
 import CoursesPage from "./components/Courses/CoursesPage.tsx";
 import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoachNavbar.tsx";
-import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
 import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic/PlayerVsComputer.tsx";
 import ChooseComputerLevel from "./components/PlayerVsComputer/ChooseComputerLevel/ChooseComputerLevel.tsx";
 import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
 import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
+import VisionTraining from "./components/Orientation training/VisionTraining.tsx";
+import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
             path={routes.chooseComputerLevel}
             element={<ChooseComputerLevel />}
           />
+          <Route path={routes.vision} element={<VisionTraining />} />
         </Route>
       </Route>
       <Route path={routes.login} element={<LoginPage />} />

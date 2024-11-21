@@ -8,6 +8,7 @@ import {
   Box,
 } from "@mui/material";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import { routes } from "../../routes";
 
 const drawerWidth = 240;
 
@@ -49,11 +50,11 @@ export default function SideMenu() {
         }}
       >
         <List>
-          <ListItem component="a" href="/training">
+          <ListItem component="a" href={routes.training}>
             <ListItemText primary="Training" />
           </ListItem>
-          <ListItem button onClick={() => console.log("Second item clicked")}>
-            <ListItemText primary="Second Item" />
+          <ListItem component="a" href={routes.vision}>
+            <ListItemText primary="Vision practice" />
           </ListItem>
           <ListItem button onClick={() => console.log("Third item clicked")}>
             <ListItemText primary="Third Item" />
