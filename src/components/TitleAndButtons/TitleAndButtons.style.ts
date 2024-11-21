@@ -31,7 +31,7 @@ export const ImageButtonContainer: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   width: "100%",
-  height: "220px",
+  height: "auto",
   backgroundColor: "#292929",
   borderRadius: "8px",
   border: "1px solid white",
