@@ -27,7 +27,7 @@ const pages = [
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const { handleSignOut } = useAuth();
@@ -36,9 +36,7 @@ function Navbar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -68,7 +66,6 @@ function Navbar() {
               component={Link}
               to={page.path}
               sx={style.Typography}
-              onClick={handleCloseNavMenu}
             >
               {page.name}
             </Button>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Box, Button } from "@mui/material";
-import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import { Square } from "react-chessboard/dist/chessboard/types";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -69,7 +69,7 @@ export default function TrainingChessBoard() {
   const onPieceDrop = (
     sourceSquare: Square,
     targetSquare: Square,
-    piece: Piece
+
   ): boolean => {
     const move = chess.move({
       from: sourceSquare,

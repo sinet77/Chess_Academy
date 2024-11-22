@@ -13,8 +13,6 @@ import {
 import {
   onAuthStateChanged,
   User,
-  sendPasswordResetEmail,
-  updatePassword,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,

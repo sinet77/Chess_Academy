@@ -1,6 +1,7 @@
 {
   "name": "chess",
   "private": true,
+  "homepage": "https://sinet77.github.io/Chess_Academy",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

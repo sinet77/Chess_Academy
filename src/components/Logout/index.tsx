@@ -1,17 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { doSignOut } from "../../firebase/auth";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { userLoggedIn } = useAuth();
+  const { userLoggedIn, handleSignOut } = useAuth();
   return (
     <nav>
       {userLoggedIn ? (
         <>
           <button
             onClick={() => {
-              doSignOut().then(() => {
+              handleSignOut().then(() => {
                 navigate("/login");
               });
             }}

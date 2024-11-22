@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "@fontsource/edu-vic-wa-nt-beginner";
 import App from "./App.tsx";
