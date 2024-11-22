@@ -3,8 +3,8 @@ import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
 
 export default function ChessboardDisplay() {
-  const [chess] = useState<Chess>(new Chess()); // Tworzymy instancję Chess
-  const [fen, setFen] = useState<string>(chess.fen()); // Stan do przechowywania FEN (pozycja szachowa)
+  const [chess] = useState<Chess>(new Chess()); 
+  const [fen, setFen] = useState<string>(chess.fen()); 
 
   useEffect(() => {
     const makeRandomMove = () => {
@@ -12,11 +12,11 @@ export default function ChessboardDisplay() {
         const moves = chess.moves();
         const move = moves[Math.floor(Math.random() * moves.length)];
         chess.move(move);
-        setFen(chess.fen()); // Aktualizacja FEN, aby odświeżyć szachownicę
+        setFen(chess.fen()); 
       }
     };
 
-    const intervalId = setInterval(makeRandomMove, 1000); // Co 1 sekundę wykonuje losowy ruch
+    const intervalId = setInterval(makeRandomMove, 1000); 
 
     return () => clearInterval(intervalId);
   }, [chess]);

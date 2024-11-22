@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { Badge } from "./Badge/Badge";
 import { badges } from "../ranksAndBadgesValues";
-import * as style from "./Badges.style"; // Import styli
+import * as style from "./Badges.style"; 
 
 export const Badges = () => {
   return (

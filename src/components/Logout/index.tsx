@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import { routes } from "../../routes";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Logout = () => {
           <button
             onClick={() => {
               handleSignOut().then(() => {
-                navigate("/login");
+                navigate(routes.login);
               });
             }}
           >
@@ -20,8 +21,8 @@ const Logout = () => {
         </>
       ) : (
         <>
-          <Link to={"/login"}>Login</Link>
-          <Link to={"/register"}>Register New Account</Link>
+          <Link to={routes.login}>Login</Link>
+          <Link to={routes.register}>Register New Account</Link>
         </>
       )}
     </nav>

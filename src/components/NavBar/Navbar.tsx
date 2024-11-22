@@ -51,7 +51,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href={routes.home}
             sx={style.WebTitle}
           >
             Chess Academy

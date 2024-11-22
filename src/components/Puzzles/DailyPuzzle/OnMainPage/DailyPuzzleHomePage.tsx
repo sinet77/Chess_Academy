@@ -5,6 +5,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState } from "react";
 import { Puzzle } from "../PuzzleTypes";
 import useDailyPuzzle from "../../../../hooks/useDailyPuzzle";
+import { routes } from "../../../../routes";
 
 export default function DailyPuzzleHomePage() {
   const [puzzle, setPuzzle] = useState<Puzzle | null>(null);
@@ -13,7 +14,7 @@ export default function DailyPuzzleHomePage() {
   
   return (
     <Box sx={style.Chessboard}>
-      <Link to={"/daily-chess-puzzle"} component={RouterLink} underline="none">
+      <Link to={routes.dailyPuzzle} component={RouterLink} underline="none">
         <Box sx={style.TextAndIcon}>
           <Typography>Solve daily puzzle!</Typography>
           <ArrowForwardIosIcon sx={style.Icon} />

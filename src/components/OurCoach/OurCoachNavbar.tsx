@@ -8,12 +8,13 @@ import {
   steps,
   chess_set,
 } from "../../assets/OurCoachImages.ts";
+import { routes } from "../../routes.ts";
 
 export default function OurCoach() {
   const navigate = useNavigate();
 
   function handleJoinButtonClick() {
-    navigate("/courses");
+    navigate(routes.courses);
   }
   return (
     <Box>

@@ -7,7 +7,7 @@ export const routes = {
   fairPlay: "/fair-play",
   login: "/login",
   register: "/register",
-  courses: "courses",
+  courses: "/courses",
   ourcouch: "/ourcouch",
   privateLesson: "/private-lesson",
   ranksAndBadges: "/ranks-and-badges",
