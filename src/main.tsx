@@ -4,7 +4,6 @@ import App from "./App.tsx";
 import "./index.css";
 import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboard.tsx";
 import {
-  BrowserRouter,
   createBrowserRouter,
   createRoutesFromElements,
   Route,
@@ -73,9 +72,7 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <AuthProvider>
-      <BrowserRouter basename="/Chess_Academy">
-        <RouterProvider router={router} />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </AuthProvider>
   );
 }

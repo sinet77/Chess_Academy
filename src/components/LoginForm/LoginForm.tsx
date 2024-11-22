@@ -14,6 +14,7 @@ import {
 import { useAuth } from "../../context/authContext";
 
 import { Navigate } from "react-router-dom";
+import { routes } from "../../routes";
 
 export default function LoginForm() {
   const {
@@ -46,7 +47,7 @@ export default function LoginForm() {
 
   return (
     <Box sx={style.Main}>
-      {userLoggedIn && <Navigate to={"/"} replace={true} />}
+      {userLoggedIn && <Navigate to={routes.home} replace={true} />}
       <Typography sx={style.Text}>Start your journey</Typography>
       <Formik
         initialValues={initialValues}
