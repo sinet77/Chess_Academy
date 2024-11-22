@@ -267,6 +267,8 @@ export default function PuzzlesExercise() {
   };
 
   return (
+  <Box>
+  <Box sx={style.Navbar}></Box>
     <Box sx={style.Main}>
       {loading ? (
         <Box sx={style.ImgContainer}>
@@ -280,7 +282,7 @@ export default function PuzzlesExercise() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-          >
+            >
             <Typography sx={style.ColorOnMove}>
               {startingColor} on move
             </Typography>
@@ -289,7 +291,7 @@ export default function PuzzlesExercise() {
                 ...style.ColorCircle,
                 backgroundColor: startingColor === "White" ? "white" : "black",
               }}
-            />
+              />
           </Grid>
 
           <Grid item xs={12} display="flex" justifyContent="center">
@@ -319,7 +321,7 @@ export default function PuzzlesExercise() {
                   ...optionSquares,
                 }}
                 boardOrientation={changeBoardOrientation}
-              />
+                />
             </Box>
           </Grid>
 
@@ -329,7 +331,7 @@ export default function PuzzlesExercise() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-          >
+            >
             <Box sx={style.NextButtonAndSwitch}>
               <Button sx={style.Button} onClick={fetchPuzzle}>
                 Next Puzzle
@@ -337,31 +339,32 @@ export default function PuzzlesExercise() {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={isAutoNextEnabled}
-                    onChange={handleToggleAutoNext}
-                    sx={style.Switch}
+                  checked={isAutoNextEnabled}
+                  onChange={handleToggleAutoNext}
+                  sx={style.Switch}
                   />
                 }
                 label="Auto Next Puzzle on correct"
                 sx={style.OptionSwitchLabel}
-              />
+                />
 
               <FormControlLabel
                 control={
                   <Switch
-                    checked={isShowMovesEnabled}
-                    onChange={handleToggleShowEnableMoves}
-                    sx={style.Switch}
+                  checked={isShowMovesEnabled}
+                  onChange={handleToggleShowEnableMoves}
+                  sx={style.Switch}
                   />
                 }
                 label="Enable Move Highlights"
                 sx={style.OptionSwitchLabel}
-              />
+                />
             </Box>
           </Grid>
         </Grid>
       )}
     </Box>
+</Box>
   );
 }
 

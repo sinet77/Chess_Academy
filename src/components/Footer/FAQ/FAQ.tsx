@@ -39,6 +39,8 @@ const faqData = [
 
 export default function FAQ() {
   return (
+    <Box>
+    <Box sx={style.Navbar}></Box>
     <Box sx={style.FAQContainer}>
       <Box sx={style.titleContainer}>
         <Typography sx={style.Title} variant="h2" gutterBottom>
@@ -52,7 +54,7 @@ export default function FAQ() {
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             sx={style.AccordionSummary}
-          >
+            >
             <Typography sx={style.Question}>{item.question}</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -71,10 +73,11 @@ export default function FAQ() {
           component={Link}
           to={routes.contactUs}
           sx={style.contactButton}
-        >
+          >
           Contact us
         </Button>
       </Box>
     </Box>
+          </Box>
   );
 }

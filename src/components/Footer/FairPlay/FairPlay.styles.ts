@@ -1,5 +1,11 @@
 import { keyframes, SxProps } from "@mui/material";
 
+export const Navbar: SxProps = {
+  backgroundColor: "black",
+  height: "112px",
+  width: "100%",
+};
+
 export const Background: SxProps = {
   backgroundImage: "url(/src/assets/fair_play_background1.png)",
   backgroundColor: "#FEEBC7",

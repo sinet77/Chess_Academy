@@ -100,6 +100,8 @@ export default function TrainingChessBoard() {
   };
 
   return (
+    <Box>
+      <Box sx={style.Navbar}></Box>
     <Box sx={style.TrainingPageLayout}>
       <Box sx={style.firstColumn}>
         <Box sx={style.Chessboard}>
@@ -164,6 +166,7 @@ export default function TrainingChessBoard() {
           </Table>
         </TableContainer>
       </Box>
+    </Box>
     </Box>
   );
 }

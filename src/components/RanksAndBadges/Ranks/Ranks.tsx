@@ -5,6 +5,11 @@ import { ranks } from "../ranksAndBadgesValues.js";
 export const Ranks = () => {
   return (
     <Box >
+      <Box sx={{
+  backgroundColor: "black",
+  height: "112px",
+  width: "100%",
+}}></Box>
       <Typography sx={{ fontSize: "1.5rem", padding: "30px" }}>RANKS</Typography>
       <Grid
         container

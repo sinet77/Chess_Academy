@@ -12,6 +12,7 @@ export default function AboutUsStartingPage({
 
   return (
     <Box sx={style.StartingPage}>
+      <Box sx={style.Navbar}></Box>
       <Box sx={style.AboutUsMainContainer}>
         <Box sx={style.AboutUsFirstContainer}>
           <Typography sx={style.AboutUsSecondContainerTitle}>ABOUT</Typography>
