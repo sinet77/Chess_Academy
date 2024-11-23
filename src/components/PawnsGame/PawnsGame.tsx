@@ -230,7 +230,7 @@ export default function PawnsGame() {
             <Typography sx={style.Description}>
               Your mission is to reach the eighth rank as white or the first
               rank as black. The computer will try to beat you and fulfill the
-              same victory conditions
+              same victory conditions. Swap side if you want to play as black.
             </Typography>
           </Box>
           <ToastContainer />
