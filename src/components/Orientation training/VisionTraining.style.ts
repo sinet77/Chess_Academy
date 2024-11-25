@@ -92,7 +92,6 @@ export const Button = (theme: Theme) => ({
   },
 });
 
-
 export const InheritColor: SxProps = { color: "inherit" };
 
 export const ButtonsContainer: SxProps = {

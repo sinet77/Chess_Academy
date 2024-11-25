@@ -6,7 +6,6 @@ export const Navbar: SxProps = {
   width: "100%",
 };
 
-
 export const FAQContainer: SxProps = {
   flex: "1 0 auto",
   display: "flex",

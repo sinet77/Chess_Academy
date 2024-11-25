@@ -61,7 +61,6 @@ export default function SideMenu() {
           </ListItem>
         </List>
       </Drawer>
-
       {/* Główna zawartość */}
       <Box
         component="main"
