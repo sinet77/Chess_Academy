@@ -118,6 +118,15 @@ export default function OurPrices() {
           </Link>
         </Box>
       </Box>
+      <Box sx={{display: "flex", justifyContent: "center", mt: "40px"}}>
+              <Link
+            to={routes.privateLesson}
+            component={RouterLink}
+          >
+          <Button sx={style.ReadMoreButton}>Read more</Button>
+          </Link>
+      </Box>
+
     </Box>
   );
 }
