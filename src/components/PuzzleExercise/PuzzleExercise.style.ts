@@ -6,7 +6,6 @@ export const Navbar: SxProps = {
   width: "100%",
 };
 
-
 export const Main: SxProps = {
   p: 10,
   display: "flex",

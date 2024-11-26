@@ -35,7 +35,6 @@ export default function Buttons({
       <Link to={routes.chooseComputerLevel} component={RouterLink}>
         <Button sx={style.BackButton}>Back</Button>
       </Link>
-
       <Button sx={style.OptionsButton} onClick={toggleOptions}>
         <SettingsIcon />
         Options

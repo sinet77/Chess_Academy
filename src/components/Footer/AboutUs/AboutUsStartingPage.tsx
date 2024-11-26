@@ -39,7 +39,6 @@ export default function AboutUsStartingPage({
         </Grid>
       </Box>
 
-
       <Box sx={style.foundersContainer}>
         <img src={piotrImage} style={style.founderProfilePicture} />
         <Box sx={style.FoundersTextContainer}>

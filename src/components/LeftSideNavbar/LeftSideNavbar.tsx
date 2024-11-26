@@ -56,12 +56,11 @@ export default function SideMenu() {
           <ListItem component="a" href={routes.vision}>
             <ListItemText primary="Vision practice" />
           </ListItem>
-          <ListItem button onClick={() => console.log("Third item clicked")}>
-            <ListItemText primary="Third Item" />
+          <ListItem component="a" href={routes.privateLesson}>
+            <ListItemText primary="Get private lesson" />
           </ListItem>
         </List>
       </Drawer>
-
       {/* Główna zawartość */}
       <Box
         component="main"

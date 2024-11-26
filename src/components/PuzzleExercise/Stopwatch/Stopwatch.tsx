@@ -1,50 +1,38 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import TimerIcon from "@mui/icons-material/Timer";
 import { Box, Typography } from "@mui/material";
 import * as style from "./Stopwatch.style";
+import { useTimer } from "../../../hooks/useTimer";
+import {TimerDirection} from "../../../hooks/useTimer"
 
 interface Props {
   moves: string[];
   currentMoveIndex: number;
+  isTurnedOn: boolean;
+  onTimerEnd: () => void;
 }
 
-const Stopwatch = ({ moves, currentMoveIndex }: Props) => {
-  const [totalSeconds, setTotalSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(true);
+const Stopwatch = ({ moves, currentMoveIndex, isTurnedOn, onTimerEnd }: Props) => {
 
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval> | null = null;
-
-    if (isActive) {
-      interval = setInterval(() => {
-        setTotalSeconds((prev) => prev + 1);
-      }, 1000);
-    }
-
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isActive]);
-
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-
+  const { formattedTime } = useTimer({
+    initialTime: 0, 
+    format: "both", 
+    direction: TimerDirection.Forward, 
+    isTurnedOn: isTurnedOn, 
+    onTimerEnd, 
+  });
+  
   useEffect(() => {
     if (currentMoveIndex === moves.length) {
-      setIsActive(false);
+      onTimerEnd();
     }
-  }, [currentMoveIndex, moves.length]);
+  }, [currentMoveIndex, moves.length, onTimerEnd]);
 
   return (
     <Box sx={style.Container}>
       <TimerIcon sx={style.TimerIconStyle} />
       <Box sx={style.TimeNamesContainer}>
-        {totalSeconds >= 60 && (
-          <>
-            <Typography sx={style.TimeFont}>{minutes} min</Typography>
-          </>
-        )}
-        <Typography sx={style.TimeFont}> {seconds} s</Typography>
+        <Typography sx={style.TimeFont}> {formattedTime}</Typography>
       </Box>
     </Box>
   );
