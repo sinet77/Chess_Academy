@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { Square } from "react-chessboard/dist/chessboard/types";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Table from "@mui/material/Table";
@@ -103,7 +103,8 @@ export default function TrainingChessBoard() {
     <Box>
       <Box sx={style.Navbar}></Box>
     <Box sx={style.TrainingPageLayout}>
-      <Box sx={style.firstColumn}>
+    <Grid padding={"50px"} container spacing={2}>
+    <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
         <Box sx={style.Chessboard}>
           <Chessboard
             id="BasicChessboard"
@@ -118,9 +119,9 @@ export default function TrainingChessBoard() {
         </Box>
         <Pgn chess={chess} onFenChange={handleFenChange} />
         <Fen chess={chess} onFenChange={handleFenChange} />
-      </Box>
+      </Grid>
 
-      <Box sx={style.secondColumn}>
+      <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
         <Box>
           <Button
             variant="contained"
@@ -165,7 +166,8 @@ export default function TrainingChessBoard() {
             </TableBody>
           </Table>
         </TableContainer>
-      </Box>
+      </Grid>
+    </Grid>
     </Box>
     </Box>
   );

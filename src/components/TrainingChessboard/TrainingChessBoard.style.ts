@@ -14,9 +14,10 @@ export const Table: SxProps = {
 };
 
 export const TrainingPageLayout: SxProps = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  display: "flex",
+  flexDirection: "column",
   height: "100vh",
+  width: "100%",
   backgroundColor: "#e9f5f8",
 };
 
@@ -60,7 +61,7 @@ export const MainRow: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: "70%",
+  width: { xs: "300px", sm: "400px", md: "600px" },
   height: "auto",
   border: "1px solid black",
 };
