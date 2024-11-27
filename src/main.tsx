@@ -6,6 +6,7 @@ import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboa
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  HashRouter,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -33,7 +34,7 @@ import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
+    <Route path="/Chess_Academy">
       <Route element={<Protected />}>
         <Route element={<Layout />}>
           <Route index element={<App />} />
@@ -72,7 +73,9 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <AuthProvider>
-      <RouterProvider router={router} />
+      <HashRouter>
+        <RouterProvider router={router} />
+      </HashRouter>
     </AuthProvider>
   );
 }
