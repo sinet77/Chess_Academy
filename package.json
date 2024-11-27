@@ -1,5 +1,6 @@
 {
   "name": "chess",
+  "homepage": "https://sinet77.github.io/chess",
   "private": true,
   "version": "0.0.0",
   "type": "module",
