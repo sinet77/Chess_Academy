@@ -7,6 +7,7 @@
 
 <h1>Demo</h1>
 
+### Live demo is available here:  [Chess Academy](https://sinet77.github.io/Chess_Academy/)
 
 | User  | Password |
 |-------|----------|
