@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboard.tsx";
 import {
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
@@ -31,7 +31,7 @@ import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePa
 import VisionTraining from "./components/Orientation training/VisionTraining.tsx";
 import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route element={<Protected />}>

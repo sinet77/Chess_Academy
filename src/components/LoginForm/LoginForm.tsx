@@ -12,7 +12,7 @@ import {
   Link,
 } from "@mui/material";
 import { useAuth } from "../../context/authContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes";
 
 export default function LoginForm() {
@@ -112,7 +112,7 @@ export default function LoginForm() {
                 >
                   Sign in with Google
                 </Button>
-                <Link href="/register" underline="hover">
+                <Link component={RouterLink} to={routes.register} underline="hover">
                   Register
                 </Link>
               </Box>
