@@ -1,4 +1,4 @@
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import * as style from "./TitleAndButtons.style";
 import { motion } from "framer-motion";
 import { training, computer, puzzle } from "../../assets/MainPageImages.ts";
@@ -29,23 +29,23 @@ export default function TitleAndButtons() {
           <Link
             to={routes.training}
             component={RouterLink}
-            sx={style.TextUnderlineTurnOff}
+            underline="hover"
           >
-            <Button sx={style.ImageButtonContainer}>
+            <Box sx={style.ImageButtonContainer}>
               <img
                 src={training}
                 alt="Chessboard with a man playing"
                 style={style.ButtonImage}
               />
               <Typography sx={style.TitleUnderButtonImage}>Training</Typography>
-            </Button>
+            </Box>
           </Link>
           <Link
             to={routes.chooseComputerLevel}
             component={RouterLink}
-            sx={style.TextUnderlineTurnOff}
+            underline="hover"
           >
-            <Button sx={style.ImageButtonContainer}>
+            <Box sx={style.ImageButtonContainer}>
               <img
                 src={computer}
                 alt="Scared robot"
@@ -54,17 +54,17 @@ export default function TitleAndButtons() {
               <Typography sx={style.TitleUnderButtonImage}>
                 Play vs computer
               </Typography>
-            </Button>
+            </Box>
           </Link>
           <Link
             to={routes.chooseDifficulty}
             component={RouterLink}
-            sx={style.TextUnderlineTurnOff}
+            underline="hover"
           >
-            <Button sx={style.ImageButtonContainer}>
+            <Box sx={style.ImageButtonContainer}>
               <img src={puzzle} alt="Chess Puzzle" style={style.ButtonImage} />
               <Typography sx={style.TitleUnderButtonImage}>Puzzles</Typography>
-            </Button>
+            </Box>
           </Link>
           <DailyPuzzleHomePage />
         </Box>
