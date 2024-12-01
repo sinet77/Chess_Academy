@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Box, Button, Grid } from "@mui/material";
@@ -16,12 +16,10 @@ import Pgn from "./Pgn";
 import Options from "./Options";
 import Fen from "./Fen";
 import Engine from "../../Engine/engine";
-
 interface MovePair {
   white: string;
   black: string;
 }
-
 export default function TrainingChessBoard() {
   const engine = useRef(new Engine());
   const game = useRef(new Chess());
@@ -31,14 +29,12 @@ export default function TrainingChessBoard() {
   const [bestLine, setBestline] = useState<string>("");
   const [possibleMate, setPossibleMate] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [fen, setFen] = useState<string>(game.current.fen());
   const [history, setHistory] = useState<MovePair[]>([]);
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<"white" | "black">("white");
   const [autoPromoteToQueen, setAutoPromoteToQueen] = useState<boolean>(false);
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const findBestMove=()=> {
     engine.current.evaluatePosition(chessBoardPosition, 18);
@@ -75,7 +71,7 @@ export default function TrainingChessBoard() {
   }
 
   const updateHistory=() =>{
-    const currentHistory = chess.history();
+    const currentHistory = game.current.history();
     const updatedHistory: MovePair[] = [];
 
     for (let i = 0; i < currentHistory.length; i += 2) {
@@ -89,42 +85,51 @@ export default function TrainingChessBoard() {
   }
 
   const undoMove =()=> {
-    chess.undo();
-    setFen(chess.fen());
+    game.current.undo();
+    setChessBoardPosition(game.current.fen());
     updateHistory();
   }
 
   const onPieceDrop = (
     sourceSquare: Square,
     targetSquare: Square,
-
   ): boolean => {
-    const move = chess.move({
+    const move = game.current.move({
       from: sourceSquare,
       to: targetSquare,
       promotion: "q",
     });
-
+    setPossibleMate("");
+    setChessBoardPosition(game.current.fen());
+updateHistory();
     if (move === null) return false;
-
-    setFen(chess.fen());
-    updateHistory();
+    engine.stop();
+    setBestline("");
+    if (game.current.isGameOver() || game.current.isDraw()) return false;
     return true;
-  };
+    
+  }
+    
+  useEffect(() => {
+    if (!game.current.isGameOver() || game.current.isDraw()) {
+      findBestMove();
+    }
+  }, [chessBoardPosition]);
+  
 
   const handleFenChange = (newFen: string) => {
-    setFen(newFen);
+    setChessBoardPosition(newFen);
     updateHistory();
   };
 
   const handleClearTheBoard = () => {
-    chess.clear();
-    setFen(chess.fen());
+    game.current.clear();
+    setChessBoardPosition(game.current.fen());
   };
 
   const handleResetTheBoard = () => {
-    chess.reset();
-    setFen(chess.fen());
+    game.current.reset();
+    setChessBoardPosition(game.current.fen());
   }; 
 
   return (
@@ -136,7 +141,7 @@ export default function TrainingChessBoard() {
         <Box sx={style.Chessboard}>
           <Chessboard
             id="AnalysisBoard"
-            position={fen}
+            position={chessBoardPosition}
             boardOrientation={changeBoardOrientation}
             onPieceDrop={onPieceDrop}
             arePiecesDraggable={true}
@@ -145,8 +150,8 @@ export default function TrainingChessBoard() {
             customLightSquareStyle={{ backgroundColor: "#607d8b" }}
           />
         </Box>
-        <Pgn chess={chess} onFenChange={handleFenChange} />
-        <Fen chess={chess} onFenChange={handleFenChange} />
+        <Pgn chess={game} onFenChange={handleFenChange} />
+        <Fen chess={game} onFenChange={handleFenChange} />
       </Grid>
 
       <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
