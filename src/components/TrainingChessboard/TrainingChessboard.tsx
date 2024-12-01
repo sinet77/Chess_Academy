@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Box, Button, Grid } from "@mui/material";
@@ -15,6 +15,7 @@ import * as style from "./TrainingChessBoard.style";
 import Pgn from "./Pgn";
 import Options from "./Options";
 import Fen from "./Fen";
+import Engine from "../../Engine/engine";
 
 interface MovePair {
   white: string;
@@ -22,31 +23,58 @@ interface MovePair {
 }
 
 export default function TrainingChessBoard() {
-  const [open, setOpen] = useState(false);
+  const engine = useRef(new Engine());
+  const game = useRef(new Chess());
+  const [chessBoardPosition, setChessBoardPosition] = useState<string>(game.current.fen());
+  const [positionEvaluation, setPositionEvaluation] = useState<number>(0);
+  const [depth, setDepth] = useState<number>(10);
+  const [bestLine, setBestline] = useState<string>("");
+  const [possibleMate, setPossibleMate] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [chess] = useState<Chess>(new Chess());
-  const [fen, setFen] = useState<string>(chess.fen());
+  const [fen, setFen] = useState<string>(game.current.fen());
   const [history, setHistory] = useState<MovePair[]>([]);
-  const [changeBoardOrientation, setChangeBoardOrientation] = useState<
-    "white" | "black"
-  >("white");
+  const [changeBoardOrientation, setChangeBoardOrientation] = useState<"white" | "black">("white");
   const [autoPromoteToQueen, setAutoPromoteToQueen] = useState<boolean>(false);
 
-  function handleBoardOrientation() {
+
+  const findBestMove=()=> {
+    engine.current.evaluatePosition(chessBoardPosition, 18);
+    engine.current.onMessage(
+      ({
+        positionEvaluation,
+        possibleMate,
+        pv, //principal variation - best line
+        depth,
+      }: {
+        positionEvaluation?: string;
+        possibleMate?: string;
+        pv?: string;
+        depth?: number;
+      }) => {
+      if (depth && depth < 10) return;
+      positionEvaluation && setPositionEvaluation((game.current.turn() === "w" ? 1 : -1) * Number(positionEvaluation) / 100);
+      possibleMate && setPossibleMate(possibleMate);
+      depth && setDepth(depth);
+      pv && setBestline(pv);
+    });
+  }
+
+  const handleBoardOrientation=()=> {
     setChangeBoardOrientation((prevBoardOrientation) =>
       prevBoardOrientation === "white" ? "black" : "white"
     );
   }
 
-  function handleAutoPromoteToQueen() {
+  const handleAutoPromoteToQueen=()=> {
     setAutoPromoteToQueen((prevAutoPromoteToQueen) =>
       prevAutoPromoteToQueen === true ? false : true
     );
   }
 
-  function updateHistory() {
+  const updateHistory=() =>{
     const currentHistory = chess.history();
     const updatedHistory: MovePair[] = [];
 
@@ -60,7 +88,7 @@ export default function TrainingChessBoard() {
     setHistory(updatedHistory);
   }
 
-  function undoMove() {
+  const undoMove =()=> {
     chess.undo();
     setFen(chess.fen());
     updateHistory();
@@ -97,7 +125,7 @@ export default function TrainingChessBoard() {
   const handleResetTheBoard = () => {
     chess.reset();
     setFen(chess.fen());
-  };
+  }; 
 
   return (
     <Box>
@@ -107,7 +135,7 @@ export default function TrainingChessBoard() {
     <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
         <Box sx={style.Chessboard}>
           <Chessboard
-            id="BasicChessboard"
+            id="AnalysisBoard"
             position={fen}
             boardOrientation={changeBoardOrientation}
             onPieceDrop={onPieceDrop}
