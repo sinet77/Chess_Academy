@@ -16,6 +16,7 @@ import Pgn from "./Pgn";
 import Options from "./Options";
 import Fen from "./Fen";
 import Engine from "../../Engine/engine";
+import PositionEvaluationBar from "./PositionEvaluationBar/PositionEvaluationBar";
 interface MovePair {
   white: string;
   black: string;
@@ -138,6 +139,17 @@ updateHistory();
     <Box sx={style.TrainingPageLayout}>
     <Grid padding={"50px"} container spacing={2}>
     <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
+    <h4>
+        Position Evaluation:{" "}
+        {possibleMate ? `Mate in #${possibleMate}` : positionEvaluation}
+        {"; "}
+        Depth: {depth}
+      </h4>
+      <h5>
+        Best line: <i>{bestLine.slice(0, 40)}</i> ...
+      </h5>
+      <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", gap: "40px"}}>
+<PositionEvaluationBar positionEvaluation={positionEvaluation} possibleMate={possibleMate}/>
         <Box sx={style.Chessboard}>
           <Chessboard
             id="AnalysisBoard"
@@ -146,10 +158,12 @@ updateHistory();
             onPieceDrop={onPieceDrop}
             arePiecesDraggable={true}
             autoPromoteToQueen={autoPromoteToQueen}
-            customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-            customLightSquareStyle={{ backgroundColor: "#607d8b" }}
-          />
+            customDarkSquareStyle={{ backgroundColor: "#607d8b" }}
+            customLightSquareStyle={{ backgroundColor: "#e0e0e0" }}
+            />
         </Box>
+            </Box>
+        
         <Pgn chess={game} onFenChange={handleFenChange} />
         <Fen chess={game} onFenChange={handleFenChange} />
       </Grid>
