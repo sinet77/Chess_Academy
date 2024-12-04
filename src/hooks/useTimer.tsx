@@ -31,12 +31,10 @@ export const useTimer = ({
   
       if (intervalRef.current) return;
   
-
       intervalRef.current = setInterval(() => {
         setTotalSeconds((prev) => {
           const nextValue = prev + direction; 
   
-
           if (direction === TimerDirection.Backward && nextValue <= 0) {
             clearInterval(intervalRef.current!);
             intervalRef.current = null;
@@ -56,9 +54,6 @@ export const useTimer = ({
       };
     }, [isTurnedOn, onTimerEnd, initialTime]);
   
-
-
-
     const formattedTime = useMemo(() => {  
       if (format === "seconds") return `${totalSeconds} s`;  
       if (format === "minutes") return `${Math.floor(totalSeconds / 60)} min`;  

@@ -175,7 +175,6 @@ export default function PlayVsComputer() {
       }
       return;
     }
-
     // Ruch obliczony przez Stockfisha z opóźnieniem
     engine.evaluatePosition(game.fen(), stockfishLevel);
     engine.onMessage(({ bestMove }) => {

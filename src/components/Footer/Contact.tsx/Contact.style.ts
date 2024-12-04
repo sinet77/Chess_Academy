@@ -1,4 +1,5 @@
 import { SxProps } from "@mui/material";
+import img from "../../../assets/pen.jpg"
 
 export const Navbar: SxProps = {
   backgroundColor: "black",
@@ -28,7 +29,7 @@ export const Form: SxProps = {
 
 export const FormAndTitle: SxProps = {
   boxShadow: "10px 10px 30px rgba(0, 0, 0, 0.5)",
-  backgroundImage: "url(/src/assets/pen.jpg)",
+  backgroundImage: `${img}`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",

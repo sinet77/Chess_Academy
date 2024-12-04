@@ -17,6 +17,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { RegisterSchema } from "../../schemas/ValidationSchema";
 import { Navigate } from "react-router-dom";
+import {routes} from "../../routes"
 
 interface FormValues {
   email: string;
@@ -50,7 +51,7 @@ export default function RegisterForm() {
 
   return (
     <Box sx={style.Main}>
-      {userLoggedIn && <Navigate to={"/"} replace={true} />}
+      {userLoggedIn && <Navigate to={routes.home} replace={true} />}
       <Typography sx={style.Text}>Create your account</Typography>
       <Formik
         initialValues={{
@@ -170,7 +171,7 @@ export default function RegisterForm() {
                 <Divider sx={style.Divider}>
                   Do you have an account? Sign in!
                 </Divider>
-                <Link href="/login" underline="hover">
+                <Link href={routes.login} underline="hover">
                   Sign in
                 </Link>
               </Box>

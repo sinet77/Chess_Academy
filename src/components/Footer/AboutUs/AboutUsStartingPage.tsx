@@ -12,6 +12,7 @@ export default function AboutUsStartingPage({
 
   return (
     <Box sx={style.StartingPage}>
+      <Box sx={style.Navbar}></Box>
       <Box sx={style.AboutUsMainContainer}>
         <Box sx={style.AboutUsFirstContainer}>
           <Typography sx={style.AboutUsSecondContainerTitle}>ABOUT</Typography>
@@ -37,7 +38,6 @@ export default function AboutUsStartingPage({
           </Box>
         </Grid>
       </Box>
-
 
       <Box sx={style.foundersContainer}>
         <img src={piotrImage} style={style.founderProfilePicture} />

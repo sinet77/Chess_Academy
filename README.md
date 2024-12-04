@@ -7,6 +7,7 @@
 
 <h1>Demo</h1>
 
+### Live demo is available here:  [Chess Academy](https://sinet77.github.io/Chess_Academy/)
 
 | User  | Password |
 |-------|----------|
@@ -33,6 +34,44 @@
 <img src="https://github.com/user-attachments/assets/ecd37b90-6155-498e-b74c-04cb93f984f5"/>
 <br></br>
 
+<h1>Technologies</h1>
+
+* <h3>HTML</h3>
+
+* <h3>CSS</h3>
+
+* <h3>Typescript</h3>
+  
+* <h3>Firebase</h3>
+
+<h1>Frameworks and libraries</h1>
+
+* <h3>React</h3>
+  <p>Library for building user interfaces</p>
+
+* <h3>Formik</h3>
+  <p>Forms with easy-to-use validation</p>
+
+* <h3>Yup</h3>
+  <p>Form validation</p>
+
+* <h3>React-chessboard</h3>
+  <p>Provides chessboard functionality to application</p>
+
+* <h3>Chess.js</h3>
+  <p>Chess moves validation, pieces movement</p>
+  
+* <h3>Stockfish.js</h3>
+  <p>Chess engine for computer moves</p>
+
+* <h3>MUI</h3>
+  <p>Framework with pre-designed Material Design components</p>
+
+* <h3>Toastify</h3>
+  <p>Customizable notification library for React</p>
+
+* <h3>Framer-motion/h3>
+  <p>Animatios</p>
 
 
 
@@ -50,15 +89,7 @@
   
 * <h3>Theme customization</h3>
 
-<h1>Technologies</h1>
 
-* <h3>React - vite</h3>
-
-* <h3>Typescript</h3>
-
-* <h3>CSS</h3>
-  
-* <h3>Firebase</h3>
 
 
 

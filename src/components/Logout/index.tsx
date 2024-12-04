@@ -1,18 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { doSignOut } from "../../firebase/auth";
+import { routes } from "../../routes";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { userLoggedIn } = useAuth();
+  const { userLoggedIn, handleSignOut } = useAuth();
   return (
     <nav>
       {userLoggedIn ? (
         <>
           <button
             onClick={() => {
-              doSignOut().then(() => {
-                navigate("/login");
+              handleSignOut().then(() => {
+                navigate(routes.login);
               });
             }}
           >
@@ -21,8 +21,8 @@ const Logout = () => {
         </>
       ) : (
         <>
-          <Link to={"/login"}>Login</Link>
-          <Link to={"/register"}>Register New Account</Link>
+          <Link to={routes.login}>Login</Link>
+          <Link to={routes.register}>Register New Account</Link>
         </>
       )}
     </nav>

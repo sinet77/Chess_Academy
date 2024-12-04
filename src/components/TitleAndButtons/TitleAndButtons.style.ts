@@ -60,5 +60,3 @@ export const TitleUnderButtonImage: React.CSSProperties = {
   fontSize: "15px",
 
 };
-
-export const TextUnderlineTurnOff: SxProps = { textDecoration: "none" };

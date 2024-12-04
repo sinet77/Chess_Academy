@@ -1,28 +1,45 @@
 import errorGif from "/src/assets/error404.gif";
 import * as style from "./Error404.style";
-
-import { Box, Button, Typography } from "@mui/material";
+import { Grid, Button, Typography, Box } from "@mui/material";
+import { routes } from "../../routes";
 
 export default function Error404() {
   return (
-    <Box sx={style.Background}>
-      <Box sx={style.MainContent}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+    <Grid
+      container
+      sx={style.Background}
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid
+        item
+        xs={10} 
+        sm={7} 
+        md={5} 
+        lg={3} 
+        sx={style.MainContent}
+      >
+        <Typography variant="h4" sx={style.Title}>
           Error 404
         </Typography>
-        <Typography variant="h5" sx={{ mb: 2 }}>
+        <Typography variant="h5" sx={style.Title}>
           Page not found
         </Typography>
-        <Button variant="contained" color="error" href="/" sx={{ mb: 2 }}>
+        <Button
+          variant="contained"
+          color="error"
+          href={routes.home}
+          sx={{ mb: 2 }}
+        >
           Return home
         </Button>
         <Box
           component="img"
           src={errorGif}
           alt="Animated gif"
-          sx={{ width: "100%", maxWidth: "400px", height: "auto" }}
+          sx={style.Gif}
         />
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }

@@ -1,11 +1,10 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "@fontsource/edu-vic-wa-nt-beginner";
 import App from "./App.tsx";
 import "./index.css";
 import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboard.tsx";
 import {
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
@@ -34,7 +33,7 @@ import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle
 import PawnsGame from "./components/PawnsGame/PawnsGame.tsx";
 import ChoosePosition from "./components/PawnsGame/ChoosePosition/ChoosePosition.tsx";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route element={<Protected />}>

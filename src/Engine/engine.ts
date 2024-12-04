@@ -7,16 +7,16 @@
  * Description of the universal chess interface (UCI)  https://gist.github.com/aliostad/f4470274f39d29b788c1b09519e67372/
  */
 
-const stockfish = new Worker("/stockfish.js");
+const stockfish = new Worker("/Chess_Academy/stockfish.js");
 
 type EngineMessage = {
-  /** stockfish engine message in UCI format*/
+  /** stockfish engine message in UCI format */
   uciMessage: string;
-  /** found best move for current position in format `e2e4`*/
+  /** found best move for current position in format `e2e4` */
   bestMove?: string;
   /** found best move for opponent in format `e7e5` */
   ponder?: string;
-  /**  material balance's difference in centipawns(IMPORTANT! stockfish gives the cp score in terms of whose turn it is)*/
+  /** material balance's difference in centipawns (IMPORTANT! stockfish gives the cp score in terms of whose turn it is) */
   positionEvaluation?: string;
   /** count of moves until mate */
   possibleMate?: string;
@@ -34,16 +34,22 @@ export default class Engine {
   constructor() {
     this.stockfish = stockfish;
     this.isReady = false;
-    this.onMessage = (callback) => {
-      this.stockfish.addEventListener("message", (e) => {
+
+    // Function to listen to engine messages
+    this.onMessage = (callback: (messageData: EngineMessage) => void) => {
+      this.stockfish.addEventListener("message", (e: MessageEvent<string>) => {
         callback(this.transformSFMessageData(e));
       });
     };
+
     this.init();
   }
 
-  private transformSFMessageData(e) {
-    const uciMessage = e?.data ?? e;
+  /**
+   * Transform Stockfish's raw message data into a structured object
+   */
+  private transformSFMessageData(e: MessageEvent<string> | string): EngineMessage {
+    const uciMessage = typeof e === "string" ? e : e.data;
 
     return {
       uciMessage,
@@ -56,9 +62,13 @@ export default class Engine {
     };
   }
 
-  init() {
+  /**
+   * Initialize the engine and prepare it for use
+   */
+  private init() {
     this.stockfish.postMessage("uci");
     this.stockfish.postMessage("isready");
+
     this.onMessage(({ uciMessage }) => {
       if (uciMessage === "readyok") {
         this.isReady = true;
@@ -66,7 +76,10 @@ export default class Engine {
     });
   }
 
-  onReady(callback) {
+  /**
+   * Register a callback to execute when the engine is ready
+   */
+  onReady(callback: () => void) {
     this.onMessage(({ uciMessage }) => {
       if (uciMessage === "readyok") {
         callback();
@@ -74,19 +87,28 @@ export default class Engine {
     });
   }
 
-  evaluatePosition(fen, depth = 12) {
+  /**
+   * Start evaluating the position with a given depth
+   */
+  evaluatePosition(fen: string, depth: number = 12) {
     if (depth > 24) depth = 24;
 
     this.stockfish.postMessage(`position fen ${fen}`);
     this.stockfish.postMessage(`go depth ${depth}`);
   }
 
+  /**
+   * Stop the engine's current calculations
+   */
   stop() {
-    this.stockfish.postMessage("stop"); // Run when searching takes too long time and stockfish will return you the bestmove of the deep it has reached
+    this.stockfish.postMessage("stop");
   }
 
+  /**
+   * Terminate the engine's process
+   */
   terminate() {
     this.isReady = false;
-    this.stockfish.postMessage("quit"); // Run this before chessboard unmounting.
+    this.stockfish.postMessage("quit");
   }
 }

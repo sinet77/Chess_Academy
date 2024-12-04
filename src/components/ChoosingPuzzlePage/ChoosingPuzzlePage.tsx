@@ -36,6 +36,8 @@ export default function ChoosingPuzzlePage() {
   };
 
   return (
+  <Box>
+  <Box sx={style.Navbar}></Box>
     <Box sx={style.Main}>
       <Typography sx={style.HeadTitle} variant="h5">
         Choose difficulty level:
@@ -54,7 +56,7 @@ export default function ChoosingPuzzlePage() {
                     backgroundImage: `url(${dragon})`,
                     backgroundPosition: BACKGROUND_POSITIONS[index],
                   }}
-                >
+                  >
                   {level}
                 </Button>
               </motion.div>
@@ -63,5 +65,6 @@ export default function ChoosingPuzzlePage() {
         </Grid>
       </motion.div>
     </Box>
+          </Box>
   );
 }

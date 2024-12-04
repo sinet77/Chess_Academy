@@ -12,9 +12,10 @@ import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.ts";
-import { Link } from "react-router-dom";
+import { Link as RouterLink} from "react-router-dom";
 import { routes } from "../../routes.js";
 import { useAuth } from "../../context/authContext/index.js";
+import { Link } from "@mui/material";
 
 const pages = [
   { name: "Home", path: routes.home },
@@ -27,17 +28,13 @@ const pages = [
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const { handleSignOut } = useAuth();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -48,30 +45,33 @@ function Navbar() {
     <AppBar sx={style.AppBar}>
       <Toolbar sx={style.Navbar}>
         <SideMenu />
+        <Link
+            to={routes.home}
+            component={RouterLink}
+            underline="hover"
+          >
         <Box sx={style.BarContainer}>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={style.WebTitle}
-          >
+            >
             Chess Academy
             <Box component="img" sx={style.WebLogo} src={web_logo} />
           </Typography>
         </Box>
+            </Link>
 
         <Box sx={style.TabsNavbar}>
           {pages.map((page) => (
-            <Button
+            <Link
               key={page.name}
-              component={Link}
+              component={RouterLink}
               to={page.path}
               sx={style.Typography}
-              onClick={handleCloseNavMenu}
             >
               {page.name}
-            </Button>
+            </Link>
           ))}
         </Box>
 

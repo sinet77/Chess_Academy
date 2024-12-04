@@ -33,8 +33,10 @@ export default function Contact() {
   const [alertOpen, setAlertOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const initialValues: FormValues = { email: "", subject: "", message: "" };
+
   const sendEmail = (
-    values: FormValues,
+    _: FormValues, //values are not used, only declared
     { setSubmitting, resetForm }: FormikHelpers<FormValues>
   ) => {
     setSubmitting(true);
@@ -98,8 +100,8 @@ export default function Contact() {
         <Grid container>
           <Grid item xs={12} md={9}>
             <Box sx={style.FormAndTitle}>
-              <Formik
-                initialValues={{ email: "", subject: "", message: "" }}
+              <Formik<FormValues>
+                initialValues={initialValues}
                 validationSchema={ContactSchema}
                 validateOnChange={true}
                 validateOnBlur={true}

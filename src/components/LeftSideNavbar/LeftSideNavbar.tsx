@@ -2,13 +2,14 @@ import { useState } from "react";
 import {
   Drawer,
   List,
-  ListItem,
   ListItemText,
   IconButton,
   Box,
+  Link
 } from "@mui/material";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import { routes } from "../../routes";
+import { Link as RouterLink } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -20,7 +21,7 @@ export default function SideMenu() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", }}>
       {/* Przyciski nawigacyjne */}
       <IconButton
         edge="start"
@@ -49,19 +50,30 @@ export default function SideMenu() {
           },
         }}
       >
-        <List>
-          <ListItem component="a" href={routes.training}>
+        <List sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px", padding: "30px", color: "black"}}>
+        <Link
+            to={routes.training}
+            component={RouterLink}
+            underline="hover"
+          >
             <ListItemText primary="Training" />
-          </ListItem>
-          <ListItem component="a" href={routes.vision}>
+          </Link>
+          <Link
+            to={routes.vision}
+            component={RouterLink}
+            underline="hover"
+          >
             <ListItemText primary="Vision practice" />
-          </ListItem>
-          <ListItem button onClick={() => console.log("Third item clicked")}>
-            <ListItemText primary="Third Item" />
-          </ListItem>
+          </Link>
+          <Link
+            to={routes.privateLesson}
+            component={RouterLink}
+            underline="hover"
+          >
+            <ListItemText primary="Get private lesson" />
+          </Link>
         </List>
       </Drawer>
-
       {/* Główna zawartość */}
       <Box
         component="main"

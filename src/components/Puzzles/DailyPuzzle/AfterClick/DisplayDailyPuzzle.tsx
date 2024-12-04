@@ -21,6 +21,7 @@ import { Puzzle } from "../PuzzleTypes";
 import { SquareStyles } from "./DisplayDailyPuzzle.types";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { routes } from "../../../../routes";
 
 export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const chess = useRef<Chess>(new Chess());
@@ -247,7 +248,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
 
         <Grid item xs={12} md={3} sx={style.Moves}>
           <Box sx={style.Title}>
-            <Link to={"/"} component={RouterLink}>
+            <Link to={routes.home} component={RouterLink}>
               <ArrowBackIcon sx={style.ArrowBackIcon} />
             </Link>
             <Box sx={style.TitleContainer}>
