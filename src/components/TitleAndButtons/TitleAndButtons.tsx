@@ -69,12 +69,12 @@ export default function TitleAndButtons() {
           <Link
             to={routes.chooseStartingPosition}
             component={RouterLink}
-            sx={style.TextUnderlineTurnOff}
+            underline="hover"
           >
-            <Button sx={style.ImageButtonContainer}>
+            <Box sx={style.ImageButtonContainer}>
               <img src={pawns} alt="Game with pawns only" style={style.ButtonImage} />
               <Typography sx={style.TitleUnderButtonImage}>Pawns Game</Typography>
-            </Button>
+            </Box>
           </Link>
           <DailyPuzzleHomePage />
         </Box>
