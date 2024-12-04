@@ -6,7 +6,6 @@ import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboa
 import {
   createHashRouter,
   createRoutesFromElements,
-  HashRouter,
   Route,
   RouterProvider,
 } from "react-router-dom";

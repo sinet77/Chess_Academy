@@ -29,7 +29,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.training}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img
@@ -43,7 +43,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.chooseComputerLevel}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img
@@ -59,7 +59,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.chooseDifficulty}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img src={puzzle} alt="Chess Puzzle" style={style.ButtonImage} />
@@ -69,7 +69,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.chooseStartingPosition}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img src={pawns} alt="Game with pawns only" style={style.ButtonImage} />
