@@ -15,11 +15,12 @@ export const Title: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   padding: "20px",
+
 };
 
 export const TitleText: SxProps = {
   color: "#fff",
-  fontFamily: "Playfair Display",
+  fontFamily: "Roboto",
   fontSize: "50px",
   fontWeight: "700",
   lineHeight: "110px",

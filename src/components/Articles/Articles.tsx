@@ -78,7 +78,7 @@ const Articles: React.FC = () => {
             <Box sx={style.Title}>{articles[currentIndex].title}</Box>
             <Box sx={style.PubDate}>{articles[currentIndex].pubDate}</Box>
 
-            <Box
+            <Box sx={style.Description}
               dangerouslySetInnerHTML={{
                 __html: articles[currentIndex].description,
               }}
