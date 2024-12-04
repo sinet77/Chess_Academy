@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import TrainingChessBoard from "./components/TrainingChessboard/TrainingChessboard.tsx";
 import {
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   HashRouter,
   Route,
@@ -31,8 +31,10 @@ import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
 import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
 import VisionTraining from "./components/Orientation training/VisionTraining.tsx";
 import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
+import PawnsGame from "./components/PawnsGame/PawnsGame.tsx";
+import ChoosePosition from "./components/PawnsGame/ChoosePosition/ChoosePosition.tsx";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/Chess_Academy">
       <Route element={<Protected />}>
@@ -59,6 +61,11 @@ const router = createBrowserRouter(
             element={<ChooseComputerLevel />}
           />
           <Route path={routes.vision} element={<VisionTraining />} />
+          <Route
+            path={routes.chooseStartingPosition}
+            element={<ChoosePosition />}
+          />
+          <Route path={routes.pawnsGame} element={<PawnsGame />} />
         </Route>
       </Route>
       <Route path={routes.login} element={<LoginPage />} />

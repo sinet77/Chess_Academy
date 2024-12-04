@@ -1,4 +1,5 @@
 import { SxProps } from "@mui/material";
+import img from "../../assets/man_background.jpeg";
 
 export const Main: SxProps = {
   display: "flex",
@@ -8,7 +9,7 @@ export const Main: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   gap: "200px",
-  backgroundImage: 'url("/src/assets/man_background.jpeg")',
+  backgroundImage: `url("${img}")`,
   backgroundSize: "100% 100%",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",

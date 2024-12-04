@@ -91,6 +91,21 @@ export const Button: SxProps = {
   },
 };
 
+export const ReadMoreButton: SxProps = {
+  color: "white",
+  backgroundColor: "#000000",
+  fontFamily: "Playfair Display",
+  fontSize: "16px",
+  fontWeight: "500",
+  lineHeight: "23px",
+  textTransform: "none",
+  padding: "15px 30px",
+  "&:hover": {
+    backgroundColor: "#ff4d01",
+    transform: "scale(1.2)"
+  },
+};
+
 export const Price = {
   fontFamily: "Playfair Display",
   fontSize: "50px",

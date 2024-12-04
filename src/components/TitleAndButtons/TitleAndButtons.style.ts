@@ -30,8 +30,8 @@ export const ImageButtonContainer: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  width: "160px",
-  height: "200px",
+  width: "100%",
+  height: "auto",
   backgroundColor: "#292929",
   borderRadius: "8px",
   border: "1px solid white",
@@ -46,16 +46,17 @@ export const ImageButtonContainer: SxProps = {
 
 export const ButtonImage: React.CSSProperties = {
   width: "160px",
-  height: "200px",
-  marginBottom: "8px",
-  borderRadius: "8px",
+  height: "auto",
+  marginBottom: "12px",
+  borderTopRightRadius: "8px",
+  borderTopLeftRadius: "8px",
+  border: "1px solid white"
 };
 export const TitleUnderButtonImage: React.CSSProperties = {
   textTransform: "none",
   color: "white",
-  paddingBottom: "10px",
+
   fontWeight: "bold",
   fontSize: "15px",
-};
 
-export const TextUnderlineTurnOff: SxProps = { textDecoration: "none" };
+};

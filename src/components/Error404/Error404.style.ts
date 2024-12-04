@@ -1,22 +1,28 @@
 import { SxProps } from "@mui/material";
+import chessPieces from "/src/assets/chess_pieces.png";
 
 export const Background: SxProps = {
   width: "100%",
-  minHeight: "100vh",
+  height: "100vh", 
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  background: 'url("/src/assets/chess_pieces.png") center / 100% no-repeat',
+  backgroundImage: `url(${chessPieces})`, 
+  backgroundPosition: "center", 
+  backgroundSize: "cover", 
+  backgroundRepeat: "no-repeat", 
 };
 
 export const MainContent: SxProps = {
-  backgroundColor: "#3b3b3b",
-  color: "white",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "20px",
-  borderRadius: "10px",
-  mb: "60px",
+  padding: "24px",
+  backgroundColor: "rgba(255, 255, 255, 0.8)", 
+  borderRadius: "8px",
+  width: "100%",
+  textAlign: "center",
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", 
 };
+
+export const Title: SxProps = { mb: 2, textAlign: "center" }
+
+export const Gif: SxProps = { width: "100%", maxWidth: "300px", height: "auto", display: "block", ml: "auto", mr: "auto" }
+

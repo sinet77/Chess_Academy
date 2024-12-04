@@ -1,7 +1,7 @@
 import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
-import { Piece, Square } from "react-chessboard/dist/chessboard/types";
+import { Square } from "react-chessboard/dist/chessboard/types";
 import { SquareStyles } from "./PuzzleExercise.types";
 import ScienceIcon from "@mui/icons-material/Science";
 import Stopwatch from "./Stopwatch/Stopwatch";
@@ -16,6 +16,7 @@ import {
 import * as style from "./PuzzleExercise.style";
 import { loading_gif } from "../../assets/PuzzleExerciseImages";
 import { useLocation } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function PuzzlesExercise() {
   const location = useLocation();
@@ -41,6 +42,8 @@ export default function PuzzlesExercise() {
   const [isAutoNextEnabled, setIsAutoNextEnabled] = useState<boolean>(false);
   const [isPuzzleSolved, setIsPuzzleSolved] = useState<boolean>(false);
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
+  const [isTimerActive, setIsTimerActive] = useState<boolean>(true);
+
 
   async function fetchPuzzle() {
     const url = `https://chess-puzzles2.p.rapidapi.com/range?min=${min}&max=${max}&max_deviation=100&number_of_puzzles=1`;
@@ -57,6 +60,7 @@ export default function PuzzlesExercise() {
     setCurrentMoveIndex(0);
     setHighlightedSquares({});
     setRightClickedSquares({});
+    setIsTimerActive(true)
 
     try {
       const response = await fetch(url, options);
@@ -66,7 +70,6 @@ export default function PuzzlesExercise() {
       setMoves(puzzle.moves);
       chess.load(puzzle.fen);
       setIsPlayerTurn(false);
-      console.log("Ruchy", puzzle.moves);
 
       const color = getStartingColorForPlayer(puzzle.fen);
       setStartingColor(color === "White" ? "Black" : "White");
@@ -102,7 +105,7 @@ export default function PuzzlesExercise() {
     }
   };
 
-  function getStartingColorForPlayer(fen: string) {
+  const getStartingColorForPlayer=(fen: string) =>{
     const spliitedPartsInFenToGetAColor = fen.split(" ");
     if (spliitedPartsInFenToGetAColor[1] === "w") {
       setChangeBoardOrientation("black");
@@ -113,7 +116,7 @@ export default function PuzzlesExercise() {
     }
   }
 
-  function automaticTransitionAfterSolvingPuzzle() {
+  const automaticTransitionAfterSolvingPuzzle=()=> {
     if (isAutoNextEnabled && isPuzzleSolved) {
       setTimeout(() => {
         fetchPuzzle();
@@ -131,16 +134,7 @@ export default function PuzzlesExercise() {
   const onPieceDrop = (
     sourceSquare: Square,
     targetSquare: Square,
-    piece: Piece
   ): boolean => {
-    console.log(
-      "Piece dropped:",
-      piece,
-      "from:",
-      sourceSquare,
-      "to:",
-      targetSquare
-    );
 
     const previousFen = chess.fen();
 
@@ -154,8 +148,6 @@ export default function PuzzlesExercise() {
       setFen(previousFen);
       return false;
     }
-
-    console.log("Move performed:", move.san);
 
     const moveIndex = currentMoveIndex;
     const apiMove = moves[moveIndex];
@@ -183,6 +175,7 @@ export default function PuzzlesExercise() {
 
       if (newIndex === moves.length) {
         setIsPuzzleSolved(true);
+        handleTimerEnd()
       }
 
       setHighlightedSquares({
@@ -211,7 +204,7 @@ export default function PuzzlesExercise() {
     }
   }, [isPlayerTurn, currentMoveIndex, moves]);
 
-  function onSquareRightClick(square: Square) {
+  const onSquareRightClick=(square: Square)=> {
     const color = "rgba(254,46,46, 0.4)";
     const isRightClicked =
       rightClickedSquares[square]?.backgroundColor === color;
@@ -224,7 +217,7 @@ export default function PuzzlesExercise() {
     }));
   }
 
-  function getMoveOptions(square: Square) {
+  const getMoveOptions=(square: Square)=> {
     const moves = chess.moves({
       square,
       verbose: true,
@@ -251,12 +244,12 @@ export default function PuzzlesExercise() {
     setOptionSquares(newSquares);
   }
 
-  function onMouseOverSquare(square: Square) {
+  const onMouseOverSquare=(square: Square)=> {
     if (isShowMovesEnabled) {
       getMoveOptions(square);
     }
   }
-  function onMouseOutSquare() {
+  const onMouseOutSquare=()=> {
     if (Object.keys(optionSquares).length !== 0) {
       setOptionSquares({});
     }
@@ -265,6 +258,28 @@ export default function PuzzlesExercise() {
   const handleToggleShowEnableMoves = () => {
     setIsShowMovesEnabled((prev) => !prev);
   };
+
+  const handleTimerEnd = () => {
+    setIsTimerActive(false);
+  };
+
+  const notify = () => {
+    toast.success(
+      <Box>
+        Correct! XP gained <ScienceIcon sx={{ verticalAlign: "middle" }} />
+      </Box>,
+      {
+        position: "top-center",
+        autoClose: 6000,
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (isPuzzleSolved) {
+      notify();
+    }
+  }, [isPuzzleSolved]);
 
   return (
   <Box>
@@ -283,6 +298,7 @@ export default function PuzzlesExercise() {
             justifyContent="center"
             alignItems="center"
             >
+              <ToastContainer />
             <Typography sx={style.ColorOnMove}>
               {startingColor} on move
             </Typography>
@@ -295,16 +311,11 @@ export default function PuzzlesExercise() {
           </Grid>
 
           <Grid item xs={12} display="flex" justifyContent="center">
-            <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} />
+            <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd}/>
           </Grid>
 
           <Grid item xs={12} display="flex" justifyContent="center">
             <Box>
-              {isPuzzleSolved && (
-                <Box sx={style.CorrectText}>
-                  Correct! XP gained <ScienceIcon />
-                </Box>
-              )}
               <Chessboard
                 id="PuzzleChessboard"
                 position={fen}

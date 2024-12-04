@@ -12,9 +12,10 @@ import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.ts";
-import { Link } from "react-router-dom";
+import { Link as RouterLink} from "react-router-dom";
 import { routes } from "../../routes.js";
 import { useAuth } from "../../context/authContext/index.js";
+import { Link } from "@mui/material";
 
 const pages = [
   { name: "Home", path: routes.home },
@@ -36,8 +37,6 @@ function Navbar() {
     setAnchorElUser(event.currentTarget);
   };
 
-
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -46,29 +45,33 @@ function Navbar() {
     <AppBar sx={style.AppBar}>
       <Toolbar sx={style.Navbar}>
         <SideMenu />
+        <Link
+            to={routes.home}
+            component={RouterLink}
+            underline="hover"
+          >
         <Box sx={style.BarContainer}>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href={routes.home}
             sx={style.WebTitle}
-          >
+            >
             Chess Academy
             <Box component="img" sx={style.WebLogo} src={web_logo} />
           </Typography>
         </Box>
+            </Link>
 
         <Box sx={style.TabsNavbar}>
           {pages.map((page) => (
-            <Button
+            <Link
               key={page.name}
-              component={Link}
+              component={RouterLink}
               to={page.path}
               sx={style.Typography}
             >
               {page.name}
-            </Button>
+            </Link>
           ))}
         </Box>
 
