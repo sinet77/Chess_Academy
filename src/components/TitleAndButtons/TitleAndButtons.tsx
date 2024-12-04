@@ -1,7 +1,7 @@
 import { Box, Link, Typography } from "@mui/material";
 import * as style from "./TitleAndButtons.style";
 import { motion } from "framer-motion";
-import { training, computer, puzzle } from "../../assets/MainPageImages.ts";
+import { training, computer, puzzle, pawns } from "../../assets/MainPageImages.ts";
 import { Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes.ts";
 import DailyPuzzleHomePage from "../Puzzles/DailyPuzzle/OnMainPage/DailyPuzzleHomePage.tsx";
@@ -65,6 +65,16 @@ export default function TitleAndButtons() {
               <img src={puzzle} alt="Chess Puzzle" style={style.ButtonImage} />
               <Typography sx={style.TitleUnderButtonImage}>Puzzles</Typography>
             </Box>
+          </Link>
+          <Link
+            to={routes.chooseStartingPosition}
+            component={RouterLink}
+            sx={style.TextUnderlineTurnOff}
+          >
+            <Button sx={style.ImageButtonContainer}>
+              <img src={pawns} alt="Game with pawns only" style={style.ButtonImage} />
+              <Typography sx={style.TitleUnderButtonImage}>Pawns Game</Typography>
+            </Button>
           </Link>
           <DailyPuzzleHomePage />
         </Box>
