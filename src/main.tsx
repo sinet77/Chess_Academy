@@ -36,7 +36,7 @@ import ChoosePosition from "./components/PawnsGame/ChoosePosition/ChoosePosition
 
 const router = createHashRouter(
   createRoutesFromElements(
-    <Route path="/Chess_Academy">
+    <Route path="/">
       <Route element={<Protected />}>
         <Route element={<Layout />}>
           <Route index element={<App />} />
@@ -80,9 +80,7 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <AuthProvider>
-      <HashRouter>
         <RouterProvider router={router} />
-      </HashRouter>
     </AuthProvider>
   );
 }
