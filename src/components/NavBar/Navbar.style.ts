@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const Typography: SxProps = {
-  fontFamily: "Playfair Display",
+  fontFamily: "Roboto",
   fontSize: "17.6px",
   fontWeight: "500",
   lineHeight: "23.46px",

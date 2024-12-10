@@ -31,7 +31,7 @@ export const BigTitle: SxProps = {
   fontSize: "52px",
   fontWeight: "600",
   lineHeight: "70px",
-  color: "#000000",
+  color: "#0D0D0D",
   textAlign: "center",
 };
 
@@ -50,7 +50,7 @@ export const OneBox: SxProps = {
   alignItems: "center",
   textAlign: "center",
   gap: "10px",
-  border: "1px solid black",
+  border: "1px solid #0D0D0D",
   padding: "80px 50px",
 };
 
@@ -59,7 +59,7 @@ export const Level: SxProps = {
   fontSize: "23px",
   fontWeight: "600",
   lineHeight: "34px",
-  color: "#000000",
+  color: "#0D0D0D",
   letterSpacing: "0.05em",
 };
 
@@ -68,7 +68,7 @@ export const Description: SxProps = {
   fontSize: "16px",
   fontWeight: "300",
   lineHeight: "23px",
-  color: "#000000",
+  color: "#0D0D0D",
 };
 
 export const Boxes: SxProps = {
@@ -79,7 +79,7 @@ export const Boxes: SxProps = {
 
 export const Button: SxProps = {
   color: "white",
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
   fontSize: "16px",
   fontWeight: "500",
@@ -93,7 +93,7 @@ export const Button: SxProps = {
 
 export const ReadMoreButton: SxProps = {
   color: "white",
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
   fontSize: "16px",
   fontWeight: "500",

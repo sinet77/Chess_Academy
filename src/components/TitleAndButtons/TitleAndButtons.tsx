@@ -8,7 +8,7 @@ import DailyPuzzleHomePage from "../Puzzles/DailyPuzzle/OnMainPage/DailyPuzzleHo
 
 export default function TitleAndButtons() {
   return (
-    <Box sx={{paddingBlock: "100px"}}>
+    <Box sx={{paddingBlock: "100px", backgroundColor: "#0D0D0D"}}>
       <motion.div
         initial={{ opacity: 0, scale: 0.3 }}
         animate={{ opacity: 1, scale: 1 }}
