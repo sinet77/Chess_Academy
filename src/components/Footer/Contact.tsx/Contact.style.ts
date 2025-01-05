@@ -18,7 +18,7 @@ export const Form: SxProps = {
   borderRadius: "10px",
   display: "flex",
   backgroundColor: "#D8DFE5",
-  border: "2px solid #03707d",
+  border: "2px solid #0D0D0D",
   flexDirection: "column",
   gap: 2,
   padding: "50px",
@@ -32,7 +32,8 @@ export const FormAndTitle: SxProps = {
   backgroundRepeat: "no-repeat",
   height: "auto",
   padding: "50px",
-  backgroundColor: "grey"
+  backgroundColor: "grey",
+  borderRadius: "10px 0 0 10px",
 };
 
 export const Text: SxProps = {
@@ -46,18 +47,19 @@ export const Text: SxProps = {
 export const Paragraph: SxProps = {
   fontSize: "17px",
   fontWeight: "bold",
-  color: "#0D0D0D"
+  color: "#0D0D0D",
 };
 
 export const Button: SxProps = {
   width: "40%",
-  backgroundColor: "#46656F",
+  backgroundColor: "orange",
   border: "2px solid #0D0D0D",
-  color: "white",
+  color: "#0D0D0D",
   "&:hover": {
-    backgroundColor: "#a7e7e1",
+    backgroundColor: "#ff6700",
     color: "#0D0D0D",
     transform: "scale(1.1)",
+    transition: "all 0.3s ease-in-out",
   },
 };
 
@@ -91,6 +93,7 @@ export const GetInTouchContainer: SxProps = {
   padding: "60px",
   textAlign: "left",
   position: "relative",
+  borderRadius: "0 10px 10px 0",
 };
 
 export const GetInTouch: SxProps = {

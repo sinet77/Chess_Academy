@@ -10,7 +10,7 @@ export const CouchTile: SxProps = {
   justifyContent: "center",
   display: "flex",
   color: "white",
-  height: "635px",
+  height: "455.5px",
 };
 
 export const Titles: SxProps = {
@@ -103,7 +103,7 @@ export const Links: SxProps = {
   alignItems: "center",
   textAlign: "center",
   gap: "10px",
-  color: "#0D0D0D"
+  color: "#0D0D0D",
 };
 
 export const GreyTile: SxProps = {

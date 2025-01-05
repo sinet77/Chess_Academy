@@ -23,7 +23,7 @@ export const Container: SxProps = {
 
 export const Background: SxProps = {
   backgroundColor: "#fffcf3",
-  padding: "50px"
+  padding: "50px",
 };
 
 export const Title: SxProps = {
@@ -75,7 +75,6 @@ export const StartingPage: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  padding: "15px",
   "@media (max-width: 1000px)": {
     padding: "100px",
     width: "auto",
@@ -107,7 +106,7 @@ export const StartingSection: SxProps = {
     width: "auto",
     height: "auto",
   },
-}
+};
 
 export const AboutUsMainContainer: SxProps = {
   display: "flex",
@@ -116,7 +115,7 @@ export const AboutUsMainContainer: SxProps = {
   maxWidth: "1000px",
   width: "100%",
   padding: "50px",
-}
+};
 
 export const AboutUsFirstContainer: SxProps = {
   fontSize: "100px",
@@ -124,37 +123,36 @@ export const AboutUsFirstContainer: SxProps = {
   justifyContent: "flex-start",
   maxWidth: "1000px",
   width: "100%",
-  ml: "-620px"
+  ml: "-620px",
 };
 
 export const AboutUsSecondContainer: SxProps = {
   display: "flex",
   gap: "30px",
-
 };
 export const AboutUsSecondContainerTitle: SxProps = {
   fontSize: "150px",
   fontWeight: "500",
   lineHeight: "120px",
-  paddingBottom: "50px"
+  paddingBottom: "50px",
 };
 
 export const AboutUsContainerFirstImage = {
   width: "900px",
-  borderRadius: "30px"
+  borderRadius: "30px",
 };
 
 export const AboutUsContainerSecondImage = {
   width: "500px",
   height: "auto",
-  borderRadius: "30px"
+  borderRadius: "30px",
 };
 export const phillosophyTitle: SxProps = {
   fontWeight: "500",
   fontSize: "45px",
   mt: "12px",
-  mb: "13px"
-}
+  mb: "13px",
+};
 
 export const foundersContainer: SxProps = {
   display: "flex",
@@ -165,13 +163,13 @@ export const foundersContainer: SxProps = {
   width: "80%",
   textAlign: "center",
   mt: "100px",
-  mb: "100px"
+  mb: "100px",
 };
 export const founderProfilePicture = {
   display: "flex",
   width: "20%",
-  borderRadius: "50px"
-}
+  borderRadius: "50px",
+};
 export const FoundersTextContainer: SxProps = {
   backgroundColor: "#fffcf3",
   width: "100%",
@@ -184,24 +182,24 @@ export const FoundersTextContainer: SxProps = {
   padding: "30px",
   paddingLeft: "100px",
   paddingRight: "100px",
-}
+};
 export const WorldMapImageLeft: SxProps = {
   width: "260px",
   height: "100px",
-  backgroundImage: 'url(src/assets/chess-world-map.jpg)',
-  backgroundSize: '520px 250px',
-  backgroundPosition: 'left',
-  borderRadius: '40px',
-}
+  backgroundImage: "url(src/assets/chess-world-map.jpg)",
+  backgroundSize: "520px 250px",
+  backgroundPosition: "left",
+  borderRadius: "40px",
+};
 
 export const WorldMapImageRight: SxProps = {
   width: "260px",
   height: "100px",
-  backgroundImage: 'url(src/assets/chess-world-map.jpg)',
-  backgroundSize: '520px 250px',
-  backgroundPosition: 'right',
-  borderRadius: '40px',
-}
+  backgroundImage: "url(src/assets/chess-world-map.jpg)",
+  backgroundSize: "520px 250px",
+  backgroundPosition: "right",
+  borderRadius: "40px",
+};
 
 export const DownButton: SxProps = {
   backgroundImage: "url(./src/assets/questions-background.png)",
