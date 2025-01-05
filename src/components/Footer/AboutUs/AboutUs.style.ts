@@ -6,7 +6,6 @@ export const Navbar: SxProps = {
   width: "100%",
 };
 
-
 export const Container: SxProps = {
   display: "flex",
   flexDirection: "column",

@@ -1,15 +1,12 @@
 import { Grid, Box, Typography } from "@mui/material";
 import { RankCard } from "./RankCard/RankCard";
 import { ranks } from "../ranksAndBadgesValues.js";
+import * as style from "./Ranks.style.ts"
 
 export const Ranks = () => {
   return (
-    <Box >
-      <Box sx={{
-  backgroundColor: "black",
-  height: "112px",
-  width: "100%",
-}}></Box>
+    <Box sx={style.RanksContainer}>
+      <Box sx={style.Navbar}></Box>
       <Typography sx={{ fontSize: "1.5rem", padding: "30px" }}>RANKS</Typography>
       <Grid
         container

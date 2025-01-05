@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-
-
  interface Puzzle {
     title: string;
     comments: string;
@@ -12,7 +10,6 @@ import { db } from "../firebase/firebase";
     image: string;
   }
   
-
 const useDailyPuzzle = (setPuzzle: (puzzle: Puzzle) => void) => {
   const fetchPuzzle = async () => {
     try {

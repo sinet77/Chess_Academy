@@ -17,4 +17,6 @@ export const routes = {
   chooseComputerLevel: "/play/choose-computer-level",
   dailyPuzzle: "daily-chess-puzzle",
   vision: "/vision",
+  pawnsGame: "/play/pawns-game",
+  chooseStartingPosition: "/starting-position",
 };

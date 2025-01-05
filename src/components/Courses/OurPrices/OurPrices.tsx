@@ -1,5 +1,7 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, Link } from "@mui/material";
 import * as style from "./OurPrices.style";
+import { Link as RouterLink } from "react-router-dom";
+import {routes} from "../../../routes"
 
 export default function OurPrices() {
   return (
@@ -42,7 +44,12 @@ export default function OurPrices() {
               </Box>
             </Box>
           </Typography>
+          <Link
+            to={routes.contactUs}
+            component={RouterLink}
+          >
           <Button sx={style.Button}>Join This Class</Button>
+          </Link>
         </Box>
 
         <Box sx={style.OneBox}>
@@ -70,7 +77,12 @@ export default function OurPrices() {
               </Box>
             </Box>
           </Typography>
+          <Link
+            to={routes.contactUs}
+            component={RouterLink}
+          >
           <Button sx={style.Button}>Join This Class</Button>
+          </Link>
         </Box>
 
         <Box sx={style.OneBox}>
@@ -98,9 +110,23 @@ export default function OurPrices() {
               </Box>
             </Box>
           </Typography>
+          <Link
+            to={routes.contactUs}
+            component={RouterLink}
+          >
           <Button sx={style.Button}>Join This Class</Button>
+          </Link>
         </Box>
       </Box>
+      <Box sx={{display: "flex", justifyContent: "center", mt: "40px"}}>
+              <Link
+            to={routes.privateLesson}
+            component={RouterLink}
+          >
+          <Button sx={style.ReadMoreButton}>Read more</Button>
+          </Link>
+      </Box>
+
     </Box>
   );
 }

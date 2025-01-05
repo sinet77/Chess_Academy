@@ -1,8 +1,11 @@
 import { SxProps } from "@mui/material";
 
 export const Main: SxProps = {
-  backgroundColor: "#000000",
-  padding: "80px",
+  backgroundColor: "#0D0D0D",
+  padding: "100px",
+  margin: "auto",
+  maxWidth: "1800px",
+  width:"100%"
 };
 
 export const Titles: SxProps = {

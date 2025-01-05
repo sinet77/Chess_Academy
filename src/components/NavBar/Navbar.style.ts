@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const Typography: SxProps = {
-  fontFamily: "Playfair Display",
+  fontFamily: "Roboto",
   fontSize: "17.6px",
   fontWeight: "500",
   lineHeight: "23.46px",
@@ -11,11 +11,7 @@ export const Typography: SxProps = {
 };
 
 export const Navbar: SxProps = {
-  borderBottom: "1px solid #DADADA",
   height: "112px",
-  gap: "0px",
-  border: "1px 0px 0px 0px",
-  opacity: "0px",
   justifyContent: "center",
   alignItems: "center",
   display: "flex",
@@ -41,6 +37,7 @@ export const AppBar: SxProps = {
   background: "transparent",
   position: "absolute",
   width: "100%",
+  boxShadow: "none"
 };
 export const WebLogo: SxProps = { height: "50px" };
 
