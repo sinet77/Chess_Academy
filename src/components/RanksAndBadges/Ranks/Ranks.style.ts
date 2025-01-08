@@ -1,9 +1,9 @@
 import { SxProps } from "@mui/material";
 
 export const Navbar: SxProps = {
-    backgroundColor: "black",
-    height: "112px",
-    width: "100%",
-  }
+  backgroundColor: "#0D0D0D",
+  height: "112px",
+  width: "100%",
+};
 
-  export const RanksContainer: SxProps= {mb: "30px"}
+export const RanksContainer: SxProps = { mb: "30px", padding: "20px" };

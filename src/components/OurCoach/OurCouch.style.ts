@@ -10,7 +10,7 @@ export const CouchTile: SxProps = {
   justifyContent: "center",
   display: "flex",
   color: "white",
-  height: "455.5px",
+  height: "635px",
 };
 
 export const Titles: SxProps = {

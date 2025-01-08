@@ -11,22 +11,27 @@ export const ArticlesBox: SxProps = {
   gap: "50px",
   fontFamily: "Roboto",
   maxWidth: "1800px",
-  width:"100%"
+
 };
 
 export const Title: SxProps = {
   fontWeight: "bold",
   fontSize: "2rem",
+  color: "#0D0D0D",
 };
 
 export const PubDate: SxProps = {
   fontStyle: "normal",
   color: "#555",
   fontSize: "1rem",
-  marginLeft: "auto"
+  marginLeft: "auto",
 };
 
-export const Description: SxProps = {fontSize: "1.2rem", fontFamily: "Roboto",}
+export const Description: SxProps = {
+  fontSize: "1.2rem",
+  fontFamily: "Roboto",
+  color: "#0D0D0D",
+};
 
 export const Circular: SxProps = {
   display: "flex",
@@ -37,7 +42,7 @@ export const Circular: SxProps = {
 
 export const ButtonNext: SxProps = {
   color: "white",
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   fontWeight: "500",
   lineHeight: "23px",
   padding: "15px 30px",
@@ -47,7 +52,7 @@ export const ButtonNext: SxProps = {
   },
 };
 export const ButtonPrev: SxProps = {
-  color: "#000000",
+  color: "#0D0D0D",
   backgroundColor: "white",
   fontWeight: "500",
   lineHeight: "23px",
@@ -68,5 +73,4 @@ export const ReadMore: SxProps = {
   color: "RGB(31, 58, 147)",
   padding: "5px",
   mt: "-15px",
-
 };

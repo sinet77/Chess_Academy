@@ -1,9 +1,10 @@
 import { SxProps } from "@mui/material/styles";
 
 export const Navbar: SxProps = {
-  backgroundColor: "black",
+  backgroundColor: "#0D0D0D",
   height: "112px",
   width: "100%",
+  zIndex: 100,
 };
 
 export const Container: SxProps = {
@@ -28,17 +29,17 @@ export const Background: SxProps = {
 
 export const Title: SxProps = {
   fontWeight: "bold",
-  color: "black",
+  color: "#0D0D0D",
 };
 
 export const SubTitle: SxProps = {
   fontWeight: "bold",
-  color: "black",
+  color: "#0D0D0D",
   marginTop: "15px",
 };
 
 export const Description: SxProps = {
-  color: "black",
+  color: "#0D0D0D",
   fontSize: "16px",
   lineHeight: "1.6",
   marginBottom: "15px",
@@ -78,8 +79,14 @@ export const StartingPage: SxProps = {
   "@media (max-width: 1000px)": {
     padding: "100px",
     width: "auto",
-    height: "auto",
+    height: "100vh",
   },
+};
+
+export const Items: SxProps = {
+  padding: "30px",
+  maxWidth: "1800px",
+  margin: "auto",
 };
 
 export const StartingSection: SxProps = {

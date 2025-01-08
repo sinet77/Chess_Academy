@@ -5,7 +5,7 @@ export const Main: SxProps = {
   padding: "100px",
   margin: "auto",
   maxWidth: "1800px",
-  width:"100%"
+
 };
 
 export const Titles: SxProps = {

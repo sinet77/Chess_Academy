@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const BlackTile: SxProps = {
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
   fontSize: "81.6px",
   fontWeight: "700",
@@ -10,7 +10,7 @@ export const BlackTile: SxProps = {
   justifyContent: "center",
   display: "flex",
   color: "white",
-  height: "360px",
+  height: "635px",
 };
 
 export const WhiteTile: SxProps = {
@@ -44,7 +44,7 @@ export const BigTitle: SxProps = {
   fontSize: "52px",
   fontWeight: "600",
   lineHeight: "70px",
-  color: "#000000",
+  color: "#0D0D0D",
 };
 
 export const DescriptionHeader: SxProps = {
@@ -69,7 +69,7 @@ export const JoinTile: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   gap: "100px",
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
 };
 
 export const Button: SxProps = {
@@ -106,7 +106,7 @@ export const JoinContainer: SxProps = {
 };
 
 export const BenefitsTile: SxProps = {
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   color: "white",
   padding: "30px",
   display: "flex",
@@ -162,7 +162,7 @@ export const List: SxProps = {
 
 export const ReadButton: SxProps = {
   color: "white",
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
   fontSize: "16px",
   fontWeight: "500",
@@ -224,7 +224,7 @@ export const Name: SxProps = {
   fontSize: "24px",
   fontWeight: "500",
   lineHeight: "30px",
-  color: "#000000",
+  color: "#0D0D0D",
 };
 
 export const Role: SxProps = {
@@ -232,5 +232,5 @@ export const Role: SxProps = {
   fontSize: "16px",
   fontWeight: "300",
   lineHeight: "30px",
-  color: "#000000",
+  color: "#0D0D0D",
 };

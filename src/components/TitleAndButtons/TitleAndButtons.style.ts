@@ -38,7 +38,7 @@ export const ImageButtonContainer: SxProps = {
   backgroundColor: "#292929",
   borderRadius: "8px",
   border: "1px solid white",
-  transition: "transform 0.2s",
+  transition: "all 0.25s ease-in-out",
   "&:hover": {
     backgroundColor: "#5C5C5C",
     transform: "scale(1.05)",

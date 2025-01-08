@@ -6,7 +6,6 @@ import * as style from "./Ranks.style.ts"
 export const Ranks = () => {
   return (
     <Box sx={style.RanksContainer}>
-      <Box sx={style.Navbar}></Box>
       <Typography sx={{ fontSize: "1.5rem", padding: "30px" }}>RANKS</Typography>
       <Grid
         container
