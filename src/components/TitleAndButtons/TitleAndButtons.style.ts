@@ -14,7 +14,7 @@ export const Title: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  padding: "20px",
+  paddingBottom: "80px",
 
 };
 

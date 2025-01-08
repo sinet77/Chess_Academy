@@ -6,12 +6,11 @@ export const ArticlesBox: SxProps = {
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "#C3C3C3",
-  padding: "100px",
+  padding: "80px",
   height: "auto",
-  gap: "20px",
+  gap: "50px",
   fontFamily: "Roboto",
   maxWidth: "1800px",
-  margin: "auto",
   width:"100%"
 };
 

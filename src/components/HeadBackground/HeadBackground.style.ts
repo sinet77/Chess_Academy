@@ -6,4 +6,5 @@ export const Main: SxProps = {
   justifyContent: "center",
   backgroundSize: "cover",
   backgroundPosition: "center",
+  width: "100%",
 };
