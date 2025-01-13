@@ -14,10 +14,17 @@ export const Table: SxProps = {
 };
 
 export const TrainingPageLayout: SxProps = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  display: "flex",
+  flexDirection: "column",
   height: "100vh",
+  width: "100%",
   backgroundColor: "#e9f5f8",
+};
+
+export const Items: SxProps = {
+  display: "flex",
+  gap: "40px",
+  alignItems: "center",
 };
 
 export const firstColumn: SxProps = {
@@ -25,6 +32,7 @@ export const firstColumn: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+  position: "relative",
 };
 
 export const secondColumn: SxProps = {
@@ -60,7 +68,7 @@ export const MainRow: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: "70%",
+  width: { xs: "300px", sm: "400px", md: "600px" },
   height: "auto",
   border: "1px solid black",
 };
@@ -89,6 +97,18 @@ export const Button: SxProps<Theme> = {
   "&:hover": {
     bgcolor: "#f5f5f5",
   },
+  transition: "all 0.3s ease-in-out",
+  width: "100%",
+};
+
+export const UndoButton: SxProps<Theme> = {
+  backgroundColor: "orange",
+  color: "#0D0D0D",
+  transition: "all 0.3s ease-in-out",
+  width: "100%",
+  "&:hover": {
+    bgcolor: "#53adcb",
+  },
 };
 
 export const Pgn: SxProps = {
@@ -106,12 +126,16 @@ export const Fen: SxProps = {
 
 export const ButtonFen: SxProps = {
   backgroundColor: "#53adcb",
+  transition: "all 0.3s ease-in-out",
+  width: "100%",
 };
 
 export const ButtonPgn: SxProps = {
   "&:hover": {
     backgroundColor: "#53adcb",
   },
+  transition: "all 0.3s ease-in-out",
+  width: "100%",
 };
 
 export const PgnInput: SxProps = {
@@ -121,4 +145,5 @@ export const PgnInput: SxProps = {
     padding: "10px",
     height: "auto",
   },
+  width: "100%",
 };

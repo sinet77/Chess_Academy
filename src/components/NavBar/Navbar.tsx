@@ -48,7 +48,7 @@ function Navbar() {
         <Link
             to={routes.home}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
         <Box sx={style.BarContainer}>
           <Typography
@@ -69,6 +69,7 @@ function Navbar() {
               component={RouterLink}
               to={page.path}
               sx={style.Typography}
+              underline="none"
             >
               {page.name}
             </Link>

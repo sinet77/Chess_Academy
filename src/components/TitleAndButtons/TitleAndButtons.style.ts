@@ -14,12 +14,13 @@ export const Title: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  padding: "20px",
+  paddingBottom: "80px",
+
 };
 
 export const TitleText: SxProps = {
   color: "#fff",
-  fontFamily: "Playfair Display",
+  fontFamily: "Roboto",
   fontSize: "50px",
   fontWeight: "700",
   lineHeight: "110px",
@@ -32,31 +33,29 @@ export const ImageButtonContainer: SxProps = {
   alignItems: "center",
   width: "100%",
   height: "auto",
+  padding:0,
+  overflow:"hidden",
   backgroundColor: "#292929",
   borderRadius: "8px",
   border: "1px solid white",
-  mb: "20px",
-  transition: "transform 0.2s",
+  transition: "all 0.25s ease-in-out",
   "&:hover": {
     backgroundColor: "#5C5C5C",
     transform: "scale(1.05)",
-    textDecoration: "none",
   },
 };
 
 export const ButtonImage: React.CSSProperties = {
   width: "160px",
   height: "auto",
-  marginBottom: "12px",
-  borderTopRightRadius: "8px",
-  borderTopLeftRadius: "8px",
-  border: "1px solid white"
+  maxHeight: "100%",
+  borderRadius: "8px"
+
 };
 export const TitleUnderButtonImage: React.CSSProperties = {
-  textTransform: "none",
   color: "white",
-
   fontWeight: "bold",
   fontSize: "15px",
-
+  paddingBlock: "12px",
+  textDecoration: "none",
 };

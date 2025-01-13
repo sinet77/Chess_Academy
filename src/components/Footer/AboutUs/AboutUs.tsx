@@ -17,19 +17,22 @@ export default function AboutUs() {
   };
 
   return (
-    <Box sx={{ position: "relative", height: "100vh" }}>
+    <>
+    <Box sx={style.Navbar}></Box>
+    <Box sx={{ position: "relative", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      
       <AnimatePresence>
         {!showNewComponent && (
           <motion.div
-            initial={{
-              y: "-100%",
-              opacity: 1,
-            }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "-100%", opacity: 0 }}
-            transition={{ duration: 0.7 }}
-            style={{ position: "absolute", width: "100%" }}
-            key="startingPage"
+          initial={{
+            y: "-100%",
+            opacity: 1,
+          }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.7 }}
+          style={{ position: "absolute", width: "100%" }}
+          key="startingPage"
           >
             <AboutUsStartingPage buttonClick={handleButtonClick} />
           </motion.div>
@@ -37,15 +40,15 @@ export default function AboutUs() {
 
         {showNewComponent && (
           <motion.div
-            initial={{
-              y: "100%",
-              opacity: 0,
-            }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "100%", opacity: 0 }}
-            transition={{ duration: 0.7 }}
-            style={{ position: "absolute", width: "100%" }}
-            key="mainComponent"
+          initial={{
+            y: "100%",
+            opacity: 0,
+          }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "100%", opacity: 0 }}
+          transition={{ duration: 0.7 }}
+          style={{ position: "absolute", width: "100%" }}
+          key="mainComponent"
           >
             <Box sx={style.Background}>
               <Box sx={style.Container}>
@@ -67,13 +70,13 @@ export default function AboutUs() {
 
                 {guidelinesSecondPage.map((item, index) => (
                   <motion.div
-                    key={index}
-                    initial={{
-                      opacity: 0,
-                      x: index % 2 === 0 ? "-100vw" : "100vw",
-                    }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ type: "spring", stiffness: 70, damping: 20 }}
+                  key={index}
+                  initial={{
+                    opacity: 0,
+                    x: index % 2 === 0 ? "-100vw" : "100vw",
+                  }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ type: "spring", stiffness: 70, damping: 20 }}
                   >
                     <Box sx={style.Section}>
                       <Typography sx={style.SubTitle} variant="h5" gutterBottom>
@@ -86,7 +89,7 @@ export default function AboutUs() {
                         sx={style.ActionButton}
                         variant="contained"
                         href={item.buttonLink}
-                      >
+                        >
                         {item.buttonText}
                       </Button>
                     </Box>
@@ -103,5 +106,6 @@ export default function AboutUs() {
         )}
       </AnimatePresence>
     </Box>
+        </>
   );
 }

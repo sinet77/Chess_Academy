@@ -7,7 +7,7 @@ export const Container: SxProps = {
 };
 
 export const CoursesTile: SxProps = {
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
   fontSize: "81.6px",
   fontWeight: "700",
@@ -46,6 +46,7 @@ export const Header: SxProps = {
   fontSize: "23px",
   fontWeight: "600",
   lineHeight: "34px",
+  color:"#0D0D0D"
 };
 
 export const Description: SxProps = {

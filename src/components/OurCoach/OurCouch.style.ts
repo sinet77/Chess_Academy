@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const CouchTile: SxProps = {
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
   fontSize: "81.6px",
   fontWeight: "700",
@@ -10,7 +10,7 @@ export const CouchTile: SxProps = {
   justifyContent: "center",
   display: "flex",
   color: "white",
-  height: "360px",
+  height: "635px",
 };
 
 export const Titles: SxProps = {
@@ -38,7 +38,7 @@ export const BigTitle: SxProps = {
   fontSize: "52px",
   fontWeight: "600",
   lineHeight: "70px",
-  color: "#000000",
+  color: "#0D0D0D",
 };
 
 export const DescriptionHeader: SxProps = {
@@ -90,7 +90,7 @@ export const Role: SxProps = {
   fontSize: "16px",
   fontWeight: "300",
   lineHeight: "30px",
-  color: "#000000",
+  color: "#0D0D0D",
 };
 
 export const ImgWithNameBox: SxProps = {
@@ -103,6 +103,7 @@ export const Links: SxProps = {
   alignItems: "center",
   textAlign: "center",
   gap: "10px",
+  color: "#0D0D0D",
 };
 
 export const GreyTile: SxProps = {
@@ -121,7 +122,7 @@ export const BlackTile: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   gap: "100px",
-  backgroundColor: "#000000",
+  backgroundColor: "#0D0D0D",
 };
 
 export const Button: SxProps = {

@@ -46,7 +46,7 @@ export default function PawnsGame() {
   const [optionSquares, setOptionSquares] = useState<SquareStyles>({});
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
   const [gameOver, setGameOver] = useState(false);
-  const [isGameStarted, setIsGameStarted] = useState(false)
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
   const handleBoardOrientation = () => {
     setChangeBoardOrientation((prevBoardOrientation) => {
@@ -62,14 +62,14 @@ export default function PawnsGame() {
   const resetGame = () => {
     game.load(startingFen);
     setGamePosition(startingFen);
-    setChangeBoardOrientation("white")
+    setChangeBoardOrientation("white");
     setHighlightedSquares({});
     setRightClickedSquares({});
     setGameOver(false);
-    setIsGameStarted(false)
+    setIsGameStarted(false);
     if (changeBoardOrientation === "black") {
       setChangeBoardOrientation("white");
-  }
+    }
   };
 
   const onSquareRightClick = (square: Square) => {
@@ -136,17 +136,19 @@ export default function PawnsGame() {
     const squaresForWhiteToWin: Square[] = getWinnerSquares(8);
     const squaresForBlackToWin: Square[] = getWinnerSquares(1);
 
-    const whiteWins = squaresForWhiteToWin.some(
-      (square: Square) => game.get(square).color === "w"
-    );
+    const whiteWins = squaresForWhiteToWin.some((square: Square) => {
+      const piece = game.get(square);
+      return piece?.color === "w" && piece?.type === "p";
+    });
     if (whiteWins) {
       setGameOver(true);
       return "White wins!";
     }
 
-    const blackWins = squaresForBlackToWin.some(
-      (square: Square) => game.get(square).color === "b"
-    );
+    const blackWins = squaresForBlackToWin.some((square: Square) => {
+      const piece = game.get(square);
+      return piece?.color === "b" && piece?.type === "p";
+    });
     if (blackWins) {
       setGameOver(true);
       return "Black wins!";
@@ -156,7 +158,7 @@ export default function PawnsGame() {
 
   const handleComputerMove = () => {
     if (gameOver) return;
-    setIsGameStarted(true)
+    setIsGameStarted(true);
 
     engine.evaluatePosition(game.fen(), STOCKFISHLEVEL);
     engine.onMessage(({ bestMove }) => {
@@ -188,7 +190,7 @@ export default function PawnsGame() {
   const onDrop = (sourceSquare: Square, targetSquare: Square) => {
     if (gameOver) return false;
 
-    setIsGameStarted(true)
+    setIsGameStarted(true);
 
     const move = game.move({
       from: sourceSquare,

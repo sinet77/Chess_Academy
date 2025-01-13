@@ -6,9 +6,9 @@ export const rankCardContainer: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  border: "2px solid black",
+  border: "2px solid #0D0D0D",
   borderRadius: "15px",
-  padding: "20px",
+  padding: "40px",
   paddingTop: "10px",
   boxShadow: "0 3px 10px rgb(0 0 0 / 0.5)",
   backgroundColor: "white"
@@ -20,7 +20,7 @@ export const iconWithTitle: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   borderRadius: "15px",
-  padding: "10px",
+  padding: "30px",
   backgroundColor: "#282424",
   mb: "15px"
 }

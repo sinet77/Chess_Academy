@@ -8,7 +8,7 @@ import DailyPuzzleHomePage from "../Puzzles/DailyPuzzle/OnMainPage/DailyPuzzleHo
 
 export default function TitleAndButtons() {
   return (
-    <Box>
+    <Box sx={{paddingBlock: "100px", backgroundColor: "#0D0D0D"}}>
       <motion.div
         initial={{ opacity: 0, scale: 0.3 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -29,7 +29,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.training}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img
@@ -43,7 +43,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.chooseComputerLevel}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img
@@ -59,7 +59,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.chooseDifficulty}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img src={puzzle} alt="Chess Puzzle" style={style.ButtonImage} />
@@ -69,7 +69,7 @@ export default function TitleAndButtons() {
           <Link
             to={routes.chooseStartingPosition}
             component={RouterLink}
-            underline="hover"
+            underline="none"
           >
             <Box sx={style.ImageButtonContainer}>
               <img src={pawns} alt="Game with pawns only" style={style.ButtonImage} />

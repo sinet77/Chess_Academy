@@ -89,7 +89,7 @@ export default function PrivateLesson() {
           <Typography sx={style.BigTitle}>
             What They Said After Class
           </Typography>
-          <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
+          <Typography sx={{ ...style.DescriptionHeader, color: "#0D0D0D" }}>
             Years of teaching experience have allowed us to develop an
             individual curriculum for each student at different levels of
             advancement
@@ -105,7 +105,7 @@ export default function PrivateLesson() {
           {Array.from({ length: 5 }, (_, index) => (
             <StarRateIcon key={index} sx={style.Stars} />
           ))}
-          <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
+          <Typography sx={{ ...style.DescriptionHeader, color: "#0D0D0D" }}>
             Professional classes, fantastic approach to the student. My son is
             delighted. I recommend it wholeheartedly and thank you on behalf of
             myself and my son.
@@ -123,7 +123,7 @@ export default function PrivateLesson() {
           {Array.from({ length: 5 }, (_, index) => (
             <StarRateIcon key={index} sx={style.Stars} />
           ))}
-          <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
+          <Typography sx={{ ...style.DescriptionHeader, color: "#0D0D0D" }}>
             I highly recommend it, fantastic individual approach to the student,
             thanks to which I increased my playing strength after just a few
             lessons

@@ -66,7 +66,7 @@ export const MainRow: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: { xs: "300px", sm: "400px", md: "500px" },
+  width: { xs: "300px", sm: "400px", md: "600px" },
   height: "auto",
   border: "1px solid black",
 };

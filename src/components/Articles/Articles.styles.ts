@@ -6,20 +6,31 @@ export const ArticlesBox: SxProps = {
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "#C3C3C3",
-  padding: "20px",
+  padding: "80px",
   height: "auto",
-  gap: "20px",
+  gap: "50px",
+  fontFamily: "Roboto",
+  maxWidth: "1800px",
+
 };
 
 export const Title: SxProps = {
   fontWeight: "bold",
-  fontSize: "23px",
+  fontSize: "2rem",
+  color: "#0D0D0D",
 };
 
 export const PubDate: SxProps = {
-  fontStyle: "italic",
-  color: "black",
-  fontWeight: "bold",
+  fontStyle: "normal",
+  color: "#555",
+  fontSize: "1rem",
+  marginLeft: "auto",
+};
+
+export const Description: SxProps = {
+  fontSize: "1.2rem",
+  fontFamily: "Roboto",
+  color: "#0D0D0D",
 };
 
 export const Circular: SxProps = {
@@ -31,9 +42,7 @@ export const Circular: SxProps = {
 
 export const ButtonNext: SxProps = {
   color: "white",
-  backgroundColor: "#000000",
-  fontFamily: "Playfair Display",
-  fontSize: "20px",
+  backgroundColor: "#0D0D0D",
   fontWeight: "500",
   lineHeight: "23px",
   padding: "15px 30px",
@@ -43,10 +52,8 @@ export const ButtonNext: SxProps = {
   },
 };
 export const ButtonPrev: SxProps = {
-  color: "#000000",
+  color: "#0D0D0D",
   backgroundColor: "white",
-  fontFamily: "Playfair Display",
-  fontSize: "20px",
   fontWeight: "500",
   lineHeight: "23px",
   padding: "15px 30px",
@@ -66,5 +73,4 @@ export const ReadMore: SxProps = {
   color: "RGB(31, 58, 147)",
   padding: "5px",
   mt: "-15px",
-  fontSize: "22px",
 };
