@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { Square } from "react-chessboard/dist/chessboard/types";
+import UndoIcon from "@mui/icons-material/Undo";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,39 +16,75 @@ import * as style from "./TrainingChessBoard.style";
 import Pgn from "./Pgn";
 import Options from "./Options";
 import Fen from "./Fen";
-
+import Engine from "../../Engine/engine";
+import PositionEvaluationBar from "./PositionEvaluationBar/PositionEvaluationBar";
 interface MovePair {
   white: string;
   black: string;
 }
-
 export default function TrainingChessBoard() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [chess] = useState<Chess>(new Chess());
-  const [fen, setFen] = useState<string>(chess.fen());
+  const engine = useRef(new Engine());
+  const game = useRef(new Chess());
+  const [chessBoardPosition, setChessBoardPosition] = useState<string>(
+    game.current.fen()
+  );
+  const [positionEvaluation, setPositionEvaluation] = useState<number>(0);
+  const [depth, setDepth] = useState<number>(10);
+  const [bestLine, setBestline] = useState<string>("");
+  const [possibleMate, setPossibleMate] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
   const [history, setHistory] = useState<MovePair[]>([]);
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
     "white" | "black"
   >("white");
   const [autoPromoteToQueen, setAutoPromoteToQueen] = useState<boolean>(false);
+  const [gameOverMessage, setGameOverMessage] = useState<string | null>(null);
 
-  function handleBoardOrientation() {
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const findBestMove = () => {
+    engine.current.evaluatePosition(chessBoardPosition, 18);
+    engine.current.onMessage(
+      ({
+        positionEvaluation,
+        possibleMate,
+        pv, //principal variation - best line
+        depth,
+      }: {
+        positionEvaluation?: string;
+        possibleMate?: string;
+        pv?: string;
+        depth?: number;
+      }) => {
+        if (depth && depth < 10) return;
+        positionEvaluation &&
+          setPositionEvaluation(
+            ((game.current.turn() === "w" ? 1 : -1) *
+              Number(positionEvaluation)) /
+              100
+          );
+        possibleMate && setPossibleMate(possibleMate);
+        depth && setDepth(depth);
+        pv && setBestline(pv);
+      }
+    );
+  };
+
+  const handleBoardOrientation = () => {
     setChangeBoardOrientation((prevBoardOrientation) =>
       prevBoardOrientation === "white" ? "black" : "white"
     );
-  }
+  };
 
-  function handleAutoPromoteToQueen() {
+  const handleAutoPromoteToQueen = () => {
     setAutoPromoteToQueen((prevAutoPromoteToQueen) =>
       prevAutoPromoteToQueen === true ? false : true
     );
-  }
+  };
 
-  function updateHistory() {
-    const currentHistory = chess.history();
+  const updateHistory = () => {
+    const currentHistory = game.current.history();
     const updatedHistory: MovePair[] = [];
 
     for (let i = 0; i < currentHistory.length; i += 2) {
@@ -58,115 +95,159 @@ export default function TrainingChessBoard() {
     }
 
     setHistory(updatedHistory);
-  }
+  };
 
-  function undoMove() {
-    chess.undo();
-    setFen(chess.fen());
+  const undoMove = () => {
+    game.current.undo();
+    setChessBoardPosition(game.current.fen());
     updateHistory();
-  }
+  };
 
-  const onPieceDrop = (
-    sourceSquare: Square,
-    targetSquare: Square,
-
-  ): boolean => {
-    const move = chess.move({
+  const onPieceDrop = (sourceSquare: Square, targetSquare: Square): boolean => {
+    const move = game.current.move({
       from: sourceSquare,
       to: targetSquare,
       promotion: "q",
     });
-
-    if (move === null) return false;
-
-    setFen(chess.fen());
+    setPossibleMate("");
+    setChessBoardPosition(game.current.fen());
     updateHistory();
+    if (move === null) return false;
+    engine.current.stop();
+    setBestline("");
+    if (game.current.isCheckmate()) {
+      setGameOverMessage("Mated");
+    } else if (game.current.isDraw()) {
+      setGameOverMessage("Draw");
+    } else {
+      setGameOverMessage(null);
+    }
+
     return true;
   };
 
+  useEffect(() => {
+    if (!game.current.isGameOver() || game.current.isDraw()) {
+      findBestMove();
+    }
+  }, [chessBoardPosition]);
+
   const handleFenChange = (newFen: string) => {
-    setFen(newFen);
+    setChessBoardPosition(newFen);
     updateHistory();
   };
 
   const handleClearTheBoard = () => {
-    chess.clear();
-    setFen(chess.fen());
+    game.current.clear();
+    setChessBoardPosition(game.current.fen());
   };
 
   const handleResetTheBoard = () => {
-    chess.reset();
-    setFen(chess.fen());
+    game.current.reset();
+    setChessBoardPosition(game.current.fen());
   };
+
+  const evaluationText = gameOverMessage
+    ? `Game over: ${gameOverMessage}`
+    : possibleMate
+    ? `Mate in #${possibleMate}`
+    : `Position Evaluation: ${positionEvaluation}; Depth: ${depth}`;
 
   return (
     <Box>
       <Box sx={style.Navbar}></Box>
-    <Box sx={style.TrainingPageLayout}>
-      <Box sx={style.firstColumn}>
-        <Box sx={style.Chessboard}>
-          <Chessboard
-            id="BasicChessboard"
-            position={fen}
-            boardOrientation={changeBoardOrientation}
-            onPieceDrop={onPieceDrop}
-            arePiecesDraggable={true}
-            autoPromoteToQueen={autoPromoteToQueen}
-            customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-            customLightSquareStyle={{ backgroundColor: "#607d8b" }}
-          />
-        </Box>
-        <Pgn chess={chess} onFenChange={handleFenChange} />
-        <Fen chess={chess} onFenChange={handleFenChange} />
-      </Box>
+      <Box sx={style.TrainingPageLayout}>
+        <Grid padding={"50px"} container spacing={2}>
+          <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
+            <h4>{evaluationText}</h4>
+              <h5>
+                Best line: <i>{bestLine.slice(0, 40)}</i> ...
+              </h5>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "40px",
+              }}
+            >
+              <PositionEvaluationBar
+                positionEvaluation={positionEvaluation}
+                possibleMate={possibleMate}
+                gameOverMessage={gameOverMessage}
+              />
+              <Box sx={style.Chessboard}>
+                <Chessboard
+                  id="AnalysisBoard"
+                  position={chessBoardPosition}
+                  boardOrientation={changeBoardOrientation}
+                  onPieceDrop={onPieceDrop}
+                  arePiecesDraggable={true}
+                  autoPromoteToQueen={autoPromoteToQueen}
+                  customDarkSquareStyle={{ backgroundColor: "#607d8b" }}
+                  customLightSquareStyle={{ backgroundColor: "#e0e0e0" }}
+                />
+              </Box>
+            </Box>
 
-      <Box sx={style.secondColumn}>
-        <Box>
-          <Button
-            variant="contained"
-            endIcon={<SettingsIcon />}
-            onClick={handleOpen}
-          >
-            Settings
-          </Button>
-          <Options
-            open={open}
-            handleClose={handleClose}
-            handleBoardOrientation={handleBoardOrientation}
-            undoMove={undoMove}
-            clearBoard={handleClearTheBoard}
-            resetBoard={handleResetTheBoard}
-            handleAutoPromoteToQueen={handleAutoPromoteToQueen}
-          />
-        </Box>
+            <Pgn chess={game.current} onFenChange={handleFenChange} />
+            <Fen chess={game.current} onFenChange={handleFenChange} />
+          </Grid>
 
-        <h3>Moves history:</h3>
-        <TableContainer sx={style.Table} component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow sx={style.MainRow}>
-                <TableCell sx={style.moveColumn}>Move</TableCell>
-                <TableCell sx={style.WhiteAndBlackColumn}>White</TableCell>
-                <TableCell sx={style.WhiteAndBlackColumn}>Black</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {history.map((move, index) => (
-                <TableRow key={index}>
-                  <TableCell sx={style.moveColumn}>{index + 1}</TableCell>
-                  <TableCell sx={style.WhiteAndBlackColumn}>
-                    {move.white}
-                  </TableCell>
-                  <TableCell sx={style.WhiteAndBlackColumn}>
-                    {move.black}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+          <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
+            <Box sx={style.Items}>
+            <Button
+                sx={style.UndoButton}
+                startIcon={<UndoIcon />}
+                onClick={undoMove}
+              >
+                Undo
+              </Button>
+              <Button sx={style.ButtonPgn}
+                variant="contained"
+                endIcon={<SettingsIcon />}
+                onClick={handleOpen}
+              >
+                Settings
+              </Button>
+              <Options
+                open={open}
+                handleClose={handleClose}
+                handleBoardOrientation={handleBoardOrientation}
+                clearBoard={handleClearTheBoard}
+                resetBoard={handleResetTheBoard}
+                handleAutoPromoteToQueen={handleAutoPromoteToQueen}
+              />
+            </Box>
+
+            <h3>Moves history:</h3>
+            <TableContainer sx={style.Table} component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow sx={style.MainRow}>
+                    <TableCell sx={style.moveColumn}>Move</TableCell>
+                    <TableCell sx={style.WhiteAndBlackColumn}>White</TableCell>
+                    <TableCell sx={style.WhiteAndBlackColumn}>Black</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {history.map((move, index) => (
+                    <TableRow key={index}>
+                      <TableCell sx={style.moveColumn}>{index + 1}</TableCell>
+                      <TableCell sx={style.WhiteAndBlackColumn}>
+                        {move.white}
+                      </TableCell>
+                      <TableCell sx={style.WhiteAndBlackColumn}>
+                        {move.black}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+        </Grid>
       </Box>
-    </Box>
     </Box>
   );
 }

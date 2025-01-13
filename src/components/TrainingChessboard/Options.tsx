@@ -7,7 +7,6 @@ import {
   IconButton,
 } from "@mui/material";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
-import UndoIcon from "@mui/icons-material/Undo";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import FlagIcon from "@mui/icons-material/Flag";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,7 +16,6 @@ interface OptionsProps {
   open: boolean;
   handleClose: () => void;
   handleBoardOrientation: () => void;
-  undoMove: () => void;
   clearBoard: () => void;
   resetBoard: () => void;
   handleAutoPromoteToQueen: () => void;
@@ -27,7 +25,6 @@ export default function Options({
   open,
   handleClose,
   handleBoardOrientation,
-  undoMove,
   clearBoard,
   resetBoard,
   handleAutoPromoteToQueen,
@@ -52,9 +49,6 @@ export default function Options({
           onClick={handleBoardOrientation}
         >
           Swap
-        </Button>
-        <Button sx={style.Button} startIcon={<UndoIcon />} onClick={undoMove}>
-          Undo
         </Button>
         <Button
           sx={style.Button}
