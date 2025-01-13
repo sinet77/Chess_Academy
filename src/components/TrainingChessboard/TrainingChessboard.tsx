@@ -3,6 +3,7 @@ import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Box, Button, Grid } from "@mui/material";
 import { Square } from "react-chessboard/dist/chessboard/types";
+import UndoIcon from "@mui/icons-material/Undo";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -37,6 +38,7 @@ export default function TrainingChessBoard() {
     "white" | "black"
   >("white");
   const [autoPromoteToQueen, setAutoPromoteToQueen] = useState<boolean>(false);
+  const [gameOverMessage, setGameOverMessage] = useState<string | null>(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -111,9 +113,16 @@ export default function TrainingChessBoard() {
     setChessBoardPosition(game.current.fen());
     updateHistory();
     if (move === null) return false;
-    engine.stop();
+    engine.current.stop();
     setBestline("");
-    if (game.current.isGameOver() || game.current.isDraw()) return false;
+    if (game.current.isCheckmate()) {
+      setGameOverMessage("Mated");
+    } else if (game.current.isDraw()) {
+      setGameOverMessage("Draw");
+    } else {
+      setGameOverMessage(null);
+    }
+
     return true;
   };
 
@@ -138,21 +147,22 @@ export default function TrainingChessBoard() {
     setChessBoardPosition(game.current.fen());
   };
 
+  const evaluationText = gameOverMessage
+    ? `Game over: ${gameOverMessage}`
+    : possibleMate
+    ? `Mate in #${possibleMate}`
+    : `Position Evaluation: ${positionEvaluation}; Depth: ${depth}`;
+
   return (
     <Box>
       <Box sx={style.Navbar}></Box>
       <Box sx={style.TrainingPageLayout}>
         <Grid padding={"50px"} container spacing={2}>
           <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
-            <h4>
-              Position Evaluation:{" "}
-              {possibleMate ? `Mate in #${possibleMate}` : positionEvaluation}
-              {"; "}
-              Depth: {depth}
-            </h4>
-            <h5>
-              Best line: <i>{bestLine.slice(0, 40)}</i> ...
-            </h5>
+            <h4>{evaluationText}</h4>
+              <h5>
+                Best line: <i>{bestLine.slice(0, 40)}</i> ...
+              </h5>
             <Box
               sx={{
                 display: "flex",
@@ -164,6 +174,7 @@ export default function TrainingChessBoard() {
               <PositionEvaluationBar
                 positionEvaluation={positionEvaluation}
                 possibleMate={possibleMate}
+                gameOverMessage={gameOverMessage}
               />
               <Box sx={style.Chessboard}>
                 <Chessboard
@@ -179,13 +190,20 @@ export default function TrainingChessBoard() {
               </Box>
             </Box>
 
-            <Pgn chess={game} onFenChange={handleFenChange} />
-            <Fen chess={game} onFenChange={handleFenChange} />
+            <Pgn chess={game.current} onFenChange={handleFenChange} />
+            <Fen chess={game.current} onFenChange={handleFenChange} />
           </Grid>
 
           <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
-            <Box>
-              <Button
+            <Box sx={style.Items}>
+            <Button
+                sx={style.UndoButton}
+                startIcon={<UndoIcon />}
+                onClick={undoMove}
+              >
+                Undo
+              </Button>
+              <Button sx={style.ButtonPgn}
                 variant="contained"
                 endIcon={<SettingsIcon />}
                 onClick={handleOpen}
@@ -196,7 +214,6 @@ export default function TrainingChessBoard() {
                 open={open}
                 handleClose={handleClose}
                 handleBoardOrientation={handleBoardOrientation}
-                undoMove={undoMove}
                 clearBoard={handleClearTheBoard}
                 resetBoard={handleResetTheBoard}
                 handleAutoPromoteToQueen={handleAutoPromoteToQueen}

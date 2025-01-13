@@ -1,35 +1,35 @@
-import React from "react";
+import { useMemo } from "react";
 import "./PositionEvaluationBar.css";
+import { getEvaluationBarHeight } from "./PositionEvaluationBar.utils";
 
 interface PositionEvaluationBarProps {
+  possibleMate?: string;
   positionEvaluation: number;
-  possibleMate?: string; 
+  gameOverMessage?: string | null;
 }
 
-const PositionEvaluationBar: React.FC<PositionEvaluationBarProps> = ({
-  positionEvaluation,
+const PositionEvaluationBar = ({
   possibleMate,
-}) => {
+  positionEvaluation,
+  gameOverMessage
+}: PositionEvaluationBarProps) => {
 
-  const evaluationNormalized = Math.max(-20, Math.min(20, positionEvaluation));
+  const {whiteHeight, blackHeight } =
+    getEvaluationBarHeight( positionEvaluation, possibleMate );
+    
 
-  let whiteHeight = 50 + (evaluationNormalized / 20) * 50;
-  let blackHeight = 100 - whiteHeight;
+    const evaluationLabel = gameOverMessage 
+    ? gameOverMessage 
+    : possibleMate 
+      ? `M${possibleMate}` 
+      : positionEvaluation;
 
-  let whiteColor = "";
-  let blackColor = "";
+  const evaluationClassname = possibleMate || gameOverMessage ? "" : "evaluation-value";  
 
-  if (possibleMate) {
-    if (positionEvaluation > 0) {
-      whiteHeight = 100;
-      blackHeight = 0;
-      whiteColor = "white";  
-    } else {
-      blackHeight = 100;
-      whiteHeight = 0;
-      blackColor = "black";  
-    }
-  }
+  const isWhiteAdvantage = useMemo(() => positionEvaluation > 0, [positionEvaluation]);
+  const isBlackAdvantage = useMemo(() => positionEvaluation < 0, [positionEvaluation]);
+  
+  console.log(possibleMate);
 
   return (
     <div className="evaluation-bar">
@@ -37,15 +37,12 @@ const PositionEvaluationBar: React.FC<PositionEvaluationBarProps> = ({
         className="evaluation-section black-section"
         style={{
           height: `${blackHeight}%`,
-          position: "relative",
-          backgroundColor: blackColor,
         }}
       >
-        {possibleMate && positionEvaluation < 0 && (
-          <span className="possible-mate black-mate">M{possibleMate}</span>
-        )}
-        {!possibleMate && positionEvaluation < 0 && (
-          <span className="evaluation-value">{positionEvaluation}</span>
+        {isBlackAdvantage && (
+          <span className={evaluationClassname}>
+            {gameOverMessage || evaluationLabel}
+          </span>
         )}
       </div>
 
@@ -53,15 +50,12 @@ const PositionEvaluationBar: React.FC<PositionEvaluationBarProps> = ({
         className="evaluation-section white-section"
         style={{
           height: `${whiteHeight}%`,
-          position: "relative",
-          backgroundColor: whiteColor,
         }}
       >
-        {possibleMate && positionEvaluation > 0 && (
-          <span className="possible-mate white-mate">M{possibleMate}</span>
-        )}
-        {!possibleMate && positionEvaluation > 0 && (
-          <span className="evaluation-value">{positionEvaluation}</span>
+        {isWhiteAdvantage && (
+          <span className={evaluationClassname}>
+            {gameOverMessage || evaluationLabel}
+          </span>
         )}
       </div>
     </div>

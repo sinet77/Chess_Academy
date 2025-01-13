@@ -5,15 +5,10 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  height: 300px;
 }
 
-@media (max-width: 600px) {
-  .evaluation-bar {
-    height: 300px;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 960px) {
+@media (min-width: 600px) {
   .evaluation-bar {
     height: 400px;
   }
@@ -24,7 +19,6 @@
     height: 600px;
   }
 }
-
 
 .evaluation-section {
   width: 100%;
@@ -38,11 +32,13 @@
 .black-section {
   background-color: black;
   color: white; 
+  position: relative;
 }
 
 .white-section {
   background-color: white;
   color: black; 
+  position: relative;
 }
 
 .evaluation-value {
