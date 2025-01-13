@@ -5,6 +5,7 @@ import { training, computer, puzzle, pawns } from "../../assets/MainPageImages.t
 import { Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes.ts";
 import DailyPuzzleHomePage from "../Puzzles/DailyPuzzle/OnMainPage/DailyPuzzleHomePage.tsx";
+import { ColorsChessboard } from "../ColorsChessboard/ColorsChessboard.tsx";
 
 export default function TitleAndButtons() {
   return (
@@ -79,6 +80,7 @@ export default function TitleAndButtons() {
           <DailyPuzzleHomePage />
         </Box>
       </motion.div>
+      <ColorsChessboard />
     </Box>
   );
 }
