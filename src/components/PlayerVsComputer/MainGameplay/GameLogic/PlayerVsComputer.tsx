@@ -96,7 +96,7 @@ export default function PlayVsComputer() {
       newSquares[move.to] = {
         background:
           game.get(move.to) &&
-          game.get(move.to).color !== game.get(square).color
+          game.get(move.to)!.color !== game.get(square)!.color
             ? "radial-gradient(circle, rgba(0,0,0,.1) 85%, transparent 85%)"
             : "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
         borderRadius: "50%",

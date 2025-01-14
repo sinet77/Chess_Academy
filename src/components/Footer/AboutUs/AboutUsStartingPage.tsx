@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import * as style from "./AboutUs.style";
 import { guidelines } from "./AboutUs.constants";
 import {
-  piotrImage,
-  pawelImage,
   chessBoardAboutUs,
   chessPieciesAboutUs,
 } from "../../../assets/AboutUsImages";
