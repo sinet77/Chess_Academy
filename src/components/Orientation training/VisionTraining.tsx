@@ -55,22 +55,21 @@ export default function VisionTraining() {
 
   useEffect(() => {
     const fetchBestScore = async () => {
-      if (!currentUser) return
-        const bestScoreDocRef = doc(
-          db,
-          "Users",
-          currentUser.uid,
-          "vision",
-          "visionDocId"
-        );
-        const bestScoreDocSnapshot = await getDoc(bestScoreDocRef);
+      if (!currentUser) return;
+      const bestScoreDocRef = doc(
+        db,
+        "Users",
+        currentUser.uid,
+        "vision",
+        "visionDocId"
+      );
+      const bestScoreDocSnapshot = await getDoc(bestScoreDocRef);
 
-        if (bestScoreDocSnapshot.exists()) {
-          setBestScore(bestScoreDocSnapshot.data().Best_Score);
-        } else {
-          await setDoc(bestScoreDocRef, { Best_Score: 0 });
-        }
-      
+      if (bestScoreDocSnapshot.exists()) {
+        setBestScore(bestScoreDocSnapshot.data().Best_Score);
+      } else {
+        await setDoc(bestScoreDocRef, { Best_Score: 0 });
+      }
     };
 
     fetchBestScore();
@@ -113,19 +112,18 @@ export default function VisionTraining() {
   };
 
   const handleSquareClick = (square: string) => {
-    if (!isTimerActive) return
-      const isCorrect = square === randomSquare;
-      setAttempts((prevAttempts) => [
-        ...prevAttempts,
-        { isValid: isCorrect, targetSquare: randomSquare },
-      ]);
+    if (!isTimerActive) return;
+    const isCorrect = square === randomSquare;
+    setAttempts((prevAttempts) => [
+      ...prevAttempts,
+      { isValid: isCorrect, targetSquare: randomSquare },
+    ]);
 
-      if (isCorrect) {
-        setCounter((prevCounter) => prevCounter + 1);
-      }
+    if (isCorrect) {
+      setCounter((prevCounter) => prevCounter + 1);
+    }
 
-      generateRandomSquare();
-    
+    generateRandomSquare();
   };
 
   const handleBoardOrientation = () => {
@@ -141,7 +139,6 @@ export default function VisionTraining() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Box sx={style.TimerAndPoints}>

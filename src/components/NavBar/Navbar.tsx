@@ -12,7 +12,7 @@ import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.ts";
-import { Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { routes } from "../../routes.js";
 import { useAuth } from "../../context/authContext/index.js";
 import { Link } from "@mui/material";
@@ -28,8 +28,8 @@ const pages = [
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
-
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const { pathname } = useLocation();
 
   const { handleSignOut } = useAuth();
 
@@ -42,79 +42,81 @@ function Navbar() {
   };
 
   return (
-    <AppBar sx={style.AppBar}>
-      <Toolbar sx={style.Navbar}>
-        <SideMenu />
-        <Link
-            to={routes.home}
-            component={RouterLink}
-            underline="none"
-          >
-        <Box sx={style.BarContainer}>
-          <Typography
-            variant="h6"
-            noWrap
-            sx={style.WebTitle}
-            >
-            Chess Academy
-            <Box component="img" sx={style.WebLogo} src={web_logo} />
-          </Typography>
-        </Box>
-            </Link>
+    <>
+      {pathname !== "/" && (
+        <Box
+          sx={{
+            height: 112,
+            background: "#000",
+          }}
+        />
+      )}
+      <AppBar sx={style.AppBar}>
+        <Toolbar sx={style.Navbar}>
+          <SideMenu />
+          <Link to={routes.home} component={RouterLink} underline="none">
+            <Box sx={style.BarContainer}>
+              <Typography variant="h6" noWrap sx={style.WebTitle}>
+                Chess Academy
+                <Box component="img" sx={style.WebLogo} src={web_logo} />
+              </Typography>
+            </Box>
+          </Link>
 
-        <Box sx={style.TabsNavbar}>
-          {pages.map((page) => (
-            <Link
-              key={page.name}
-              component={RouterLink}
-              to={page.path}
-              sx={style.Typography}
-              underline="none"
-            >
-              {page.name}
-            </Link>
-          ))}
-        </Box>
-
-        <Box>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu}>
-              <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: "45px" }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem
-                key={setting}
-                onClick={() => {
-                  handleCloseUserMenu();
-                  if (setting === "Logout") {
-                    handleSignOut();
-                  }
-                }}
+          <Box sx={style.TabsNavbar}>
+            {pages.map((page) => (
+              <Link
+                key={page.name}
+                component={RouterLink}
+                to={page.path}
+                sx={style.Typography}
+                underline="none"
               >
-                <Button>{setting}</Button>
-              </MenuItem>
+                {page.name}
+              </Link>
             ))}
-          </Menu>
-        </Box>
-      </Toolbar>
-    </AppBar>
+          </Box>
+
+          <Box>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu}>
+                <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem
+                  key={setting}
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    if (setting === "Logout") {
+                      handleSignOut();
+                    }
+                  }}
+                >
+                  <Button>{setting}</Button>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }
 

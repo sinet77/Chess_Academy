@@ -14,7 +14,6 @@ export default function FairPlay() {
 
   return (
     <Box sx={style.Background}>
-            <Box sx={style.Navbar}></Box>
       {!showNewComponent && (
         <motion.div
           initial={{ opacity: 0, scale: 0.3 }}

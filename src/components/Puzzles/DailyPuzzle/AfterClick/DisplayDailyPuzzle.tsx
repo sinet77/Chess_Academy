@@ -213,7 +213,6 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Typography sx={style.ColorOnMove}>

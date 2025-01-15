@@ -16,7 +16,6 @@ export default function AboutUsStartingPage({
 }) {
   return (
     <>
-      <Box sx={style.Navbar}></Box>
       <Box sx={style.StartingPage}>
         <Box sx={style.AboutUsMainContainer}>
           <Box sx={style.AboutUsFirstContainer}>

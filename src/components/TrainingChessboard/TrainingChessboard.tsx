@@ -28,10 +28,12 @@ export default function TrainingChessBoard() {
   const [chessBoardPosition, setChessBoardPosition] = useState<string>(
     game.current.fen()
   );
-  const [positionEvaluation, setPositionEvaluation] = useState<number>(0);
+  const [positionEvaluation, setPositionEvaluation] = useState<number | null>(
+    0
+  );
   const [depth, setDepth] = useState<number>(10);
   const [bestLine, setBestline] = useState<string>("");
-  const [possibleMate, setPossibleMate] = useState<string>("");
+  const [possibleMate, setPossibleMate] = useState<string | undefined>("");
   const [open, setOpen] = useState<boolean>(false);
   const [history, setHistory] = useState<MovePair[]>([]);
   const [changeBoardOrientation, setChangeBoardOrientation] = useState<
@@ -45,30 +47,32 @@ export default function TrainingChessBoard() {
 
   const findBestMove = () => {
     engine.current.evaluatePosition(chessBoardPosition, 18);
-    engine.current.onMessage(
-      ({
-        positionEvaluation,
-        possibleMate,
-        pv, //principal variation - best line
-        depth,
-      }: {
-        positionEvaluation?: string;
-        possibleMate?: string;
-        pv?: string;
-        depth?: number;
-      }) => {
-        if (depth && depth < 10) return;
-        positionEvaluation &&
-          setPositionEvaluation(
-            ((game.current.turn() === "w" ? 1 : -1) *
-              Number(positionEvaluation)) /
-              100
-          );
-        possibleMate && setPossibleMate(possibleMate);
-        depth && setDepth(depth);
-        pv && setBestline(pv);
-      }
-    );
+    engine.current.onMessage(function ({
+      positionEvaluation,
+      possibleMate,
+      pv, //principal variation - best line
+      depth,
+    }: {
+      positionEvaluation?: string;
+      possibleMate?: string;
+      pv?: string;
+      depth?: number;
+    }) {
+      if ((depth && depth < 10) || (!possibleMate && !positionEvaluation))
+        return;
+      console.log(positionEvaluation);
+
+      const newEv = !positionEvaluation
+        ? null
+        : ((game.current.turn() === "w" ? 1 : -1) *
+            Number(positionEvaluation)) /
+          100;
+
+      setPositionEvaluation(newEv);
+      setPossibleMate(possibleMate);
+      depth && setDepth(depth);
+      pv && setBestline(pv);
+    });
   };
 
   const handleBoardOrientation = () => {
@@ -127,6 +131,13 @@ export default function TrainingChessBoard() {
   };
 
   useEffect(() => {
+    if (game.current.isCheckmate()) {
+      setGameOverMessage("Mated");
+    } else if (game.current.isDraw()) {
+      setGameOverMessage("Draw");
+    } else {
+      setGameOverMessage(null);
+    }
     if (!game.current.isGameOver() || game.current.isDraw()) {
       findBestMove();
     }
@@ -155,14 +166,13 @@ export default function TrainingChessBoard() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Box sx={style.TrainingPageLayout}>
         <Grid padding={"50px"} container spacing={2}>
           <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
             <h4>{evaluationText}</h4>
-              <h5>
-                Best line: <i>{bestLine.slice(0, 40)}</i> ...
-              </h5>
+            <h5>
+              Best line: <i>{bestLine.slice(0, 40)}</i> ...
+            </h5>
             <Box
               sx={{
                 display: "flex",
@@ -196,14 +206,15 @@ export default function TrainingChessBoard() {
 
           <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
             <Box sx={style.Items}>
-            <Button
+              <Button
                 sx={style.UndoButton}
                 startIcon={<UndoIcon />}
                 onClick={undoMove}
               >
                 Undo
               </Button>
-              <Button sx={style.ButtonPgn}
+              <Button
+                sx={style.ButtonPgn}
                 variant="contained"
                 endIcon={<SettingsIcon />}
                 onClick={handleOpen}

@@ -71,7 +71,6 @@ export default function ChoosePosition() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Box sx={style.Container}>
         <Grid container spacing={2} justifyContent="center">
           {POSITIONS.map(({ startingFen, image, description }, index) => (

@@ -6,7 +6,6 @@ import * as style from "./Ranks/Ranks.style";
 export const RanksAndBadges = () => {
   return (
     <>
-      <Box sx={style.Navbar}></Box>
       <Ranks />
       <Badges />
     </>

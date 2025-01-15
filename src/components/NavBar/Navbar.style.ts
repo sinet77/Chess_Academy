@@ -37,7 +37,7 @@ export const AppBar: SxProps = {
   background: "transparent",
   position: "absolute",
   width: "100%",
-  boxShadow: "none"
+  boxShadow: "none",
 };
 export const WebLogo: SxProps = { height: "50px" };
 

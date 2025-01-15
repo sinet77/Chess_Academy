@@ -11,8 +11,8 @@ interface Props {
 }
 
 const DIFFICULTY_LEVELS = [
-  { level: "Beginner", min: 100, max: 500 },
-  { level: "Easy", min: 501, max: 1000 },
+  { level: "Beginner", min: 100, max: 600 },
+  { level: "Easy", min: 601, max: 1000 },
   { level: "Intermediate", min: 1001, max: 1500 },
   { level: "Challenging", min: 1501, max: 2000 },
   { level: "Advanced", min: 2001, max: 2500 },
@@ -36,35 +36,38 @@ export default function ChoosingPuzzlePage() {
   };
 
   return (
-  <Box>
-  <Box sx={style.Navbar}></Box>
-    <Box sx={style.Main}>
-      <Typography sx={style.HeadTitle} variant="h5">
-        Choose difficulty level:
-      </Typography>
-      <motion.div initial="hidden" animate="visible" variants={style.container}>
-        <Grid container spacing={2}>
-          {DIFFICULTY_LEVELS.map(({ level, min, max }, index) => (
-            <Grid item xs={12} key={level}>
-              <motion.div variants={style.item}>
-                <Button
-                  variant="contained"
-                  fullWidth
-                  onClick={() => handleDifficultySelect({ level, min, max })}
-                  sx={{
-                    ...style.Button,
-                    backgroundImage: `url(${dragon})`,
-                    backgroundPosition: BACKGROUND_POSITIONS[index],
-                  }}
+    <Box>
+      <Box sx={style.Main}>
+        <Typography sx={style.HeadTitle} variant="h5">
+          Choose difficulty level:
+        </Typography>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={style.container}
+        >
+          <Grid container spacing={2}>
+            {DIFFICULTY_LEVELS.map(({ level, min, max }, index) => (
+              <Grid item xs={12} key={level}>
+                <motion.div variants={style.item}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    onClick={() => handleDifficultySelect({ level, min, max })}
+                    sx={{
+                      ...style.Button,
+                      backgroundImage: `url(${dragon})`,
+                      backgroundPosition: BACKGROUND_POSITIONS[index],
+                    }}
                   >
-                  {level}
-                </Button>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
-      </motion.div>
+                    {level}
+                  </Button>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </motion.div>
+      </Box>
     </Box>
-          </Box>
   );
 }

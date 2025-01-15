@@ -1,6 +1,14 @@
+export const getEvaluationValue = (
+  rawEvaluation: string | undefined
+): number => {
+  if (!rawEvaluation) return 0;
+  return Number(rawEvaluation) / 100;
+};
+
 export const getEvaluationBarHeight = (
   positionEvaluation: number,
-  possibleMate?: string
+  possibleMate?: string,
+  gameOverMessage?: string
 ) => {
   const offset = 20;
   const wholeRange = 100;
@@ -12,7 +20,7 @@ export const getEvaluationBarHeight = (
   let whiteHeight = wholeRange / 2 + (evaluationNormalized / offset) * 50;
   let blackHeight = wholeRange - whiteHeight;
 
-  if (possibleMate) {
+  if (possibleMate || gameOverMessage) {
     if (positionEvaluation > 0) {
       whiteHeight = 100;
       blackHeight = 0;

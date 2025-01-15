@@ -11,24 +11,27 @@ interface PositionEvaluationBarProps {
 const PositionEvaluationBar = ({
   possibleMate,
   positionEvaluation,
-  gameOverMessage
+  gameOverMessage,
 }: PositionEvaluationBarProps) => {
+  const ev = positionEvaluation ?? 0;
+  const { whiteHeight, blackHeight } = getEvaluationBarHeight(
+    ev,
+    possibleMate,
+    gameOverMessage
+  );
 
-  const {whiteHeight, blackHeight } =
-    getEvaluationBarHeight( positionEvaluation, possibleMate );
-    
+  const evaluationLabel = gameOverMessage
+    ? gameOverMessage
+    : possibleMate
+    ? `M${possibleMate}`
+    : positionEvaluation;
 
-    const evaluationLabel = gameOverMessage 
-    ? gameOverMessage 
-    : possibleMate 
-      ? `M${possibleMate}` 
-      : positionEvaluation;
+  const evaluationClassname =
+    possibleMate || gameOverMessage ? "" : "evaluation-value";
 
-  const evaluationClassname = possibleMate || gameOverMessage ? "" : "evaluation-value";  
+  const isWhiteAdvantage = ev > 0;
+  const isBlackAdvantage = ev < 0;
 
-  const isWhiteAdvantage = useMemo(() => positionEvaluation > 0, [positionEvaluation]);
-  const isBlackAdvantage = useMemo(() => positionEvaluation < 0, [positionEvaluation]);
-  
   console.log(possibleMate);
 
   return (
