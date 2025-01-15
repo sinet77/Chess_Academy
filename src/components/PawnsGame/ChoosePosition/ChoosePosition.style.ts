@@ -1,11 +1,5 @@
 import { SxProps } from "@mui/system";
 
-export const Navbar: SxProps = {
-  backgroundColor: "black",
-  height: "112px",
-  width: "100%",
-};
-
 export const Container: SxProps = {
   display: "flex",
   minHeight: "100vh",

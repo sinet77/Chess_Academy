@@ -278,7 +278,6 @@ export default function PuzzlesExercise() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Box sx={style.Main}>
         {loading ? (
           <Box sx={style.ImgContainer}>

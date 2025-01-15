@@ -219,7 +219,6 @@ export default function PawnsGame() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid container sx={style.Instruction}>
           <Box sx={style.Title}>

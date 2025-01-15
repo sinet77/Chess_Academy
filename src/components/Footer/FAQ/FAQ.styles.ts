@@ -1,11 +1,5 @@
 import { SxProps } from "@mui/system";
 
-export const Navbar: SxProps = {
-  backgroundColor: "black",
-  height: "112px",
-  width: "100%",
-};
-
 export const FAQContainer: SxProps = {
   flex: "1 0 auto",
   display: "flex",
