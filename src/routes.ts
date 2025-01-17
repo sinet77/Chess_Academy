@@ -8,7 +8,7 @@ export const routes = {
   login: "/login",
   register: "/register",
   courses: "/courses",
-  ourcouch: "/ourcouch",
+  ourcouch: "/ourcoach",
   privateLesson: "/private-lesson",
   ranksAndBadges: "/ranks-and-badges",
   puzzles: "/puzzles/:level",

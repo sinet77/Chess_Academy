@@ -3,6 +3,7 @@ import * as style from "./Footer.styles";
 import { Facebook, GitHub, Instagram, LinkedIn } from "@mui/icons-material";
 import { footer_knight } from "../../assets/FooterNavbarImages.ts";
 import { routes } from "../../routes.js";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -40,42 +41,43 @@ export default function Footer() {
       </Box>
       <Divider sx={style.Divider}></Divider>
       <Box sx={style.Links}>
-        <Typography
+        {/* <Link to={routes.home} component={RouterLink} underline="none"></Link> */}
+        <Link
           sx={style.Typography}
-          component="a"
-          href={routes.contactUs}
+          component={RouterLink}
+          to={routes.contactUs}
           variant="caption"
           gutterBottom
         >
           Contact
-        </Typography>
-        <Typography
+        </Link>
+        <Link
           sx={style.Typography}
-          component="a"
-          href={routes.aboutUs}
+          component={RouterLink}
+          to={routes.home}
           variant="caption"
           gutterBottom
         >
-          About us
-        </Typography>
-        <Typography
+          About us (To Do)
+        </Link>
+        <Link
           sx={style.Typography}
-          component="a"
-          href={routes.faq}
+          component={RouterLink}
+          to={routes.faq}
           variant="caption"
           gutterBottom
         >
           FAQ
-        </Typography>
-        <Typography
+        </Link>
+        <Link
           sx={style.Typography}
-          component="a"
-          href={routes.fairPlay}
+          component={RouterLink}
+          to={routes.fairPlay}
           variant="caption"
           gutterBottom
         >
           Fair play
-        </Typography>
+        </Link>
       </Box>
     </Box>
   );

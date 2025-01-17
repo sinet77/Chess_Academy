@@ -14,7 +14,6 @@ export default function FairPlay() {
 
   return (
     <Box sx={style.Background}>
-            <Box sx={style.Navbar}></Box>
       {!showNewComponent && (
         <motion.div
           initial={{ opacity: 0, scale: 0.3 }}
@@ -23,11 +22,11 @@ export default function FairPlay() {
         >
           <Box sx={style.HeadContainer}>
             <Typography sx={style.HeadTitle}>Fair Play</Typography>
-            <Box
+            {/* <Box
               sx={style.FairPlayImage}
               component="img"
               src="/src/assets/fair_play_image.jpg"
-            ></Box>
+            ></Box> */}
             <Button onClick={handleButtonClick}>
               <KeyboardDoubleArrowDownIcon
                 sx={style.BouncingIcon}

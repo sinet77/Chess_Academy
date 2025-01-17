@@ -11,8 +11,8 @@ interface Props {
 }
 
 const DIFFICULTY_LEVELS = [
-  { level: "Beginner", min: 100, max: 500 },
-  { level: "Easy", min: 501, max: 1000 },
+  { level: "Beginner", min: 200, max: 600 },
+  { level: "Easy", min: 601, max: 1000 },
   { level: "Intermediate", min: 1001, max: 1500 },
   { level: "Challenging", min: 1501, max: 2000 },
   { level: "Advanced", min: 2001, max: 2500 },
@@ -37,7 +37,6 @@ export default function ChoosingPuzzlePage() {
 
   return (
   <Box>
-  <Box sx={style.Navbar}></Box>
     <Box sx={style.Main}>
       <Typography sx={style.HeadTitle} variant="h5">
         Choose difficulty level:

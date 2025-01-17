@@ -99,7 +99,7 @@ export default function PawnsGame() {
       newSquares[move.to] = {
         background:
           game.get(move.to) &&
-          game.get(move.to).color !== game.get(square).color
+          game.get(move.to)!.color !== game.get(square)!.color
             ? "radial-gradient(circle, rgba(0,0,0,.1) 85%, transparent 85%)"
             : "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
         borderRadius: "50%",
@@ -219,7 +219,6 @@ export default function PawnsGame() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Grid container sx={style.Main}>
         <Grid container sx={style.Instruction}>
           <Box sx={style.Title}>

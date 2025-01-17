@@ -82,7 +82,6 @@ export default function Contact() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Box sx={style.Main}>
         {alertOpen && (
           <Box sx={{ mb: 2 }}>

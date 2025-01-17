@@ -44,7 +44,6 @@ export default function PuzzlesExercise() {
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(true);
 
-
   async function fetchPuzzle() {
     const url = `https://chess-puzzles2.p.rapidapi.com/range?min=${min}&max=${max}&max_deviation=100&number_of_puzzles=1`;
     const options = {
@@ -60,7 +59,7 @@ export default function PuzzlesExercise() {
     setCurrentMoveIndex(0);
     setHighlightedSquares({});
     setRightClickedSquares({});
-    setIsTimerActive(true)
+    setIsTimerActive(true);
 
     try {
       const response = await fetch(url, options);
@@ -105,7 +104,7 @@ export default function PuzzlesExercise() {
     }
   };
 
-  const getStartingColorForPlayer=(fen: string) =>{
+  const getStartingColorForPlayer = (fen: string) => {
     const spliitedPartsInFenToGetAColor = fen.split(" ");
     if (spliitedPartsInFenToGetAColor[1] === "w") {
       setChangeBoardOrientation("black");
@@ -114,15 +113,15 @@ export default function PuzzlesExercise() {
       setChangeBoardOrientation("white");
       return "Black";
     }
-  }
+  };
 
-  const automaticTransitionAfterSolvingPuzzle=()=> {
+  const automaticTransitionAfterSolvingPuzzle = () => {
     if (isAutoNextEnabled && isPuzzleSolved) {
       setTimeout(() => {
         fetchPuzzle();
       }, 1000);
     }
-  }
+  };
   const handleToggleAutoNext = () => {
     setIsAutoNextEnabled((prev) => !prev);
   };
@@ -131,11 +130,7 @@ export default function PuzzlesExercise() {
     automaticTransitionAfterSolvingPuzzle();
   }, [isPuzzleSolved, isAutoNextEnabled]);
 
-  const onPieceDrop = (
-    sourceSquare: Square,
-    targetSquare: Square,
-  ): boolean => {
-
+  const onPieceDrop = (sourceSquare: Square, targetSquare: Square): boolean => {
     const previousFen = chess.fen();
 
     const move = chess.move({
@@ -175,7 +170,7 @@ export default function PuzzlesExercise() {
 
       if (newIndex === moves.length) {
         setIsPuzzleSolved(true);
-        handleTimerEnd()
+        handleTimerEnd();
       }
 
       setHighlightedSquares({
@@ -204,7 +199,7 @@ export default function PuzzlesExercise() {
     }
   }, [isPlayerTurn, currentMoveIndex, moves]);
 
-  const onSquareRightClick=(square: Square)=> {
+  const onSquareRightClick = (square: Square) => {
     const color = "rgba(254,46,46, 0.4)";
     const isRightClicked =
       rightClickedSquares[square]?.backgroundColor === color;
@@ -215,9 +210,9 @@ export default function PuzzlesExercise() {
         ? { backgroundColor: "transparent" }
         : { backgroundColor: color },
     }));
-  }
+  };
 
-  const getMoveOptions=(square: Square)=> {
+  const getMoveOptions = (square: Square) => {
     const moves = chess.moves({
       square,
       verbose: true,
@@ -231,7 +226,7 @@ export default function PuzzlesExercise() {
       newSquares[move.to] = {
         background:
           chess.get(move.to) &&
-          chess.get(move.to).color !== chess.get(square).color
+          chess.get(move.to)!.color !== chess.get(square)!.color
             ? "radial-gradient(circle, rgba(0,0,0,.1) 85%, transparent 85%)"
             : "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
         borderRadius: "50%",
@@ -242,18 +237,18 @@ export default function PuzzlesExercise() {
       background: "rgba(255, 255, 0, 0.4)",
     };
     setOptionSquares(newSquares);
-  }
+  };
 
-  const onMouseOverSquare=(square: Square)=> {
+  const onMouseOverSquare = (square: Square) => {
     if (isShowMovesEnabled) {
       getMoveOptions(square);
     }
-  }
-  const onMouseOutSquare=()=> {
+  };
+  const onMouseOutSquare = () => {
     if (Object.keys(optionSquares).length !== 0) {
       setOptionSquares({});
     }
-  }
+  };
 
   const handleToggleShowEnableMoves = () => {
     setIsShowMovesEnabled((prev) => !prev);
@@ -282,100 +277,105 @@ export default function PuzzlesExercise() {
   }, [isPuzzleSolved]);
 
   return (
-  <Box>
-  <Box sx={style.Navbar}></Box>
-    <Box sx={style.Main}>
-      {loading ? (
-        <Box sx={style.ImgContainer}>
-          <Box component="img" src={loading_gif} />
-        </Box>
-      ) : (
-        <Grid container spacing={2} alignItems="center">
-          <Grid
-            item
-            xs={12}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+    <Box>
+      <Box sx={style.Main}>
+        {loading ? (
+          <Box sx={style.ImgContainer}>
+            <Box component="img" src={loading_gif} />
+          </Box>
+        ) : (
+          <Grid container spacing={2} alignItems="center">
+            <Grid
+              item
+              xs={12}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
             >
               <ToastContainer />
-            <Typography sx={style.ColorOnMove}>
-              {startingColor} on move
-            </Typography>
-            <Box
-              sx={{
-                ...style.ColorCircle,
-                backgroundColor: startingColor === "White" ? "white" : "black",
-              }}
-              />
-          </Grid>
-
-          <Grid item xs={12} display="flex" justifyContent="center">
-            <Stopwatch currentMoveIndex={currentMoveIndex} moves={moves} isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd}/>
-          </Grid>
-
-          <Grid item xs={12} display="flex" justifyContent="center">
-            <Box>
-              <Chessboard
-                id="PuzzleChessboard"
-                position={fen}
-                arePiecesDraggable={true}
-                arePremovesAllowed={false}
-                boardWidth={500}
-                onPieceDrop={onPieceDrop}
-                onSquareRightClick={onSquareRightClick}
-                onMouseOverSquare={onMouseOverSquare}
-                onMouseOutSquare={onMouseOutSquare}
-                customSquareStyles={{
-                  ...highlightedSquares,
-                  ...rightClickedSquares,
-                  ...optionSquares,
+              <Typography sx={style.ColorOnMove}>
+                {startingColor} on move
+              </Typography>
+              <Box
+                sx={{
+                  ...style.ColorCircle,
+                  backgroundColor:
+                    startingColor === "White" ? "white" : "black",
                 }}
-                boardOrientation={changeBoardOrientation}
-                />
-            </Box>
-          </Grid>
+              />
+            </Grid>
 
-          <Grid
-            item
-            xs={12}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+            <Grid item xs={12} display="flex" justifyContent="center">
+              <Stopwatch
+                currentMoveIndex={currentMoveIndex}
+                moves={moves}
+                isTurnedOn={isTimerActive}
+                onTimerEnd={handleTimerEnd}
+              />
+            </Grid>
+
+            <Grid item xs={12} display="flex" justifyContent="center">
+              <Box>
+                <Chessboard
+                  id="PuzzleChessboard"
+                  position={fen}
+                  arePiecesDraggable={true}
+                  arePremovesAllowed={false}
+                  boardWidth={500}
+                  onPieceDrop={onPieceDrop}
+                  onSquareRightClick={onSquareRightClick}
+                  onMouseOverSquare={onMouseOverSquare}
+                  onMouseOutSquare={onMouseOutSquare}
+                  customSquareStyles={{
+                    ...highlightedSquares,
+                    ...rightClickedSquares,
+                    ...optionSquares,
+                  }}
+                  boardOrientation={changeBoardOrientation}
+                />
+              </Box>
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
             >
-            <Box sx={style.NextButtonAndSwitch}>
-              <Button sx={style.Button} onClick={fetchPuzzle}>
-                Next Puzzle
-              </Button>
-              <FormControlLabel
-                control={
-                  <Switch
-                  checked={isAutoNextEnabled}
-                  onChange={handleToggleAutoNext}
-                  sx={style.Switch}
-                  />
-                }
-                label="Auto Next Puzzle on correct"
-                sx={style.OptionSwitchLabel}
+              <Box sx={style.NextButtonAndSwitch}>
+                <Button sx={style.Button} onClick={fetchPuzzle}>
+                  Next Puzzle
+                </Button>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isAutoNextEnabled}
+                      onChange={handleToggleAutoNext}
+                      sx={style.Switch}
+                    />
+                  }
+                  label="Auto Next Puzzle on correct"
+                  sx={style.OptionSwitchLabel}
                 />
 
-              <FormControlLabel
-                control={
-                  <Switch
-                  checked={isShowMovesEnabled}
-                  onChange={handleToggleShowEnableMoves}
-                  sx={style.Switch}
-                  />
-                }
-                label="Enable Move Highlights"
-                sx={style.OptionSwitchLabel}
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isShowMovesEnabled}
+                      onChange={handleToggleShowEnableMoves}
+                      sx={style.Switch}
+                    />
+                  }
+                  label="Enable Move Highlights"
+                  sx={style.OptionSwitchLabel}
                 />
-            </Box>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      )}
+        )}
+      </Box>
     </Box>
-</Box>
   );
 }
 

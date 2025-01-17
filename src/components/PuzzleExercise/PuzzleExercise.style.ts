@@ -1,11 +1,5 @@
 import { SxProps } from "@mui/material";
 
-export const Navbar: SxProps = {
-  backgroundColor: "black",
-  height: "112px",
-  width: "100%",
-};
-
 export const Main: SxProps = {
   p: 10,
   display: "flex",
