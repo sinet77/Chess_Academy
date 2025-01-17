@@ -5,14 +5,13 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.ts";
-import { Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes.js";
 import { useAuth } from "../../context/authContext/index.js";
 import { Link } from "@mui/material";
@@ -25,10 +24,14 @@ const pages = [
   { name: "Contact", path: routes.contactUs },
   { name: "Ranks and Badges", path: routes.ranksAndBadges },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = [
+  { name: "Profile", path: routes.userProfile },
+  { name: "Account", path: "/account" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Logout", path: null },
+];
 
 function Navbar() {
-
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const { handleSignOut } = useAuth();
@@ -45,22 +48,14 @@ function Navbar() {
     <AppBar sx={style.AppBar}>
       <Toolbar sx={style.Navbar}>
         <SideMenu />
-        <Link
-            to={routes.home}
-            component={RouterLink}
-            underline="none"
-          >
-        <Box sx={style.BarContainer}>
-          <Typography
-            variant="h6"
-            noWrap
-            sx={style.WebTitle}
-            >
-            Chess Academy
-            <Box component="img" sx={style.WebLogo} src={web_logo} />
-          </Typography>
-        </Box>
-            </Link>
+        <Link to={routes.home} component={RouterLink} underline="none">
+          <Box sx={style.BarContainer}>
+            <Typography variant="h6" noWrap sx={style.WebTitle}>
+              Chess Academy
+              <Box component="img" sx={style.WebLogo} src={web_logo} />
+            </Typography>
+          </Box>
+        </Link>
 
         <Box sx={style.TabsNavbar}>
           {pages.map((page) => (
@@ -100,15 +95,25 @@ function Navbar() {
           >
             {settings.map((setting) => (
               <MenuItem
-                key={setting}
+                key={setting.name}
                 onClick={() => {
                   handleCloseUserMenu();
-                  if (setting === "Logout") {
+                  if (setting.name === "Logout") {
                     handleSignOut();
                   }
                 }}
               >
-                <Button>{setting}</Button>
+                {setting.path ? (
+                  <Link
+                    component={RouterLink}
+                    to={setting.path}
+                    sx={{ textDecoration: "none" }}
+                  >
+                    {setting.name}
+                  </Link>
+                ) : (
+                  <Link>{setting.name}</Link>
+                )}
               </MenuItem>
             ))}
           </Menu>

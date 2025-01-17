@@ -32,6 +32,7 @@ import VisionTraining from "./components/Orientation training/VisionTraining.tsx
 import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 import PawnsGame from "./components/PawnsGame/PawnsGame.tsx";
 import ChoosePosition from "./components/PawnsGame/ChoosePosition/ChoosePosition.tsx";
+import { UserProfile } from "./components/UserProfile/UserProfile.tsx";
 
 const router = createHashRouter(
   createRoutesFromElements(
@@ -65,6 +66,7 @@ const router = createHashRouter(
             element={<ChoosePosition />}
           />
           <Route path={routes.pawnsGame} element={<PawnsGame />} />
+          <Route path={routes.userProfile} element={<UserProfile />} />
         </Route>
       </Route>
       <Route path={routes.login} element={<LoginPage />} />

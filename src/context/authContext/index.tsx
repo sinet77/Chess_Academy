@@ -105,6 +105,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       password
     );
     await addUserToFirestore({ id: user.uid, login, email });
+
+    const chessboardRef = doc(db, "Users", user.uid, "chessboard", "chessboardDocId");
+    await setDoc(chessboardRef, {
+      darkSquare: "#607d8b",
+      lightSquare: "#e0e0e0",
+    });
     return user;
   };
 

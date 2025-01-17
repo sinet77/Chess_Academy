@@ -19,4 +19,5 @@ export const routes = {
   vision: "/vision",
   pawnsGame: "/play/pawns-game",
   chooseStartingPosition: "/starting-position",
+  userProfile: "/profile"
 };

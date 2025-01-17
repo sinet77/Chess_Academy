@@ -47,7 +47,7 @@ export const useColorsChessboard = () => {
         "Users",
         currentUser.uid,
         "chessboard",
-        "FEAAmh0EJsmR1BLB5jwV"
+        "chessboardDocId"
       );
   
       try {
