@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth, db } from "../../firebase/firebase.ts";
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import { auth, db, storage } from "../../firebase/firebase.ts";
 import {
   collection,
   doc,
@@ -84,6 +85,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return auth.signOut();
   };
 
+  const defaultAvatarUrl = "src/assets/user-placeholder.jpg";
+
+  const setDefaultAvatar = async (userId: string) => {
+ // Pobranie instancji Firebase Storage
+    const avatarRef = ref(storage, `avatars/${userId}/avatar.png`); // Tworzymy unikalny folder dla każdego użytkownika
+    
+    // Pobranie URL domyślnego avatara
+    const placeholderImage = await getDownloadURL(ref(storage, defaultAvatarUrl));
+  
+    // Pobranie danych obrazu, aby zapisać w Firebase Storage
+    const response = await fetch(placeholderImage);
+    const blob = await response.blob(); // Przekształcamy obrazek na obiekt Blob
+  
+    // Zapisujemy obrazek w Firebase Storage
+    await uploadBytes(avatarRef, blob);
+  
+    // Teraz zapisujemy URL avatara w Firestore
+    const avatarUrl = await getDownloadURL(avatarRef); // Uzyskujemy URL po załadowaniu
+  
+    // Zapisz URL avatara w Firestore
+    await setDoc(doc(db, "Users", userId, "avatar", "avatarDoc"), {
+      avatarURL: avatarUrl,
+    });
+  };
+  
+
   const handleCreateUserWithEmailAndPassword = async ({
     login,
     email,
@@ -106,11 +133,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
     await addUserToFirestore({ id: user.uid, login, email });
 
+    await setDefaultAvatar(user.uid);
+
     const chessboardRef = doc(db, "Users", user.uid, "chessboard", "chessboardDocId");
     await setDoc(chessboardRef, {
       darkSquare: "#607d8b",
       lightSquare: "#e0e0e0",
     });
+
+
     return user;
   };
 
