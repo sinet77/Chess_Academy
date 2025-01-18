@@ -32,7 +32,7 @@ import VisionTraining from "./components/Orientation training/VisionTraining.tsx
 import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 import PawnsGame from "./components/PawnsGame/PawnsGame.tsx";
 import ChoosePosition from "./components/PawnsGame/ChoosePosition/ChoosePosition.tsx";
-import { UserProfile } from "./components/UserProfile/UserProfile.tsx";
+import UserProfile from "./pages/UserProfile/UserProfile.tsx";
 
 const router = createHashRouter(
   createRoutesFromElements(
@@ -81,7 +81,7 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <AuthProvider>
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </AuthProvider>
   );
 }

@@ -55,7 +55,6 @@ function Navbar() {
             sx={{ height: 112, backgroundColor: "#020202", width: "100%" }}
           ></Box>
         )}
-
       <AppBar sx={style.AppBar}>
         <Toolbar sx={style.Navbar}>
           <SideMenu />
@@ -131,7 +130,9 @@ function Navbar() {
         </Box>
       </Toolbar>
     </AppBar>
+    </>
   );
 }
+
 
 export default Navbar;

@@ -15,6 +15,7 @@ export const Navbar: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   display: "flex",
+  
 };
 
 export const BarContainer: SxProps = {
