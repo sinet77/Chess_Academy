@@ -4,7 +4,6 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Paper,
   TextField,
@@ -15,6 +14,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import * as style from "./UserProfile.style";
+import { useAuth } from "../../context/authContext";
 import { useState } from "react";
 
 export default function UserProfile() {
@@ -24,15 +24,17 @@ export default function UserProfile() {
     { icon: <InstagramIcon />, label: "Instagram", value: "" },
     { icon: <FacebookIcon />, label: "Facebook", value: "" },
   ]);
-  const [focusedIndex, setFocusedIndex] = useState(null);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
-  const handleChange = (index, newValue) => {
+  const { currentUser } = useAuth();
+
+  const handleChange = (index: number, newValue: string) => {
     const updatedLinks = [...links];
     updatedLinks[index].value = newValue;
     setLinks(updatedLinks);
   };
 
-  const handleFocus = (index) => {
+  const handleFocus = (index: number) => {
     setFocusedIndex(index);
   };
 
@@ -55,7 +57,14 @@ export default function UserProfile() {
           <Paper elevation={3} sx={{ padding: 2 }}>
             <Typography variant="h6">Right Top</Typography>
             <Typography variant="body2">
-              This is the content for Right Top.
+              {currentUser ? (
+                <>
+                  <strong>Login:</strong> {currentUser.login || "N/A"} <br />
+                  <strong>Email:</strong> {currentUser.email || "N/A"}
+                </>
+              ) : (
+                "No user is logged in."
+              )}
             </Typography>
           </Paper>
         </Grid>
@@ -69,12 +78,18 @@ export default function UserProfile() {
               {links.map((link, index) => (
                 <Box key={index}>
                   <ListItem>
-                    <ListItemIcon>{link.icon}</ListItemIcon>
                     <ListItemText
                       primary={
-                        <Typography variant="body1" fontWeight="bold">
-                          {link.label}
-                        </Typography>
+                        <Box sx={style.Label}>
+                          {link.icon}
+                          <Typography
+                            variant="body1"
+                            fontWeight="bold"
+                            sx={{ ml: 1 }}
+                          >
+                            {link.label}
+                          </Typography>
+                        </Box>
                       }
                       secondary={
                         <TextField

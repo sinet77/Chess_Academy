@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "../../firebase/firebase.ts";
 import {
   collection,
@@ -187,7 +187,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         (provider) => provider.providerId === "google.com"
       );
       setIsGoogleUser(isGoogle);
-
       setUserLoggedIn(true);
     } else {
       setCurrentUser(null);
