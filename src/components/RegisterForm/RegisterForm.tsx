@@ -16,8 +16,8 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { RegisterSchema } from "../../schemas/ValidationSchema";
-import { Navigate } from "react-router-dom";
-import {routes} from "../../routes"
+import { Navigate, Link as RouterLink } from "react-router-dom";
+import { routes } from "../../routes";
 
 interface FormValues {
   email: string;
@@ -171,7 +171,7 @@ export default function RegisterForm() {
                 <Divider sx={style.Divider}>
                   Do you have an account? Sign in!
                 </Divider>
-                <Link href={routes.login} underline="hover">
+                <Link component={RouterLink} to={routes.login} underline="hover">
                   Sign in
                 </Link>
               </Box>

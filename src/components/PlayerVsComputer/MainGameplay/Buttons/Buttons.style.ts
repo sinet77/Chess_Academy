@@ -30,19 +30,21 @@ export const BackButton: SxProps = {
 
 export const OptionsButton: SxProps = {
   position: "absolute",
-  left: "0px",
+  left: "10px",
   top: "220px",
   display: "flex",
   alignContent: "center",
   gap: "10px",
   textTransform: "none",
-  backgroundColor: "#000000",
   fontFamily: "Playfair Display",
   color: "white",
   fontSize: "22px",
   fontWeight: "bold",
   height: "50px",
   padding: "20px",
+  "&:hover": {
+    bgcolor: "transparent",
+  },
 };
 
 export const Button: SxProps = {

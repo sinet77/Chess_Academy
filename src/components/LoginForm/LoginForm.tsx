@@ -22,7 +22,7 @@ export default function LoginForm() {
     handleSignInWithGoogle,
   } = useAuth();
 
-  const initialValues = { login: "", password: "", remember: false };
+  const initialValues = { login: "Demo", password: "Demo123", remember: false };
 
   const onSubmit = async (
     values: typeof initialValues,

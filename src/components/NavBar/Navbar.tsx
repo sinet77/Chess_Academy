@@ -51,7 +51,7 @@ function Navbar() {
       {pathname !== "/" &&
         pathname !== "/play/choose-computer-level" &&
         pathname !== "/courses" &&
-        pathname !== "/ourcoach" && pathname !== "/private-lesson" && (
+        pathname !== "/ourcoach" && pathname !== "/private-lesson" && !pathname.startsWith("/play/computer/") &&(
           <Box
             sx={{ height: 112, backgroundColor: "#020202", width: "100%" }}
           ></Box>

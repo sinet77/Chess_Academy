@@ -134,9 +134,16 @@ export const Button: SxProps = {
   lineHeight: "23px",
   textTransform: "none",
   padding: "10px 30px",
+  transition: "all 0.3s ease-in-out",
   "&:hover": {
     backgroundColor: "#B0540C",
   },
+};
+
+export const LinkButton: SxProps = {
+  ...Button,
+  marginTop: "40px",
+  padding: "15px 30px",
 };
 
 export const TransparentImage: SxProps = {

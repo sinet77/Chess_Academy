@@ -13,9 +13,14 @@ import { routes } from "../../routes.ts";
 export default function OurCoach() {
   const navigate = useNavigate();
 
-  function handleJoinButtonClick() {
-    navigate(routes.courses);
+  function handleJoinButtonClick(destination: "courses" | "privateLesson") {
+    if (destination === "courses") {
+      navigate(routes.courses);
+    } else if (destination === "privateLesson") {
+      navigate(routes.privateLesson);
+    }
   }
+
   return (
     <Box>
       <Box sx={style.CouchTile}>Our Coach</Box>
@@ -31,6 +36,7 @@ export default function OurCoach() {
             advancement
           </Typography>
           <Box component="img" sx={style.HeadImage} src={ourCouch} />
+          <Button onClick={() => handleJoinButtonClick("privateLesson")} sx={style.LinkButton}>Sign up for private lesson!</Button>
         </Box>
         <Box sx={style.ImgWithNameBox}>
           <Box component="img" sx={style.Image} src={portret} />
@@ -59,7 +65,7 @@ export default function OurCoach() {
       <Box sx={style.GreyTile}>
         <Typography sx={style.SmallTitle}>Why Choose Us?</Typography>
         <Typography sx={style.BigTitle}>We Have An Amazing Strategy</Typography>
-        <Typography sx={{ ...style.DescriptionHeader, color: "#000000" }}>
+        <Typography sx={{ ...style.DescriptionHeader, color: "#0D0D0D" }}>
           Our personalized approach ensures each student receives targeted
           coaching, helping them excel at every stage of their chess journey.
           With cutting-edge tools and methodologies, we empower players to
@@ -76,7 +82,7 @@ export default function OurCoach() {
           <Typography sx={{ ...style.DescriptionHeader, color: "#FFFFFF" }}>
             Sign up for classes now and check your possibilities!
           </Typography>
-          <Button onClick={handleJoinButtonClick} sx={style.Button}>
+          <Button onClick={() => handleJoinButtonClick("courses")} sx={style.Button}>
             Join
           </Button>
         </Box>

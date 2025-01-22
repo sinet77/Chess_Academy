@@ -1,4 +1,5 @@
-import { SxProps, Theme } from "@mui/material";
+import { SxProps } from "@mui/material";
+import img from "../../../../assets/play_computer_background.jpg";
 
 export const Table: SxProps = {
   width: "80%",
@@ -16,12 +17,14 @@ export const TrainingPageLayout: SxProps = {
 };
 
 export const OptionsTile: SxProps = {
-  height: "350px",
+  height: "500px",
   minHeight: "200px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  backgroundColor: "black",
+  backgroundImage: `url("${img}")`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
   alignItems: "center",
   color: "White",
 };
@@ -69,13 +72,4 @@ export const Chessboard: SxProps = {
   width: { xs: "300px", sm: "400px", md: "600px" },
   height: "auto",
   border: "1px solid black",
-};
-
-export const Button: SxProps<Theme> = {
-  mb: 2,
-  color: "#000",
-  borderColor: "#000",
-  "&:hover": {
-    bgcolor: "#f5f5f5",
-  },
 };

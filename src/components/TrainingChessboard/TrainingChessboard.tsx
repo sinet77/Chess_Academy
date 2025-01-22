@@ -155,7 +155,6 @@ export default function TrainingChessBoard() {
 
   return (
     <Box>
-      <Box sx={style.Navbar}></Box>
       <Box sx={style.TrainingPageLayout}>
         <Grid padding={"50px"} container spacing={2}>
           <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>

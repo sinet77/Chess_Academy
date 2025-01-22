@@ -1,6 +1,7 @@
-import training from "./chess_puzzles.png";
-import computer from "./robot.jpg";
-import puzzle from "./puzzle.jpg";
-import pawns from "./pawns.jpg";
+import training from "./training.jpg";
+import computer from "./playComputer.jpg";
+import puzzle from "./puzzles.jpg";
+import pawns from "./pawns_game.jpg";
+import vision from "./vision.jpeg";
 
-export { training, computer, puzzle, pawns };
+export { training, computer, puzzle, pawns, vision };
