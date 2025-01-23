@@ -18,6 +18,7 @@ import Options from "./Options";
 import Fen from "./Fen";
 import Engine from "../../Engine/engine";
 import PositionEvaluationBar from "./PositionEvaluationBar/PositionEvaluationBar";
+import StyledChessboard from "../StyledChessboard";
 interface MovePair {
   white: string;
   black: string;
@@ -177,7 +178,7 @@ export default function TrainingChessBoard() {
                 gameOverMessage={gameOverMessage}
               />
               <Box sx={style.Chessboard}>
-                <Chessboard
+                <StyledChessboard
                   id="AnalysisBoard"
                   position={chessBoardPosition}
                   boardOrientation={changeBoardOrientation}

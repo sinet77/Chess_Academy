@@ -17,6 +17,8 @@ import * as style from "./PuzzleExercise.style";
 import { loading_gif } from "../../assets/PuzzleExerciseImages";
 import { useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useAuth } from "../../context/authContext";
+import StyledChessboard from "../StyledChessboard";
 
 export default function PuzzlesExercise() {
   const location = useLocation();
@@ -43,6 +45,7 @@ export default function PuzzlesExercise() {
   const [isPuzzleSolved, setIsPuzzleSolved] = useState<boolean>(false);
   const [isShowMovesEnabled, setIsShowMovesEnabled] = useState<boolean>(true);
   const [isTimerActive, setIsTimerActive] = useState<boolean>(true);
+  
 
   async function fetchPuzzle() {
     const url = `https://chess-puzzles2.p.rapidapi.com/range?min=${min}&max=${max}&max_deviation=100&number_of_puzzles=1`;
@@ -316,7 +319,7 @@ export default function PuzzlesExercise() {
 
             <Grid item xs={12} display="flex" justifyContent="center">
               <Box>
-                <Chessboard
+                <StyledChessboard
                   id="PuzzleChessboard"
                   position={fen}
                   arePiecesDraggable={true}
@@ -331,6 +334,7 @@ export default function PuzzlesExercise() {
                     ...rightClickedSquares,
                     ...optionSquares,
                   }}
+                
                   boardOrientation={changeBoardOrientation}
                 />
               </Box>
