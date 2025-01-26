@@ -63,7 +63,12 @@ const addUserToFirestore = async ({
   const userSnapshot = await getDoc(userRef);
 
   if (!userSnapshot.exists()) {
-    await setDoc(userRef, { id, login, email });
+    await setDoc(userRef, {
+      id,
+      login,
+      email,
+      chessboard: { darkSquare: "#607d8b", lightSquare: "#e0e0e0" },
+    });
   } else {
     console.error("User already exists in Firestore");
   }
@@ -88,28 +93,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const defaultAvatarUrl = "src/assets/user-placeholder.jpg";
 
   const setDefaultAvatar = async (userId: string) => {
- // Pobranie instancji Firebase Storage
+    // Pobranie instancji Firebase Storage
     const avatarRef = ref(storage, `avatars/${userId}/avatar.png`); // Tworzymy unikalny folder dla każdego użytkownika
-    
+
     // Pobranie URL domyślnego avatara
-    const placeholderImage = await getDownloadURL(ref(storage, defaultAvatarUrl));
-  
+    const placeholderImage = await getDownloadURL(
+      ref(storage, defaultAvatarUrl)
+    );
+
     // Pobranie danych obrazu, aby zapisać w Firebase Storage
     const response = await fetch(placeholderImage);
     const blob = await response.blob(); // Przekształcamy obrazek na obiekt Blob
-  
+
     // Zapisujemy obrazek w Firebase Storage
     await uploadBytes(avatarRef, blob);
-  
+
     // Teraz zapisujemy URL avatara w Firestore
     const avatarUrl = await getDownloadURL(avatarRef); // Uzyskujemy URL po załadowaniu
-  
+
     // Zapisz URL avatara w Firestore
     await setDoc(doc(db, "Users", userId, "avatar", "avatarDoc"), {
       avatarURL: avatarUrl,
     });
   };
-  
 
   const handleCreateUserWithEmailAndPassword = async ({
     login,
@@ -134,13 +140,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await addUserToFirestore({ id: user.uid, login, email });
 
     await setDefaultAvatar(user.uid);
-
-    const chessboardRef = doc(db, "Users", user.uid, "chessboard", "chessboardDocId");
-    await setDoc(chessboardRef, {
-      darkSquare: "#607d8b",
-      lightSquare: "#e0e0e0",
-    });
-
 
     return user;
   };
@@ -176,7 +175,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function initializeUser(user: User | null) {
     if (user) {
-      setCurrentUser({ ...user });
+      const userDataRef = await getDoc(doc(db, "Users", user.uid));
+
+      setCurrentUser({ ...userDataRef.data(), id: user.uid });
 
       const isEmail = user.providerData.some(
         (provider) => provider.providerId === "password"

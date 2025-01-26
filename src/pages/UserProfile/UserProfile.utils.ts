@@ -4,11 +4,11 @@ import { db } from "../../firebase/firebase";
 
 export const fetchUserById = async (userId: string) => {
   try {
-    const userRef = doc(db, "Users", userId); // Referencja do konkretnego dokumentu
-    const userSnapshot = await getDoc(userRef); // Pobranie dokumentu
+    const userRef = doc(db, "Users", userId); 
+    const userSnapshot = await getDoc(userRef); 
 
     if (userSnapshot.exists()) {
-      const userData = userSnapshot.data(); // Dane użytkownika
+      const userData = userSnapshot.data(); 
       console.log("User data:", userData);
       return userData;
     } else {

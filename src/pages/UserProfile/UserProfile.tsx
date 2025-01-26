@@ -16,6 +16,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import * as style from "./UserProfile.style";
 import { useAuth } from "../../context/authContext";
 import { useState } from "react";
+import { ColorsChessboard } from "../../components/ColorsChessboard/ColorsChessboard";
 
 export default function UserProfile() {
   const [links, setLinks] = useState([
@@ -27,6 +28,8 @@ export default function UserProfile() {
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
   const { currentUser } = useAuth();
+
+  // console.log("User data:", currentUser);
 
   const handleChange = (index: number, newValue: string) => {
     const updatedLinks = [...links];
@@ -120,9 +123,9 @@ export default function UserProfile() {
 
         <Grid item xs={12} sm={6}>
           <Paper elevation={3} sx={{ padding: 2 }}>
-            <Typography variant="h6">Right Bottom</Typography>
+            <Typography variant="h6">Choose colors on chessboard</Typography>
             <Typography variant="body2">
-              This is the content for Right Bottom.
+              <ColorsChessboard />
             </Typography>
           </Paper>
         </Grid>

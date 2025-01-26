@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { doc, getDoc,updateDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebase.ts";
-import { useAuth } from "../../context/authContext/index.tsx";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+import { useAuth } from "../../context/authContext";
 
 type ChessboardColors = {
   darkSquare: string;
@@ -12,54 +12,62 @@ export const useColorsChessboard = () => {
   const { currentUser } = useAuth();
   const [colors, setColors] = useState<ChessboardColors | null>(null);
 
+  console.log(colors);
+
   useEffect(() => {
     const fetchColors = async () => {
-      if (!currentUser) return
-        const chessboardColorsRef = doc(
-          db,
-          "Users",
-          currentUser.uid,
-          "chessboard",
-          "chessboardDocId"
-        );
-        try {
-          const chessboardColorsDocSnapshot = await getDoc(chessboardColorsRef);
-  
-          if (chessboardColorsDocSnapshot.exists()) {
-            const data = chessboardColorsDocSnapshot.data() as ChessboardColors;
-            setColors(data);
-          } else {
-            console.error("Nie znaleziono dokumentu z kolorami w bazie danych.");
-          }
-        } catch (error) {
-          console.error("Błąd podczas pobierania kolorów:", error);
-        }
-      };
-  
-      fetchColors();
-    }, [currentUser]);
+      if (!currentUser) return;
 
-    const updateColors = async (newColors: Partial<ChessboardColors>) => {
-      if (!currentUser || !colors) return;
-  
-      const chessboardColorsRef = doc(
-        db,
-        "Users",
-        currentUser.uid,
-        "chessboard",
-        "chessboardDocId"
-      );
-  
+      const userDocRef = doc(db, "Users", currentUser.uid);
+
       try {
-        await updateDoc(chessboardColorsRef, newColors);
-        setColors((prevColors) => ({ ...prevColors!, ...newColors }));
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          setColors(userData.chessboard as ChessboardColors);
+        } else {
+          console.error("Nie znaleziono dokumentu użytkownika.");
+        }
       } catch (error) {
-        console.error("Błąd podczas aktualizacji kolorów:", error);
+        console.error("Błąd podczas pobierania danych szachownicy:", error);
       }
     };
+
+    fetchColors();
+  }, [currentUser]);
+
+  const updateColors = async (newColors: Partial<ChessboardColors>) => {
+    console.log("updateColors called");
   
-    return { colors, updateColors };
+    if (!currentUser || !colors) return;
+  
+    const userDocRef = doc(db, "Users", currentUser.uid);
+  
+    try {
+      console.log("Current colors before update:", colors);
+      console.log("New colors to update:", newColors);
+  
+      await updateDoc(userDocRef, {
+        chessboard: {
+          ...colors,
+          ...newColors,
+        },
+      });
+  
+      console.log("Colors successfully updated in Firestore.");
+  
+      setColors((prevColors) => {
+        const updatedColors = { ...prevColors!, ...newColors };
+        console.log("Updated Colors (after state change):", updatedColors);
+        return updatedColors;
+      });
+    } catch (error) {
+      console.error("Błąd podczas aktualizacji danych szachownicy:", error);
+    }
   };
+  
+  
 
-
-
+  return { colors, updateColors };
+};
