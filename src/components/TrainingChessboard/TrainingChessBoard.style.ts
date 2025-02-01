@@ -1,11 +1,5 @@
 import { SxProps, Theme } from "@mui/material";
 
-export const Navbar: SxProps = {
-  backgroundColor: "black",
-  height: "112px",
-  width: "100%",
-};
-
 export const Table: SxProps = {
   width: "80%",
   border: "1px solid black",

@@ -4,18 +4,29 @@ export const Main: SxProps = {
   backgroundColor: "grey",
   padding: "10px 40px",
   minHeight: "100vh",
+  display: "flex",
+  alignItems: "center",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
 };
 
-export const Avatar: SxProps = {
-  padding: 2,
+export const Item: SxProps = {
+  padding: "10px",
   display: "flex",
+  height: "100%",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
+  gap: "2rem",
   backgroundColor: "white",
-  borderRadius: "4px",
-  boxShadow:
-    "0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12)",
+  borderRadius: "6px",
 };
 
-export const Label: SxProps = { display: "flex", alignItems: "center", mb: 1 }
+export const TestAvatar: SxProps = {
+  borderRadius: "50%",
+  width: "200px",
+  height: "200px",
+  border: "1px solid #0d0d0d",
+};
+
+export const Label: SxProps = { display: "flex", alignItems: "center", mb: 1 };

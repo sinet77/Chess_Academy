@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Link } from "@mui/material";
+import { Box, Button, CircularProgress, Link, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import * as style from "./Articles.styles";
 import { motion } from "framer-motion";
@@ -73,6 +73,7 @@ const Articles: React.FC = () => {
       transition={{ duration: 0.7 }}
     >
       <Box sx={style.ArticlesBox}>
+        <Typography sx={style.HeadTitle}>Chess World News</Typography>
         {articles.length > 0 && (
           <Box sx={style.ArticlesBox}>
             <Box sx={style.Title}>{articles[currentIndex].title}</Box>

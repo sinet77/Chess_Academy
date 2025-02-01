@@ -21,12 +21,22 @@ import {
   UserCredential,
 } from "firebase/auth";
 
+interface LoggedUser extends User {
+  login: string;
+  id:string;
+  email: string;
+  chessboard?: {
+    darkSquare: string;
+    lightSquare: string;
+  };
+}
+
 interface AuthContextType {
   userLoggedIn: boolean;
   isEmailUser: boolean;
   isGoogleUser: boolean;
-  currentUser: User | null;
-  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
+  currentUser: LoggedUser | null;
+  setCurrentUser: React.Dispatch<React.SetStateAction<LoggedUser | null>>;
   handleCreateUserWithEmailAndPassword: (userData: {
     login: string;
     email: string;
@@ -75,7 +85,7 @@ const addUserToFirestore = async ({
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<LoggedUser | null>(null);
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
   const [isEmailUser, setIsEmailUser] = useState<boolean>(false);
   const [isGoogleUser, setIsGoogleUser] = useState<boolean>(false);
@@ -177,7 +187,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (user) {
       const userDataRef = await getDoc(doc(db, "Users", user.uid));
 
-      setCurrentUser({ ...userDataRef.data(), id: user.uid });
+      setCurrentUser({ ...userDataRef.data(), id: user.uid } as LoggedUser);
 
       const isEmail = user.providerData.some(
         (provider) => provider.providerId === "password"

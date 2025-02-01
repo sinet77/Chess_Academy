@@ -107,7 +107,7 @@ export const Links: SxProps = {
 };
 
 export const GreyTile: SxProps = {
-  backgroundColor: "#C3C3C3",
+  backgroundColor: "#C2C2C2",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

@@ -17,6 +17,7 @@ import * as style from "./UserProfile.style";
 import { useAuth } from "../../context/authContext";
 import { useState } from "react";
 import { ColorsChessboard } from "../../components/ColorsChessboard/ColorsChessboard";
+import userProfile_bg from "../../assets/userProfile_bg.jpg";
 
 export default function UserProfile() {
   const [links, setLinks] = useState([
@@ -45,20 +46,21 @@ export default function UserProfile() {
     setFocusedIndex(null);
   };
   return (
-    <Box sx={style.Main}>
-      <Grid container spacing={2} sx={{ padding: 2 }}>
+    <Box sx={{ ...style.Main, backgroundImage: `url(${userProfile_bg})` }}>
+      <Grid container spacing={4} sx={{ width: "1320px", margin: "auto" }}>
         <Grid item xs={12} sm={6}>
-          <Box sx={style.Avatar}>
-            <Typography variant="h6">Left Top</Typography>
+          <Box sx={style.Item}>
+            <Typography variant="h6">Chess Profile</Typography>
+            <Box sx={style.TestAvatar}></Box>
             <Typography variant="body2">
-              This is the content for Left Top.
+              {currentUser?.login}
             </Typography>
           </Box>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3} sx={{ padding: 2 }}>
-            <Typography variant="h6">Right Top</Typography>
+          <Paper elevation={3} sx={style.Item}>
+            <Typography variant="h6">Data</Typography>
             <Typography variant="body2">
               {currentUser ? (
                 <>
@@ -73,7 +75,7 @@ export default function UserProfile() {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3} sx={{ padding: 2 }}>
+          <Paper elevation={3} sx={style.Item}>
             <Typography variant="h6">Links</Typography>
             <List
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -122,7 +124,7 @@ export default function UserProfile() {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3} sx={{ padding: 2 }}>
+          <Paper elevation={3} sx={style.Item}>
             <Typography variant="h6">Choose colors on chessboard</Typography>
             <Typography variant="body2">
               <ColorsChessboard />

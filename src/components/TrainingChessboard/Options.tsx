@@ -19,6 +19,7 @@ interface OptionsProps {
   clearBoard: () => void;
   resetBoard: () => void;
   handleAutoPromoteToQueen: () => void;
+  handleToggleShowEnableMoves: () => void;
 }
 
 export default function Options({
@@ -28,6 +29,7 @@ export default function Options({
   clearBoard,
   resetBoard,
   handleAutoPromoteToQueen,
+  handleToggleShowEnableMoves,
 }: OptionsProps) {
   return (
     <Modal
@@ -66,7 +68,14 @@ export default function Options({
           }
           label="Enable auto promotion to queen"
         />
+        <FormControlLabel
+          control={
+            <Switch color="warning" onChange={handleToggleShowEnableMoves} />
+          }
+          label="Hide possible moves"
+        />
       </Box>
     </Modal>
   );
 }
+
