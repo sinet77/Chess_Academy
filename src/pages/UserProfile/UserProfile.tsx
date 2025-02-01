@@ -2,10 +2,8 @@ import {
   Box,
   Divider,
   Grid,
-  List,
   ListItem,
   ListItemText,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,6 +16,8 @@ import { useAuth } from "../../context/authContext";
 import { useState } from "react";
 import { ColorsChessboard } from "../../components/ColorsChessboard/ColorsChessboard";
 import userProfile_bg from "../../assets/userProfile_bg.jpg";
+import { Chessboard } from "react-chessboard";
+import { Tile } from "./Tile"; 
 
 export default function UserProfile() {
   const [links, setLinks] = useState([
@@ -27,10 +27,9 @@ export default function UserProfile() {
     { icon: <FacebookIcon />, label: "Facebook", value: "" },
   ]);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
-
   const { currentUser } = useAuth();
 
-  // console.log("User data:", currentUser);
+  console.log("User data:", currentUser);
 
   const handleChange = (index: number, newValue: string) => {
     const updatedLinks = [...links];
@@ -38,98 +37,98 @@ export default function UserProfile() {
     setLinks(updatedLinks);
   };
 
-  const handleFocus = (index: number) => {
-    setFocusedIndex(index);
-  };
+  const handleFocus = (index: number) => setFocusedIndex(index);
+  const handleBlur = () => setFocusedIndex(null);
 
-  const handleBlur = () => {
-    setFocusedIndex(null);
-  };
   return (
     <Box sx={{ ...style.Main, backgroundImage: `url(${userProfile_bg})` }}>
       <Grid container spacing={4} sx={{ width: "1320px", margin: "auto" }}>
         <Grid item xs={12} sm={6}>
-          <Box sx={style.Item}>
-            <Typography variant="h6">Chess Profile</Typography>
+          <Tile title="Chess Profile">
             <Box sx={style.TestAvatar}></Box>
-            <Typography variant="body2">
-              {currentUser?.login}
-            </Typography>
-          </Box>
+            <Typography variant="body2">{currentUser?.login}</Typography>
+          </Tile>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3} sx={style.Item}>
-            <Typography variant="h6">Data</Typography>
+          <Tile title="Data">
             <Typography variant="body2">
               {currentUser ? (
-                <>
-                  <strong>Login:</strong> {currentUser.login || "N/A"} <br />
-                  <strong>Email:</strong> {currentUser.email || "N/A"}
-                </>
+                <Box sx={style.DataBox}>
+                  <Box><strong>Login:</strong> {currentUser.login || "N/A"}</Box>
+                  <Box><strong>Email:</strong> {currentUser.email || "N/A"}</Box>
+                </Box>
               ) : (
                 "No user is logged in."
               )}
             </Typography>
-          </Paper>
+          </Tile>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3} sx={style.Item}>
-            <Typography variant="h6">Links</Typography>
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              {links.map((link, index) => (
-                <Box key={index}>
-                  <ListItem>
-                    <ListItemText
-                      primary={
-                        <Box sx={style.Label}>
-                          {link.icon}
-                          <Typography
-                            variant="body1"
-                            fontWeight="bold"
-                            sx={{ ml: 1 }}
-                          >
-                            {link.label}
-                          </Typography>
-                        </Box>
-                      }
-                      secondary={
-                        <TextField
-                          variant="outlined"
-                          size="small"
-                          value={link.value}
-                          onChange={(e) => handleChange(index, e.target.value)}
-                          onFocus={() => handleFocus(index)}
-                          onBlur={handleBlur}
-                          sx={{
-                            "& fieldset": {
-                              borderColor:
-                                focusedIndex === index
-                                  ? "primary.main"
-                                  : "transparent",
-                            },
-                          }}
-                        />
-                      }
-                    />
-                  </ListItem>
-                  {index < links.length - 1 && <Divider />}
-                </Box>
-              ))}
-            </List>
-          </Paper>
+          <Tile title="Links">
+            {links.map((link, index) => (
+              <Box key={index}>
+                <ListItem>
+                  <ListItemText
+                    primary={
+                      <Box sx={style.Label}>
+                        {link.icon}
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          sx={{ ml: 1 }}
+                        >
+                          {link.label}
+                        </Typography>
+                      </Box>
+                    }
+                    secondary={
+                      <TextField
+                        variant="outlined"
+                        size="small"
+                        value={link.value}
+                        onChange={(e) => handleChange(index, e.target.value)}
+                        onFocus={() => handleFocus(index)}
+                        onBlur={handleBlur}
+                        sx={{
+                          "& fieldset": {
+                            borderColor:
+                              focusedIndex === index
+                                ? "primary.main"
+                                : "transparent",
+                          },
+          
+                        }}
+                      />
+                    }
+                  />
+                </ListItem>
+                {index < links.length && <Divider />}
+              </Box>
+            ))}
+          </Tile>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3} sx={style.Item}>
-            <Typography variant="h6">Choose colors on chessboard</Typography>
-            <Typography variant="body2">
+          <Tile title="Choose colors on chessboard">
+            <Box sx={style.Wrapper}>
               <ColorsChessboard />
-            </Typography>
-          </Paper>
+              <Box sx={style.Chessboard}>
+              <Chessboard
+                arePiecesDraggable={false}
+                customDarkSquareStyle={{
+                  backgroundColor:
+                    currentUser?.chessboard?.darkSquare || "#607d8b",
+                }}
+                customLightSquareStyle={{
+                  backgroundColor:
+                    currentUser?.chessboard?.lightSquare || "#e0e0e0",
+                }}
+              />
+              </Box>
+            </Box>
+          </Tile>
         </Grid>
       </Grid>
     </Box>
