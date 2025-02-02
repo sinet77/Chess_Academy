@@ -8,7 +8,8 @@ export const FAQContainer: SxProps = {
   justifyContent: "top",
   minHeight: "100vh",
   backgroundColor: "#fffcf3",
-  padding: "50px",
+  padding: "60px",
+  gap: "20px",
 };
 
 export const titleContainer: SxProps = {

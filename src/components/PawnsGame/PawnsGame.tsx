@@ -135,26 +135,30 @@ export default function PawnsGame() {
   const checkWinner = (game: Chess) => {
     const squaresForWhiteToWin: Square[] = getWinnerSquares(8);
     const squaresForBlackToWin: Square[] = getWinnerSquares(1);
-
+  
     const whiteWins = squaresForWhiteToWin.some((square: Square) => {
       const piece = game.get(square);
       return piece?.color === "w" && piece?.type === "p";
     });
     if (whiteWins) {
       setGameOver(true);
+      toast("White wins!");
       return "White wins!";
     }
-
+  
     const blackWins = squaresForBlackToWin.some((square: Square) => {
       const piece = game.get(square);
       return piece?.color === "b" && piece?.type === "p";
     });
     if (blackWins) {
       setGameOver(true);
+      toast("Black wins!");
       return "Black wins!";
     }
+  
     return null;
   };
+  
 
   const handleComputerMove = () => {
     if (gameOver) return;

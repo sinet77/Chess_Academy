@@ -1,32 +1,48 @@
 import { keyframes, SxProps } from "@mui/material";
+import fairPlayImage from "../../../assets/fair_play_image.jpg";
 
-export const Background: SxProps = {
-  backgroundImage: "url(/src/assets/fair_play_background1.png)",
-  backgroundColor: "#FEEBC7",
-  backgroundSize: "contain",
+export const Starter: SxProps = {
+  height: "500px",
+  minHeight: "200px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  backgroundImage: `url("${fairPlayImage}")`,
+  backgroundSize: "cover",
   backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  minHeight: "100vh",
+  alignItems: "center",
+  color: "White",
   width: "100%",
 };
 
-export const FairPlayImage: SxProps = {
-  maxWidth: "100%",
-  height: "300px",
-  objectFit: "contain",
-  mt: "30px",
+export const Background: SxProps = {
+  backgroundColor: "#0d0d0d",
+  minHeight: "100vh",
+  width: "100%",
 };
 
 export const HeadTitle: SxProps = {
   mt: "50px",
   fontWeight: "bold",
   fontSize: "50px",
-  color: "#333",
+  color: "white",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-  transition: "all 0.3s ease",
+  transition: "all 0.3s ease-in-out",
   "&:hover": {
-    color: "#1e88e5",
-    textShadow: "4px 4px 8px rgba(30, 136, 229, 0.7)",
+    color: "orange",
+    textShadow: "4px 4px 8px grey",
+  },
+};
+export const Description: SxProps = {
+  padding: "50px",
+  fontSize: "20px",
+  maxWidth: "800px",
+  color: "white",
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+  transition: "all 0.3s ease-in-out",
+  "&:hover": {
+    color: "orange",
+    textShadow: "4px 4px 8px grey",
   },
 };
 
@@ -42,9 +58,10 @@ export const MainContent: SxProps = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  justifyContent: "center",
-  height: "100vh",
-  backgroundColor: "#e0f7fa",
+  height: "auto",
+  padding: "200px",
+  backgroundColor: "#0d0d0d",
+  color: "white",
 };
 
 const bounce = keyframes`
@@ -61,14 +78,45 @@ const bounce = keyframes`
 
 export const BouncingIcon: SxProps = {
   animation: `${bounce} 1.5s infinite`,
-  color: "black",
-  border: "1px solid black",
+  color: "#0d0d0d",
+  border: "1px solid #0d0d0d",
   fontSize: "50px",
   width: "100px",
   height: "50px",
   borderRadius: "10px",
   backgroundColor: "#FDA172",
   mt: "30px",
+  transition: "all 0.3s ease-in-out",
+  "&:hover": {
+      backgroundColor: "orange", 
+    },
+};
+
+export const Button: SxProps = {
+    "&:hover": {
+      backgroundColor: "transparent", 
+    },
+    "&:focus": {
+      backgroundColor: "transparent", 
+    },
+    "&:active": {
+      backgroundColor: "transparent", 
+    },
+}
+
+export const BackButton: SxProps = {
+  color: "#0d0d0d",
+  padding: "10px 20px",
+  border: "1px solid 0d0d0d",
+  textTransform: "none",
+  fontSize: "20px",
+  borderRadius: "10px",
+  backgroundColor: "#FDA172",
+  mt: "50px",
+  transition: "all 0.3s ease-in-out",
+  "&:hover": {
+      backgroundColor: "orange", 
+    },
 };
 
 export const guidelineTitle: SxProps = {
@@ -80,7 +128,9 @@ export const ImportantBox: SxProps = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  gap: "10px",
+  gap: "20px",
+  maxWidth: "500px",
+  marginTop: "50px",
 };
 
 export const Important: SxProps = {

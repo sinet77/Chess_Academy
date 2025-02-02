@@ -102,7 +102,7 @@ export const ReadMoreButton: SxProps = {
   padding: "15px 30px",
   "&:hover": {
     backgroundColor: "#ff4d01",
-    transform: "scale(1.2)"
+    transform: "scale(1.1)"
   },
 };
 

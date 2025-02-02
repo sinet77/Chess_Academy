@@ -11,16 +11,21 @@ export const BlackTile: SxProps = {
   display: "flex",
   color: "white",
   height: "635px",
+  
 };
 
 export const WhiteTile: SxProps = {
   padding: "80px",
   display: "flex",
+  flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  gap: "30px",
+  gap: "80px",
 };
-
+export const Items: SxProps = {
+  display: "flex",
+  gap: "100px",
+}
 export const Titles: SxProps = {
   display: "flex",
   justifyContent: "center",
@@ -63,6 +68,18 @@ export const QuoteText: SxProps = {
   color: "#7E7E7E",
 };
 
+export const Header: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "20px",
+}
+export const Wrapper: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+}
 export const JoinTile: SxProps = {
   padding: "40px 40px 60px 40px",
   display: "flex",

@@ -12,7 +12,7 @@ export const FAQ_DATA = [
     {
       question: "Can I play with friends?",
       answer:
-        "Yes, you can invite friends to play by selecting 'Play with Friends' from the game options and sending them an invitation link.",
+        "This option is in progress but in the future, you can invite friends to play by selecting 'Play with Friends' from the game options and sending them an invitation link.",
     },
     {
       question: "How can I improve my rating?",
@@ -22,6 +22,6 @@ export const FAQ_DATA = [
     {
       question: "What should I do if I encounter a technical issue?",
       answer:
-        "If you encounter a technical issue, please contact our support team via the 'Help' section. Provide details about the issue and any relevant screenshots.",
+        "If you encounter a technical issue, please contact our support team via the 'Contact' section. Provide details about the issue and any relevant screenshots.",
     },
   ];

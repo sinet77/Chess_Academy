@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import * as style from "./FairPlay.styles";
 import {
+  Button,
   Divider,
   List,
   ListItem,
@@ -9,22 +10,9 @@ import {
   ListItemText,
 } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { guidelines } from "./FairPlay.utils";
 
-const guidelines = [
-  "Make your own moves independently.",
-  "Refrain from cheating or using any unfair means.",
-  "Do not accept assistance from others, such as parents, friends, coaches, or other players.",
-  "Avoid using chess engines, software, bots, plugins, browser add-ons, or any tools that analyze positions during a game. We have the capability to detect the use of such programs.",
-  "Do not use tablebases or any other tools that reveal the optimal move in both Online and Daily chess formats.",
-  "Opening Explorer and other books may only be used in Daily chess, not during Online or Live games.",
-  "Do not conduct automated analysis or check for mistakes in ongoing games.",
-  "Do not share your account with others or use someone else's account.",
-  "Avoid artificially manipulating ratings, match outcomes, or results.",
-  "Do not disrupt or interfere with the gameplay experience of other players.",
-  "If you believe your opponent is cheating, this does not justify using outside assistance yourself. Suspected cheating should be reported directly to Chess.com.",
-];
-
-export default function FairPlayGuidelines() {
+export default function FairPlayGuidelines({ onBack }: { onBack: () => void }) {
   return (
     <Box sx={style.MainContent}>
       <Typography sx={style.guidelineTitle} variant="h4" gutterBottom>
@@ -52,6 +40,9 @@ export default function FairPlayGuidelines() {
           Play violations.
         </Typography>
       </Box>
+      <Button onClick={onBack} sx={style.BackButton}>
+        Back to Fair Play Intro
+      </Button>
     </Box>
   );
 }

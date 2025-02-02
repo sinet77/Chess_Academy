@@ -41,7 +41,6 @@ export default function Footer() {
       </Box>
       <Divider sx={style.Divider}></Divider>
       <Box sx={style.Links}>
-        {/* <Link to={routes.home} component={RouterLink} underline="none"></Link> */}
         <Link
           sx={style.Typography}
           component={RouterLink}

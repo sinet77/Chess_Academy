@@ -15,8 +15,7 @@ export default function PrivateLesson() {
     <Box>
       <Box sx={style.BlackTile}>Private Lesson</Box>
       <Box sx={style.WhiteTile}>
-        <Box component="img" sx={style.HeadImage} src={chess_private_lesson} />
-        <Box sx={style.Titles}>
+        <Box sx={style.Header}>
           <Typography sx={style.SmallTitle}>Private Lesson</Typography>
           <Typography sx={style.BigTitle}>
             Learn Chess From A Distance In Your Home
@@ -26,45 +25,55 @@ export default function PrivateLesson() {
             individual curriculum for each student at different levels of
             advancement
           </Typography>
-          <Typography sx={style.QuoteText}>
-            “You may learn much more from a game you lose than from a game you
-            win.” — Jose Capablanca
-          </Typography>
         </Box>
-        <Box sx={style.BenefitsTile}>
-          <Typography sx={style.BenefitsBigTitle}>
-            Benefits of online classes
-          </Typography>
-          <Typography sx={style.BenefitsDescription}>
-            Online chess lessons offer a flexible and effective way to improve
-            your skills without the need to travel. With personalized coaching
-            and interactive tools, you can progress at your own pace, from the
-            comfort of your home. Discover the many advantages that make online
-            learning a perfect fit for chess enthusiasts of all levels.
-          </Typography>
-          <Box component="ul" sx={style.List}>
-            <Box component="li" sx={style.Point}>
-              <CheckIcon sx={style.CheckIcon} />
-              Convenience: Learn from anywhere, anytime, without commuting.
-            </Box>
-            <Box component="li" sx={style.Point}>
-              <CheckIcon sx={style.CheckIcon} />
-              Personalized Coaching: Lessons are tailored to your individual
-              skill level.
-            </Box>
-            <Box component="li" sx={style.Point}>
-              <CheckIcon sx={style.CheckIcon} />
-              Interactive Tools: Engage with live demonstrations and game
-              analysis.
-            </Box>
-            <Box component="li" sx={style.Point}>
-              <CheckIcon sx={style.CheckIcon} />
-              After classes: You get notes from the classes and extra tasks.
-            </Box>
-            <Box component="li" sx={style.Point}>
-              <CheckIcon sx={style.CheckIcon} />
-              Cost-Effective: Save on travel and get affordable, quality
-              instruction.
+        <Box sx={style.Items}>
+          <Box sx={style.Wrapper}>
+            <Box
+              component="img"
+              sx={style.HeadImage}
+              src={chess_private_lesson}
+            />
+            <Typography sx={style.QuoteText}>
+              “You may learn much more from a game you lose than from a game you
+              win.” — Jose Capablanca
+            </Typography>
+          </Box>
+
+          <Box sx={style.BenefitsTile}>
+            <Typography sx={style.BenefitsBigTitle}>
+              Benefits of online classes
+            </Typography>
+            <Typography sx={style.BenefitsDescription}>
+              Online chess lessons offer a flexible and effective way to improve
+              your skills without the need to travel. With personalized coaching
+              and interactive tools, you can progress at your own pace, from the
+              comfort of your home. Discover the many advantages that make
+              online learning a perfect fit for chess enthusiasts of all levels.
+            </Typography>
+            <Box component="ul" sx={style.List}>
+              <Box component="li" sx={style.Point}>
+                <CheckIcon sx={style.CheckIcon} />
+                Convenience: Learn from anywhere, anytime, without commuting.
+              </Box>
+              <Box component="li" sx={style.Point}>
+                <CheckIcon sx={style.CheckIcon} />
+                Personalized Coaching: Lessons are tailored to your individual
+                skill level.
+              </Box>
+              <Box component="li" sx={style.Point}>
+                <CheckIcon sx={style.CheckIcon} />
+                Interactive Tools: Engage with live demonstrations and game
+                analysis.
+              </Box>
+              <Box component="li" sx={style.Point}>
+                <CheckIcon sx={style.CheckIcon} />
+                After classes: You get notes from the classes and extra tasks.
+              </Box>
+              <Box component="li" sx={style.Point}>
+                <CheckIcon sx={style.CheckIcon} />
+                Cost-Effective: Save on travel and get affordable, quality
+                instruction.
+              </Box>
             </Box>
           </Box>
         </Box>

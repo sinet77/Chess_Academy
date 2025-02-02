@@ -11,7 +11,7 @@ export const Main: SxProps = {
 export const Form: SxProps = {
   borderRadius: "10px",
   display: "flex",
-  backgroundColor: "#D8DFE5",
+  backgroundColor: "white",
   border: "2px solid #0D0D0D",
   flexDirection: "column",
   gap: 2,

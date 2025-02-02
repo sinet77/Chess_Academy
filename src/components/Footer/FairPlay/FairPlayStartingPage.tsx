@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import * as style from "./FairPlay.styles";
 import FairPlayMainContent from "./FairPlayMainContent";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import { fairPlayDescription } from "./FairPlay.utils";
 
 export default function FairPlay() {
   const [showNewComponent, setShowNewComponent] = useState(false);
@@ -21,13 +22,10 @@ export default function FairPlay() {
           transition={{ duration: 0.5 }}
         >
           <Box sx={style.HeadContainer}>
+            <Box sx={style.Starter}></Box>
             <Typography sx={style.HeadTitle}>Fair Play</Typography>
-            {/* <Box
-              sx={style.FairPlayImage}
-              component="img"
-              src="/src/assets/fair_play_image.jpg"
-            ></Box> */}
-            <Button onClick={handleButtonClick}>
+            <Typography sx={style.Description}>{fairPlayDescription}</Typography>
+            <Button onClick={handleButtonClick} sx={style.Button}>
               <KeyboardDoubleArrowDownIcon
                 sx={style.BouncingIcon}
                 fontSize="large"
@@ -43,7 +41,7 @@ export default function FairPlay() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7 }}
         >
-          <FairPlayMainContent />
+          <FairPlayMainContent onBack={() => setShowNewComponent(false)} />
         </motion.div>
       )}
     </Box>

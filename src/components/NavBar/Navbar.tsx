@@ -8,7 +8,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import SideMenu from "../LeftSideNavbar/LeftSideNavbar";
 import { useState } from "react";
 import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.ts";
@@ -51,7 +50,10 @@ function Navbar() {
       {pathname !== "/" &&
         pathname !== "/play/choose-computer-level" &&
         pathname !== "/courses" &&
-        pathname !== "/ourcoach" && pathname !== "/private-lesson" && !pathname.startsWith("/play/computer/") &&(
+        pathname !== "/ourcoach" &&
+        pathname !== "/private-lesson" &&
+        !pathname.startsWith("/play/computer/") &&
+        !pathname.startsWith("/fair-play") && (
           <Box
             sx={{ height: 112, backgroundColor: "#020202", width: "100%" }}
           ></Box>
@@ -59,7 +61,6 @@ function Navbar() {
 
       <AppBar sx={style.AppBar}>
         <Toolbar sx={style.Navbar}>
-          <SideMenu />
           <Link to={routes.home} component={RouterLink} underline="none">
             <Box sx={style.BarContainer}>
               <Typography variant="h6" noWrap sx={style.WebTitle}>
