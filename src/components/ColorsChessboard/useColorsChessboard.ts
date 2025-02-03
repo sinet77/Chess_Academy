@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { useAuth } from "../../context/authContext";
 
@@ -13,6 +13,9 @@ export const useColorsChessboard = () => {
   const [colors, setColors] = useState<ChessboardColors | null>(null);
 
   console.log(colors);
+  useEffect(() => {
+    console.log("currentUser w useColorsChessboard:", currentUser);
+  }, [currentUser]);
 
   useEffect(() => {
     const fetchColors = async () => {
@@ -38,36 +41,34 @@ export const useColorsChessboard = () => {
   }, [currentUser]);
 
   const updateColors = async (newColors: Partial<ChessboardColors>) => {
+    if (!currentUser) {
+      console.warn("Brak użytkownika, przerwanie aktualizacji.");
+      return;
+    }
+
+    if (!colors) {
+      console.warn("Brak danych o kolorach, pobieram dane...");
+      return;
+    }
+
     console.log("updateColors called");
-  
-    if (!currentUser || !colors) return;
-  
+    console.log("Aktualne kolory:", colors);
+    console.log("Nowe kolory:", newColors);
+
     const userDocRef = doc(db, "Users", currentUser.uid);
-  
+
     try {
-      console.log("Current colors before update:", colors);
-      console.log("New colors to update:", newColors);
-  
-      await updateDoc(userDocRef, {
-        chessboard: {
-          ...colors,
-          ...newColors,
-        },
+      await setDoc(userDocRef, {
+        "chessboard.darkSquare": newColors.darkSquare ?? colors.darkSquare,
+        "chessboard.lightSquare": newColors.lightSquare ?? colors.lightSquare,
       });
-  
-      console.log("Colors successfully updated in Firestore.");
-  
-      setColors((prevColors) => {
-        const updatedColors = { ...prevColors!, ...newColors };
-        console.log("Updated Colors (after state change):", updatedColors);
-        return updatedColors;
-      });
+
+      console.log("Firestore zaktualizowane");
+      setColors({ ...colors, ...newColors });
     } catch (error) {
-      console.error("Błąd podczas aktualizacji danych szachownicy:", error);
+      console.error("Błąd aktualizacji Firestore:", error);
     }
   };
-  
-  
 
   return { colors, updateColors };
 };

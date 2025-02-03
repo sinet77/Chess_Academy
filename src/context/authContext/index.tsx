@@ -185,26 +185,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function initializeUser(user: User | null) {
     if (user) {
-      const userDataRef = await getDoc(doc(db, "Users", user.uid));
-
-      setCurrentUser({ ...userDataRef.data(), id: user.uid } as LoggedUser);
-
-      const isEmail = user.providerData.some(
-        (provider) => provider.providerId === "password"
-      );
-      setIsEmailUser(isEmail);
-
-      const isGoogle = user.providerData.some(
-        (provider) => provider.providerId === "google.com"
-      );
-      setIsGoogleUser(isGoogle);
+      const userDocRef = doc(db, "Users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+  
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data() as LoggedUser;
+        setCurrentUser({ ...userData, id: user.uid });
+      } else {
+        console.error("Nie znaleziono użytkownika w Firestore.");
+        setCurrentUser(null);
+      }
+  
       setUserLoggedIn(true);
+      setIsEmailUser(user.providerData.some(p => p.providerId === "password"));
+      setIsGoogleUser(user.providerData.some(p => p.providerId === "google.com"));
     } else {
       setCurrentUser(null);
       setUserLoggedIn(false);
     }
     setLoading(false);
   }
+  
 
   const value: AuthContextType = {
     userLoggedIn,

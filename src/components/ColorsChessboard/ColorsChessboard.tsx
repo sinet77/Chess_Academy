@@ -1,21 +1,41 @@
 import { Box } from "@mui/material";
 import { useColorsChessboard } from "./useColorsChessboard";
 import { useAuth } from "../../context/authContext";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import * as style from "./ColorsChessboard.style";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+
+const updateColorsInFirestore = async (id: string, darkSquare: string, lightSquare: string) => {
+  try {
+    const userRef = doc(db, "Users", id);
+    await setDoc(userRef, { chessboard: { darkSquare, lightSquare } }, { merge: true });
+    console.log("Colors updated in Firestore");
+  } catch (error) {
+    console.error("Error updating colors:", error);
+  }
+};
+
 
 export const ColorsChessboard = () => {
   const { colors, updateColors } = useColorsChessboard();
-
   const { currentUser } = useAuth();
 
-  const handleColorChange = (
+  const handleColorChange = useCallback((
     field: "darkSquare" | "lightSquare",
     value: string
   ) => {
     console.log(`Changing color field: ${field} to value: ${value}`);
     updateColors({ [field]: value });
-  };
+
+    if (currentUser) {
+      updateColorsInFirestore(
+        currentUser.id,
+        field === "darkSquare" ? value : currentUser.chessboard.darkSquare,
+        field === "lightSquare" ? value : currentUser.chessboard.lightSquare
+      );
+    }
+  },[]);
 
   useEffect(() => {
     if (currentUser) {
@@ -30,7 +50,7 @@ export const ColorsChessboard = () => {
         <Box
           component="input"
           type="color"
-          value={colors?.darkSquare}
+          value={currentUser?.chessboard?.darkSquare}
           onChange={(e) => handleColorChange("darkSquare", e.target.value)}
           sx={style.ColorInput}
         />
@@ -40,7 +60,7 @@ export const ColorsChessboard = () => {
         <Box
           component="input"
           type="color"
-          value={colors?.lightSquare}
+          value={currentUser?.chessboard?.lightSquare}
           onChange={(e) => handleColorChange("lightSquare", e.target.value)}
           sx={style.ColorInput}
         />
