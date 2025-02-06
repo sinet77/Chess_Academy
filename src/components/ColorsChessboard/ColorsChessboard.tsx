@@ -1,12 +1,10 @@
 import { Box } from "@mui/material";
 import { useColorsChessboard } from "./useColorsChessboard";
-import { useAuth } from "../../context/authContext";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import * as style from "./ColorsChessboard.style";
 
 export const ColorsChessboard = () => {
   const { colors, updateColors, saveColors } = useColorsChessboard();
-  const { currentUser } = useAuth();
 
   const handleColorChange = useCallback(
     (field: "darkSquare" | "lightSquare", value: string) => {
@@ -15,14 +13,8 @@ export const ColorsChessboard = () => {
     []
   );
 
-  useEffect(() => {
-    if (currentUser) {
-      console.log("User data:", currentUser);
-    }
-  }, [handleColorChange, currentUser]);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     saveColors();
   };
 
@@ -39,7 +31,7 @@ export const ColorsChessboard = () => {
         />
       </Box>
       <Box component="label" sx={style.Label}>
-        Light square{" "}
+        Light square
         <Box
           component="input"
           type="color"

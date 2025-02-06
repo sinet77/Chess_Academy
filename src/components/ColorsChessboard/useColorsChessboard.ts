@@ -22,17 +22,24 @@ export const useColorsChessboard = () => {
     setColors((prev) => ({ ...prev, [newColor.field]: newColor.value }));
   };
 
-  const saveColors = async () => {
-    if (!currentUser) {
-      console.warn("Brak użytkownika, przerwanie aktualizacji.");
-      return;
-    }
+const saveColors = async () => {
+  if (!currentUser) {
+    console.warn("No user found.");
+    return;
+  }
+
+  try {
     const userDocRef = doc(db, "Users", currentUser.id);
     await updateDoc(userDocRef, {
       chessboard: colors,
     });
     setCurrentUser({ ...currentUser, chessboard: colors });
-  };
+    console.log("Colors has been changed.");
+  } catch (error) {
+    console.error("Error during saving colors:", error);
+  }
+};
+
 
   return { colors, updateColors, saveColors };
 };

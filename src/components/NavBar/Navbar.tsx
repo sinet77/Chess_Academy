@@ -122,7 +122,7 @@ function Navbar() {
                     {setting.name}
                   </Link>
                 ) : (
-                  <Link>{setting.name}</Link>
+                  <Typography>{setting.name}</Typography>
                 )}
               </MenuItem>
             ))}
