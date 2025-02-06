@@ -5,6 +5,7 @@ export const Main: SxProps = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  
 };
 
 export const ImgContainer: SxProps = {
@@ -13,6 +14,7 @@ export const ImgContainer: SxProps = {
   justifyContent: "center",
   minHeight: "100vh",
   width: "100%",
+  
 };
 
 export const Button: SxProps = {

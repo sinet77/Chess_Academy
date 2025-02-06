@@ -16,7 +16,6 @@ const PositionEvaluationBar = ({
 
   const {whiteHeight, blackHeight } =
     getEvaluationBarHeight( positionEvaluation, possibleMate );
-    
 
     const evaluationLabel = gameOverMessage 
     ? gameOverMessage 

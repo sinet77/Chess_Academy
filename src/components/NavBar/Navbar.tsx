@@ -5,7 +5,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
@@ -25,10 +24,10 @@ const pages = [
   { name: "Ranks and Badges", path: routes.ranksAndBadges },
 ];
 const settings = [
-  "Profile (To Do)",
-  "Account (To Do)",
-  "Dashboard (To Do)",
-  "Logout",
+  { name: "Profile", path: routes.userProfile },
+  { name: "Account", path: "/account" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Logout", path: null },
 ];
 
 function Navbar() {
@@ -58,7 +57,6 @@ function Navbar() {
             sx={{ height: 112, backgroundColor: "#020202", width: "100%" }}
           ></Box>
         )}
-
       <AppBar sx={style.AppBar}>
         <Toolbar sx={style.Navbar}>
           <Link to={routes.home} component={RouterLink} underline="none">
@@ -84,47 +82,58 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu}>
-                <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={() => {
-                    handleCloseUserMenu();
-                    if (setting === "Logout") {
-                      handleSignOut();
-                    }
-                  }}
-                >
-                  <Button>{setting}</Button>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </AppBar>
+        <Box>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu}>
+              <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem
+                key={setting.name}
+                onClick={() => {
+                  handleCloseUserMenu();
+                  if (setting.name === "Logout") {
+                    handleSignOut();
+                  }
+                }}
+              >
+                {setting.path ? (
+                  <Link
+                    component={RouterLink}
+                    to={setting.path}
+                    sx={{ textDecoration: "none" }}
+                  >
+                    {setting.name}
+                  </Link>
+                ) : (
+                  <Typography>{setting.name}</Typography>
+                )}
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      </Toolbar>
+    </AppBar>
     </>
   );
 }
+
 
 export default Navbar;

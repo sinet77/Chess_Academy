@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect,useState } from "react";
 import { Chessboard } from "react-chessboard";
-import { Chess } from "chess.js";
 import { Box, Button, Grid } from "@mui/material";
-import { Square } from "react-chessboard/dist/chessboard/types";
 import UndoIcon from "@mui/icons-material/Undo";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Table from "@mui/material/Table";
@@ -16,35 +14,53 @@ import * as style from "./TrainingChessBoard.style";
 import Pgn from "./Pgn";
 import Options from "./Options";
 import Fen from "./Fen";
-import Engine from "../../Engine/engine";
 import PositionEvaluationBar from "./PositionEvaluationBar/PositionEvaluationBar";
-interface MovePair {
-  white: string;
-  black: string;
-}
+import { useChessboard } from "../../hooks/useChessboard";
+
 export default function TrainingChessBoard() {
-  const engine = useRef(new Engine());
-  const game = useRef(new Chess());
-  const [chessBoardPosition, setChessBoardPosition] = useState<string>(
-    game.current.fen()
-  );
+
+  function onPieceDrop() {
+    setPossibleMate("");
+    updateHistory();
+    setBestline("");
+    if (game.current.isCheckmate()) {
+      setGameOverMessage("Mated");
+    } else if (game.current.isDraw()) {
+      setGameOverMessage("Draw");
+    } else {
+      setGameOverMessage(null);
+    }
+
+    return true;
+  }
+  const {
+    game,
+    engine,
+    history,
+    chessboardProps,
+    currentPosition,
+    clearBoard,
+    toggleBoardOrientation,
+    toggleAutoPromoteToQueen,
+    resetBoard,
+    undoMove,
+    setPosition,
+    handleToggleShowEnableMoves,
+    updateHistory,
+  } = useChessboard({ onPieceDrop, id: "AnalysisBoard" });
+
   const [positionEvaluation, setPositionEvaluation] = useState<number>(0);
   const [depth, setDepth] = useState<number>(10);
   const [bestLine, setBestline] = useState<string>("");
   const [possibleMate, setPossibleMate] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const [history, setHistory] = useState<MovePair[]>([]);
-  const [changeBoardOrientation, setChangeBoardOrientation] = useState<
-    "white" | "black"
-  >("white");
-  const [autoPromoteToQueen, setAutoPromoteToQueen] = useState<boolean>(false);
   const [gameOverMessage, setGameOverMessage] = useState<string | null>(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const findBestMove = () => {
-    engine.current.evaluatePosition(chessBoardPosition, 18);
+    engine.current.evaluatePosition(currentPosition, 18);
     engine.current.onMessage(
       ({
         positionEvaluation,
@@ -71,80 +87,18 @@ export default function TrainingChessBoard() {
     );
   };
 
-  const handleBoardOrientation = () => {
-    setChangeBoardOrientation((prevBoardOrientation) =>
-      prevBoardOrientation === "white" ? "black" : "white"
-    );
-  };
-
-  const handleAutoPromoteToQueen = () => {
-    setAutoPromoteToQueen((prevAutoPromoteToQueen) =>
-      prevAutoPromoteToQueen === true ? false : true
-    );
-  };
-
-  const updateHistory = () => {
-    const currentHistory = game.current.history();
-    const updatedHistory: MovePair[] = [];
-
-    for (let i = 0; i < currentHistory.length; i += 2) {
-      updatedHistory.push({
-        white: currentHistory[i],
-        black: currentHistory[i + 1] || "",
-      });
-    }
-
-    setHistory(updatedHistory);
-  };
-
-  const undoMove = () => {
-    game.current.undo();
-    setChessBoardPosition(game.current.fen());
-    updateHistory();
-  };
-
-  const onPieceDrop = (sourceSquare: Square, targetSquare: Square): boolean => {
-    const move = game.current.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: "q",
-    });
-    setPossibleMate("");
-    setChessBoardPosition(game.current.fen());
-    updateHistory();
-    if (move === null) return false;
-    engine.current.stop();
-    setBestline("");
-    if (game.current.isCheckmate()) {
-      setGameOverMessage("Mated");
-    } else if (game.current.isDraw()) {
-      setGameOverMessage("Draw");
-    } else {
-      setGameOverMessage(null);
-    }
-
-    return true;
-  };
 
   useEffect(() => {
     if (!game.current.isGameOver() || game.current.isDraw()) {
       findBestMove();
+      console.log(possibleMate);
+      
     }
-  }, [chessBoardPosition]);
+  }, [currentPosition]);
 
   const handleFenChange = (newFen: string) => {
-    setChessBoardPosition(newFen);
+    setPosition(newFen);
     updateHistory();
-  };
-
-  const handleClearTheBoard = () => {
-    game.current.clear();
-    setChessBoardPosition(game.current.fen());
-  };
-
-  const handleResetTheBoard = () => {
-    game.current.reset();
-    setChessBoardPosition(game.current.fen());
   };
 
   const evaluationText = gameOverMessage
@@ -159,9 +113,9 @@ export default function TrainingChessBoard() {
         <Grid padding={"50px"} container spacing={2}>
           <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
             <h4>{evaluationText}</h4>
-              <h5>
-                Best line: <i>{bestLine.slice(0, 40)}</i> ...
-              </h5>
+            <h5>
+              Best line: <i>{bestLine.slice(0, 40)}</i> ...
+            </h5>
             <Box
               sx={{
                 display: "flex",
@@ -176,16 +130,7 @@ export default function TrainingChessBoard() {
                 gameOverMessage={gameOverMessage}
               />
               <Box sx={style.Chessboard}>
-                <Chessboard
-                  id="AnalysisBoard"
-                  position={chessBoardPosition}
-                  boardOrientation={changeBoardOrientation}
-                  onPieceDrop={onPieceDrop}
-                  arePiecesDraggable={true}
-                  autoPromoteToQueen={autoPromoteToQueen}
-                  customDarkSquareStyle={{ backgroundColor: "#607d8b" }}
-                  customLightSquareStyle={{ backgroundColor: "#e0e0e0" }}
-                />
+                <Chessboard {...chessboardProps} />
               </Box>
             </Box>
 
@@ -195,14 +140,15 @@ export default function TrainingChessBoard() {
 
           <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
             <Box sx={style.Items}>
-            <Button
+              <Button
                 sx={style.UndoButton}
                 startIcon={<UndoIcon />}
                 onClick={undoMove}
               >
                 Undo
               </Button>
-              <Button sx={style.ButtonPgn}
+              <Button
+                sx={style.ButtonPgn}
                 variant="contained"
                 endIcon={<SettingsIcon />}
                 onClick={handleOpen}
@@ -212,10 +158,11 @@ export default function TrainingChessBoard() {
               <Options
                 open={open}
                 handleClose={handleClose}
-                handleBoardOrientation={handleBoardOrientation}
-                clearBoard={handleClearTheBoard}
-                resetBoard={handleResetTheBoard}
-                handleAutoPromoteToQueen={handleAutoPromoteToQueen}
+                handleBoardOrientation={toggleBoardOrientation}
+                clearBoard={clearBoard}
+                resetBoard={resetBoard}
+                handleAutoPromoteToQueen={toggleAutoPromoteToQueen}
+                handleToggleShowEnableMoves={handleToggleShowEnableMoves}
               />
             </Box>
 

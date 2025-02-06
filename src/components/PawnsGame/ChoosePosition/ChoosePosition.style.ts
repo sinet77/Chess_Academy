@@ -24,18 +24,18 @@ export const PositionBox: SxProps = {
   textAlign: "center",
   padding: 1.5,
   border: "2px solid orange",
-  backgroundColor: "black",
+  backgroundColor: "#0d0d0d",
   borderRadius: "20px",
   "&:hover": {
     backgroundColor: "#FFA53F",
-    border: "2px solid black",
-    color: "black",
+    border: "2px solid #0d0d0d",
+    color: "#0d0d0d",
     "& .MuiTypography-root": {
       color: "#002366",
       fontWeight: "500",
     },
     "& .MuiTypography-subtitle1": {
-      color: "black",
+      color: "#0d0d0d",
     },
   },
 };

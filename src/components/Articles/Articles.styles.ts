@@ -5,7 +5,7 @@ export const ArticlesBox: SxProps = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#C3C3C3",
+  backgroundColor: "#eeeeee",
   padding: "80px",
   height: "auto",
   gap: "50px",
@@ -14,9 +14,17 @@ export const ArticlesBox: SxProps = {
 
 };
 
+export const HeadTitle: SxProps = {
+  fontWeight: "bold",
+  fontSize: "2.2rem",
+  color: "#333333",
+  marginBottom: "-50px",
+  textDecoration: "underline",
+};
+
 export const Title: SxProps = {
   fontWeight: "bold",
-  fontSize: "2rem",
+  fontSize: "1.7rem",
   color: "#0D0D0D",
 };
 
