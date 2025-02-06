@@ -77,20 +77,6 @@ const Articles: React.FC = () => {
           <Box sx={style.ArticlesBox}>
             <Box sx={style.Title}>{articles[currentIndex].title}</Box>
             <Box sx={style.PubDate}>{articles[currentIndex].pubDate}</Box>
-
-            <Box sx={style.Description}
-              dangerouslySetInnerHTML={{
-                __html: articles[currentIndex].description,
-              }}
-            />
-            <Link
-              sx={style.ReadMore}
-              href={articles[currentIndex].link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read more
-            </Link>
             <Box sx={style.ButtonContainer}>
               <Button
                 variant="outlined"
@@ -108,6 +94,19 @@ const Articles: React.FC = () => {
                 Next
               </Button>
             </Box>
+            <Box sx={style.Description}
+              dangerouslySetInnerHTML={{
+                __html: articles[currentIndex].description,
+              }}
+            />
+            <Link
+              sx={style.ReadMore}
+              href={articles[currentIndex].link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read more
+            </Link>
           </Box>
         )}
       </Box>

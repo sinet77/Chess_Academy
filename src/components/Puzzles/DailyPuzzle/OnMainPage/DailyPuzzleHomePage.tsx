@@ -16,7 +16,7 @@ export default function DailyPuzzleHomePage() {
     <Box sx={style.Chessboard}>
       <Link to={routes.dailyPuzzle} component={RouterLink} underline="none">
         <Box sx={style.TextAndIcon}>
-          <Typography>Solve daily puzzle!</Typography>
+          <Typography sx={style.Title}>Solve daily puzzle!</Typography>
           <ArrowForwardIosIcon sx={style.Icon} />
         </Box>
         {puzzle && puzzle.image !== null && (

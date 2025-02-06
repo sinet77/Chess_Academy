@@ -8,7 +8,7 @@ import DailyPuzzleHomePage from "../Puzzles/DailyPuzzle/OnMainPage/DailyPuzzleHo
 
 export default function TitleAndButtons() {
   return (
-    <Box sx={{ paddingBlock: "100px", backgroundColor: "#0D0D0D" }}>
+    <Box sx={{ padding: "100px", backgroundColor: "#0D0D0D" }}>
       <motion.div
         initial={{ opacity: 0, scale: 0.3 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -25,7 +25,13 @@ export default function TitleAndButtons() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Box sx={{ display: "flex", justifyContent: "center", gap: "70px", alignItems: "center" }}>
+        <Box sx={{ 
+  display: "grid", 
+  gridTemplateColumns: { xs: "1fr", sm: "1fr", md: "repeat(2, 1fr)" }, 
+  gap: "50px",
+  justifyItems: "center",
+  alignItems:"center", 
+}}>
         <Box>
         <Box sx={{ display: "flex", justifyContent: "center", gap: "40px", flexWrap: "wrap" }}>
           <Link to={routes.training} component={RouterLink} underline="none">

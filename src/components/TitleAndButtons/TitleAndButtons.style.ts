@@ -24,6 +24,7 @@ export const TitleText: SxProps = {
   fontSize: "50px",
   fontWeight: "700",
   lineHeight: "110px",
+  textAlign: "center",
 };
 
 export const ImageButtonContainer: SxProps = {

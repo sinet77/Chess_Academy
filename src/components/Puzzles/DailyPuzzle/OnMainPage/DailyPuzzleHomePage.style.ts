@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const Chessboard: SxProps = {
-  width: "25%",
+  width: { xs: "60%", sm: "40%", md: "70%", lg: "70%", xl: "65%" },
   height: "auto",
   border: "2px solid white",
   transition: "all 0.25s ease-in-out",
@@ -10,6 +10,11 @@ export const Chessboard: SxProps = {
     transform: "scale(1.05)",
   },
 };
+
+export const Title: SxProps = {
+  fontSize: { xs: "15px", lg: "20px", xl: "22px" }
+}
+
 export const TextAndIcon: SxProps = {
   padding: "10px",
   alignItems: "center",
@@ -19,9 +24,11 @@ export const TextAndIcon: SxProps = {
   position: "relative",
   display: "flex",
   borderBottom: "2px solid white",
+  
 };
 
 export const Icon: SxProps = {
+  fontSize: { xs: "15px", lg: "20px", xl: "22px" },
   color: "white",
   position: "absolute",
   right: "10px",
