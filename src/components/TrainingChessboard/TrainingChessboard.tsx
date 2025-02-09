@@ -110,18 +110,18 @@ export default function TrainingChessBoard() {
   return (
     <Box>
       <Box sx={style.TrainingPageLayout}>
-        <Grid padding={"50px"} container spacing={2}>
-          <Grid item xs={12} sm={12} md={12} lg={6} sx={style.firstColumn}>
+        <Grid padding={"50px"} container spacing={5}>
+          <Grid item xs={12} sm={12} md={12} lg={7} sx={style.firstColumn}>
             <h4>{evaluationText}</h4>
             <h5>
-              Best line: <i>{bestLine.slice(0, 40)}</i> ...
+              Best line: <i>{bestLine.slice(0, 30)}</i> ...
             </h5>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "40px",
+                gap: "20px",
               }}
             >
               <PositionEvaluationBar
@@ -138,7 +138,7 @@ export default function TrainingChessBoard() {
             <Fen chess={game.current} onFenChange={handleFenChange} />
           </Grid>
 
-          <Grid item xs={12} sm={12} md={12} lg={6} sx={style.secondColumn}>
+          <Grid item xs={12} sm={12} md={12} lg={5} sx={style.secondColumn}>
             <Box sx={style.Items}>
               <Button
                 sx={style.UndoButton}

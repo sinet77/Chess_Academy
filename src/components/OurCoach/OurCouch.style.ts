@@ -3,14 +3,14 @@ import { SxProps } from "@mui/material";
 export const CouchTile: SxProps = {
   backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
-  fontSize: "81.6px",
+  fontSize: {xs:"50px", sm:"81px"},
   fontWeight: "700",
   lineHeight: "108.77px",
   alignItems: "center",
   justifyContent: "center",
   display: "flex",
   color: "white",
-  height: "635px",
+  height:{xs:"400px", sm:"635px"},
 };
 
 export const Titles: SxProps = {
@@ -50,11 +50,14 @@ export const DescriptionHeader: SxProps = {
 };
 
 export const WhiteTile: SxProps = {
-  padding: "80px",
-  display: "flex",
-  justifyContent: "center",
+  padding: { xs:"50px", md: "100px" },
+  display: "grid",
+  gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
+  columnGap: "30px",
+  rowGap: "30px",
+  justifyItems: "center",
   alignItems: "center",
-  gap: "100px",
+  backgroundColor: "white",
 };
 
 export const FooterBox: SxProps = {
@@ -95,6 +98,7 @@ export const Role: SxProps = {
 
 export const ImgWithNameBox: SxProps = {
   width: "350px",
+  
 };
 
 export const Links: SxProps = {
@@ -107,23 +111,37 @@ export const Links: SxProps = {
 };
 
 export const GreyTile: SxProps = {
-  backgroundColor: "#C2C2C2",
+  backgroundColor: "#EEEEEE",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  textAlign: "center",
   flexDirection: "column",
   padding: "80px",
   gap: "30px",
 };
 
+// export const BlackTile: SxProps = {
+//   padding: "40px 40px 60px 40px",
+//   display: "flex",
+//   justifyContent: "center",
+//   alignItems: "center",
+//   gap: "100px",
+//   backgroundColor: "#0D0D0D",
+// };
+
 export const BlackTile: SxProps = {
   padding: "40px 40px 60px 40px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: "100px",
+  display: "grid",
+  gridTemplateColumns: { xs: "1fr", md: "1fr", lg: "repeat(2, max-content)" },
+  justifyItems: "center",
+  justifyContent:"center", 
+  alignItems: "center", 
+  gap: "100px", 
+  margin: "0 auto", 
   backgroundColor: "#0D0D0D",
 };
+
 
 export const Button: SxProps = {
   color: "white",

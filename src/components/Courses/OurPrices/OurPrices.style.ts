@@ -3,6 +3,7 @@ import { SxProps } from "@mui/material";
 export const Main: SxProps = {
   backgroundColor: "white",
   padding: "80px",
+  
 };
 
 export const Titles: SxProps = {
@@ -73,8 +74,9 @@ export const Description: SxProps = {
 
 export const Boxes: SxProps = {
   display: "grid",
-  gridTemplateColumns: "repeat(3,1fr)",
+  gridTemplateColumns: { xs: "1fr", sm: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
   columnGap: "30px",
+  rowGap: "30px",
 };
 
 export const Button: SxProps = {

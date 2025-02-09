@@ -5,7 +5,7 @@ import OurPrices from "./OurPrices/OurPrices";
 
 export default function CoursesPage() {
   return (
-    <Box>
+    <Box sx={{backgroundColor: "#0D0D0D",}}>
       <Courses />
       <OurClass />
       <OurPrices />

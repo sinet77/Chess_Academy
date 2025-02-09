@@ -4,7 +4,7 @@ import { pawn, courseware, classes } from "../../../assets/CoursesImages.ts";
 
 export default function Courses() {
   return (
-    <Box sx={style.Container}>
+    <Box>
       <Box sx={style.CoursesTile}>Courses</Box>
       <Box sx={style.WhiteTile}>
         <Box sx={style.OneTile}>

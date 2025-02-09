@@ -1,30 +1,26 @@
 import { SxProps } from "@mui/material";
 
-export const Container: SxProps = {
-  display: "grid",
-  gridTemplateRows: "repeat(2, 1fr)",
-  height: "100vh",
-};
-
 export const CoursesTile: SxProps = {
   backgroundColor: "#0D0D0D",
   fontFamily: "Playfair Display",
-  fontSize: "81.6px",
+  fontSize: {xs:"50px", sm:"81px"},
   fontWeight: "700",
   lineHeight: "108.77px",
   alignItems: "center",
   justifyContent: "center",
   display: "flex",
   color: "white",
+  height:{xs:"400px", sm:"635px"},
 };
 
 export const WhiteTile: SxProps = {
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  backgroundColor: "white",
+  gridTemplateColumns: { xs: "1fr", sm: "1fr", md: "repeat(3, 1fr)"},
   justifyContent: "center",
   alignItems: "center",
   gap: "21px",
-  padding: "40px",
+  padding: { xs:"50px", md: "100px" },
 };
 
 export const Image: SxProps = {

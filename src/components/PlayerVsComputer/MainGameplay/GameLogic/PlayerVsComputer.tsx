@@ -31,9 +31,8 @@ export default function PlayVsComputer() {
   const location = useLocation();
   const { level, color } = location.state;
   const stockfishLevel = 1;
+  const [playerColor, setPlayerColor] = useState<string | null>(null);
 
-  const playerColor =
-    color === "random" ? (Math.random() < 0.5 ? "white" : "black") : color;
 
   const engineRef = useRef(new Engine());
   const gameRef = useRef(new Chess());
@@ -140,11 +139,25 @@ export default function PlayVsComputer() {
 
   useEffect(() => {
     if (playerColor === "black") {
-      handleComputerMove();
       setChangeBoardOrientation("black");
+      handleComputerMove();
     }
   }, [playerColor]);
 
+  useEffect(() => {
+    if (color === "random") {
+      const chosenColor = Math.random() < 0.5 ? "white" : "black";
+      setPlayerColor(chosenColor);
+      setChangeBoardOrientation(chosenColor);
+    } else {
+      setPlayerColor(color);
+      setChangeBoardOrientation(color);
+    }
+  }, [color]); 
+  
+
+  console.log(playerColor);
+  
   const handleComputerMove = () => {
     const frequency = FREQUENCY_MAP[level];
 

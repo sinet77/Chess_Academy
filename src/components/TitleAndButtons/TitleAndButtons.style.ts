@@ -21,9 +21,8 @@ export const Title: SxProps = {
 export const TitleText: SxProps = {
   color: "#fff",
   fontFamily: "Roboto",
-  fontSize: "50px",
+  fontSize: { xs: "30px", sm: "40px", md: "50px" },
   fontWeight: "700",
-  lineHeight: "110px",
   textAlign: "center",
 };
 

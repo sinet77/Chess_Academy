@@ -2,10 +2,9 @@ import { SxProps } from "@mui/material";
 
 export const Main: SxProps = {
   backgroundColor: "#0D0D0D",
-  padding: "100px",
+  padding: { xs:"50px", md: "100px" },
   margin: "auto",
   maxWidth: "1800px",
-
 };
 
 export const Titles: SxProps = {
@@ -80,7 +79,8 @@ export const Description: SxProps = {
 
 export const Tiles: SxProps = {
   display: "grid",
-  gridTemplateColumns: "repeat(3,1fr)",
+  gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)" },
   gridTemplateRows: "repeat(2,1fr)",
   columnGap: "30px",
+  rowGap: "30px",
 };

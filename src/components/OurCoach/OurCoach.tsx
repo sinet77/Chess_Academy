@@ -1,5 +1,5 @@
 import { Box, Button, Link, Typography } from "@mui/material";
-import * as style from "./OurCouch.style";
+import * as style from "./OurCouch.style.ts";
 import { Facebook, GitHub, LinkedIn } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import {
@@ -22,7 +22,7 @@ export default function OurCoach() {
   }
 
   return (
-    <Box>
+    <Box sx={{backgroundColor: "#0D0D0D",}}>
       <Box sx={style.CouchTile}>Our Coach</Box>
       <Box sx={style.WhiteTile}>
         <Box sx={style.Titles}>

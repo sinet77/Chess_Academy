@@ -7,13 +7,18 @@ import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 import * as style from "./Navbar.style";
 import { web_logo } from "../../assets/FooterNavbarImages.ts";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { routes } from "../../routes.js";
 import { useAuth } from "../../context/authContext/index.js";
-import { Link } from "@mui/material";
+import { Link, useMediaQuery } from "@mui/material";
 
 const pages = [
   { name: "Home", path: routes.home },
@@ -32,9 +37,12 @@ const settings = [
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
 
   const { handleSignOut } = useAuth();
+
+  const isMobile = useMediaQuery("(max-width:1000px)");
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -59,6 +67,16 @@ function Navbar() {
         )}
       <AppBar sx={style.AppBar}>
         <Toolbar sx={style.Navbar}>
+        <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
+        {isMobile && (
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={() => setMobileOpen(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Link to={routes.home} component={RouterLink} underline="none">
             <Box sx={style.BarContainer}>
               <Typography variant="h6" noWrap sx={style.WebTitle}>
@@ -67,20 +85,23 @@ function Navbar() {
               </Typography>
             </Box>
           </Link>
-
-          <Box sx={style.TabsNavbar}>
-            {pages.map((page) => (
-              <Link
-                key={page.name}
-                component={RouterLink}
-                to={page.path}
-                sx={style.Typography}
-                underline="none"
-              >
-                {page.name}
-              </Link>
-            ))}
           </Box>
+
+          {!isMobile && (
+            <Box sx={style.TabsNavbar}>
+              {pages.map((page) => (
+                <Link
+                  key={page.name}
+                  component={RouterLink}
+                  to={page.path}
+                  sx={style.Typography}
+                  underline="none"
+                >
+                  {page.name}
+                </Link>
+              ))}
+            </Box>
+          )}
 
         <Box>
           <Tooltip title="Open settings">
@@ -131,6 +152,20 @@ function Navbar() {
         </Box>
       </Toolbar>
     </AppBar>
+    <Drawer anchor="left" open={mobileOpen} onClose={() => setMobileOpen(false)}>
+        <List sx={{ width: 250 }}>
+          {pages.map((page) => (
+            <ListItem
+              key={page.name}
+              onClick={() => setMobileOpen(false)}
+              component={RouterLink}
+              to={page.path}
+            >
+              <ListItemText primary={page.name} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
     </>
   );
 }
