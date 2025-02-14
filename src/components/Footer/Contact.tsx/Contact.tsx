@@ -97,7 +97,7 @@ export default function Contact() {
         )}
 
         <Grid container>
-          <Grid item xs={12} md={9}>
+          <Grid item xs={12} md={8}>
             <Box sx={style.FormAndTitle}>
               <Formik<FormValues>
                 initialValues={initialValues}
@@ -190,7 +190,7 @@ export default function Contact() {
               </Formik>
             </Box>
           </Grid>
-          <Grid item xs={12} md={3} sx={{ display: "flex" }}>
+          <Grid item xs={12} md={4} sx={{ display: "flex" }}>
             <Box sx={style.GetInTouchContainer}>
               <Typography sx={style.GetInTouch}>Get In Touch</Typography>
               <Box sx={style.IconAndNameContainer}>
@@ -229,6 +229,7 @@ export default function Contact() {
         <Grid item xs={12}>
           <Box sx={style.Map}>
             <iframe
+              title="map"
               width="100%"
               height="100%"
               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Bia%C5%82ystok,%20Poland+(Chess%20Academy)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"

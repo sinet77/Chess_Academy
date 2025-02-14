@@ -22,7 +22,7 @@ export const Footer: SxProps = {
   color: "white",
   alignItems: "center",
   gap: "20px",
-  padding: "10px 80px",
+  padding: {xs: "15px",md:"10px 80px"},
 };
 
 export const Typography: SxProps = {
@@ -66,6 +66,8 @@ export const CopyrightText: SxProps = {
 export const Container: SxProps = {
   display: "flex",
   justifyContent: "space-between",
+  flexDirection: {xs:"column", md:"row"},
+  gap:{xs:"10px", md:"0px"},
   width: "100%",
 };
 

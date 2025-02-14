@@ -40,9 +40,11 @@ export default function FairPlayGuidelines({ onBack }: { onBack: () => void }) {
           Play violations.
         </Typography>
       </Box>
+      <Box sx={style.Wrapper}>
       <Button onClick={onBack} sx={style.BackButton}>
         Back to Fair Play Intro
       </Button>
+      </Box>
     </Box>
   );
 }

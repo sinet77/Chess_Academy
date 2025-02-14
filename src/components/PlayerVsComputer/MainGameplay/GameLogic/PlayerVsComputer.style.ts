@@ -11,7 +11,6 @@ export const Table: SxProps = {
 export const TrainingPageLayout: SxProps = {
   display: "flex",
   flexDirection: "column",
-  height: "100vh",
   width: "100%",
   backgroundColor: "#e9f5f8",
 };

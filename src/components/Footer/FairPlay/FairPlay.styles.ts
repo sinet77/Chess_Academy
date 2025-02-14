@@ -59,7 +59,8 @@ export const MainContent: SxProps = {
   flexDirection: "column",
   alignItems: "center",
   height: "auto",
-  padding: "200px",
+  padding: {xs:"15px",md:"200px"},
+  marginTop: {xs:"150px", md:0},
   backgroundColor: "#0d0d0d",
   color: "white",
 };
@@ -93,6 +94,7 @@ export const BouncingIcon: SxProps = {
 };
 
 export const Button: SxProps = {
+  paddingBottom: "100px",
     "&:hover": {
       backgroundColor: "transparent", 
     },
@@ -118,6 +120,10 @@ export const BackButton: SxProps = {
       backgroundColor: "orange", 
     },
 };
+
+export const Wrapper: SxProps = {
+  padding: "20px",
+}
 
 export const guidelineTitle: SxProps = {
   mb: "50px",

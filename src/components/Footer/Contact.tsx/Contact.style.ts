@@ -1,11 +1,14 @@
 import { SxProps } from "@mui/material";
 
 export const Main: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  alignContent: "center",
+  justifyContent: "center",
   backgroundColor: "#0D0D0D",
   boxShadow: "10px 10px 30px rgba(0, 0, 0, 0.5)",
-  padding: "50px",
+  padding: {xs:"5px",md:"50px"},
   textAlign: "center",
-  minHeight: "100vh",
 };
 
 export const Form: SxProps = {
@@ -16,16 +19,13 @@ export const Form: SxProps = {
   flexDirection: "column",
   gap: 2,
   padding: "50px",
-  width: "50%",
+  width: {md:"50%"},
   margin: "0 auto",
 };
 
 export const FormAndTitle: SxProps = {
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
   height: "auto",
-  padding: "50px",
+  padding: {xs:"5px",md:"40px"},
   backgroundColor: "grey",
   borderRadius: "10px 0 0 10px",
 };
@@ -82,12 +82,12 @@ export const Map: SxProps = {
 
 export const GetInTouchContainer: SxProps = {
   backgroundColor: "#333333",
-  width: "100%",
   color: "white",
-  padding: "60px",
+  padding: "50px",
   textAlign: "left",
   position: "relative",
   borderRadius: "0 10px 10px 0",
+  width:"100%",
 };
 
 export const GetInTouch: SxProps = {
@@ -121,6 +121,6 @@ export const PointTitle: SxProps = {
 export const FooterIcons: SxProps = {
   display: "flex",
   position: "absolute",
-  bottom: "50px",
+  bottom: "30px",
   gap: "20px",
 };

@@ -28,6 +28,8 @@ type ReturnsType = {
   game: React.MutableRefObject<Chess>;
   clearBoard: () => void;
   toggleBoardOrientation: () => void;
+  setBoardOrientation: (value: "white" | "black") => void;
+  setHighlightedSquares: (squares: SquareStyles) => void;
   toggleAutoPromoteToQueen: () => void;
   handleToggleShowEnableMoves: () => void;
   resetBoard: () => void;
@@ -238,5 +240,7 @@ export const useChessboard = ({
     toggleAutoPromoteToQueen,
     handleToggleShowEnableMoves,
     setPosition,
+    setBoardOrientation,
+    setHighlightedSquares,
   };
 };

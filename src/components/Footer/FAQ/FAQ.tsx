@@ -12,7 +12,7 @@ import { FAQ_DATA } from "./FAQData";
 
 export default function FAQ() {
   return (
-    <Box>
+
     <Box sx={style.FAQContainer}>
       <Box sx={style.titleContainer}>
         <Typography sx={style.Title} variant="h2" gutterBottom>
@@ -50,6 +50,6 @@ export default function FAQ() {
         </Button>
       </Box>
     </Box>
-          </Box>
+
   );
 }

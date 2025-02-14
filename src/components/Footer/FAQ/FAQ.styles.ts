@@ -43,7 +43,7 @@ export const Accordion: SxProps = {
   marginBottom: "15px",
   borderRadius: "8px",
   backgroundColor: "#f8f4eb",
-  width: "50%",
+  width: {xs:"100%",md:"50%"},
   padding: "13px 13px",
   boxShadow: "0 3px 15px rgb(0 0 0 / 0.2)",
   '&:before': { height: '0px' },
@@ -68,7 +68,7 @@ export const footerContainer: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
-  width: "500px",
+  width: {xs:"300px",md:"400px"},
   mt: "70px"
 }
 export const footertitle: SxProps = {
