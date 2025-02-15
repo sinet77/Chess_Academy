@@ -138,8 +138,10 @@ export default function PawnsGame() {
   
     const whiteWins = squaresForWhiteToWin.some((square: Square) => {
       const piece = game.get(square);
-      return piece?.color === "w" && piece?.type === "p";
+      return piece?.color === "w" && ["p","q"].includes(piece?.type);
     });
+    console.log(whiteWins);
+    
     if (whiteWins) {
       setGameOver(true);
       toast("White wins!");
@@ -148,8 +150,10 @@ export default function PawnsGame() {
   
     const blackWins = squaresForBlackToWin.some((square: Square) => {
       const piece = game.get(square);
-      return piece?.color === "b" && piece?.type === "p";
+      return piece?.color === "b" && ["p","q"].includes(piece?.type);
     });
+    console.log(blackWins);
+    
     if (blackWins) {
       setGameOver(true);
       toast("Black wins!");

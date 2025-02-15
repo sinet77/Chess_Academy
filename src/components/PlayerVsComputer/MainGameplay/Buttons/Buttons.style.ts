@@ -4,8 +4,10 @@ export const Window: SxProps = {
   border: "2px solid orange",
   padding: "10px",
   display: "flex",
+  flexDirection: {xs:"column", md:"row"},
   color: "black",
   backgroundColor: "#e0e0e0",
+  mt: "20px",
 };
 export const BackButton: SxProps = {
   position: "absolute",

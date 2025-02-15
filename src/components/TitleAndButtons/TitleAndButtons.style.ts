@@ -1,5 +1,10 @@
 import { SxProps } from "@mui/material";
 
+export const Wrapper: SxProps = {
+  padding: { xs: "50px", md: "100px" },
+  backgroundColor: "#0D0D0D",
+};
+
 export const TileContainer: SxProps = {
   display: "flex",
   justifyContent: "center",
@@ -14,8 +19,7 @@ export const Title: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  paddingBottom: "80px",
-
+  paddingBottom: { xs: "50px", md: "80px" },
 };
 
 export const TitleText: SxProps = {
@@ -33,8 +37,8 @@ export const ImageButtonContainer: SxProps = {
   alignItems: "center",
   width: "100%",
   height: "auto",
-  padding:0,
-  overflow:"hidden",
+  padding: 0,
+  overflow: "hidden",
   backgroundColor: "#292929",
   borderRadius: "8px",
   border: "1px solid white",
@@ -49,8 +53,7 @@ export const ButtonImage: React.CSSProperties = {
   width: "160px",
   height: "auto",
   maxHeight: "100%",
-  borderRadius: "8px"
-
+  borderRadius: "8px",
 };
 export const TitleUnderButtonImage: React.CSSProperties = {
   color: "white",

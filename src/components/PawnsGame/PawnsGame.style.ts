@@ -6,16 +6,11 @@ export const Main: SxProps = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "50px",
+  gap: { xs: "0px", md: "40px" },
 };
 
 export const Chessboard: SxProps = {
-  width: {
-    xs: "80%",
-    sm: "70%",
-    md: "80%",
-    lg: "60%",
-  },
+  width: { xs: "370px", sm: "550px", md: "800px" },
   height: "auto",
   border: "1px solid black",
   cursor: "pointer",
@@ -58,9 +53,8 @@ export const SwitchLabel: SxProps = {
 };
 
 export const ButtonsContainer: SxProps = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "10px",
+  display: "grid",
+  gap: "20px",
 };
 
 export const Instruction: SxProps = {
@@ -68,7 +62,8 @@ export const Instruction: SxProps = {
   color: "white",
   display: "flex",
   width: "100%",
-  padding: "20px",
+  maxWidth: "2000px",
+  padding: { xs: "12px", md: "20px" },
   border: "1px solid #DADADA",
   borderTop: "none",
 };
@@ -85,7 +80,7 @@ export const Title: SxProps = {
 
 export const TitleName: SxProps = {
   fontFamily: "Playfair Display",
-  fontSize: "24px",
+  fontSize: "1.5rem",
   fontWeight: "500",
   lineHeight: "23px",
 };
@@ -98,7 +93,7 @@ export const DescriptionContainer: SxProps = {
 
 export const Description: SxProps = {
   fontFamily: "Roboto",
-  fontSize: "24px",
+  fontSize: { sx: "1rem", md: "1.5rem" },
   fontWeight: "500",
   display: "flex",
   textAlign: "center",
