@@ -60,7 +60,7 @@ export default function TrainingChessBoard() {
   const handleClose = () => setOpen(false);
 
   const findBestMove = () => {
-    engine.current.evaluatePosition(currentPosition, 18);
+    engine.current.evaluatePosition(game.current.fen(), 18);
     engine.current.onMessage(
       ({
         positionEvaluation,

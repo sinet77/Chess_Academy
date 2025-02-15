@@ -18,11 +18,11 @@ const Articles: React.FC = () => {
   const fetchRSS = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        "https://thingproxy.freeboard.io/fetch/https://theweekinchess.com/twic-rss-feed"
-      );
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent("https://theweekinchess.com/twic-rss-feed")}`);
 
-      const textIn_XML_Format = await response.text();
+      const data = await response.json(); 
+      const textIn_XML_Format = data.contents;
+
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(textIn_XML_Format, "text/xml");
       const items = Array.from(xmlDoc.getElementsByTagName("item"));
