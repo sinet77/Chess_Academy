@@ -77,10 +77,6 @@
 
 <h1>To Do</h1>
 
-* <h3>Merge updated branches to main</h3>
-
-* <h3>Mobile responsiveness</h3>
-
 * <h3>Ranks and Badges customization</h3>
 
 * <h3>Users ranking</h3>
