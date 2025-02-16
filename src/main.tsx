@@ -22,7 +22,7 @@ import Contact from "./components/Footer/Contact.tsx/Contact.tsx";
 import CoursesPage from "./components/Courses/CoursesPage.tsx";
 import { routes } from "./routes.ts";
 import OurCoach from "./components/OurCoach/OurCoach.tsx";
-import PrivateLesson from "./PrivateLesson/PrivateLesson.tsx";
+import PrivateLesson from "./pages/PrivateLesson/PrivateLesson.tsx";
 import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
 import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic/PlayerVsComputer.tsx";
 import ChooseComputerLevel from "./components/PlayerVsComputer/ChooseComputerLevel/ChooseComputerLevel.tsx";

@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import {
   chess_set,
   chess_private_lesson,
-} from "../assets/PrivateLessonImages.ts";
+} from "../../assets/PrivateLessonImages.ts";
 import CheckIcon from "@mui/icons-material/Check";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import FormatQuoteOutlinedIcon from "@mui/icons-material/FormatQuoteOutlined";
