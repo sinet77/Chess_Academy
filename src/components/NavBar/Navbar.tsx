@@ -30,8 +30,6 @@ const pages = [
 ];
 const settings = [
   { name: "Profile", path: routes.userProfile },
-  { name: "Account", path: "/account" },
-  { name: "Dashboard", path: "/dashboard" },
   { name: "Logout", path: null },
 ];
 

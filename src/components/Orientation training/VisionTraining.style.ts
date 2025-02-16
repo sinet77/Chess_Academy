@@ -10,12 +10,7 @@ export const Main: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: {
-    xs: "80%",
-    sm: "70%",
-    md: "80%",
-    lg: "60%",
-  },
+  width: { xs: "300px", sm: "500px", md: "600px", lg:"700px" },
   maxWidth: "800px",
   height: "auto",
   border: "1px solid black",
@@ -27,7 +22,7 @@ export const TimerAndPoints: SxProps = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  padding: "20px",
+  padding: "10px",
   gap: "15px",
 };
 
@@ -42,8 +37,8 @@ export const Points: SxProps = {
 export const DrawnSquare: SxProps = {
   color: "white",
   position: "absolute",
-  right: "40px",
-  top: "40px",
+  right: {xs:"20px",md:"40px"},
+  top: {xs:"100px",md:"40px"},
   fontSize: "2.2rem",
   fontWeight: "bold",
   letterSpacing: 2,

@@ -4,25 +4,26 @@ import { Formik, Form, Field, FormikHelpers } from "formik";
 import {
   Box,
   TextField,
-  Checkbox,
-  FormControlLabel,
   Button,
   Typography,
   Divider,
   Link,
 } from "@mui/material";
+import { Google as GoogleIcon } from "@mui/icons-material"; 
+import web_logo from "../../assets/web_logo.png";
 import { useAuth } from "../../context/authContext";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes";
 
 export default function LoginForm() {
+  
   const {
     userLoggedIn,
     handleSignInWithEmailAndPassword,
     handleSignInWithGoogle,
   } = useAuth();
 
-  const initialValues = { login: "Demo", password: "Demo123", remember: false };
+  const initialValues = { login: "Demo", password: "Demo123" };
 
   const onSubmit = async (
     values: typeof initialValues,
@@ -46,8 +47,19 @@ export default function LoginForm() {
 
   return (
     <Box sx={style.Main}>
-      {userLoggedIn && <Navigate to={routes.home} replace={true} />}
-      <Typography sx={style.Text}>Start your journey</Typography>
+      {userLoggedIn && <Navigate to={routes.home} />}
+      <Box component="img" sx={style.WebLogo} src={web_logo} />
+      <Typography sx={style.Text}>Log in with</Typography>
+
+      <Box sx={style.SocialButtons}>
+        <Button onClick={onGoogleSignIn} sx={style.GoogleButton}>
+          <GoogleIcon />
+          Google
+        </Button>
+      </Box>
+
+      <Divider sx={style.Divider}>or</Divider>
+
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
@@ -61,65 +73,35 @@ export default function LoginForm() {
                 name="login"
                 as={TextField}
                 fullWidth
-                id="login"
                 label="Login"
-                placeholder="Login"
+                placeholder="Enter your login"
                 error={touched.login && Boolean(errors.login)}
                 helperText={touched.login && errors.login}
               />
-
               <Field
                 sx={style.TextField}
                 name="password"
                 as={TextField}
                 fullWidth
-                id="password"
                 label="Password"
                 type="password"
-                placeholder="Password"
+                placeholder="Enter your password"
                 error={touched.password && Boolean(errors.password)}
                 helperText={touched.password && errors.password}
               />
 
-              <FormControlLabel
-                control={
-                  <Field
-                    as={Checkbox}
-                    name="remember"
-                    color="primary"
-                    sx={style.Checkbox}
-                  />
-                }
-                label="Remember"
-              />
-              <Box sx={style.Centered}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disabled={isSubmitting}
-                  sx={style.Button}
-                >
-                  {isSubmitting ? "Loading..." : "Login"}
-                </Button>
-                <Divider sx={style.Divider}>OR</Divider>
-                <Button
-                  onClick={onGoogleSignIn}
-                  variant="contained"
-                  color="primary"
-                  sx={style.Button}
-                  type="button"
-                >
-                  Sign in with Google
-                </Button>
-                <Link component={RouterLink} to={routes.register} underline="hover">
-                  Register
-                </Link>
-              </Box>
+              <Button type="submit" variant="contained" sx={style.Button} disabled={isSubmitting}>
+              {isSubmitting ? "Loading..." : "Login"}
+              </Button>
             </Box>
           </Form>
         )}
       </Formik>
+
+      <Typography sx={style.Centered}>
+        Don’t have an account?{" "}
+        <Link component={RouterLink} to={routes.register}>Sign up!</Link>
+      </Typography>
     </Box>
   );
 }

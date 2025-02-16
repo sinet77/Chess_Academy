@@ -158,8 +158,8 @@ export default function VisionTraining() {
               onSquareClick={handleSquareClick}
               showBoardNotation={checked}
               customNotationStyle={{ fontSize: "18px" }}
-              customLightSquareStyle={{ backgroundColor: "#e0e0e0" }}
-              customDarkSquareStyle={{ backgroundColor: "#607d8b" }}
+              customLightSquareStyle={{ backgroundColor: currentUser?.chessboard?.lightSquare ?? "#e0e0e0" }}
+              customDarkSquareStyle={{ backgroundColor: currentUser?.chessboard?.darkSquare ?? "#607d8b" }}
             />
           </Box>
           <Box sx={style.ButtonsContainer}>

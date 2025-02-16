@@ -1,5 +1,5 @@
 import { SxProps } from "@mui/material";
-import img from "../../assets/register_background.jpg";
+import img from "../../assets/man_background.jpeg";
 
 export const Main: SxProps = {
   display: "flex",

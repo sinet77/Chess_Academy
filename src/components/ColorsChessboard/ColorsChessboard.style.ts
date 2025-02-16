@@ -23,3 +23,19 @@ export const ColorInput: SxProps = {
     borderRadius: "50%",
   },
 };
+
+export const SubmitButton: SxProps = {
+  fontFamily: "Roboto, sans-serif",
+  textTransform: "none",
+  cursor: "pointer",
+  fontWeight: "bold",
+  backgroundColor: "orange",
+  color: "0d0d0d",
+  padding: "12px",
+  borderRadius: "8px",
+  transition:"ease-in-out all 0.3s",
+  "&:hover": {
+    backgroundColor: "#F3F43F",
+  },
+};
+

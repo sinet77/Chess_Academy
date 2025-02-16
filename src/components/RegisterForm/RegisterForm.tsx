@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import PasswordStrengthBar from "react-password-strength-bar";
-import * as style from "./RegisterForm.style";
+import * as style from "../LoginForm/LoginForm.style"
 import { Formik, Form, Field, FormikHelpers } from "formik";
 import {
   Box,
@@ -169,10 +169,10 @@ export default function RegisterForm() {
                   {isSubmitting ? "Loading..." : "Register"}
                 </Button>
                 <Divider sx={style.Divider}>
-                  Do you have an account? Sign in!
+                  Do you have an account?
                 </Divider>
                 <Link component={RouterLink} to={routes.login} underline="hover">
-                  Sign in
+                  Sign in!
                 </Link>
               </Box>
             </Box>

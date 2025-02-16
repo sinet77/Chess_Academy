@@ -8,7 +8,7 @@ export const Main: SxProps = {
   minHeight: "100vh",
   justifyContent: "center",
   alignItems: "center",
-  gap: "200px",
+  gap: {md:"100px", lg:"200px"},
   backgroundImage: `url("${img}")`,
   backgroundSize: "100% 100%",
   backgroundRepeat: "no-repeat",

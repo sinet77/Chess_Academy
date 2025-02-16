@@ -40,7 +40,7 @@ export const ColorsChessboard = () => {
           sx={style.ColorInput}
         />
       </Box>
-      <Box component="button" type="submit">
+      <Box component="button" type="submit" sx={style.SubmitButton}>
         Submit
       </Box>
     </Box>

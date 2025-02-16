@@ -2,7 +2,7 @@ import { SxProps } from "@mui/system";
 
 export const Container: SxProps = {
   display: "flex",
-  minHeight: "100vh",
+
   justifyContent: "top",
   alignItems: "center",
   flexDirection: "column",
