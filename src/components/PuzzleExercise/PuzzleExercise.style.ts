@@ -1,11 +1,16 @@
 import { SxProps } from "@mui/material";
 
 export const Main: SxProps = {
-  p: 10,
+  p: { xs: "20px", md: "80px" },
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  
+};
+export const Chessboard: SxProps = {
+  width: { xs: "300px", sm: "400px", md: "600px" },
+  height: "auto",
+  ml: 2,
+  p: 2,
 };
 
 export const ImgContainer: SxProps = {
@@ -14,7 +19,6 @@ export const ImgContainer: SxProps = {
   justifyContent: "center",
   minHeight: "100vh",
   width: "100%",
-  
 };
 
 export const Button: SxProps = {

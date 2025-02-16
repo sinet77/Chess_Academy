@@ -30,8 +30,10 @@ type ReturnsType = {
   toggleBoardOrientation: () => void;
   setBoardOrientation: (value: "white" | "black") => void;
   setHighlightedSquares: (squares: SquareStyles) => void;
+  setRightClickedSquares: (squares: SquareStyles) => void;
   toggleAutoPromoteToQueen: () => void;
   handleToggleShowEnableMoves: () => void;
+  isShowMovesEnabled: boolean;
   resetBoard: () => void;
   undoMove: () => void;
   setPosition: (fen: string) => void;
@@ -73,7 +75,8 @@ export const useChessboard = ({
   const handlePieceDrop = (
     sourceSquare: Square,
     targetSquare: Square,
-    piece: Piece
+    piece: Piece,
+
   ): boolean => {
     try {
       const move = game.current.move({
@@ -116,9 +119,8 @@ export const useChessboard = ({
   };
 
   const setPosition = useCallback((fen: string) => {
-    game.current.load(fen);
     setFen(fen);
-    setHighlightedSquares({});
+
   }, []);
 
   const clearBoard = () => {
@@ -238,9 +240,11 @@ export const useChessboard = ({
     updateHistory,
     toggleBoardOrientation,
     toggleAutoPromoteToQueen,
+    isShowMovesEnabled,
     handleToggleShowEnableMoves,
     setPosition,
     setBoardOrientation,
     setHighlightedSquares,
+    setRightClickedSquares
   };
 };

@@ -37,7 +37,7 @@ export const Container: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  padding: 2,
+  padding: { xs: 2, md: 4 },
   backgroundColor: "#eeeeee",
 };
 

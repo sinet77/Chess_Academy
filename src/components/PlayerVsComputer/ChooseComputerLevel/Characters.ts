@@ -38,7 +38,7 @@ export const CHARACTERS = [
     {
       image: cartoon_girlBlueHair,
       level: "Expert",
-      description: "I know complex strategies; prepare yourself!",
+      description: "I know complex strategies, prepare yourself!",
     },
     {
       image: cartoon_girlV2,

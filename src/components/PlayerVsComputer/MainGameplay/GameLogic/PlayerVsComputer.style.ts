@@ -11,14 +11,14 @@ export const Table: SxProps = {
 export const TrainingPageLayout: SxProps = {
   display: "flex",
   flexDirection: "column",
-  height  : "100vh",
+  minHeight  : "100vh",
   width: "100%",
   backgroundColor: "#e9f5f8",
 };
 
 export const OptionsTile: SxProps = {
   height:{xs:"300px", md:"500px"},
-  minHeight: "200px",
+  minHeight: {xs:"200px", md:"320px"},
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",

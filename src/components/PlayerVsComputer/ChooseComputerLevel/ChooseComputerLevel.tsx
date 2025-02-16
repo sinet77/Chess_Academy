@@ -72,7 +72,7 @@ export default function ChooseComputerLevel() {
         </ButtonGroup>
       </Box>
       <Box sx={style.Container}>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={4} justifyContent="center">
           {CHARACTERS.map(({ image, level, description }, index) => (
             <Grid
               item
