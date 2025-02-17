@@ -1,3 +1,7 @@
+# Chess Academy
+
+![Chess Academy](https://github.com/user-attachments/assets/6adb264b-9bd9-4882-b3ab-a27ce547bd1f)
+
 ## Table of Contents
 - [Chess Academy](#chess-academy)
 - [General Info](#general-info)
@@ -7,21 +11,17 @@
 - [Frameworks and Libraries](#frameworks-and-libraries)
 - [To Do](#to-do)
 
-## Chess Academy
+# General Info
+### Chess Academy is a platform where you can learn and play chess. It has been developed for my students in mind to improve their chess skills.
 
-![Chess Academy](https://github.com/user-attachments/assets/6adb264b-9bd9-4882-b3ab-a27ce547bd1f)
-
-## General Info
-Chess Academy is a platform where you can learn and play chess. It has been developed for my students in mind to improve their chess skills.
-
-## Demo
+# Demo
 ### Live demo is available here:  [Chess Academy](https://sinet77.github.io/Chess_Academy/)
 
 | User  | Password |
 |-------|----------|
 | Demo  | Demo123  |
 
-## Features
+# Features
 ### Solve various chess puzzles at different difficulty levels
 
 ![Puzzle](https://github.com/user-attachments/assets/f9b22c04-584f-4f8f-83dc-cdb8511bff20)
@@ -38,13 +38,13 @@ Chess Academy is a platform where you can learn and play chess. It has been deve
 
 ![Guess Squares](https://github.com/user-attachments/assets/ecd37b90-6155-498e-b74c-04cb93f984f5)
 
-## Technologies
+# Technologies
 - **HTML**
 - **CSS**
 - **TypeScript**
 - **Firebase**
 
-## Frameworks and Libraries
+# Frameworks and Libraries
 - **React** - Library for building user interfaces
 - **Formik** - Forms with easy-to-use validation
 - **Yup** - Form validation
