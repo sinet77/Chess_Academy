@@ -2,10 +2,19 @@ import { ComponentProps, useCallback, useMemo, useRef, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { useAuth } from "../context/authContext";
 import Engine from "../Engine/engine";
-import { Chess, Square } from "chess.js";
+import { Chess, Move, Square } from "chess.js";
 import { Piece } from "react-chessboard/dist/chessboard/types";
 
-type Props = ComponentProps<typeof Chessboard>;
+export type PieceDropArgs = {
+  sourceSquare: Square;
+  targetSquare: Square;
+  piece: Piece;
+  move: Move;
+};
+
+type Props = ComponentProps<typeof Chessboard> & {
+  onPieceDrop: (args?: PieceDropArgs) => void;
+};
 
 interface SquareStyles {
   [key: string]: {
@@ -21,7 +30,7 @@ interface MovePair {
 }
 
 type ReturnsType = {
-  chessboardProps: Props;
+  chessboardProps: ComponentProps<typeof Chessboard>;
   currentPosition: string;
   engine: React.MutableRefObject<Engine>;
   history: MovePair[];
@@ -75,8 +84,7 @@ export const useChessboard = ({
   const handlePieceDrop = (
     sourceSquare: Square,
     targetSquare: Square,
-    piece: Piece,
-
+    piece: Piece
   ): boolean => {
     try {
       const move = game.current.move({
@@ -86,7 +94,7 @@ export const useChessboard = ({
       });
 
       if (onPieceDrop) {
-        onPieceDrop(sourceSquare, targetSquare, piece);
+        onPieceDrop({ sourceSquare, targetSquare, piece, move });
         setHighlightedSquares({
           [sourceSquare]: { backgroundColor: "#b2aa5e" },
           [targetSquare]: { backgroundColor: "#ccd285" },
@@ -120,7 +128,6 @@ export const useChessboard = ({
 
   const setPosition = useCallback((fen: string) => {
     setFen(fen);
-
   }, []);
 
   const clearBoard = () => {
@@ -245,6 +252,6 @@ export const useChessboard = ({
     setPosition,
     setBoardOrientation,
     setHighlightedSquares,
-    setRightClickedSquares
+    setRightClickedSquares,
   };
 };

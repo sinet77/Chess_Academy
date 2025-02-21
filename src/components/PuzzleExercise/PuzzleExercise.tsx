@@ -20,6 +20,7 @@ import { useChessboard } from "../../hooks/useChessboard";
 export default function PuzzlesExercise() {
   const {
     game,
+    undoMove,
     chessboardProps,
     setBoardOrientation,
     setPosition,
@@ -167,7 +168,7 @@ export default function PuzzlesExercise() {
       setIsPlayerTurn(false);
       executeComputerMove();
     } else {
-      game.current.undo();
+      undoMove()
       setPosition(previousFen);
       console.log(previousFen);
 

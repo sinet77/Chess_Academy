@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { Chess } from "chess.js";
+import { useEffect, useState } from "react";
+import { PieceDropArgs } from "../../../../hooks/useChessboard";
 import { Chessboard } from "react-chessboard";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -15,53 +15,33 @@ import ExtensionIcon from "@mui/icons-material/Extension";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Square } from "react-chessboard/dist/chessboard/types";
 import * as style from "./DisplayDailyPuzzle.style";
 import { Puzzle } from "../PuzzleTypes";
-import { SquareStyles } from "./DisplayDailyPuzzle.types";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { routes } from "../../../../routes";
+import { useChessboard } from "../../../../hooks/useChessboard";
 
 export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
-  const chess = useRef<Chess>(new Chess());
   const [isMovable, setIsMovable] = useState(true);
-  const [fen, setFen] = useState<string>("start");
   const [moves, setMoves] = useState<string[]>([]);
   const [currentMoveIndex, setCurrentMoveIndex] = useState<number>(0);
   const [playedMoves, setPlayedMoves] = useState<
     { move: string; isValid: boolean }[]
   >([]);
-  const [changeBoardOrientation, setChangeBoardOrientation] = useState<
-    "white" | "black"
-  >("white");
   const [startingColor, setStartingColor] = useState<string>("");
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
-  const [highlightedSquares, setHighlightedSquares] = useState<SquareStyles>(
-    {}
-  );
-  const [rightClickedSquares, setRightClickedSquares] = useState<SquareStyles>(
-    {}
-  );
 
-  const handleBoardOrientation = () => {
-    setChangeBoardOrientation((prevBoardOrientation) =>
-      prevBoardOrientation === "white" ? "black" : "white"
-    );
-  };
+  const {
+    game,
+    chessboardProps,
+    toggleBoardOrientation,
+    setBoardOrientation,
+    setHighlightedSquares,
+    undoMove,
+    setPosition,
 
-  const onSquareRightClick = (square: Square) => {
-    const color = "rgba(254,46,46, 0.4)";
-    const isRightClicked =
-      rightClickedSquares[square]?.backgroundColor === color;
-
-    setRightClickedSquares((prevState) => ({
-      ...prevState,
-      [square]: isRightClicked
-        ? { backgroundColor: "transparent" }
-        : { backgroundColor: color },
-    }));
-  };
+  } = useChessboard({ onPieceDrop, id: "DailyPuzzleBoard" });
 
   const showCorrectTitleWhenSolved = () => {
     if (currentMoveIndex === moves.length - 1) {
@@ -72,18 +52,18 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
   const getStartingColorForPlayer = (fen: string) => {
     const spliitedPartsInFenToGetAColor = fen.split(" ");
     if (spliitedPartsInFenToGetAColor[1] === "w") {
-      setChangeBoardOrientation("white");
+      setBoardOrientation("white");
       setStartingColor("White");
     } else {
-      setChangeBoardOrientation("black");
+      setBoardOrientation("black");
       setStartingColor("Black");
     }
   };
 
   const resetGame = () => {
     if (puzzle?.fen) {
-      chess.current.load(puzzle.fen);
-      setFen(puzzle.fen);
+      game.current.load(puzzle.fen);
+      setPosition(puzzle.fen);
     }
     setHighlightedSquares({});
     setPlayedMoves([]);
@@ -104,15 +84,15 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     }
 
     if (puzzle.fen) {
-      chess.current.load(puzzle.fen);
-      setFen(puzzle.fen);
+      game.current.load(puzzle.fen);
+      setPosition(puzzle.fen);
       getStartingColorForPlayer(puzzle.fen);
     }
 
     if (puzzle.pgn) {
       const pgn = puzzle.pgn;
-      chess.current.loadPgn(pgn);
-      const moves = chess.current
+      game.current.loadPgn(pgn);
+      const moves = game.current
         .history({ verbose: true })
         .map((move) => move.san);
       const cleanedMoves = moves.map(cleanMove).filter((move) => move !== null);
@@ -129,20 +109,14 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     }
   }, [puzzle]);
 
-  const onPieceDrop = (sourceSquare: Square, targetSquare: Square): boolean => {
-    const previousFen = chess.current.fen();
-
-    const move = chess.current.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: "q",
-    });
+  function onPieceDrop({sourceSquare, targetSquare, move}: PieceDropArgs): boolean {
+    const previousFen = game.current.fen();
 
     const moveDescription = move.san;
 
-    if (move === null) {
+    if (game.current.move === null) {
       console.error(`Invalid move: ${sourceSquare} to ${targetSquare}`);
-      setFen(previousFen);
+      setPosition(previousFen);
 
       return false;
     }
@@ -163,7 +137,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
       if (blackMoveIndex < moves.length) {
         setTimeout(() => {
           const blackMove = moves[blackMoveIndex];
-          const PCmove = chess.current.move(blackMove);
+          const PCmove = game.current.move(blackMove);
           const sourceSquareComputer = PCmove.from;
           const targetSquareComputer = PCmove.to;
 
@@ -175,7 +149,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
               backgroundColor: "rgba(255, 255, 0, 0.4)",
             },
           });
-          setFen(chess.current.fen());
+          setPosition(game.current.fen());
           setCurrentMoveIndex(blackMoveIndex + 1);
 
           if (blackMoveIndex + 1 === moves.length) {
@@ -185,19 +159,19 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
         }, 500);
       }
     } else {
-      chess.current.undo();
-      setFen(previousFen);
+      undoMove();
+      setPosition(previousFen);
       setPlayedMoves((prevMoves) => [
         ...prevMoves,
         { move: moveDescription, isValid: false },
       ]);
     }
 
-    setFen(chess.current.fen());
+    setPosition(game.current.fen());
     showCorrectTitleWhenSolved();
 
     return true;
-  };
+  }
 
   const notify = () =>
     toast.success("Congratulations, you solved this!", {
@@ -221,25 +195,16 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
           <ToastContainer />
           <Box sx={style.Chessboard}>
             <Chessboard
-              id="BasicChessboard"
-              position={fen}
-              onPieceDrop={onPieceDrop}
+              {...chessboardProps}
               arePiecesDraggable={isMovable}
-              boardOrientation={changeBoardOrientation}
-              onSquareRightClick={onSquareRightClick}
-              customDarkSquareStyle={{ backgroundColor: "#e0e0e0" }}
-              customLightSquareStyle={{ backgroundColor: "#607d8b" }}
-              customSquareStyles={{
-                ...highlightedSquares,
-                ...rightClickedSquares,
-              }}
             />
+
           </Box>
           <Box sx={style.ButtonsContainer}>
             <Button onClick={resetGame} sx={style.Button}>
               Reset puzzle
             </Button>
-            <Button onClick={handleBoardOrientation} sx={style.Button}>
+            <Button onClick={toggleBoardOrientation} sx={style.Button}>
               Swap orientation
             </Button>
           </Box>
