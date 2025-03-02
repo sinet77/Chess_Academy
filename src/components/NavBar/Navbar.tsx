@@ -22,7 +22,7 @@ import { Link, useMediaQuery } from "@mui/material";
 
 const pages = [
   { name: "Home", path: routes.home },
-  { name: "About (To Do)", path: routes.home },
+  { name: "About (To Do)", path: routes.aboutUs },
   { name: "Courses", path: routes.courses },
   { name: "Our Couch", path: routes.ourcouch },
   { name: "Contact", path: routes.contactUs },

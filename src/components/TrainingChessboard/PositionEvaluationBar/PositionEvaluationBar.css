@@ -8,16 +8,17 @@
   height: 300px;
 }
 
-@media (min-width: 600px) {
+@media (max-width: 600px) {
   .evaluation-bar {
-    height: 400px;
-    width: 60px;
+    height: 330px;
+    width: 26px;
   }
 }
 
 @media (min-width: 960px) {
   .evaluation-bar {
     height: 600px;
+    width: 60px;
   }
 }
 

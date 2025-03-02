@@ -2,6 +2,8 @@ import { SxProps } from "@mui/material";
 
 export const Chessboard: SxProps = {
   width: { xs: "60%", sm: "40%", md: "70%", lg: "70%", xl: "65%" },
+  marginTop: { xs: "50px", md: "0px"},
+  marginBottom: { xs: "50px", md: "0px"},
   height: "auto",
   border: "2px solid white",
   transition: "all 0.25s ease-in-out",
@@ -12,7 +14,8 @@ export const Chessboard: SxProps = {
 };
 
 export const Title: SxProps = {
-  fontSize: { xs: "15px", lg: "20px", xl: "22px" }
+  fontSize: { xs: "15px", lg: "20px", xl: "22px" },
+  fontWeight: "bold",
 }
 
 export const TextAndIcon: SxProps = {

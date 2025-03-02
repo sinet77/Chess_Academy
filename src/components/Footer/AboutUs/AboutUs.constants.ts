@@ -1,4 +1,4 @@
-export const guidelines = [
+export const GUIDELINES = [
   {
     title: "Play with your friend",
     description:
@@ -31,7 +31,7 @@ export const guidelines = [
   },
 ];
 
-export const guidelinesSecondPage = [
+export const GUIDELINES_SECONDPAGE = [
   {
     title: "1. Design a mockup",
     description: `Design how you think the site should look using a graphic design

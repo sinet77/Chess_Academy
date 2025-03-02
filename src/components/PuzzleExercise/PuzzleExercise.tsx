@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
-import { Square } from "react-chessboard/dist/chessboard/types";
 import ScienceIcon from "@mui/icons-material/Science";
 import Stopwatch from "./Stopwatch/Stopwatch";
 import {
@@ -15,7 +14,7 @@ import * as style from "./PuzzleExercise.style";
 import { loading_gif } from "../../assets/PuzzleExerciseImages";
 import { useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { useChessboard } from "../../hooks/useChessboard";
+import { PieceDropArgs, useChessboard } from "../../hooks/useChessboard";
 
 export default function PuzzlesExercise() {
   const {
@@ -128,12 +127,11 @@ export default function PuzzlesExercise() {
     automaticTransitionAfterSolvingPuzzle();
   }, [isPuzzleSolved, isAutoNextEnabled]);
 
-  function onPieceDrop(sourceSquare: Square, targetSquare: Square): boolean {
+  function onPieceDrop({sourceSquare, targetSquare}: PieceDropArgs): void {
     const previousFen = game.current.fen();
 
     if (!game.current.move) {
       setPosition(previousFen);
-      return false;
     }
 
     const moveIndex = currentMoveIndex;
@@ -176,7 +174,6 @@ export default function PuzzlesExercise() {
     }
 
     setPosition(game.current.fen());
-    return true;
   }
 
   useEffect(() => {

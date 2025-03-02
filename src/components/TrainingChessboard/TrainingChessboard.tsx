@@ -121,7 +121,7 @@ export default function TrainingChessBoard() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "20px",
+                gap: {xs:"10px",md:"20px"},
               }}
             >
               <PositionEvaluationBar

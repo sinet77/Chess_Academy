@@ -12,8 +12,8 @@ export type PieceDropArgs = {
   move: Move;
 };
 
-type Props = ComponentProps<typeof Chessboard> & {
-  onPieceDrop: (args?: PieceDropArgs) => void;
+type Props = Omit<ComponentProps<typeof Chessboard>, 'onPieceDrop'> & {
+  onPieceDrop: (args: PieceDropArgs) => void;
 };
 
 interface SquareStyles {

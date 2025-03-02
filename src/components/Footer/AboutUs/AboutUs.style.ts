@@ -1,12 +1,5 @@
 import { SxProps } from "@mui/material/styles";
 
-export const Navbar: SxProps = {
-  backgroundColor: "#0D0D0D",
-  height: "112px",
-  width: "100%",
-  zIndex: 100,
-};
-
 export const Container: SxProps = {
   display: "flex",
   flexDirection: "column",
@@ -72,24 +65,25 @@ export const FooterText: SxProps = {
 
 export const StartingPage: SxProps = {
   backgroundColor: "#fffcf3",
+  minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  "@media (max-width: 1000px)": {
-    padding: "100px",
+  "@media (max-width: 600px)": {
+    padding: "30px",
     width: "auto",
-    height: "100vh",
+
   },
 };
 
 export const Items: SxProps = {
-  padding: "30px",
-  maxWidth: "1800px",
+  padding: { xs: "0px", sm: "30px" },
+  maxWidth: { xs: "300px", sm: "700px", md: "1800px" },
   margin: "auto",
 };
 
-export const StartingSection: SxProps = {
+export const Item: SxProps = {
   textAlign: "center",
   marginBottom: "15px",
   background: "linear-gradient(-45deg, #fffcf3, #eae7e2)",
@@ -115,97 +109,42 @@ export const StartingSection: SxProps = {
   },
 };
 
-export const AboutUsMainContainer: SxProps = {
+export const Main: SxProps = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  maxWidth: "1000px",
+  maxWidth: "1100px",
   width: "100%",
-  padding: "50px",
+  padding: {xs:"20px", md:"50px"},
 };
 
-export const AboutUsFirstContainer: SxProps = {
-  fontSize: "100px",
+export const TitleContainer: SxProps = {
   display: "flex",
-  justifyContent: "flex-start",
-  maxWidth: "1000px",
-  width: "100%",
-  ml: "-620px",
-};
-
-export const AboutUsSecondContainer: SxProps = {
-  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   gap: "30px",
 };
-export const AboutUsSecondContainerTitle: SxProps = {
-  fontSize: "150px",
+export const Header: SxProps = {
+  fontSize: {xs:"4rem", md:"6rem"},
+  textAlign: "center",
   fontWeight: "500",
-  lineHeight: "120px",
-  paddingBottom: "50px",
+  paddingBottom: "30px",
+
 };
 
-export const AboutUsContainerFirstImage = {
-  width: "900px",
+export const StartingPageFirstImage = {
+  width: { xs: "250px", md: "1100px" },
   borderRadius: "30px",
 };
 
-export const AboutUsContainerSecondImage = {
-  width: "500px",
+export const StartingPageSecondImage = {
+  width: { xs: "250px", md: "500px" },
   height: "auto",
   borderRadius: "30px",
 };
 export const phillosophyTitle: SxProps = {
   fontWeight: "500",
-  fontSize: "45px",
-  mt: "12px",
-  mb: "13px",
-};
-
-export const foundersContainer: SxProps = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  backgroundColor: "#eae7e2",
-  borderRadius: "50px",
-  width: "80%",
-  textAlign: "center",
-  mt: "100px",
-  mb: "100px",
-};
-export const founderProfilePicture = {
-  display: "flex",
-  width: "20%",
-  borderRadius: "50px",
-};
-export const FoundersTextContainer: SxProps = {
-  backgroundColor: "#fffcf3",
-  width: "100%",
-  height: "30%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  borderRadius: "30px",
-  padding: "30px",
-  paddingLeft: "100px",
-  paddingRight: "100px",
-};
-export const WorldMapImageLeft: SxProps = {
-  width: "260px",
-  height: "100px",
-  backgroundImage: "url(src/assets/chess-world-map.jpg)",
-  backgroundSize: "520px 250px",
-  backgroundPosition: "left",
-  borderRadius: "40px",
-};
-
-export const WorldMapImageRight: SxProps = {
-  width: "260px",
-  height: "100px",
-  backgroundImage: "url(src/assets/chess-world-map.jpg)",
-  backgroundSize: "520px 250px",
-  backgroundPosition: "right",
-  borderRadius: "40px",
+  fontSize: "2.5rem",
 };
 
 export const DownButton: SxProps = {

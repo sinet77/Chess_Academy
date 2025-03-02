@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import * as style from "./AboutUs.style";
 import AboutUsStartingPage from "./AboutUsStartingPage";
 import { useState } from "react";
-import { guidelinesSecondPage } from "./AboutUs.constants";
+import { GUIDELINES_SECONDPAGE } from "./AboutUs.constants";
 
 export default function AboutUs() {
   const [showNewComponent, setShowNewComponent] = useState(false);
@@ -17,18 +17,8 @@ export default function AboutUs() {
   };
 
   return (
-    <>
-      <Box sx={style.Navbar}></Box>
-      <Box
-        sx={{
-          position: "relative",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+    <Box>
+      <Box>
         <AnimatePresence>
           {!showNewComponent && (
             <motion.div
@@ -76,7 +66,7 @@ export default function AboutUs() {
                     to get your changes implemented:
                   </Typography>
 
-                  {guidelinesSecondPage.map((item, index) => (
+                  {GUIDELINES_SECONDPAGE.map((item, index) => (
                     <motion.div
                       key={index}
                       initial={{
@@ -122,6 +112,6 @@ export default function AboutUs() {
           )}
         </AnimatePresence>
       </Box>
-    </>
+    </Box>
   );
 }

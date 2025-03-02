@@ -109,7 +109,7 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     }
   }, [puzzle]);
 
-  function onPieceDrop({sourceSquare, targetSquare, move}: PieceDropArgs): boolean {
+  function onPieceDrop({sourceSquare, targetSquare, move}: PieceDropArgs) {
     const previousFen = game.current.fen();
 
     const moveDescription = move.san;
@@ -117,8 +117,6 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
     if (game.current.move === null) {
       console.error(`Invalid move: ${sourceSquare} to ${targetSquare}`);
       setPosition(previousFen);
-
-      return false;
     }
 
     const sanitizedMove = cleanMove(move.san);
@@ -169,8 +167,6 @@ export default function Puzzles({ puzzle }: { puzzle: Puzzle | null }) {
 
     setPosition(game.current.fen());
     showCorrectTitleWhenSolved();
-
-    return true;
   }
 
   const notify = () =>
