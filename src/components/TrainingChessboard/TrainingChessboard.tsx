@@ -1,21 +1,15 @@
 import { useEffect,useState } from "react";
 import { Chessboard } from "react-chessboard";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import SettingsIcon from "@mui/icons-material/Settings";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import * as style from "./TrainingChessBoard.style";
 import Pgn from "./Pgn";
 import Options from "./Options";
 import Fen from "./Fen";
 import PositionEvaluationBar from "./PositionEvaluationBar/PositionEvaluationBar";
 import { useChessboard } from "../../hooks/useChessboard";
+import { MovesTable } from "../MovesTable/MovesTable";
 
 export default function TrainingChessBoard() {
 
@@ -112,7 +106,7 @@ export default function TrainingChessBoard() {
       <Box sx={style.TrainingPageLayout}>
         <Grid padding={"50px"} container spacing={5}>
           <Grid item xs={12} sm={12} md={12} lg={7} sx={style.firstColumn}>
-            <h4>{evaluationText}</h4>
+            <Typography sx={{fontWeight:"bold"}}>{evaluationText}</Typography>
             <h5>
               Best line: <i>{bestLine.slice(0, 30)}</i> ...
             </h5>
@@ -121,7 +115,7 @@ export default function TrainingChessBoard() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: {xs:"10px",md:"20px"},
+                gap: {xs:"5px",md:"20px"},
               }}
             >
               <PositionEvaluationBar
@@ -165,32 +159,7 @@ export default function TrainingChessBoard() {
                 handleToggleShowEnableMoves={handleToggleShowEnableMoves}
               />
             </Box>
-
-            <h3>Moves history:</h3>
-            <TableContainer sx={style.Table} component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow sx={style.MainRow}>
-                    <TableCell sx={style.moveColumn}>Move</TableCell>
-                    <TableCell sx={style.WhiteAndBlackColumn}>White</TableCell>
-                    <TableCell sx={style.WhiteAndBlackColumn}>Black</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {history.map((move, index) => (
-                    <TableRow key={index}>
-                      <TableCell sx={style.moveColumn}>{index + 1}</TableCell>
-                      <TableCell sx={style.WhiteAndBlackColumn}>
-                        {move.white}
-                      </TableCell>
-                      <TableCell sx={style.WhiteAndBlackColumn}>
-                        {move.black}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <MovesTable history={history} />
           </Grid>
         </Grid>
       </Box>
