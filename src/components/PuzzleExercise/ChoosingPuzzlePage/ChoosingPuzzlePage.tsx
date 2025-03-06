@@ -1,7 +1,7 @@
 import { Box, Typography, Grid, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import * as style from "./ChoosingPuzzlePage.style";
-import dragon from "../../assets/dust.jpg";
+import dust from "../../../assets/dust.jpg";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -52,7 +52,7 @@ export default function ChoosingPuzzlePage() {
                   onClick={() => handleDifficultySelect({ level, min, max })}
                   sx={{
                     ...style.Button,
-                    backgroundImage: `url(${dragon})`,
+                    backgroundImage: `url(${dust})`,
                     backgroundPosition: BACKGROUND_POSITIONS[index],
                   }}
                   >

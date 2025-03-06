@@ -27,7 +27,7 @@ import { RanksAndBadges } from "./components/RanksAndBadges/RanksAndBadges.tsx";
 import PlayVsComputer from "./components/PlayerVsComputer/MainGameplay/GameLogic/PlayerVsComputer.tsx";
 import ChooseComputerLevel from "./components/PlayerVsComputer/ChooseComputerLevel/ChooseComputerLevel.tsx";
 import PuzzlesExercise from "./components/PuzzleExercise/PuzzleExercise.tsx";
-import ChoosingPuzzlePage from "./components/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
+import ChoosingPuzzlePage from "./components/PuzzleExercise/ChoosingPuzzlePage/ChoosingPuzzlePage.tsx";
 import VisionTraining from "./components/Orientation training/VisionTraining.tsx";
 import DailyPuzzle from "./components/Puzzles/DailyPuzzle/AfterClick/DailyPuzzle.tsx";
 import PawnsGame from "./components/PawnsGame/PawnsGame.tsx";

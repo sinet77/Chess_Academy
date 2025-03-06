@@ -29,7 +29,6 @@ export const BoardAndButtons: SxProps = {
 export const Button: SxProps = {
   color: "white",
   backgroundColor: "#000000",
-  fontFamily: "Playfair Display",
   fontSize: "1rem",
   fontWeight: "500",
   lineHeight: "23px",
@@ -79,7 +78,6 @@ export const Title: SxProps = {
 };
 
 export const TitleName: SxProps = {
-  fontFamily: "Playfair Display",
   fontSize: "1.5rem",
   fontWeight: "500",
   lineHeight: "23px",
@@ -92,7 +90,6 @@ export const DescriptionContainer: SxProps = {
 };
 
 export const Description: SxProps = {
-  fontFamily: "Roboto",
   fontSize: { sx: "1rem", md: "1.5rem" },
   fontWeight: "500",
   display: "flex",

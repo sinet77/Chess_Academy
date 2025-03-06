@@ -38,6 +38,7 @@ type ReturnsType = {
   clearBoard: () => void;
   toggleBoardOrientation: () => void;
   setBoardOrientation: (value: "white" | "black") => void;
+  boardOrientation: "white" | "black";
   setHighlightedSquares: (squares: SquareStyles) => void;
   setRightClickedSquares: (squares: SquareStyles) => void;
   toggleAutoPromoteToQueen: () => void;
@@ -251,6 +252,7 @@ export const useChessboard = ({
     handleToggleShowEnableMoves,
     setPosition,
     setBoardOrientation,
+    boardOrientation,
     setHighlightedSquares,
     setRightClickedSquares,
   };

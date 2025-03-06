@@ -25,7 +25,6 @@ export const Button: SxProps = {
   color: "white",
   mt: "30px",
   backgroundColor: "#000000",
-  fontFamily: "Playfair Display",
   fontSize: "16px",
   fontWeight: "500",
   lineHeight: "23px",
@@ -38,9 +37,7 @@ export const Button: SxProps = {
 
 export const ColorOnMove: SxProps = {
   display: "flex",
-  fontFamily: "Roboto",
   fontSize: "25px",
-  fontStyle: "italic",
   fontWeight: "500",
   lineHeight: "34px",
   padding: "5px",

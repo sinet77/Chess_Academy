@@ -47,25 +47,27 @@ export const Paragraph: SxProps = {
 export const Button: SxProps = {
   width: "40%",
   backgroundColor: "orange",
-  border: "2px solid #0D0D0D",
+  border: "1px solid #0D0D0D",
   color: "#0D0D0D",
+  boxShadow:"none",
+  transition: "all 0.3s ease-in-out",
   "&:hover": {
-    backgroundColor: "#ff6700",
+    backgroundColor: "orange",
     color: "#0D0D0D",
+    boxShadow:"none",
     transform: "scale(1.1)",
-    transition: "all 0.3s ease-in-out",
   },
 };
 
 export const TextField: SxProps = {
   "& .MuiOutlinedInput-root": {
     backgroundColor: "#FBFBFB",
-    "& > fieldset": { borderColor: "#0D0D0D" },
+    "& > fieldset": { borderColor: "#838383" },
   },
   "& .MuiOutlinedInput-root.Mui-focused": {
-    "& > fieldset": { borderColor: "#0D0D0D" },
+    "& > fieldset": { borderColor: "#838383" },
   },
-  "& .MuiInputLabel-root.Mui-focused": { color: "#0D0D0D" },
+  "& .MuiInputLabel-root.Mui-focused": { color: "#838383" },
 };
 
 export const Alert: SxProps = {
@@ -92,8 +94,7 @@ export const GetInTouchContainer: SxProps = {
 
 export const GetInTouch: SxProps = {
   color: "#FFFFFF",
-  fontFamily: "Playfair Display",
-  fontSize: "50px",
+  fontSize: "52px",
   fontWeight: "600",
   lineHeight: "70px",
   mb: "50px",

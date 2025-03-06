@@ -14,7 +14,6 @@ export const HeadTitle: SxProps = {
   fontWeight: "bold",
   fontSize: "2rem",
   textTransform: "none",
-  fontFamily: "Playful Display",
   background: "linear-gradient(180deg, black, #fa6602)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
@@ -34,7 +33,6 @@ export const Button: SxProps = {
   fontWeight: "bold",
   fontSize: "2rem",
   textTransform: "none",
-  fontFamily: "Playful Display",
   boxShadow: 1,
   overflow: "hidden",
   "&:hover": {

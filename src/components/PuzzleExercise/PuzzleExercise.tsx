@@ -168,8 +168,6 @@ export default function PuzzlesExercise() {
     } else {
       undoMove()
       setPosition(previousFen);
-      console.log(previousFen);
-
       setIsPlayerTurn(true);
     }
 

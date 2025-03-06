@@ -1,6 +1,8 @@
 import { SxProps } from "@mui/material";
 
 export const badgesContainer: SxProps = {
+  display:"grid",
+  gridTemplateColumns: "repeat(3,1fr)",
   backgroundColor: "#302e2b",
   padding: "30px",
   paddingTop: 0,

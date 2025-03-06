@@ -58,24 +58,21 @@ const Articles: React.FC = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <Box sx={style.Circular}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
     <motion.div
       initial={{ x: "100%", opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.7 }}
     >
-      <Box sx={style.ArticlesBox}>
-        <Typography sx={style.HeadTitle}>Chess World News</Typography>
+      <Box>
+      {loading && (
+          <Box sx={style.LoadingContainer}>
+            <CircularProgress />
+          </Box>
+        )}
         {articles.length > 0 && (
           <Box sx={style.ArticlesBox}>
+            <Typography sx={style.HeadTitle}>Chess World News</Typography>
             <Box sx={style.Title}>{articles[currentIndex].title}</Box>
             <Box sx={style.PubDate}>{articles[currentIndex].pubDate}</Box>
             <Box sx={style.ButtonContainer}>
