@@ -20,7 +20,7 @@ export const WhiteTile: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   gap: "21px",
-  padding: { xs:"50px", md: "100px" },
+  padding: "60px 20px",
 };
 
 export const Image: SxProps = {

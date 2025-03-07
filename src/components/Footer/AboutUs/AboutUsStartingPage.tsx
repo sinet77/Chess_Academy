@@ -20,7 +20,7 @@ export default function AboutUsStartingPage({
         </Box>
         <Grid gap={5} container>
           <Box>
-            <Typography sx={{ textAlign: "justify", fontSize: "1.3rem" }}>
+            <Typography sx={{ textAlign: "justify", fontSize: "1.2rem" }}>
               I am currently the sole developer working on improving the Chess
               Academy website. As an active player and certified instructor, I
               created this platform to offer a space where I can control the
@@ -60,7 +60,7 @@ export default function AboutUsStartingPage({
               <Typography sx={style.phillosophyTitle}>
                 Our Phillosophy
               </Typography>
-              <Typography sx={{ textAlign: "justify", fontSize: "1.3rem" }}>
+              <Typography sx={{ textAlign: "justify", fontSize: "1.2rem" }}>
                 Chess Academy is designed for everyone, regardless of age or
                 skill level. Whether you're looking to play games or solve
                 puzzles, we provide various levels of difficulty to suit all

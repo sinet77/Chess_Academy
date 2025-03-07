@@ -7,7 +7,7 @@ export const Main: SxProps = {
   justifyContent: "center",
   backgroundColor: "#0D0D0D",
   boxShadow: "10px 10px 30px rgba(0, 0, 0, 0.5)",
-  padding: {xs:"5px",md:"50px"},
+  padding: {xs:"5px",md:"20px"},
   textAlign: "center",
 };
 

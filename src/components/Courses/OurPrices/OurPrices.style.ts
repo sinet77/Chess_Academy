@@ -2,7 +2,7 @@ import { SxProps } from "@mui/material";
 
 export const Main: SxProps = {
   backgroundColor: "white",
-  padding: "80px",
+  padding: "60px 20px",
   
 };
 
@@ -129,6 +129,6 @@ export const List: SxProps = {
 };
 
 export const Point: SxProps = {
-  textAlign: "justify",
+  textAlign: "left",
   marginBottom: "20px",
 };

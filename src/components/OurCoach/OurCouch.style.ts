@@ -50,7 +50,7 @@ export const DescriptionHeader: SxProps = {
 };
 
 export const WhiteTile: SxProps = {
-  padding: { xs:"50px", md: "100px" },
+  padding: { xs:"60px 20px", md: "100px" },
   display: "grid",
   gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
   columnGap: "30px",
@@ -120,15 +120,6 @@ export const GreyTile: SxProps = {
   padding: "80px",
   gap: "30px",
 };
-
-// export const BlackTile: SxProps = {
-//   padding: "40px 40px 60px 40px",
-//   display: "flex",
-//   justifyContent: "center",
-//   alignItems: "center",
-//   gap: "100px",
-//   backgroundColor: "#0D0D0D",
-// };
 
 export const BlackTile: SxProps = {
   padding: "40px 40px 60px 40px",

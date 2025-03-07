@@ -125,7 +125,7 @@ export const TitleContainer: SxProps = {
   gap: "30px",
 };
 export const Header: SxProps = {
-  fontSize: {xs:"4rem", md:"6rem"},
+  fontSize: {xs:"3rem", md:"5rem"},
   textAlign: "center",
   fontWeight: "500",
   paddingBottom: "30px",
