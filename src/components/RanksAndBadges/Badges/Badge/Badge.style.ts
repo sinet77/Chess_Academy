@@ -6,8 +6,8 @@ export const badgeContainer: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   border: "3px solid white",
-  width: "150px",
-  height: "150px",
+  width: {xs:"130px",sm:"150px"},
+  height: {xs:"130px",sm:"150px"},
   borderRadius: "50%",
   backgroundColor: "#eed9c4",
   padding: "15px"
@@ -15,7 +15,8 @@ export const badgeContainer: SxProps = {
 
 export const title: SxProps = {
   fontWeight: "500",
-  mt: "10px"
+  mt: "10px",
+  textAlign: "center",
 };
 
 export const imgStyle = {

@@ -31,7 +31,7 @@ export const secondColumn: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: { xs: "330px", sm: "400px", md: "600px" },
+  width: { xs: "330px", sm: "500px", md: "650px" },
   height: "auto",
   border: "1px solid black",
 };

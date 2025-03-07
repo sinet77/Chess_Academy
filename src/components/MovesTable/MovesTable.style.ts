@@ -2,6 +2,7 @@ import { SxProps } from "@mui/material";
 
 export const Table: SxProps = {
   width: "80%",
+  maxWidth:"800px",
   maxHeight: "540px",
   overflowY: "auto",
   borderRadius: "8px",

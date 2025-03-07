@@ -1,11 +1,10 @@
 import { SxProps } from "@mui/material";
 
 export const badgesContainer: SxProps = {
-  display:"grid",
-  gridTemplateColumns: "repeat(3,1fr)",
+  display: "flex",
+  flexDirection: "column", 
   backgroundColor: "#302e2b",
-  padding: "30px",
-  paddingTop: 0,
+  padding: {xs:"20px",sm:"40px"},
 };
 
 export const categoryTitle: SxProps = {
@@ -18,4 +17,6 @@ export const badgesWrapper: SxProps = {
   display: "flex",
   flexWrap: "wrap",
   gap: 2,
+  justifyContent: "start", 
+  alignItems: "flex-start", 
 };

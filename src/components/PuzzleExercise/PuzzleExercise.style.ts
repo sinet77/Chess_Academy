@@ -7,10 +7,11 @@ export const Main: SxProps = {
   alignItems: "center",
 };
 export const Chessboard: SxProps = {
-  width: { xs: "300px", sm: "400px", md: "600px" },
+  width: { xs: "330px", sm: "500px", md: "650px" },
   height: "auto",
+  border:"1px solid black",
   ml: 2,
-  p: 2,
+  mt:2
 };
 
 export const ImgContainer: SxProps = {

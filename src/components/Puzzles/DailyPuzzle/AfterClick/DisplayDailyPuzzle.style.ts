@@ -1,25 +1,19 @@
 import { SxProps } from "@mui/material";
 
 export const Chessboard: SxProps = {
-  width: {
-    xs: "80%",
-    sm: "70%",
-    md: "80%",
-    lg: "60%",
-  },
+  width: { xs: "330px", sm: "550px", md:"600px",lg: "800px" },
   height: "auto",
   border: "1px solid black",
 };
 
 export const ColorOnMove: SxProps = {
   display: "flex",
-  fontFamily: "Roboto",
-  fontSize: "25px",
-  fontStyle: "italic",
+  fontSize: {xs:"20px",md:"25px"},
   fontWeight: "500",
   lineHeight: "34px",
   padding: "5px",
   color: "white",
+  marginBottom: {xs:"-30px",md:"0px"},
 };
 
 export const BoardAndButtons: SxProps = {
@@ -35,7 +29,6 @@ export const BoardAndButtons: SxProps = {
 export const Button: SxProps = {
   color: "white",
   backgroundColor: "#000000",
-  fontFamily: "Playfair Display",
   fontSize: "16px",
   fontWeight: "500",
   lineHeight: "23px",
@@ -85,7 +78,6 @@ export const Title: SxProps = {
 };
 
 export const TitleName: SxProps = {
-  fontFamily: "Playfair Display",
   fontSize: "24px",
   fontWeight: "500",
   lineHeight: "23px",

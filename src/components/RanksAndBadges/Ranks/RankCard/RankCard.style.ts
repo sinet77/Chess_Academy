@@ -2,27 +2,31 @@ import { SxProps } from "@mui/material";
 
 export const rankCardContainer: SxProps = {
   width: "100%",
+  maxWidth: "500px",
+  minWidth: "170px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  border: "2px solid #0D0D0D",
   borderRadius: "15px",
   padding: "40px",
   paddingTop: "10px",
   boxShadow: "0 3px 10px rgb(0 0 0 / 0.5)",
-  backgroundColor: "white"
+  backgroundColor: "white",
+  aspectRatio: "2/1",
+  
 };
 export const iconWithTitle: SxProps = {
-  width: "100%",
+  width: "auto",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
   borderRadius: "15px",
-  padding: "30px",
+  padding: "40px",
   backgroundColor: "#282424",
-  mb: "15px"
+  mb: "15px",
+  aspectRatio: "1/1",
 }
 
 export const iconImg = {

@@ -18,7 +18,7 @@ import { web_logo } from "../../assets/FooterNavbarImages.ts";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { routes } from "../../routes.js";
 import { useAuth } from "../../context/authContext/index.js";
-import { Link, useMediaQuery } from "@mui/material";
+import { Divider, Link, useMediaQuery } from "@mui/material";
 
 const pages = [
   { name: "Home", path: routes.home },
@@ -32,6 +32,14 @@ const settings = [
   { name: "Profile", path: routes.userProfile },
   { name: "Logout", path: null },
 ];
+
+const gameModes = [  
+  { name: "Training", path: routes.training },
+  { name: "Play vs computer", path: routes.chooseComputerLevel },
+  { name: "Daily puzzle", path: routes.dailyPuzzle },
+  { name: "Puzzles", path: routes.chooseDifficulty },
+  { name: "Pawns game", path: routes.chooseStartingPosition },
+  { name: "Vision", path: routes.vision }]
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -102,7 +110,7 @@ function Navbar() {
           )}
 
         <Box>
-          <Tooltip title="Open settings">
+          <Tooltip title="Open settings" sx={{padding:0}}>
             <IconButton onClick={handleOpenUserMenu}>
               <Avatar alt="Profile" src="/static/images/avatar/2.jpg" />
             </IconButton>
@@ -151,19 +159,48 @@ function Navbar() {
       </Toolbar>
     </AppBar>
     <Drawer anchor="left" open={mobileOpen} onClose={() => setMobileOpen(false)}>
-        <List sx={{ width: 250 }}>
-          {pages.map((page) => (
-            <ListItem
-              key={page.name}
-              onClick={() => setMobileOpen(false)}
-              component={RouterLink}
-              to={page.path}
-            >
-              <ListItemText primary={page.name} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+  <Box sx={{ position: "relative", width: 250, height: "100%", backgroundColor:"#0d0d0d" }}>
+    <IconButton
+      color="inherit"
+      edge="start"
+      onClick={() => setMobileOpen(false)}
+      sx={{
+        position: "absolute",
+        top: 36,
+        left: 16,
+        color:"white"
+      }}
+    >
+      <MenuIcon />
+    </IconButton>
+    <List sx={{ mt: 9 }}>
+      {pages.map((page) => (
+        <ListItem
+          key={page.name}
+          onClick={() => setMobileOpen(false)}
+          component={RouterLink}
+          to={page.path}
+          sx={{color:"white"}}
+        >
+          <ListItemText primary={page.name} />
+        </ListItem>
+      ))}
+      <Divider sx={{border:"1px solid white",mx:2}}/>
+      {gameModes.map((mode) => (
+        <ListItem
+          key={mode.name}
+          onClick={() => setMobileOpen(false)}
+          component={RouterLink}
+          to={mode.path}
+          sx={{color:"white"}}
+        >
+          <ListItemText primary={mode.name} />
+        </ListItem>
+      ))}
+    </List>
+  </Box>
+</Drawer>
+
     </>
   );
 }

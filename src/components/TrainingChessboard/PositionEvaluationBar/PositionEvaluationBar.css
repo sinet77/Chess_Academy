@@ -14,10 +14,15 @@
     width: 30px;
   }
 }
-
-@media (min-width: 960px) {
+@media (min-width:600px) and (max-width: 900px) {
   .evaluation-bar {
-    height: 600px;
+    height: 500px;
+    width: 40px;
+  }
+}
+@media (min-width: 900px) {
+  .evaluation-bar {
+    height: 650px;
     width: 60px;
   }
 }
