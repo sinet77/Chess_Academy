@@ -5,10 +5,9 @@ export const Container: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  padding: "3rem",
+  padding: "2rem",
   maxWidth: "800px",
   margin: "auto",
-  textAlign: "justify",
   backgroundColor: "#eae7e2",
   borderRadius: "8px",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -17,12 +16,13 @@ export const Container: SxProps = {
 
 export const Background: SxProps = {
   backgroundColor: "#fffcf3",
-  padding: "50px",
+  padding: {xs:"20px",sm:"50px"},
 };
 
 export const Title: SxProps = {
   fontWeight: "bold",
   color: "#0D0D0D",
+  marginTop:"50px"
 };
 
 export const SubTitle: SxProps = {

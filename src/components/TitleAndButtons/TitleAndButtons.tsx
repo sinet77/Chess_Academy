@@ -43,10 +43,24 @@ export default function TitleAndButtons() {
           <Box>
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "repeat(2, 1fr)",
+                  md: "repeat(3, 1fr)",
+                },
+                gridTemplateAreas: {
+                  xs: `"training computer"
+                       "pawns vision"
+                       "puzzle puzzle"`,
+                  sm: `"training computer"
+                       "pawns vision"
+                      "puzzle puzzle"`,
+                  md: `"training computer pawns"
+                       "vision puzzle puzzle"`,
+                },
                 gap: "40px",
-                flexWrap: "wrap",
+                justifyItems: "center",
+                alignItems: "center",
               }}
             >
               <Link
@@ -54,7 +68,9 @@ export default function TitleAndButtons() {
                 component={RouterLink}
                 underline="none"
               >
-                <Box sx={style.ImageButtonContainer}>
+                <Box
+                  sx={{ gridArea: "training", ...style.ImageButtonContainer }}
+                >
                   <img
                     src={training}
                     alt="Chessboard with a man playing"
@@ -65,12 +81,15 @@ export default function TitleAndButtons() {
                   </Typography>
                 </Box>
               </Link>
+
               <Link
                 to={routes.chooseComputerLevel}
                 component={RouterLink}
                 underline="none"
               >
-                <Box sx={style.ImageButtonContainer}>
+                <Box
+                  sx={{ gridArea: "computer", ...style.ImageButtonContainer }}
+                >
                   <img
                     src={computer}
                     alt="Scared robot"
@@ -81,37 +100,13 @@ export default function TitleAndButtons() {
                   </Typography>
                 </Box>
               </Link>
-              <Link
-                to={routes.chooseDifficulty}
-                component={RouterLink}
-                underline="none"
-              >
-                <Box sx={style.ImageButtonContainer}>
-                  <img
-                    src={puzzle}
-                    alt="Chess Puzzle"
-                    style={style.ButtonImage}
-                  />
-                  <Typography sx={style.TitleUnderButtonImage}>
-                    Puzzles
-                  </Typography>
-                </Box>
-              </Link>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                gap: "40px",
-                marginTop: "40px",
-              }}
-            >
+
               <Link
                 to={routes.chooseStartingPosition}
                 component={RouterLink}
                 underline="none"
               >
-                <Box sx={style.ImageButtonContainer}>
+                <Box sx={{ gridArea: "pawns", ...style.ImageButtonContainer }}>
                   <img
                     src={pawns}
                     alt="Game with pawns only"
@@ -122,8 +117,9 @@ export default function TitleAndButtons() {
                   </Typography>
                 </Box>
               </Link>
+
               <Link to={routes.vision} component={RouterLink} underline="none">
-                <Box sx={style.ImageButtonContainer}>
+                <Box sx={{ gridArea: "vision", ...style.ImageButtonContainer }}>
                   <img
                     src={vision}
                     alt="Vision game"
@@ -131,6 +127,23 @@ export default function TitleAndButtons() {
                   />
                   <Typography sx={style.TitleUnderButtonImage}>
                     Vision
+                  </Typography>
+                </Box>
+              </Link>
+
+              <Link
+                to={routes.chooseDifficulty}
+                component={RouterLink}
+                underline="none"
+              >
+                <Box sx={{ gridArea: "puzzle", ...style.ImageButtonContainer }}>
+                  <img
+                    src={puzzle}
+                    alt="Chess Puzzle"
+                    style={style.ButtonImage}
+                  />
+                  <Typography sx={style.TitleUnderButtonImage}>
+                    Puzzles
                   </Typography>
                 </Box>
               </Link>
