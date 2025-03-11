@@ -38,7 +38,7 @@ export default function ChoosingPuzzlePage() {
   return (
   <Box>
     <Box sx={style.Main}>
-      <Typography sx={style.HeadTitle} variant="h5">
+      <Typography sx={style.HeadTitle} variant="h1">
         Choose difficulty level:
       </Typography>
       <motion.div initial="hidden" animate="visible" variants={style.container}>

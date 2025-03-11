@@ -5,7 +5,7 @@ export const Main: SxProps = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: "20px",
+  padding: "20px 0px",
   width: "100%",
 };
 
