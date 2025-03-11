@@ -10,7 +10,7 @@ export const TrainingPageLayout: SxProps = {
 };
 
 export const OptionsTile: SxProps = {
-  height:{xs:"300px", md:"500px"},
+  height:{xs:"200px", md:"400px"},
   minHeight: {xs:"200px", md:"320px"},
   display: "flex",
   flexDirection: "column",
@@ -39,7 +39,7 @@ export const secondColumn: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: { xs: "330px", sm: "500px", md: "650px" },
+  width: { xs: "350px", sm: "500px", md: "650px" },
   height: "auto",
   border: "1px solid black",
 };

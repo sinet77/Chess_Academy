@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
 
 export const HeadImage: SxProps = {
-  height: "500px",
+  height: {xs:"400px",md:"500px"},
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -12,7 +12,6 @@ export const HeadImage: SxProps = {
 };
 
 export const Title: SxProps = {
-  fontFamily: "Playfair Display",
   fontSize: { xs: "24px", sm: "36px", md: "50px" },
   fontWeight: "700",
   color: "white",

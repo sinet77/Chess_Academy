@@ -11,7 +11,7 @@ export const rankCardContainer: SxProps = {
   borderRadius: "15px",
   padding: "40px",
   paddingTop: "10px",
-  boxShadow: "0 3px 10px rgb(0 0 0 / 0.5)",
+  boxShadow: "0 1px 10px rgb(0 0 0 / 0.2)",
   backgroundColor: "white",
   aspectRatio: "2/1",
   

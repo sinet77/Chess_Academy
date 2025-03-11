@@ -9,21 +9,21 @@ import {
   Divider,
   Link,
 } from "@mui/material";
-import { Google as GoogleIcon } from "@mui/icons-material"; 
+import { Google as GoogleIcon } from "@mui/icons-material";
 import web_logo from "../../assets/web_logo.png";
 import { useAuth } from "../../context/authContext";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes";
 
 export default function LoginForm() {
-  
   const {
     userLoggedIn,
     handleSignInWithEmailAndPassword,
     handleSignInWithGoogle,
   } = useAuth();
 
-  const initialValues = { login: "Demo", password: "Demo123" };
+  const initialValues = { login: "", password: "" };
+  const demoValues = { login: "Demo", password: "Demo123" };
 
   const onSubmit = async (
     values: typeof initialValues,
@@ -40,6 +40,17 @@ export default function LoginForm() {
   const onGoogleSignIn = async () => {
     try {
       await handleSignInWithGoogle();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const demoLogin = async () => {
+    try {
+      await handleSignInWithEmailAndPassword(
+        demoValues.login,
+        demoValues.password
+      );
     } catch (error) {
       console.log(error);
     }
@@ -89,9 +100,16 @@ export default function LoginForm() {
                 error={touched.password && Boolean(errors.password)}
                 helperText={touched.password && errors.password}
               />
-
-              <Button type="submit" variant="contained" sx={style.Button} disabled={isSubmitting}>
-              {isSubmitting ? "Loading..." : "Login"}
+              <Button variant="outlined" sx={style.Button} onClick={demoLogin}>
+                Demo Login
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={style.Button}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Loading..." : "Login"}
               </Button>
             </Box>
           </Form>
@@ -100,7 +118,9 @@ export default function LoginForm() {
 
       <Typography sx={style.Centered}>
         Don’t have an account?{" "}
-        <Link component={RouterLink} to={routes.register}>Sign up!</Link>
+        <Link component={RouterLink} to={routes.register}>
+          Sign up!
+        </Link>
       </Typography>
     </Box>
   );

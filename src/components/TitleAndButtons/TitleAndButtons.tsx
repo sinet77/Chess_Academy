@@ -31,46 +31,15 @@ export default function TitleAndButtons() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr", md: "repeat(2, 1fr)" },
-            gap: "50px",
-            justifyItems: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box sx={style.Main}>
           <Box>
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: {
-                  xs: "repeat(2, 1fr)",
-                  md: "repeat(3, 1fr)",
-                },
-                gridTemplateAreas: {
-                  xs: `"training computer"
-                       "pawns vision"
-                       "puzzle puzzle"`,
-                  sm: `"training computer"
-                       "pawns vision"
-                      "puzzle puzzle"`,
-                  md: `"training computer pawns"
-                       "vision puzzle puzzle"`,
-                },
-                gap: "40px",
-                justifyItems: "center",
-                alignItems: "center",
-              }}
-            >
+            <Box sx={style.GameModeButtons}>
               <Link
                 to={routes.training}
                 component={RouterLink}
                 underline="none"
               >
-                <Box
-                  sx={{ gridArea: "training", ...style.ImageButtonContainer }}
-                >
+                <Box sx={style.ImageButtonContainer}>
                   <img
                     src={training}
                     alt="Chessboard with a man playing"
@@ -87,9 +56,7 @@ export default function TitleAndButtons() {
                 component={RouterLink}
                 underline="none"
               >
-                <Box
-                  sx={{ gridArea: "computer", ...style.ImageButtonContainer }}
-                >
+                <Box sx={style.ImageButtonContainer}>
                   <img
                     src={computer}
                     alt="Scared robot"
@@ -106,7 +73,7 @@ export default function TitleAndButtons() {
                 component={RouterLink}
                 underline="none"
               >
-                <Box sx={{ gridArea: "pawns", ...style.ImageButtonContainer }}>
+                <Box sx={style.ImageButtonContainer}>
                   <img
                     src={pawns}
                     alt="Game with pawns only"
@@ -119,7 +86,7 @@ export default function TitleAndButtons() {
               </Link>
 
               <Link to={routes.vision} component={RouterLink} underline="none">
-                <Box sx={{ gridArea: "vision", ...style.ImageButtonContainer }}>
+                <Box sx={style.ImageButtonContainer}>
                   <img
                     src={vision}
                     alt="Vision game"
@@ -136,7 +103,7 @@ export default function TitleAndButtons() {
                 component={RouterLink}
                 underline="none"
               >
-                <Box sx={{ gridArea: "puzzle", ...style.ImageButtonContainer }}>
+                <Box sx={style.ImageButtonContainer}>
                   <img
                     src={puzzle}
                     alt="Chess Puzzle"

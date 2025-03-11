@@ -1,8 +1,16 @@
 import { SxProps } from "@mui/material";
 
 export const Wrapper: SxProps = {
-  padding: { xs: "50px", md: "100px" },
+  padding: { xs: "40px 12px", md: "100px" },
   backgroundColor: "#0D0D0D",
+};
+
+export const Main: SxProps = {
+  display: "grid",
+  gridTemplateColumns: { xs: "1fr", sm: "1fr", md: "repeat(2, 1fr)" },
+  gap: "50px",
+  justifyItems: "center",
+  alignItems: "center",
 };
 
 export const TileContainer: SxProps = {
@@ -28,6 +36,14 @@ export const TitleText: SxProps = {
   fontSize: { xs: "30px", sm: "40px", md: "50px" },
   fontWeight: "700",
   textAlign: "center",
+};
+
+export const GameModeButtons: SxProps = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  gap: "40px",
+  maxWidth: "700px",
 };
 
 export const ImageButtonContainer: SxProps = {

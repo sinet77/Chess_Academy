@@ -15,18 +15,18 @@ export const BackButton: SxProps = {
   top: "150px",
   color: "white",
   backgroundColor: "#000000",
-  fontFamily: "Playfair Display",
   border: "1px solid white",
   fontSize: "16px",
   fontWeight: "bold",
   height: "50px",
   textTransform: "none",
   padding: "10px 30px",
+  transition: "all 0.3s ease-in-out",
   "&:hover": {
     backgroundColor: "orange",
     color: "black",
     fontWeight: "bold",
-    border: "2px solid black",
+    border: "1px solid black",
   },
 };
 
@@ -38,7 +38,6 @@ export const OptionsButton: SxProps = {
   alignContent: "center",
   gap: "10px",
   textTransform: "none",
-  fontFamily: "Playfair Display",
   color: "white",
   fontSize: "22px",
   fontWeight: "bold",

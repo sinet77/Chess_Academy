@@ -10,7 +10,7 @@ export const Main: SxProps = {
 };
 
 export const Chessboard: SxProps = {
-  width: { xs: "300px", sm: "500px", md: "600px", lg:"700px" },
+  width: { xs: "350px", sm: "500px", md: "600px", lg:"700px" },
   maxWidth: "800px",
   height: "auto",
   border: "1px solid black",
@@ -24,6 +24,7 @@ export const TimerAndPoints: SxProps = {
   justifyContent: "center",
   padding: "10px",
   gap: "15px",
+  marginBottom:"-20px"
 };
 
 export const Points: SxProps = {
@@ -76,8 +77,8 @@ export const Button = (theme: Theme) => ({
   },
    
   [theme.breakpoints.down("sm")]: {
-    padding: "5px",
-    fontSize: "10px" 
+    padding: "10px 20px",
+    fontSize: "12px" 
   },
 });
 

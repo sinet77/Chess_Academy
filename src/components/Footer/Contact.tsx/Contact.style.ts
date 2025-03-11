@@ -7,7 +7,7 @@ export const Main: SxProps = {
   justifyContent: "center",
   backgroundColor: "#0D0D0D",
   boxShadow: "10px 10px 30px rgba(0, 0, 0, 0.5)",
-  padding: {xs:"5px",md:"20px"},
+  padding: { xs: "5px", md: "20px" },
   textAlign: "center",
 };
 
@@ -15,17 +15,17 @@ export const Form: SxProps = {
   borderRadius: "10px",
   display: "flex",
   backgroundColor: "white",
-  border: "2px solid #0D0D0D",
+  border: "1px solid #0D0D0D",
   flexDirection: "column",
   gap: 2,
   padding: "50px",
-  width: {md:"50%"},
+  width: { md: "50%" },
   margin: "0 auto",
 };
 
 export const FormAndTitle: SxProps = {
   height: "auto",
-  padding: {xs:"5px",md:"40px"},
+  padding: { xs: "5px", md: "40px" },
   backgroundColor: "grey",
   borderRadius: "10px 0 0 10px",
 };
@@ -49,12 +49,12 @@ export const Button: SxProps = {
   backgroundColor: "orange",
   border: "1px solid #0D0D0D",
   color: "#0D0D0D",
-  boxShadow:"none",
+  boxShadow: "none",
   transition: "all 0.3s ease-in-out",
   "&:hover": {
     backgroundColor: "orange",
     color: "#0D0D0D",
-    boxShadow:"none",
+    boxShadow: "none",
     transform: "scale(1.1)",
   },
 };
@@ -89,7 +89,7 @@ export const GetInTouchContainer: SxProps = {
   textAlign: "left",
   position: "relative",
   borderRadius: "0 10px 10px 0",
-  width:"100%",
+  width: "100%",
 };
 
 export const GetInTouch: SxProps = {
@@ -113,7 +113,6 @@ export const Icon: SxProps = {
   width: "25px",
 };
 export const PointTitle: SxProps = {
-  fontFamily: "Playfair Display",
   fontSize: "20px",
   fontWeight: "500",
   lineHeight: "23px",

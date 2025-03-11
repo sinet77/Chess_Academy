@@ -7,8 +7,9 @@ export const Main: SxProps = {
   minHeight: "100vh",
   justifyContent: "center",
   alignItems: "center",
-  backgroundImage: `url("${img}")`,
+  backgroundImage: {sm:`url("${img}")`},
   backgroundSize: "100% 100%",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
+  backgroundColor:{xs:"#F5E3D0",sm:"none"}
 };

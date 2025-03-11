@@ -55,22 +55,21 @@ export default function VisionTraining() {
 
   useEffect(() => {
     const fetchBestScore = async () => {
-      if (!currentUser) return
-        const bestScoreDocRef = doc(
-          db,
-          "Users",
-          currentUser.uid,
-          "vision",
-          "visionDocId"
-        );
-        const bestScoreDocSnapshot = await getDoc(bestScoreDocRef);
+      if (!currentUser) return;
+      const bestScoreDocRef = doc(
+        db,
+        "Users",
+        currentUser.uid,
+        "vision",
+        "visionDocId"
+      );
+      const bestScoreDocSnapshot = await getDoc(bestScoreDocRef);
 
-        if (bestScoreDocSnapshot.exists()) {
-          setBestScore(bestScoreDocSnapshot.data().Best_Score);
-        } else {
-          await setDoc(bestScoreDocRef, { Best_Score: 0 });
-        }
-      
+      if (bestScoreDocSnapshot.exists()) {
+        setBestScore(bestScoreDocSnapshot.data().Best_Score);
+      } else {
+        await setDoc(bestScoreDocRef, { Best_Score: 0 });
+      }
     };
 
     fetchBestScore();
@@ -113,19 +112,18 @@ export default function VisionTraining() {
   };
 
   const handleSquareClick = (square: string) => {
-    if (!isTimerActive) return
-      const isCorrect = square === randomSquare;
-      setAttempts((prevAttempts) => [
-        ...prevAttempts,
-        { isValid: isCorrect, targetSquare: randomSquare },
-      ]);
+    if (!isTimerActive) return;
+    const isCorrect = square === randomSquare;
+    setAttempts((prevAttempts) => [
+      ...prevAttempts,
+      { isValid: isCorrect, targetSquare: randomSquare },
+    ]);
 
-      if (isCorrect) {
-        setCounter((prevCounter) => prevCounter + 1);
-      }
+    if (isCorrect) {
+      setCounter((prevCounter) => prevCounter + 1);
+    }
 
-      generateRandomSquare();
-    
+    generateRandomSquare();
   };
 
   const handleBoardOrientation = () => {
@@ -144,7 +142,9 @@ export default function VisionTraining() {
       <Grid container sx={style.Main}>
         <Grid item xs={12} md={9} sx={style.BoardAndButtons}>
           <Box sx={style.TimerAndPoints}>
-            <Typography sx={style.Points}>Points scored: {counter}</Typography>
+            <Typography variant="h1" sx={style.Points}>
+              Points scored: {counter}
+            </Typography>
             <Timer isTurnedOn={isTimerActive} onTimerEnd={handleTimerEnd} />
           </Box>
           {isTimerActive && randomSquare && (
@@ -158,8 +158,14 @@ export default function VisionTraining() {
               onSquareClick={handleSquareClick}
               showBoardNotation={checked}
               customNotationStyle={{ fontSize: "18px" }}
-              customLightSquareStyle={{ backgroundColor: currentUser?.chessboard?.lightSquare ?? "#e0e0e0" }}
-              customDarkSquareStyle={{ backgroundColor: currentUser?.chessboard?.darkSquare ?? "#607d8b" }}
+              customLightSquareStyle={{
+                backgroundColor:
+                  currentUser?.chessboard?.lightSquare ?? "#e0e0e0",
+              }}
+              customDarkSquareStyle={{
+                backgroundColor:
+                  currentUser?.chessboard?.darkSquare ?? "#607d8b",
+              }}
             />
           </Box>
           <Box sx={style.ButtonsContainer}>

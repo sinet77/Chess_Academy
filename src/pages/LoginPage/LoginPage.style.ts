@@ -9,8 +9,9 @@ export const Main: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   gap: {md:"100px", lg:"200px"},
-  backgroundImage: `url("${img}")`,
+  backgroundImage: {sm:`url("${img}")`},
   backgroundSize: "100% 100%",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
+  backgroundColor:{xs:"#F5E3D0",sm:"none"}
 };

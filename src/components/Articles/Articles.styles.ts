@@ -1,6 +1,5 @@
 import { SxProps } from "@mui/system";
 
-
 export const ArticlesBox: SxProps = {
   display: "flex",
   flexDirection: "column",
@@ -8,11 +7,11 @@ export const ArticlesBox: SxProps = {
   justifyContent: "center",
   backgroundColor: "#eeeeee",
   padding: "80px",
-  minHeight: "500px", 
+  minHeight: "500px",
   gap: "50px",
   fontFamily: "Roboto",
   maxWidth: "1800px",
-  transition: "min-height 0.3s ease-in-out", 
+  transition: "min-height 0.3s ease-in-out",
 };
 
 export const LoadingContainer: SxProps = {
@@ -20,7 +19,9 @@ export const LoadingContainer: SxProps = {
   justifyContent: "center",
   alignItems: "center",
   position: "relative",
-  minHeight: "500px", 
+  minHeight: "500px",
+  backgroundColor: "#eeeeee",
+  width:"1800px"
 };
 
 export const ArticlesContent: SxProps = {

@@ -13,7 +13,7 @@ export const Main: SxProps<Theme> = {
   maxWidth: "400px",
   height: "600px",
 };
-export const WebLogo: SxProps = { height: "200px", marginBottom: "30px" };
+export const WebLogo: SxProps = { height: "180px", marginBottom: "20px" };
 
 export const Text: SxProps<Theme> = {
   fontSize: "1.3rem",
@@ -69,11 +69,9 @@ export const Form: SxProps<Theme> = {
 
 export const TextField: SxProps<Theme> = {
   "& .MuiInputBase-input": {
-    fontFamily: "Roboto, sans-serif",
     color: "#5A3E2B",
   },
   "& .MuiInputLabel-root": {
-    fontFamily: "Roboto, sans-serif",
     color: "#7D5A44",
   },
   "& .MuiOutlinedInput-root": {
@@ -91,10 +89,10 @@ export const TextField: SxProps<Theme> = {
 };
 
 export const Button: SxProps<Theme> = {
-  fontFamily: "Roboto, sans-serif",
   textTransform: "none",
   fontWeight: "bold",
   backgroundColor: "#5A3E2B",
+  width:"100%",
   color: "#fff",
   padding: "12px",
   borderRadius: "8px",
@@ -105,8 +103,8 @@ export const Button: SxProps<Theme> = {
 };
 
 export const Centered: SxProps<Theme> = {
-  fontFamily: "Roboto, sans-serif",
   fontSize: "0.9rem",
+  fontFamily:"Roboto",
   color: "#7D5A44",
   textAlign: "center",
   marginTop: "1rem",
