@@ -9,8 +9,8 @@ import {
   Divider,
   Link,
 } from "@mui/material";
-import { Google as GoogleIcon } from "@mui/icons-material";
 import web_logo from "../../assets/web_logo.png";
+import google_logo from "../../assets/googleLogo.png"
 import { useAuth } from "../../context/authContext";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { routes } from "../../routes";
@@ -63,9 +63,8 @@ export default function LoginForm() {
       <Typography sx={style.Text}>Log in with</Typography>
 
       <Box sx={style.SocialButtons}>
-        <Button onClick={onGoogleSignIn} sx={style.GoogleButton}>
-          <GoogleIcon />
-          Google
+        <Button variant="outlined" sx={style.Button} onClick={demoLogin}>
+          Demo Login
         </Button>
       </Box>
 
@@ -100,8 +99,11 @@ export default function LoginForm() {
                 error={touched.password && Boolean(errors.password)}
                 helperText={touched.password && errors.password}
               />
-              <Button variant="outlined" sx={style.Button} onClick={demoLogin}>
-                Demo Login
+              <Button onClick={onGoogleSignIn} sx={style.GoogleButton}>
+
+              <Box component="img" sx={{ height: "20px", width: "20px", marginRight: "10px" }} src={google_logo}>
+      </Box>
+                Sign in with Google
               </Button>
               <Button
                 type="submit"
